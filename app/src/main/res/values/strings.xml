@@ -62,5 +62,6 @@
     <string name="what_are_you_looking_for">what are you looking for ?</string>
     <string name="categories">Categories</string>
     <string name="no_categories_to_show">No categories to show</string>
+    <string name="choose_your_preferred_method_of_logging_in">Choose your preferred method of logging in .</string>
 
 </resources>

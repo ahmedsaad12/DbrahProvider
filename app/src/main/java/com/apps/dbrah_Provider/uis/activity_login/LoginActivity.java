@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.ActivityLoginBinding;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity {
     private void initView() {
         model = new LoginModel();
         binding.setModel(model);
+        binding.setLang(getLang());
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 setResult(RESULT_OK);
@@ -61,6 +63,25 @@ public class LoginActivity extends BaseActivity {
         binding.btnLogin.setOnClickListener(v -> {
             if (model.isDataValid(this)) {
                 navigateToVerificationCodeActivity();
+            }
+        });
+        binding.tvEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.viewEmail.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                binding.viewPhone.setBackgroundColor(getResources().getColor(R.color.grey8));
+                binding.tvEmail.setTextColor(getResources().getColor(R.color.colorAccent));
+                binding.tvPhone.setTextColor(getResources().getColor(R.color.black));
+
+            }
+        });
+        binding.tvPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.viewEmail.setBackgroundColor(getResources().getColor(R.color.grey8));
+                binding.viewPhone.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                binding.tvEmail.setTextColor(getResources().getColor(R.color.black));
+                binding.tvPhone.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
     }
