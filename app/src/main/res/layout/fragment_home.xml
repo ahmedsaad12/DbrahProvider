@@ -559,7 +559,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="@string/vat_number"
+                            android:text="@string/vat_number2"
                             android:textColor="@color/grey7"
                             android:textSize="15sp" />
 

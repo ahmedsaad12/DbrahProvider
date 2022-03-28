@@ -21,6 +21,7 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="contact_us">Contact us</string>
     <string name="wait">Wait...</string>
+    <string name="new_">New</string>
     <string name="current">Current</string>
     <string name="prev">Previous</string>
     <string name="choose_your_language">Choose your language</string>
@@ -84,7 +85,7 @@
     <string name="this_month_s_miss_order">This month’s miss order</string>
     <string name="total_clients_this_year">Total Clients this year</string>
     <string name="customer_reviews">Customer Reviews</string>
-    <string name="vat_number">VAT Number :</string>
+    <string name="vat_number2">VAT Number :</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="choose_category">Please choose category</string>
     <string name="please_enter_your_email">Please enter your registered email</string>
@@ -95,5 +96,7 @@
     <string name="reset_password">Reset Password</string>
     <string name="please_enter_a_new_password">Please enter a new password</string>
     <string name="new_password">New Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

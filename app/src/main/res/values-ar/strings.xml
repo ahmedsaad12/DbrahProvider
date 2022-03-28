@@ -22,6 +22,7 @@
     <string name="privacy_policy">السياسة والخصوصية</string>
     <string name="contact_us">إتصل بنا</string>
     <string name="wait">إنتطر قليلا...</string>
+    <string name="new_">الجديدة</string>
     <string name="current">الحالية</string>
     <string name="prev">السابقة</string>
     <string name="choose_your_language">إختر اللغة</string>
@@ -63,8 +64,14 @@
     <string name="what_are_you_looking_for">عن ماذا تبحث ؟</string>
     <string name="categories">الأقسام</string>
     <string name="no_categories_to_show">لا توجد أقسام لعرضها</string>
+    <string name="store_name">اسم المتجر</string>
+    <string name="category">القسم</string>
+    <string name="vat_number">الرقم الضريبي</string>
+    <string name="commercial_record">السجل التجاري</string>
+    <string name="register">إنشاء حساب</string>
+    <string name="already_have_an_account">لديك حساب بالفعل ؟</string>
     <string name="choose_your_preferred_method_of_logging_in">اختر طريقتك المفضلة لتسجيل الدخول.</string>
-    <string name="country_code">كود الدزله</string>
+    <string name="country_code">كود الدوله</string>
     <string name="password">كلمة المرور</string>
     <string name="inv_email">بريد الكترونى خاطئ</string>
     <string name="pass_short">كلمة المرور قصيره جدا</string>
@@ -79,7 +86,16 @@
     <string name="this_month_s_miss_order">الطلبات المفقوده هذا الشهر</string>
     <string name="total_clients_this_year">إجمالي العملاء هذا العام</string>
     <string name="customer_reviews">اراء العملاء</string>
-    <string name="vat_number">الرقم الضريبى : </string>
-
+    <string name="vat_number2">الرقم الضريبى : </string>
+    <string name="repeat_password">أعد كتابة كلمة المرور</string>
+    <string name="choose_category">من فضلك اختر قسم</string>
+    <string name="please_enter_your_email">الرجاء إدخال بريدك الإلكتروني المسجل</string>
+    <string name="we_will_send_a_verification_code">سوف نرسل رمز التحقق إلى بريدك الإلكتروني المسجل</string>
+    <string name="done">تم</string>
+    <string name="please_enter_your_verification_code">الرجاء إدخال رمز التحقق الخاص بك .</string>
+    <string name="we_have_sent_a_verification_code_to_your_registered_email">لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني المسجل</string>
+    <string name="reset_password">إعادة تعيين كلمة المرور</string>
+    <string name="please_enter_a_new_password">الرجاء إدخال كلمة مرور جديدة</string>
+    <string name="new_password">كلمة المرور الجديددة</string>
 
 </resources>
