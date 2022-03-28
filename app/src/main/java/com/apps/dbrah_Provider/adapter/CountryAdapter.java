@@ -1,0 +1,80 @@
+package com.apps.dbrah_Provider.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.apps.dbrah_Provider.R;
+import com.apps.dbrah_Provider.databinding.CountriesRowBinding;
+import com.apps.dbrah_Provider.model.CountryModel;
+import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
+
+import java.util.List;
+
+public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<CountryModel> list;
+    private Context context;
+    private LayoutInflater inflater;
+
+    public CountryAdapter(Context context) {
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+    }
+
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        CountriesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.countries_row, parent, false);
+        return new MyHolder(binding);
+
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+        MyHolder myHolder = (MyHolder) holder;
+        myHolder.binding.setModel(list.get(position));
+        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (context instanceof LoginActivity) {
+                    LoginActivity activity = (LoginActivity) context;
+                    activity.setItemData(list.get(holder.getLayoutPosition()));
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return list != null ? list.size() : 0;
+    }
+
+    public static class MyHolder extends RecyclerView.ViewHolder {
+        private CountriesRowBinding binding;
+
+        public MyHolder(CountriesRowBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
+
+        }
+
+    }
+
+    public void updateList(List<CountryModel> list) {
+        if (list != null) {
+            this.list = list;
+        }
+        notifyDataSetChanged();
+    }
+
+}

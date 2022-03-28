@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.model;
 
 import android.content.Context;
+import android.util.Patterns;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -14,33 +15,66 @@ import java.io.Serializable;
 public class LoginModel extends BaseObservable implements Serializable {
     private String phone_code;
     private String phone;
+    private String email;
+    private String password;
+    private int type;
+    public ObservableField<String> error_email = new ObservableField<>();
+    public ObservableField<String> error_password = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
 
     public LoginModel() {
-        phone_code ="+20";
-        phone ="";
+        phone_code = "+20";
+        phone = "";
+        email = "";
+        password = "";
     }
 
-    public boolean isDataValid(Context context){
-        if (!phone.isEmpty()){
+    public boolean isDataValid(Context context) {
+        if ((type == 1 && !phone.isEmpty())
+                || (type == 2 && !email.isEmpty() &&
+                Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
+                password.length() >= 6)) {
             error_phone.set(null);
-
+            error_email.set(null);
+            error_password.set(null);
 
             return true;
-        }else {
+        } else {
+            if (type == 1) {
+                if (phone.isEmpty()) {
+                    error_phone.set(context.getString(R.string.field_required));
 
-            if (phone.isEmpty()){
-                error_phone.set(context.getString(R.string.field_required));
+                } else {
+                    error_phone.set(null);
 
-            }else {
-                error_phone.set(null);
+                }
+            } else if (type == 2) {
+                if (email.isEmpty()) {
+                    error_email.set(context.getString(R.string.field_required));
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    error_email.set(context.getString(R.string.inv_email));
+                } else {
+                    error_email.set(null);
 
+                }
+                if (password.isEmpty()) {
+                    error_password.set(context.getString(R.string.field_required));
+
+                } else if (password.length() < 6) {
+                    error_password.set(context.getString(R.string.pass_short));
+
+                } else {
+                    error_password.set(null);
+
+                }
             }
 
 
             return false;
         }
     }
+
     @Bindable
     public String getPhone_code() {
         return phone_code;
@@ -50,6 +84,7 @@ public class LoginModel extends BaseObservable implements Serializable {
         this.phone_code = phone_code;
         notifyPropertyChanged(BR.phone_code);
     }
+
     @Bindable
     public String getPhone() {
         return phone;
@@ -61,5 +96,32 @@ public class LoginModel extends BaseObservable implements Serializable {
 
     }
 
+    public int getType() {
+        return type;
+    }
 
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Bindable
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+        notifyPropertyChanged(BR.email);
+    }
+
+    @Bindable
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        notifyPropertyChanged(BR.password);
+
+    }
 }

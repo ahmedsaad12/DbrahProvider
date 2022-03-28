@@ -63,7 +63,13 @@
     <string name="what_are_you_looking_for">عن ماذا تبحث ؟</string>
     <string name="categories">الأقسام</string>
     <string name="no_categories_to_show">لا توجد أقسام لعرضها</string>
-    <string name="choose_your_preferred_method_of_logging_in">Choose your preferred method of logging in .</string>
+    <string name="choose_your_preferred_method_of_logging_in">اختر طريقتك المفضلة لتسجيل الدخول.</string>
+    <string name="country_code">كود الدزله</string>
+    <string name="password">كلمة المرور</string>
+    <string name="inv_email">بريد الكترونى خاطئ</string>
+    <string name="pass_short">كلمة المرور قصيره جدا</string>
+    <string name="don_t_have_an_account">لا يوجد لديك حساب ؟ </string>
+    <string name="forget_password">نسيت كلمة المرور ؟ </string>
 
 
 </resources>
