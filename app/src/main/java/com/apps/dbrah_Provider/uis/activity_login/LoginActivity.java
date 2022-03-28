@@ -25,7 +25,7 @@ import com.apps.dbrah_Provider.mvvm.ActivityLoginMvvm;
 import com.apps.dbrah_Provider.uis.activity_forget_password.ForgetPasswordActivity;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
-import com.apps.dbrah_Provider.uis.activity_verification_code.VerificationCodeActivity;
+import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,11 +100,7 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
-        binding.btnLogin.setOnClickListener(v -> {
-            if (model.isDataValid(this)) {
-                navigateToVerificationCodeActivity();
-            }
-        });
+
         binding.consPhone.setVisibility(View.VISIBLE);
         binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_eg));
         model.setPhone_code("+20");
@@ -141,6 +137,7 @@ public class LoginActivity extends BaseActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                navigateToHomeActivity();
                 if(model.isDataValid(LoginActivity.this)){
 
                 }
@@ -171,11 +168,10 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private void navigateToVerificationCodeActivity() {
-        Intent intent = new Intent(this, VerificationCodeActivity.class);
-        intent.putExtra("phone_code", model.getPhone_code());
-        intent.putExtra("phone", model.getPhone());
-        launcher.launch(intent);
+    private void navigateToHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
     public void setItemData(CountryModel countryModel) {
         dialog.dismiss();

@@ -69,16 +69,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
         map.put(0,R.id.home);
         map.put(1,R.id.order);
-        map.put(2,R.id.cart);
-        map.put(3,R.id.profile);
+        map.put(2,R.id.settings);
 
 
 
 
-        fragments.add(FragmentBaseNavigation.newInstance(R.id.toolbar, R.layout.base_fragment_home, R.id.navHostFragmentHome));
-        fragments.add(FragmentBaseNavigation.newInstance(R.id.toolbar, R.layout.base_fragment_order, R.id.navHostFragmentOrder));
-        fragments.add(FragmentBaseNavigation.newInstance(R.id.toolbar, R.layout.base_fragment_cart, R.id.navHostFragmentCart));
-        fragments.add(FragmentBaseNavigation.newInstance(R.id.toolbar, R.layout.base_fragment_profile, R.id.navHostFragmentProfile));
+        fragments.add(FragmentBaseNavigation.newInstance( R.layout.base_fragment_home, R.id.navHostFragmentHome));
+        fragments.add(FragmentBaseNavigation.newInstance( R.layout.base_fragment_order, R.id.navHostFragmentOrder));
+        fragments.add(FragmentBaseNavigation.newInstance( R.layout.base_fragment_profile, R.id.navHostFragmentProfile));
 
         adapter = new MyPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, null);
         binding.pager.setAdapter(adapter);

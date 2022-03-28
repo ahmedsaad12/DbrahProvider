@@ -20,7 +20,6 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 
 public class FragmentBaseNavigation extends BaseFragment {
-    private int toolBarId;
     private int layoutResourceId;
     private int navHostId;
     private int defaultValue = -1;
@@ -29,9 +28,8 @@ public class FragmentBaseNavigation extends BaseFragment {
     private AppCompatActivity activity;
 
 
-    public static FragmentBaseNavigation newInstance(int toolBarId, int layoutResourceId, int navHostId) {
+    public static FragmentBaseNavigation newInstance(int layoutResourceId, int navHostId) {
         Bundle bundle = new Bundle();
-        bundle.putInt("toolBarId", toolBarId);
         bundle.putInt("layoutResourceId", layoutResourceId);
         bundle.putInt("navHostId", navHostId);
 
@@ -52,7 +50,6 @@ public class FragmentBaseNavigation extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            toolBarId = bundle.getInt("toolBarId", defaultValue);
             layoutResourceId = bundle.getInt("layoutResourceId", defaultValue);
             navHostId = bundle.getInt("navHostId", defaultValue);
 
@@ -76,25 +73,10 @@ public class FragmentBaseNavigation extends BaseFragment {
     }
 
     private void initView() {
-        if (toolBarId != defaultValue && layoutResourceId != defaultValue && navHostId != defaultValue) {
+        if (layoutResourceId != defaultValue && navHostId != defaultValue) {
             navController = Navigation.findNavController(activity, navHostId);
-            Toolbar toolbar = view.findViewById(toolBarId);
-            NavigationUI.setupWithNavController(toolbar, navController);
-            TextView title = view.findViewById(R.id.tvTitle);
 
-            navController.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
-                int id = navDestination.getId();
-                if (id == R.id.order) {
-                    title.setText(R.string.orders);
 
-                } else if (id == R.id.cart) {
-                    title.setText(R.string.cart);
-
-                } else if (id == R.id.profile) {
-                    title.setText(R.string.profile);
-
-                }
-            });
         }
     }
 

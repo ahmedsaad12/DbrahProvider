@@ -45,7 +45,7 @@ public class FragmentHome extends BaseFragment {
     }
 
     private void initView() {
-
+        binding.setLang(getLang());
     }
 
 

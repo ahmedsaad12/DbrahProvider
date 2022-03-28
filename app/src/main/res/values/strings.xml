@@ -75,6 +75,16 @@
     <string name="pass_short">Password Short</string>
     <string name="don_t_have_an_account">don’t have an account ?</string>
     <string name="forget_password">Forget Password ?</string>
+    <string name="welcome">Welcome</string>
+    <string name="statistics">statistics</string>
+    <string name="client">Client</string>
+    <string name="this_month_s_clients">This month\'s Clients</string>
+    <string name="order">Order</string>
+    <string name="this_month_s_order">This month’s order</string>
+    <string name="this_month_s_miss_order">This month’s miss order</string>
+    <string name="total_clients_this_year">Total Clients this year</string>
+    <string name="customer_reviews">Customer Reviews</string>
+    <string name="vat_number">VAT Number :</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="choose_category">Please choose category</string>
     <string name="please_enter_your_email">Please enter your registered email</string>
