@@ -3,6 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable-v24/ic_left_arrow1.xml" value="0.20833333333333334" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_grey.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_primary.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_shape.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_shape2.xml" value="0.2574074074074074" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_white.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_edit.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_logo.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_mail.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/pin_view_item.xml" value="0.2574074074074074" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_category.xml" value="0.2574074074074074" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_grey6_stroke.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_grey9.xml" value="0.2574074074074074" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_primary.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_right.xml" value="0.2574074074074074" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_shape_gray1_strock6.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_forget_password.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_new_password.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_reset_password.xml" value="0.24010416666666667" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_verification_code.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/category_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/dialog_countries.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/toolbar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/drawable/bottom_item_nav_bg.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/drawable/circle_primary.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/drawable/ic_cart.xml" value="0.21614583333333334" />
@@ -24,22 +49,15 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/layout/toolbar.xml" value="0.1787037037037037" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/menu/menu.xml" value="0.18981481481481483" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/dialog_window_bg.xml" value="0.16041666666666668" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/ic_mail.xml" value="0.15625" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/rounded_shape_gray6_strock8.xml" value="0.15885416666666666" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/activity_contact_us.xml" value="0.1" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/activity_home.xml" value="0.10185185185185185" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/activity_sign_up.xml" value="0.10185185185185185" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/base_fragment_cart.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/base_fragment_home.xml" value="0.18" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/base_fragment_profile.xml" value="0.14270833333333333" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/countries_row.xml" value="0.1" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/dialog_countries.xml" value="0.1" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/fragment_home.xml" value="0.10185185185185185" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/fragment_order.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/fragment_profile.xml" value="0.14270833333333333" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/layout/toolbar.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>

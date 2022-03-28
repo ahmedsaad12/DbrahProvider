@@ -21,186 +21,619 @@
 
         >
 
-
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:fillViewport="true">
+            android:background="@color/grey3"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="3dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-
-                    >
-
-
-                    <FrameLayout
-                        android:id="@+id/flImage"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-
-
-                        >
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/image"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:clickable="false"
-                            android:longClickable="false"
-                            app:civ_border_color="@color/white"
-                            app:civ_border_width="1dp"
-                            app:civ_circle_background_color="@color/white" />
-
-                        <ImageView
-                            android:id="@+id/icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/circle_white"
-                            android:clickable="false"
-                            android:longClickable="false"
-                            android:padding="8dp"
-                            android:src="@drawable/circle_avatar" />
-
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:layout_constraintBottom_toBottomOf="@id/flImage"
-                        app:layout_constraintEnd_toEndOf="@id/flImage"
-                        app:layout_constraintHorizontal_bias=".1"
-                        app:layout_constraintStart_toStartOf="@id/flImage"
-                        app:layout_constraintTop_toTopOf="@id/flImage"
-                        app:layout_constraintVertical_bias="1">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-
-
-                            />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="10dp"
-                            android:src="@drawable/ic_camera"
-                            app:tint="@color/white" />
-                    </FrameLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        >
+
+
+                        <FrameLayout
+                            android:id="@+id/flImage"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            >
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:clickable="false"
+                                android:longClickable="false"
+                                app:civ_border_color="@color/grey6"
+                                app:civ_border_width="1dp"
+                                app:civ_circle_background_color="@color/white" />
+
+                            <ImageView
+                                android:id="@+id/icon"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/circle_shape2"
+                                android:clickable="false"
+                                android:longClickable="false"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_logo" />
+
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:layout_constraintBottom_toBottomOf="@id/flImage"
+                            app:layout_constraintEnd_toEndOf="@id/flImage"
+                            app:layout_constraintHorizontal_bias=".1"
+                            app:layout_constraintStart_toStartOf="@id/flImage"
+                            app:layout_constraintTop_toTopOf="@id/flImage"
+                            app:layout_constraintVertical_bias="1">
+
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/circle_shape" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_edit" />
+
+                        </FrameLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
 
-                        <EditText
-                            error="@{model.error_first_name}"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_store" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:background="@color/transparent"
-
-                            android:gravity="center"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="8dp"
-                            android:singleLine="true"
-                            android:text="@={model.first_name}"
+                            android:text="@string/store_name"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            tools:ignore="TextFields" />
+                            android:textSize="16sp" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-
-                            />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6">
 
                         <EditText
-                            error="@{model.error_seconed_name}"
+                            error="@{model.error_store_name}"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_height="match_parent"
                             android:background="@color/transparent"
-                            android:gravity="center"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="8dp"
-                            android:singleLine="true"
-                            android:text="@={model.seconed_name}"
+                            android:hint="@string/store_name"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text="@={model.store_name}"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            tools:ignore="TextFields" />
+                            android:textColorHint="@color/grey7"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_mail2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/email"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6">
+
+                        <EditText
+                            error="@{model.error_email}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:hint="mail@mail.com"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text="@={model.email}"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey7"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_phone" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/phone"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/consPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <FrameLayout
+                            android:id="@+id/fl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/rounded_shape_gray1_strock6"
+                            android:paddingLeft="7dp"
+                            android:paddingRight="7dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/imFalg"
+                                    android:layout_width="24dp"
+                                    android:layout_height="17dp"
+                                    android:layout_gravity="center" />
+
+                                <ImageView
+                                    android:id="@+id/arrow"
+                                    android:layout_width="24dp"
+                                    android:layout_height="17dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_arrow_down"
+                                    app:tint="@color/grey10" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llPhone"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/rounded_shape_gray1_strock6"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/fl"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <EditText
+                                android:id="@+id/edtPhone"
+                                error="@{model.error_phone}"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/transparent"
+                                android:hint="@string/phone"
+                                android:inputType="number"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:singleLine="true"
+                                android:text="@={model.phone}"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey7"
+                                android:textSize="14sp"
+                                tools:ignore="TextFields" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_category" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/category"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6">
+
+                        <Spinner
+                            android:id="@+id/spinnerCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recViewCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_vat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/vat_number"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6">
+
+                        <EditText
+                            error="@{model.error_vat_num}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:hint="@string/vat_number"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text="@={model.vat_num}"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey7"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_record" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/commercial_record"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6">
+
+                        <ImageView
+                            android:id="@+id/imageRecord"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:id="@+id/iconUpload"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_record"
+                            app:tint="@color/grey6" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_lock" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/password"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        app:counterEnabled="false"
+                        app:errorEnabled="false"
+                        app:errorTextColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/colorPrimary"
+
+                        >
+
+                        <EditText
+                            error="@{model.error_password}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:gravity="start|center_vertical"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            android:lines="1"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text="@={model.password}"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey7"
+                            android:textSize="14sp"
 
                             />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24sp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_lock" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/repeat_password"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        app:counterEnabled="false"
+                        app:errorEnabled="false"
+                        app:errorTextColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/colorAccent"
+
+                        >
+
+                        <EditText
+                            error="@{model.error_repeat_password}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:gravity="start|center_vertical"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            android:lines="1"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text="@={model.repeat_password}"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey7"
+                            android:textSize="14sp"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnSignup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/rounded_primary"
+                        android:minWidth="180dp"
+                        android:text="@string/register"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/already_have_an_account"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvLogin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/login"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
-
-
-
-
-                <Button
-                    android:id="@+id/btnSignup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_primary"
-                    android:minWidth="180dp"
-                    android:text="@string/sign_up"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
 
         <net.cachapa.expandablelayout.ExpandableLayout
             android:id="@+id/expandLayout"
@@ -300,6 +733,5 @@
 
 
         </net.cachapa.expandablelayout.ExpandableLayout>
-
     </FrameLayout>
 </layout>

@@ -7,40 +7,67 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.apps.dbrah_Provider.R;
+import com.apps.dbrah_Provider.adapter.CategoryAdapter;
+import com.apps.dbrah_Provider.adapter.CountryAdapter;
 import com.apps.dbrah_Provider.databinding.ActivitySignUpBinding;
+import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
+import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.SignUpModel;
+import com.apps.dbrah_Provider.mvvm.ActivityLoginMvvm;
+import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
 import com.apps.dbrah_Provider.preferences.Preferences;
 import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SignUpActivity extends BaseActivity {
     private ActivitySignUpBinding binding;
+    private String phone_code = "";
+    private String phone = "";
+    private List<CountryModel> countryModelList = new ArrayList<>();
+    private CountryAdapter countriesAdapter;
+    private CategoryAdapter categoryAdapter;
+    private List<Object>list;
+    private AlertDialog dialog;
     private SignUpModel model;
+    private ActivitySignUpMvvm activitySignUpMvvm;
     private Preferences preferences;
-    private String phone_code, phone;
     private ActivityResultLauncher<Intent> launcher;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int READ_REQ = 1, CAMERA_REQ = 2;
     private int selectedReq = 0;
+    private String type;
     private Uri uri = null;
 
     @Override
@@ -60,7 +87,23 @@ public class SignUpActivity extends BaseActivity {
     private void initView() {
         preferences = Preferences.getInstance();
         model = new SignUpModel();
+
         binding.setModel(model);
+        setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
+        activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
+
+        activitySignUpMvvm.getCoListMutableLiveData().observe(this, countryModels -> {
+            if (countryModels != null && countryModels.size() > 0) {
+                countryModelList.clear();
+                countryModelList.addAll(countryModels);
+            }
+        });
+        activitySignUpMvvm.setCountry();
+
+        list=new ArrayList<>();
+        categoryAdapter=new CategoryAdapter(list,this);
+        binding.recViewCategory.setLayoutManager(new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false));
+        binding.recViewCategory.setAdapter(categoryAdapter);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 if (selectedReq == READ_REQ) {
@@ -68,7 +111,12 @@ public class SignUpActivity extends BaseActivity {
 
                     uri = result.getData().getData();
                     File file = new File(Common.getImagePath(this, uri));
-                    //Picasso.get().load(file).fit().into(binding.image);
+                    if (type.equals("mainImage")) {
+                        Picasso.get().load(file).fit().into(binding.image);
+                    }else if (type.equals("secondImage")){
+                        binding.iconUpload.setVisibility(View.GONE);
+                        Picasso.get().load(file).fit().into(binding.imageRecord);
+                    }
 
                 } else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
@@ -78,10 +126,21 @@ public class SignUpActivity extends BaseActivity {
                         String path = Common.getImagePath(this, uri);
 
                         if (path != null) {
+                            if (type.equals("mainImage")) {
+                                Picasso.get().load(new File(path)).fit().into(binding.image);
+                            }else if (type.equals("secondImage")){
+                                binding.iconUpload.setVisibility(View.GONE);
+                                Picasso.get().load(new File(path)).fit().into(binding.imageRecord);
+                            }
                             //Picasso.get().load(new File(path)).fit().into(binding.image);
 
                         } else {
-                           // Picasso.get().load(uri).fit().into(binding.image);
+                            if (type.equals("mainImage")) {
+                                Picasso.get().load(uri).fit().into(binding.image);
+                            }else if (type.equals("secondImage")){
+                                binding.iconUpload.setVisibility(View.GONE);
+                                Picasso.get().load(uri).fit().into(binding.iconUpload);
+                            }
 
                         }
                     }
@@ -89,9 +148,40 @@ public class SignUpActivity extends BaseActivity {
             }
         });
 
+        binding.edtPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
-        binding.flImage.setOnClickListener(view -> openSheet());
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().startsWith("0")) {
+                    binding.edtPhone.setText("");
+                }
+            }
+        });
+        binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_eg));
+        model.setPhone_code("+20");
+
+        sortCountries();
+        createCountriesDialog();
+
+        binding.tvLogin.setPaintFlags(binding.tvLogin.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        binding.flImage.setOnClickListener(view -> {
+            type = "mainImage";
+            openSheet();
+        });
+        binding.imageRecord.setOnClickListener(view -> {
+            type="secondImage";
+            openSheet();
+        });
         binding.flGallery.setOnClickListener(view -> {
             closeSheet();
             checkReadPermission();
@@ -102,6 +192,7 @@ public class SignUpActivity extends BaseActivity {
             checkCameraPermission();
         });
 
+        binding.arrow.setOnClickListener(view -> dialog.show());
         binding.btnCancel.setOnClickListener(view -> closeSheet());
 
         binding.btnSignup.setOnClickListener(view -> {
@@ -112,6 +203,28 @@ public class SignUpActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void createCountriesDialog() {
+
+        dialog = new AlertDialog.Builder(this)
+                .create();
+        countriesAdapter = new CountryAdapter(this);
+        countriesAdapter.updateList(countryModelList);
+        DialogCountriesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_countries, null, false);
+        binding.recView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recView.setAdapter(countriesAdapter);
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+    }
+
+    private void sortCountries() {
+        Collections.sort(countryModelList, (country1, country2) -> {
+            return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());
+        });
     }
 
     public void openSheet() {
@@ -208,4 +321,10 @@ public class SignUpActivity extends BaseActivity {
     }
 
 
+    public void setItemData(CountryModel countryModel) {
+        dialog.dismiss();
+        model.setPhone_code(countryModel.getDialCode());
+        binding.setModel(model);
+        binding.imFalg.setImageResource(countryModel.getFlag());
+    }
 }

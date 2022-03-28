@@ -14,6 +14,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.CountriesRowBinding;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
+import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 
 import java.util.List;
 
@@ -46,6 +47,9 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             public void onClick(View view) {
                 if (context instanceof LoginActivity) {
                     LoginActivity activity = (LoginActivity) context;
+                    activity.setItemData(list.get(holder.getLayoutPosition()));
+                }else if (context instanceof SignUpActivity){
+                    SignUpActivity activity=(SignUpActivity) context;
                     activity.setItemData(list.get(holder.getLayoutPosition()));
                 }
             }

@@ -63,11 +63,27 @@
     <string name="categories">Categories</string>
     <string name="no_categories_to_show">No categories to show</string>
     <string name="choose_your_preferred_method_of_logging_in">Choose your preferred method of logging in .</string>
+    <string name="store_name">Store Name</string>
+    <string name="category">Category</string>
+    <string name="vat_number">Vat Number</string>
+    <string name="commercial_record">Commercial Record</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account ?</string>
     <string name="country_code">Country Code</string>
     <string name="password">Password</string>
     <string name="inv_email">Invaild Email</string>
     <string name="pass_short">Password Short</string>
     <string name="don_t_have_an_account">don’t have an account ?</string>
     <string name="forget_password">Forget Password ?</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="choose_category">Please choose category</string>
+    <string name="please_enter_your_email">Please enter your registered email</string>
+    <string name="we_will_send_a_verification_code">We will send a verification code to your registered email</string>
+    <string name="done">Done</string>
+    <string name="please_enter_your_verification_code">Please enter your verification code .</string>
+    <string name="we_have_sent_a_verification_code_to_your_registered_email">We have sent a verification code to your registered email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="please_enter_a_new_password">Please enter a new password</string>
+    <string name="new_password">New Password</string>
 
 </resources>

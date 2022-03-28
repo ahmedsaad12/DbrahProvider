@@ -22,7 +22,9 @@ import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.LoginModel;
 import com.apps.dbrah_Provider.mvvm.ActivityLoginMvvm;
+import com.apps.dbrah_Provider.uis.activity_forget_password.ForgetPasswordActivity;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
+import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 import com.apps.dbrah_Provider.uis.activity_verification_code.VerificationCodeActivity;
 
 import java.util.ArrayList;
@@ -70,6 +72,14 @@ public class LoginActivity extends BaseActivity {
                 setResult(RESULT_OK);
                 finish();
             }
+        });
+        binding.tvSignUp.setOnClickListener(view -> {
+            Intent intent=new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        });
+        binding.tvForgetPassword.setOnClickListener(view -> {
+            Intent intent=new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+            startActivity(intent);
         });
 
         binding.edtPhone.addTextChangedListener(new TextWatcher() {
