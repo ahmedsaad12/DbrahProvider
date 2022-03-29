@@ -8,7 +8,7 @@
     <string name="subject">العنوان</string>
     <string name="message">الرسالة</string>
     <string name="send">ارسال</string>
-    <string name="home">السوق</string>
+    <string name="home">الرئيسيه</string>
     <string name="profile">حسابي</string>
     <string name="logout">تسجيل خروج</string>
     <string name="create_your_account_now">قم بانشاء حسابك الأن</string>
@@ -97,5 +97,6 @@
     <string name="reset_password">إعادة تعيين كلمة المرور</string>
     <string name="please_enter_a_new_password">الرجاء إدخال كلمة مرور جديدة</string>
     <string name="new_password">كلمة المرور الجديددة</string>
+    <string name="language">اللغه</string>
 
 </resources>
