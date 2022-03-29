@@ -113,6 +113,10 @@
     <string name="preview">معاينة</string>
     <string name="send_offer">ارسال العرض</string>
     <string name="language">اللغه</string>
+    <string name="available_quantity">الكمية المتاحة :</string>
+    <string name="single_price2">Single Price :</string>
+    <string name="total_price2">إجمالي السعر :</string>
+    <string name="total_cost">إجمالي التكلفة</string>
     <string name="total_price">Total Price</string>
     <string name="single_price">Single Price</string>
     <string name="sar">SAR</string>

@@ -119,5 +119,9 @@
     <string name="price_per_item">Price Per Item</string>
     <string name="or">OR</string>
     <string name="unavailable">Unavailable</string>
+    <string name="available_quantity">Available Quantity :</string>
+    <string name="single_price2">Single Price :</string>
+    <string name="total_price2">Total Price :</string>
+    <string name="total_cost">Total Cost</string>
 
 </resources>
