@@ -2,6 +2,7 @@ package com.apps.dbrah_Provider.uis.activity_home.order_module;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,19 @@ public class FragmentOrder extends BaseFragment {
         titles.add(getString(R.string.prev));
         binding.tab.setupWithViewPager(binding.pager);
 
+        fragmentList.add(FragmentNewOrders.newInstance());
+        fragmentList.add(FragmentCurrentOrders.newInstance());
+        fragmentList.add(FragmentPreviousOrders.newInstance());
+        pagerAdapter =new MyPagerAdapter(getChildFragmentManager(), PagerAdapter.POSITION_UNCHANGED,fragmentList,titles);
+
+        binding.pager.setAdapter(pagerAdapter);
+        binding.pager.setOffscreenPageLimit(fragmentList.size());
+        for (int i = 0; i < binding.tab.getTabCount(); i++) {
+            Log.e("i",i+"");
+            View view = ((ViewGroup) binding.tab.getChildAt(0)).getChildAt(i);
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            params.setMargins(15, 0, 15, 0);
+        }
     }
 
 

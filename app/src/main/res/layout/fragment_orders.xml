@@ -9,8 +9,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".uis.activity_home.order_module.fragments.FragmentCurrentOrders">
+        android:background="@color/grey3"
+        >
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViewOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"/>
     </FrameLayout>
 </layout>

@@ -26,6 +26,15 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_preview.PreviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_offer.OfferActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_order_details.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_new_password.NewPasswordActivity"
             android:exported="false" />
         <activity

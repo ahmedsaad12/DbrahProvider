@@ -97,6 +97,21 @@
     <string name="reset_password">إعادة تعيين كلمة المرور</string>
     <string name="please_enter_a_new_password">الرجاء إدخال كلمة مرور جديدة</string>
     <string name="new_password">كلمة المرور الجديددة</string>
+    <string name="order_number">رقم الطلب</string>
+    <string name="waiting_for_the_customer_s_response_to_the_offer">في انتظار رد العميل على العرض</string>
+    <string name="your_offer_has_been_accepted">تم قبول عرضك</string>
+    <string name="pin">تثبيت</string>
+    <string name="pined">مثبت</string>
+    <string name="map">الخريطة</string>
+    <string name="orderDetails">تفاصيل الطلب</string>
+    <string name="ordered">تم طلب :</string>
+    <string name="hide">إخفاء</string>
+    <string name="add_offer">إضافة عرض</string>
+    <string name="expected_delivery_time">وقت التسليم المتوقع؟</string>
+    <string name="expected_delivery_time2">وقت التسليم المتوقع :</string>
+    <string name="offer">العرض</string>
+    <string name="preview">معاينة</string>
+    <string name="send_offer">ارسال العرض</string>
     <string name="language">اللغه</string>
 
 </resources>

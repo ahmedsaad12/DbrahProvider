@@ -96,8 +96,21 @@
     <string name="reset_password">Reset Password</string>
     <string name="please_enter_a_new_password">Please enter a new password</string>
     <string name="new_password">New Password</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="order_number">Order Number</string>
+    <string name="waiting_for_the_customer_s_response_to_the_offer">Waiting for the customer\'s response to the offer</string>
+    <string name="your_offer_has_been_accepted">Your offer has been accepted</string>
+    <string name="pin">Pin</string>
+    <string name="pined">Pined</string>
+    <string name="map">Map</string>
+    <string name="orderDetails">Order Details</string>
+    <string name="ordered">Ordered :</string>
+    <string name="hide">Hide</string>
+    <string name="add_offer">Add Offer</string>
+    <string name="expected_delivery_time">Expected delivery time?</string>
+    <string name="expected_delivery_time2">Expected delivery time :</string>
+    <string name="offer">Offer</string>
+    <string name="preview">Preview</string>
+    <string name="send_offer">Send Offer</string>
     <string name="language">Language</string>
 
 </resources>
