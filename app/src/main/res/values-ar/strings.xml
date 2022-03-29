@@ -113,5 +113,12 @@
     <string name="preview">معاينة</string>
     <string name="send_offer">ارسال العرض</string>
     <string name="language">اللغه</string>
+    <string name="total_price">Total Price</string>
+    <string name="single_price">Single Price</string>
+    <string name="sar">SAR</string>
+    <string name="of">OF</string>
+    <string name="price_per_item">Price Per Item</string>
+    <string name="or">OR</string>
+    <string name="unavailable">Unavailable</string>
 
 </resources>
