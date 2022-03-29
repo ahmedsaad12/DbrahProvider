@@ -518,14 +518,14 @@
                                     android:layout_weight="1" />
 
                                 <androidx.cardview.widget.CardView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
                                     android:layout_gravity="center"
                                     app:cardCornerRadius="30dp">
 
                                     <ImageView
-                                        android:layout_width="24dp"
-                                        android:layout_height="24dp"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
                                         android:layout_gravity="center"
                                         android:padding="3dp"
                                         android:rotation='@{lang.equals("en")?180:0}'
