@@ -155,7 +155,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="150dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -219,7 +219,7 @@
                                                 android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
-                                                android:gravity="center"
+                                                android:layout_marginBottom="7dp"
                                                 android:text="@string/this_month_s_clients"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -230,7 +230,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="150dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -295,7 +295,7 @@
                                                 android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
-                                                android:gravity="center"
+                                                android:layout_marginBottom="7dp"
                                                 android:text="@string/this_month_s_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -314,7 +314,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="150dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -378,7 +378,7 @@
                                                 android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
-                                                android:gravity="center"
+                                                android:layout_marginBottom="7dp"
                                                 android:text="@string/this_month_s_miss_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -389,7 +389,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="150dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -454,7 +454,7 @@
                                                 android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
-                                                android:gravity="center"
+                                                android:layout_marginBottom="7dp"
                                                 android:text="@string/total_clients_this_year"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
