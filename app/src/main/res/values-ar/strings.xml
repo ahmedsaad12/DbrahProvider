@@ -124,5 +124,9 @@
     <string name="price_per_item">Price Per Item</string>
     <string name="or">OR</string>
     <string name="unavailable">Unavailable</string>
+    <string name="more_options">More Options :</string>
+    <string name="item">Item</string>
+    <string name="less_quantity">less quantity</string>
+    <string name="other_brand">Other Brand</string>
 
 </resources>

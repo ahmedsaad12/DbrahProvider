@@ -123,5 +123,9 @@
     <string name="single_price2">Single Price :</string>
     <string name="total_price2">Total Price :</string>
     <string name="total_cost">Total Cost</string>
+    <string name="more_options">More Options :</string>
+    <string name="item">Item</string>
+    <string name="less_quantity">less quantity</string>
+    <string name="other_brand">Other Brand</string>
 
 </resources>

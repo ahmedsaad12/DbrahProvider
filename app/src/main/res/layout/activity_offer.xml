@@ -30,10 +30,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:fillViewport="true"
+                    app:layout_constraintBottom_toTopOf="@+id/llBottom"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-
-                    app:layout_constraintTop_toTopOf="parentparent">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/btnSend"
+                                app:layout_constraintEnd_toStartOf="@id/btnNext"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
 
@@ -81,7 +81,7 @@
                             </LinearLayout>
 
                             <Button
-                                android:id="@+id/btnSend"
+                                android:id="@+id/btnNext"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -183,91 +183,258 @@
                                 android:textColor="@color/black2"
                                 android:textSize="14sp" />
                         </LinearLayout>
-                        <androidx.constraintlayout.widget.ConstraintLayout
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            >
+                            android:layout_marginTop="10dp">
+
                             <LinearLayout
                                 android:id="@+id/ll"
                                 android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/tv1"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                android:padding="3dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/rounded_shape_gray1_strock6"
-                                >
+                                android:orientation="horizontal"
+                                android:padding="3dp">
+
                                 <EditText
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_marginStart="15dp"
-                                    android:layout_marginEnd="15dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
                                     android:layout_weight="1"
                                     android:background="@color/transparent"
+                                    android:hint="@string/price"
                                     android:lines="1"
                                     android:paddingStart="8dp"
                                     android:paddingEnd="8dp"
                                     android:singleLine="true"
-                                    android:hint="@string/price"
                                     android:textColor="@color/black"
                                     android:textColorHint="@color/grey7"
                                     android:textSize="14sp"
 
                                     />
+
                                 <TextView
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:text="@string/sar"
-                                    android:background="@drawable/small_rounded_grey7"
                                     android:layout_gravity="center_vertical"
-                                    android:textColor="@color/white"
-                                    android:gravity="center"
                                     android:layout_marginEnd="10dp"
-                                    android:textSize="12sp"/>
+                                    android:background="@drawable/small_rounded_grey7"
+                                    android:gravity="center"
+                                    android:text="@string/sar"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp" />
                             </LinearLayout>
+
                             <TextView
                                 android:id="@+id/tv1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/or"
                                 android:layout_gravity="center_vertical"
-                                android:textColor="@color/black"
-                                android:gravity="center"
                                 android:layout_marginStart="7dp"
-
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/ll"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/tvUnAvilable"
                                 android:layout_marginEnd="7dp"
-                                android:textSize="12sp"/>
+                                android:gravity="center"
+                                android:text="@string/or"
+
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
                             <TextView
                                 android:id="@+id/tvUnAvilable"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:text="@string/unavailable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center_vertical"
-                                android:textColor="@color/colorPrimary"
+                                android:layout_marginStart="7dp"
+                                android:layout_marginEnd="7dp"
+                                android:background="@drawable/rounded_shape_gray1_strock6"
                                 android:gravity="center"
                                 android:padding="5dp"
-                                android:background="@drawable/rounded_shape_gray1_strock6"
-                                android:layout_marginStart="7dp"
-                                app:layout_constraintTop_toTopOf="parent"
+                                android:text="@string/unavailable"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/tv1"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginEnd="10dp"
-                                android:textSize="15sp"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                                app:layout_constraintStart_toEndOf="@+id/tv1"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/flUnAvilable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="@string/more_options"
+                                    android:textColor="@color/grey7"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:background="@drawable/rounded_grey8"
+                                    android:padding="3dp">
+
+                                    <TextView
+                                        android:id="@+id/tvLess"
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/small_rounded_primary"
+                                        android:enabled="false"
+                                        android:gravity="center"
+                                        android:padding="7dp"
+                                        android:text="@string/less_quantity"
+                                        android:textColor="@color/white"
+                                        android:textSize="15sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvOTher"
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rounded_grey9_stroke_grey7"
+                                        android:gravity="center"
+                                        android:padding="7dp"
+                                        android:text="@string/other_brand"
+                                        android:textColor="@color/grey7"
+                                        android:textSize="15sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@drawable/rounded_color1"
+                                    android:orientation="vertical"
+                                    android:padding="8dp">
+
+                                    <FrameLayout
+                                        android:id="@+id/flBrand"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:background="@drawable/rounded_shape_gray1_strock6"
+                                        android:padding="3dp"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center">
+
+                                        </Spinner>
+                                    </FrameLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/llItem"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:layout_marginTop="10dp"
+                                        android:background="@drawable/rounded_shape_gray1_strock6"
+                                        android:orientation="horizontal"
+                                        android:padding="3dp">
+
+                                        <EditText
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/transparent"
+                                            android:hint="@string/available_quantity"
+                                            android:lines="1"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:singleLine="true"
+                                            android:textColor="@color/black"
+                                            android:textColorHint="@color/grey7"
+                                            android:textSize="14sp"
+
+                                            />
+
+                                        <TextView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginEnd="10dp"
+                                            android:background="@drawable/small_rounded_grey7"
+                                            android:gravity="center"
+                                            android:text="@string/item"
+                                            android:textColor="@color/white"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:layout_marginTop="7dp"
+                                        android:background="@drawable/rounded_shape_gray1_strock6"
+                                        android:orientation="horizontal"
+                                        android:padding="3dp">
+
+                                        <EditText
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/transparent"
+                                            android:hint="@string/price"
+                                            android:lines="1"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:singleLine="true"
+                                            android:textColor="@color/black"
+                                            android:textColorHint="@color/grey7"
+                                            android:textSize="14sp"
+
+                                            />
+
+                                        <TextView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginEnd="10dp"
+                                            android:background="@drawable/small_rounded_grey7"
+                                            android:gravity="center"
+                                            android:text="@string/sar"
+                                            android:textColor="@color/white"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </FrameLayout>
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
 
                 <LinearLayout
+                    android:id="@+id/llBottom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded__grey10_stroke_grey7"
@@ -278,9 +445,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/rounded__grey10_stroke_grey7"
+                        android:layout_height="50dp"
+                        android:background="@color/grey10"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -292,10 +458,11 @@
                             android:padding="7dp"
                             android:text="@string/single_price"
                             android:textColor="@color/black2"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            tools:ignore="NestedWeights" />
 
                         <View
-                            android:layout_width="1dp"
+                            android:layout_width="1px"
                             android:layout_height="match_parent"
                             android:background="@color/grey7"
 
@@ -312,17 +479,17 @@
                             android:textColor="@color/black2"
                             android:textSize="14sp" />
                     </LinearLayout>
-
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey7" />
+                        android:layout_height="1px"
+                        android:background="@color/grey7"
+
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/rounded__grey10_stroke_grey7"
+                        android:layout_height="50dp"
+                        android:background="@color/grey10"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -335,10 +502,11 @@
                             android:text="@string/sar"
 
                             android:textColor="@color/black2"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            tools:ignore="NestedWeights" />
 
                         <View
-                            android:layout_width="1dp"
+                            android:layout_width="1px"
                             android:layout_height="match_parent"
                             android:background="@color/grey7"
 
