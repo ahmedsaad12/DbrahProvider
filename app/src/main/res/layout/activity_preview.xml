@@ -238,7 +238,7 @@
                             android:layout_marginBottom="16dp"
                             android:background="@drawable/small_rounded_grey7"
                             android:orientation="horizontal"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
