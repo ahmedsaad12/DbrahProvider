@@ -36,7 +36,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -225,6 +226,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
                             android:background="@drawable/small_rounded_grey7"
                             android:orientation="horizontal"
                             android:padding="8dp"
@@ -271,9 +273,9 @@
                         android:id="@+id/btnSendOffer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginEnd="25dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/rounded_color9"
                         android:text="@string/send_offer"
