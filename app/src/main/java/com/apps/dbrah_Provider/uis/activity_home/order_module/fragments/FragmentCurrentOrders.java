@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.uis.activity_home.order_module.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.databinding.FragmentOrdersBinding;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
+import com.apps.dbrah_Provider.uis.activity_current_prev_order_details.CurrentPreviousOrderDetailsActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 
 import java.util.ArrayList;
@@ -64,4 +66,8 @@ public class FragmentCurrentOrders extends BaseFragment {
         binding.recViewOrders.setAdapter(orderAdapter);
     }
 
+    public void navigateToDetails() {
+        Intent intent=new Intent(activity, CurrentPreviousOrderDetailsActivity.class);
+        startActivity(intent);
+    }
 }

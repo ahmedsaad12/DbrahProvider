@@ -45,11 +45,24 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setLang(lang);
-
+        myHolder.binding.llDetails.setOnClickListener(view -> {
+            if (fragment instanceof FragmentNewOrders) {
+                FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
+                fragmentNew.navigateToDetails();
+            }
+        });
+        myHolder.itemView.setOnClickListener(view -> {
+           if (fragment instanceof FragmentCurrentOrders) {
+                FragmentCurrentOrders fragmentCurrent = (FragmentCurrentOrders) fragment;
+                fragmentCurrent.navigateToDetails();
+            } else if (fragment instanceof FragmentPreviousOrders) {
+                FragmentPreviousOrders fragmentPrevious = (FragmentPreviousOrders) fragment;
+                fragmentPrevious.navigateToDetails();
+            }
+        });
         if (fragment instanceof FragmentNewOrders) {
             FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
             myHolder.binding.llNewOrders.setVisibility(View.VISIBLE);
-            myHolder.binding.llDetails.setOnClickListener(view -> fragmentNew.navigateToDetails());
 
         } else if (fragment instanceof FragmentCurrentOrders) {
             FragmentCurrentOrders fragmentCurrent = (FragmentCurrentOrders) fragment;
