@@ -47,5 +47,12 @@ public class OrderDetailsActivity extends BaseActivity {
             Intent intent=new Intent(OrderDetailsActivity.this, OfferActivity.class);
             startActivity(intent);
         });
+        binding.flExpectedTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.flExpectedTime.setVisibility(View.GONE);
+
+            }
+        });
     }
 }

@@ -155,7 +155,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="170dp"
+                                    android:layout_height="150dp"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -216,10 +216,9 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:layout_marginStart="3dp"
+                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="3dp"
+                                                android:layout_marginEnd="7dp"
                                                 android:gravity="center"
                                                 android:text="@string/this_month_s_clients"
                                                 android:textColor="@color/black2"
@@ -231,7 +230,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="170dp"
+                                    android:layout_height="150dp"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -293,10 +292,9 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:layout_marginStart="3dp"
+                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="3dp"
+                                                android:layout_marginEnd="7dp"
                                                 android:gravity="center"
                                                 android:text="@string/this_month_s_order"
                                                 android:textColor="@color/black2"
@@ -316,7 +314,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="170dp"
+                                    android:layout_height="150dp"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -377,10 +375,9 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:layout_marginStart="3dp"
+                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="3dp"
+                                                android:layout_marginEnd="7dp"
                                                 android:gravity="center"
                                                 android:text="@string/this_month_s_miss_order"
                                                 android:textColor="@color/black2"
@@ -392,7 +389,7 @@
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
-                                    android:layout_height="170dp"
+                                    android:layout_height="150dp"
                                     android:layout_margin="7dp"
                                     android:layout_weight="1"
                                     app:cardBackgroundColor="@color/white"
@@ -454,10 +451,9 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:layout_marginStart="3dp"
+                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="3dp"
+                                                android:layout_marginEnd="7dp"
                                                 android:gravity="center"
                                                 android:text="@string/total_clients_this_year"
                                                 android:textColor="@color/black2"
@@ -520,6 +516,8 @@
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
+                                    android:layout_marginEnd="7dp"
+                                    android:layout_marginStart="7dp"
                                     android:layout_gravity="center"
                                     app:cardCornerRadius="30dp">
 
@@ -527,7 +525,6 @@
                                         android:layout_width="14dp"
                                         android:layout_height="14dp"
                                         android:layout_gravity="center"
-                                        android:padding="3dp"
 
                                         android:rotation='@{lang.equals("en")?180:0}'
                                         android:src="@drawable/ic_left_arrow"
@@ -552,23 +549,23 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_gravity="center"
+                            android:layout_gravity="center_vertical"
                             android:src="@drawable/vat" />
 
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_gravity="center_vertical"
                             android:gravity="center"
                             android:text="@string/vat_number2"
                             android:textColor="@color/grey7"
-                            android:textSize="15sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_gravity="center_vertical"
                             android:gravity="center"
                             android:text="123 123 231"
                             android:textColor="@color/grey7"

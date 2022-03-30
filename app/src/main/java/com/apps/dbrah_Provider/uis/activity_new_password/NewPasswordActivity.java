@@ -20,6 +20,7 @@ public class NewPasswordActivity extends BaseActivity {
 
     private void initView() {
         binding.setLang(getLang());
-        setUpToolbar(binding.toolbar, getString(R.string.reset_password), R.color.white, R.color.black);
+        binding.setTitle(getString(R.string.reset_password));
+        binding.llBack.setOnClickListener(view -> finish());
     }
 }

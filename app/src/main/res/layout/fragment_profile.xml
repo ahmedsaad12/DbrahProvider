@@ -92,6 +92,7 @@
                 android:layout_marginBottom="24dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:text="@string/login"
                 android:textStyle="bold" />
             <LinearLayout
                 android:id="@+id/llEditAccount"
@@ -120,6 +121,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -168,6 +171,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -201,6 +206,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -234,6 +241,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -266,6 +275,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,9 +56,9 @@ public class LoginActivity extends BaseActivity {
         model = new LoginModel();
         binding.setModel(model);
         activityLoginMvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
-
+        binding.tvSignUp.setPaintFlags(binding.tvSignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         binding.setLang(getLang());
-                activityLoginMvvm.getCoListMutableLiveData().observe(this, new Observer<List<CountryModel>>() {
+        activityLoginMvvm.getCoListMutableLiveData().observe(this, new Observer<List<CountryModel>>() {
             @Override
             public void onChanged(List<CountryModel> countryModels) {
                 if (countryModels != null && countryModels.size() > 0) {
@@ -74,11 +75,11 @@ public class LoginActivity extends BaseActivity {
             }
         });
         binding.tvSignUp.setOnClickListener(view -> {
-            Intent intent=new Intent(LoginActivity.this, SignUpActivity.class);
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(intent);
         });
         binding.tvForgetPassword.setOnClickListener(view -> {
-            Intent intent=new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+            Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
             startActivity(intent);
         });
 
@@ -95,7 +96,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().startsWith("0")){
+                if (s.toString().startsWith("0")) {
                     binding.edtPhone.setText("");
                 }
             }
@@ -110,7 +111,7 @@ public class LoginActivity extends BaseActivity {
             binding.viewEmail.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             binding.viewPhone.setBackgroundColor(getResources().getColor(R.color.grey8));
             binding.tvEmail.setTextColor(getResources().getColor(R.color.colorAccent));
-            binding.tvPhone.setTextColor(getResources().getColor(R.color.black));
+            binding.tvPhone.setTextColor(getResources().getColor(R.color.black2));
             binding.llEmail.setVisibility(View.VISIBLE);
             binding.consPhone.setVisibility(View.GONE);
             model.setType(2);
@@ -119,7 +120,7 @@ public class LoginActivity extends BaseActivity {
         binding.tvPhone.setOnClickListener(view -> {
             binding.viewEmail.setBackgroundColor(getResources().getColor(R.color.grey8));
             binding.viewPhone.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            binding.tvEmail.setTextColor(getResources().getColor(R.color.black));
+            binding.tvEmail.setTextColor(getResources().getColor(R.color.black2));
             binding.tvPhone.setTextColor(getResources().getColor(R.color.colorAccent));
             binding.consPhone.setVisibility(View.VISIBLE);
             binding.llEmail.setVisibility(View.GONE);
@@ -138,7 +139,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 navigateToHomeActivity();
-                if(model.isDataValid(LoginActivity.this)){
+                if (model.isDataValid(LoginActivity.this)) {
 
                 }
             }
@@ -173,6 +174,7 @@ public class LoginActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
     public void setItemData(CountryModel countryModel) {
         dialog.dismiss();
         model.setPhone_code(countryModel.getDialCode());

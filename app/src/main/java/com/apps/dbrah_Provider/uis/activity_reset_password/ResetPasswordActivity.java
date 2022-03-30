@@ -23,8 +23,8 @@ public class ResetPasswordActivity extends BaseActivity {
 
     private void initView() {
         binding.setLang(getLang());
-        setUpToolbar(binding.toolbar, getString(R.string.reset_password), R.color.white, R.color.black);
-
+        binding.setTitle(getString(R.string.reset_password));
+        binding.llBack.setOnClickListener(view -> finish());
         binding.btnDone.setOnClickListener(view -> {
             Intent intent=new Intent(ResetPasswordActivity.this, NewPasswordActivity.class);
             startActivity(intent);

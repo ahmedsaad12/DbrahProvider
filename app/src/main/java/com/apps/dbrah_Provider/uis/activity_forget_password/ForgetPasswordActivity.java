@@ -18,17 +18,18 @@ public class ForgetPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_forget_password);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_forget_password);
         initView();
     }
 
     private void initView() {
         binding.setLang(getLang());
-        setUpToolbar(binding.toolbar, getString(R.string.forget_password), R.color.white, R.color.black);
-
+        binding.setTitle(getString(R.string.forget_password));
+        binding.llBack.setOnClickListener(view -> finish());
         binding.btnSend.setOnClickListener(view -> {
-            Intent intent=new Intent(ForgetPasswordActivity.this, ResetPasswordActivity.class);
+            Intent intent = new Intent(ForgetPasswordActivity.this, ResetPasswordActivity.class);
             startActivity(intent);
         });
+
     }
 }
