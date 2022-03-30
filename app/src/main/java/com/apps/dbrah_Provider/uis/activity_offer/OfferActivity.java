@@ -33,11 +33,17 @@ public class OfferActivity extends BaseActivity {
                     binding.tvUnAvilable.setBackground(getResources().getDrawable(R.drawable.small_rounded_primary));
                     binding.flUnAvilable.setVisibility(View.VISIBLE);
                     binding.tvUnAvilable.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvLess.setBackground(getResources().getDrawable(R.drawable.rounded_grey9_stroke_grey7));
+                    binding.tvLess.setTextColor(getResources().getColor(R.color.grey7));
+                    binding.tvOTher.setBackground(getResources().getDrawable(R.drawable.rounded_grey9_stroke_grey7));
+                    binding.tvOTher.setTextColor(getResources().getColor(R.color.grey7));
+                    binding.llData.setVisibility(View.GONE);
                 } else {
                     avilable = 1;
                     binding.flUnAvilable.setVisibility(View.GONE);
                     binding.tvUnAvilable.setBackground(getResources().getDrawable(R.drawable.rounded_shape_gray1_strock6));
                     binding.tvUnAvilable.setTextColor(getResources().getColor(R.color.colorAccent));
+                    binding.llData.setVisibility(View.GONE);
 
                 }
             }
@@ -53,10 +59,12 @@ public class OfferActivity extends BaseActivity {
                 binding.flBrand.setVisibility(View.GONE);
                 binding.tvLess.setEnabled(false);
                 binding.tvOTher.setEnabled(true);
+                binding.llData.setVisibility(View.VISIBLE);
                 binding.tvLess.setTextColor(getResources().getColor(R.color.white));
                 binding.tvOTher.setTextColor(getResources().getColor(R.color.grey7));
 
                 binding.tvOTher.setBackground(getResources().getDrawable(R.drawable.rounded_grey9_stroke_grey7));
+
 
             }
         });
@@ -70,6 +78,7 @@ public class OfferActivity extends BaseActivity {
                 binding.tvLess.setEnabled(true);
                 binding.tvOTher.setEnabled(false);
                 binding.llItem.setVisibility(View.GONE);
+                binding.llData.setVisibility(View.VISIBLE);
                 binding.tvLess.setBackground(getResources().getDrawable(R.drawable.rounded_grey9_stroke_grey7));
                 binding.tvLess.setTextColor(getResources().getColor(R.color.grey7));
                 binding.tvOTher.setTextColor(getResources().getColor(R.color.white));
