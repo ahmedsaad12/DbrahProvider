@@ -69,6 +69,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
 
 
 

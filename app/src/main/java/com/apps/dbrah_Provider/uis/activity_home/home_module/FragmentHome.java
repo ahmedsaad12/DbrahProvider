@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.uis.activity_home.home_module;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.FragmentHomeBinding;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
+import com.apps.dbrah_Provider.uis.activity_reviews.ReviewsActivity;
 
 
 public class FragmentHome extends BaseFragment {
@@ -46,6 +48,11 @@ public class FragmentHome extends BaseFragment {
 
     private void initView() {
         binding.setLang(getLang());
+
+        binding.cardReviews.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, ReviewsActivity.class);
+            startActivity(intent);
+        });
     }
 
 

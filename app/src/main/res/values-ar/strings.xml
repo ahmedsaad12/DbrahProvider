@@ -128,5 +128,6 @@
     <string name="item">السلعة</string>
     <string name="less_quantity">كمية أقل</string>
     <string name="other_brand">ماركة أخرى</string>
+    <string name="reviews">المراجعات</string>
 
 </resources>

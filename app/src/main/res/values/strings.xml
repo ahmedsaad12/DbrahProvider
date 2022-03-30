@@ -127,5 +127,6 @@
     <string name="item">Item</string>
     <string name="less_quantity">less quantity</string>
     <string name="other_brand">Other Brand</string>
+    <string name="reviews">Reviews</string>
 
 </resources>
