@@ -29,6 +29,7 @@ import com.apps.dbrah_Provider.databinding.FragmentProfileBinding;
 import com.apps.dbrah_Provider.uis.activity_contact_us.ContactUsActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
+import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 
 import java.util.List;
 
@@ -74,22 +75,20 @@ public class FragmentProfile extends BaseFragment {
             binding.setModel(getUserModel());
         }
         binding.setLang(getLang());
-        binding.tvLang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getLang().equals("en")) {
-                    activity.refreshActivity("ar");
-                } else {
-                    activity.refreshActivity("en");
-                }
+        binding.tvLang.setOnClickListener(view -> {
+            if (getLang().equals("en")) {
+                activity.refreshActivity("ar");
+            } else {
+                activity.refreshActivity("en");
             }
         });
-        binding.llContactUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, ContactUsActivity.class);
-                startActivity(intent);
-            }
+        binding.llContactUs.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, ContactUsActivity.class);
+            startActivity(intent);
+        });
+        binding.llEditAccount.setOnClickListener(view -> {
+            Intent intent=new Intent(activity, SignUpActivity.class);
+            startActivity(intent);
         });
     }
 

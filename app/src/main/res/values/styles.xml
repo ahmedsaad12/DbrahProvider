@@ -18,6 +18,11 @@
 
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/grey12</item>
+        <item name="colorControlActivated">@color/color11</item>
+    </style>
+
     <style name="dialog_congratulation_animation">
         <item name="android:windowEnterAnimation">@anim/dialog_congratulation_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_congratulation_exit</item>

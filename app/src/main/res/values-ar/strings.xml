@@ -129,5 +129,7 @@
     <string name="less_quantity">كمية أقل</string>
     <string name="other_brand">ماركة أخرى</string>
     <string name="reviews">المراجعات</string>
+    <string name="type_a_message">اكتب هنا</string>
+    <string name="chat">Chat</string>
 
 </resources>

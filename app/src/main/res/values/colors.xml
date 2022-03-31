@@ -19,6 +19,7 @@
     <color name="color8">#FFB8B8</color>
     <color name="color9">#3B9A00</color>
     <color name="color10">#FF9096</color>
+    <color name="color11">#FFB800</color>
     <color name="grey1">#f5f5f5</color>
     <color name="grey2">#fafafa</color>
     <color name="grey3">#fdfdfd</color>
@@ -30,4 +31,5 @@
     <color name="grey9">#F8F8F8</color>
     <color name="grey10">#C4C4C4</color>
     <color name="grey11">#777777</color>
+    <color name="grey12">#656565</color>
 </resources>

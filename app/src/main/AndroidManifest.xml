@@ -26,6 +26,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_chat.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_reviews.ReviewsActivity"
             android:exported="false" />
         <activity

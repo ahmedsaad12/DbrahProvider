@@ -219,6 +219,7 @@
                                                 android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
+                                                android:singleLine="true"
                                                 android:layout_marginBottom="7dp"
                                                 android:text="@string/this_month_s_clients"
                                                 android:textColor="@color/black2"
@@ -296,6 +297,7 @@
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
                                                 android:layout_marginBottom="7dp"
+                                                android:singleLine="true"
                                                 android:text="@string/this_month_s_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -379,6 +381,7 @@
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
                                                 android:layout_marginBottom="7dp"
+                                                android:singleLine="true"
                                                 android:text="@string/this_month_s_miss_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -455,6 +458,7 @@
                                                 android:layout_marginTop="7dp"
                                                 android:layout_marginEnd="7dp"
                                                 android:layout_marginBottom="7dp"
+                                                android:singleLine="true"
                                                 android:text="@string/total_clients_this_year"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
