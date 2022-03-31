@@ -127,21 +127,13 @@ public class LoginActivity extends BaseActivity {
             model.setType(1);
 
         });
-        binding.arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.show();
-            }
-        });
+        binding.arrow.setOnClickListener(view -> dialog.show());
         sortCountries();
         createCountriesDialog();
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToHomeActivity();
-                if (model.isDataValid(LoginActivity.this)) {
+        binding.btnLogin.setOnClickListener(view -> {
+            navigateToHomeActivity();
+            if (model.isDataValid(LoginActivity.this)) {
 
-                }
             }
         });
     }

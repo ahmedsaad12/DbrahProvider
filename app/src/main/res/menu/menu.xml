@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_home"/>
     <item android:id="@+id/order"
         android:title="@string/orders"
-        android:icon="@drawable/ic_order"/>
+        android:icon="@drawable/ic_order2"/>
 
     <item android:id="@+id/settings"
         android:title="@string/settings"

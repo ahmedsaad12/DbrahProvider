@@ -257,7 +257,7 @@
                                                     android:layout_width="40dp"
                                                     android:layout_height="40dp"
                                                     android:layout_gravity="center"
-                                                    android:src="@drawable/ic_order"
+                                                    android:src="@drawable/ic_order2"
                                                     app:tint="@color/white" />
                                             </FrameLayout>
 
@@ -342,7 +342,7 @@
                                                     android:layout_width="40dp"
                                                     android:layout_height="40dp"
                                                     android:layout_gravity="center"
-                                                    android:src="@drawable/ic_people_hand" />
+                                                    android:src="@drawable/ic_order3" />
                                             </FrameLayout>
 
                                             <LinearLayout
