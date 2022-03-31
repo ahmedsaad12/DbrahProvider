@@ -41,8 +41,8 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="20dp"
                             android:layout_marginEnd="16dp"
                             app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="10dp"
@@ -108,8 +108,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             android:background="@drawable/rounded_color1_stroke_color8"
                             android:orientation="vertical"
@@ -218,6 +218,7 @@
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
                                     android:text="location"
+                                    android:fontFamily="@font/almira"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -301,30 +302,44 @@
 
                 </androidx.core.widget.NestedScrollView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/carBottom"
+                <FrameLayout
+                    android:id="@+id/flStatus"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardElevation="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/black2"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
-                    <Button
-                        android:id="@+id/btnSendOffer"
+                    <ProgressBar
+                        android:id="@+id/seekbar"
+                        style="?android:attr/progressBarStyleHorizontal"
+
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:progress="10"
+
+                        android:progressDrawable="@drawable/small_rounded_primary" />
+
+                    <TextView
+                        android:id="@+id/status"
+
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/rounded_color9"
-                        android:text="@string/send_offer"
-                        android:textAllCaps="false"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
-                </androidx.cardview.widget.CardView>
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progBar2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+                </FrameLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </FrameLayout>
