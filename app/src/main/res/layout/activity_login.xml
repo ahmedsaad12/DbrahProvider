@@ -36,8 +36,8 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:scaleType="fitXY"
-                android:scaleX='@{lang.equals("ar")?-1:1}'
                 android:src="@drawable/top"
+                android:layoutDirection="ltr"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

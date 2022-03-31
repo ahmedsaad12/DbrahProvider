@@ -64,6 +64,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:text="@string/welcome"
+                                android:fontFamily="@font/almira"
                                 android:textColor="@color/grey7"
                                 android:textSize="15sp" />
 
@@ -81,6 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:text="happiness store"
+                            android:fontFamily="@font/almaraibold"
                             android:textColor="@color/black2"
                             android:textSize="15sp"
 
@@ -129,6 +131,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:text="@string/statistics"
+                            android:fontFamily="@font/almaraibold"
                             android:textColor="@color/black2"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -139,7 +142,7 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gradient_home">
+                        android:background="@color/grey8">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -149,8 +152,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginEnd="9dp"
                                 android:orientation="horizontal">
 
                                 <androidx.cardview.widget.CardView
@@ -169,12 +172,15 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_marginTop="12dp"
+                                            android:layout_marginBottom="12dp"
                                             android:orientation="vertical">
 
                                             <FrameLayout
                                                 android:layout_width="60dp"
                                                 android:layout_height="60dp"
-                                                android:layout_margin="7dp"
                                                 android:background="@drawable/circle_color2">
 
                                                 <ImageView
@@ -187,8 +193,7 @@
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
-                                                android:layout_marginEnd="7dp"
+
                                                 android:gravity="center"
                                                 android:orientation="horizontal">
 
@@ -216,11 +221,10 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="7dp"
-                                                android:singleLine="true"
                                                 android:layout_marginBottom="7dp"
+                                                android:lines="2"
+
                                                 android:text="@string/this_month_s_clients"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -245,12 +249,16 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_marginTop="12dp"
+                                            android:layout_marginBottom="12dp"
                                             android:orientation="vertical">
 
                                             <FrameLayout
                                                 android:layout_width="60dp"
                                                 android:layout_height="60dp"
-                                                android:layout_margin="7dp"
+
                                                 android:background="@drawable/circle_color3">
 
                                                 <ImageView
@@ -264,8 +272,6 @@
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
-                                                android:layout_marginEnd="7dp"
                                                 android:gravity="center"
                                                 android:orientation="horizontal">
 
@@ -293,11 +299,9 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="7dp"
                                                 android:layout_marginBottom="7dp"
-                                                android:singleLine="true"
+                                                android:lines="2"
                                                 android:text="@string/this_month_s_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -310,8 +314,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="9dp"
+                                android:layout_marginEnd="9dp"
                                 android:orientation="horizontal">
 
                                 <androidx.cardview.widget.CardView
@@ -330,12 +334,16 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_marginTop="12dp"
+                                            android:layout_marginBottom="12dp"
                                             android:orientation="vertical">
 
                                             <FrameLayout
                                                 android:layout_width="60dp"
                                                 android:layout_height="60dp"
-                                                android:layout_margin="7dp"
+
                                                 android:background="@drawable/circle_primary">
 
                                                 <ImageView
@@ -348,8 +356,7 @@
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
-                                                android:layout_marginEnd="7dp"
+
                                                 android:gravity="center"
                                                 android:orientation="horizontal">
 
@@ -377,11 +384,10 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="7dp"
                                                 android:layout_marginBottom="7dp"
-                                                android:singleLine="true"
+                                                android:lines="2"
+
                                                 android:text="@string/this_month_s_miss_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -406,12 +412,16 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_marginTop="12dp"
+                                            android:layout_marginBottom="12dp"
                                             android:orientation="vertical">
 
                                             <FrameLayout
                                                 android:layout_width="60dp"
                                                 android:layout_height="60dp"
-                                                android:layout_margin="7dp"
+
                                                 android:background="@drawable/circle_color4">
 
                                                 <ImageView
@@ -425,8 +435,7 @@
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
-                                                android:layout_marginEnd="7dp"
+
                                                 android:gravity="center"
                                                 android:orientation="horizontal">
 
@@ -454,11 +463,9 @@
                                             <TextView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="7dp"
                                                 android:layout_marginTop="7dp"
-                                                android:layout_marginEnd="7dp"
                                                 android:layout_marginBottom="7dp"
-                                                android:singleLine="true"
+                                                android:lines="2"
                                                 android:text="@string/total_clients_this_year"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
@@ -475,23 +482,27 @@
                         android:id="@+id/cardReviews"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="16dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="15dp"
                         app:cardElevation="5dp">
 
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+
+                            >
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal"
-                                android:paddingLeft="7dp"
-                                android:paddingRight="7dp">
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="26dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginBottom="24dp">
 
 
                                 <ImageView
@@ -521,8 +532,6 @@
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
-                                    android:layout_marginEnd="7dp"
-                                    android:layout_marginStart="7dp"
                                     android:layout_gravity="center"
                                     app:cardCornerRadius="30dp">
 
