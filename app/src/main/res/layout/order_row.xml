@@ -11,17 +11,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_white_stroke_grey6"
         android:orientation="vertical"
-        android:padding="8dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -36,31 +39,33 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/almira"
                 android:text="@string/order_number"
                 android:textColor="@color/black2"
                 android:textSize="14sp" />
 
             <androidx.legacy.widget.Space
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almaraibold"
                 android:text="#123111"
                 android:textColor="@color/black2"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -81,6 +86,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/almira"
                     android:text="2/2/22222"
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
@@ -104,6 +110,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/almira"
                     android:text="03:30 pm"
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
@@ -113,9 +120,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -130,6 +137,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/almira"
                 android:text="location"
                 android:textColor="@color/black2"
                 android:textSize="14sp" />
@@ -139,11 +147,12 @@
             android:id="@+id/llNewOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -154,18 +163,19 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_pin" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="6dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/pin"
                     android:textColor="@color/grey7"
                     android:textSize="12sp" />
@@ -173,7 +183,7 @@
 
             <androidx.legacy.widget.Space
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <LinearLayout
@@ -187,15 +197,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/details"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
                     android:layout_gravity="center_vertical"
                     android:rotation='@{lang.equals("ar")?180:0}'
                     android:src="@drawable/ic_arrow" />
@@ -208,20 +219,22 @@
             android:id="@+id/llWaiting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_color5"
             android:orientation="horizontal"
-            android:padding="5dp"
             android:visibility="gone">
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_wait" />
 
             <TextView
@@ -229,37 +242,41 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="@font/almira"
                 android:text="@string/waiting_for_the_customer_s_response_to_the_offer"
                 android:textColor="@color/black2"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llAccepted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_color6"
             android:orientation="horizontal"
-            android:padding="5dp">
+            >
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_accepted" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="@font/almira"
                 android:text="@string/your_offer_has_been_accepted"
                 android:textColor="@color/black2"
                 android:textSize="14sp" />
@@ -268,9 +285,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <ProgressBar
@@ -288,12 +306,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="7dp"
+                android:layout_marginStart="26dp"
+                android:fontFamily="@font/almaraibold"
                 android:text="@string/done"
                 android:textStyle="bold"
                 android:textColor="@color/black2"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </layout>

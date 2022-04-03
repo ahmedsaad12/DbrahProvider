@@ -41,6 +41,7 @@ import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
 import com.apps.dbrah_Provider.preferences.Preferences;
 import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
+import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -56,7 +57,7 @@ public class SignUpActivity extends BaseActivity {
     private List<CountryModel> countryModelList = new ArrayList<>();
     private CountryAdapter countriesAdapter;
     private CategoryAdapter categoryAdapter;
-    private List<Object>list;
+    private List<Object> list;
     private AlertDialog dialog;
     private SignUpModel model;
     private ActivitySignUpMvvm activitySignUpMvvm;
@@ -100,9 +101,9 @@ public class SignUpActivity extends BaseActivity {
         });
         activitySignUpMvvm.setCountry();
 
-        list=new ArrayList<>();
-        categoryAdapter=new CategoryAdapter(list,this);
-        binding.recViewCategory.setLayoutManager(new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false));
+        list = new ArrayList<>();
+        categoryAdapter = new CategoryAdapter(list, this);
+        binding.recViewCategory.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(categoryAdapter);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -113,7 +114,7 @@ public class SignUpActivity extends BaseActivity {
                     File file = new File(Common.getImagePath(this, uri));
                     if (type.equals("mainImage")) {
                         Picasso.get().load(file).fit().into(binding.image);
-                    }else if (type.equals("secondImage")){
+                    } else if (type.equals("secondImage")) {
                         binding.iconUpload.setVisibility(View.GONE);
                         Picasso.get().load(file).fit().into(binding.imageRecord);
                     }
@@ -128,7 +129,7 @@ public class SignUpActivity extends BaseActivity {
                         if (path != null) {
                             if (type.equals("mainImage")) {
                                 Picasso.get().load(new File(path)).fit().into(binding.image);
-                            }else if (type.equals("secondImage")){
+                            } else if (type.equals("secondImage")) {
                                 binding.iconUpload.setVisibility(View.GONE);
                                 Picasso.get().load(new File(path)).fit().into(binding.imageRecord);
                             }
@@ -137,7 +138,7 @@ public class SignUpActivity extends BaseActivity {
                         } else {
                             if (type.equals("mainImage")) {
                                 Picasso.get().load(uri).fit().into(binding.image);
-                            }else if (type.equals("secondImage")){
+                            } else if (type.equals("secondImage")) {
                                 binding.iconUpload.setVisibility(View.GONE);
                                 Picasso.get().load(uri).fit().into(binding.iconUpload);
                             }
@@ -173,13 +174,17 @@ public class SignUpActivity extends BaseActivity {
         createCountriesDialog();
 
         binding.tvLogin.setPaintFlags(binding.tvLogin.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvLogin.setOnClickListener(view -> {
+            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
 
         binding.flImage.setOnClickListener(view -> {
             type = "mainImage";
             openSheet();
         });
         binding.imageRecord.setOnClickListener(view -> {
-            type="secondImage";
+            type = "secondImage";
             openSheet();
         });
         binding.flGallery.setOnClickListener(view -> {

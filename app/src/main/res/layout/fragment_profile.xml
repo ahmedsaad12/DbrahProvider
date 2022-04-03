@@ -40,17 +40,19 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="113dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/profile_bg"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <FrameLayout
                     android:id="@+id/flImage"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="54dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -63,11 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clickable="false"
-                        android:longClickable="false"
-                        app:civ_border_color="@color/white"
-                        app:civ_border_width="1dp"
-
-                        app:civ_circle_background_color="@color/white" />
+                        android:longClickable="false" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/icon"
@@ -76,53 +74,59 @@
                         android:background="@drawable/circle_white"
                         android:clickable="false"
                         android:longClickable="false"
-                        android:padding="5dp"
                         android:src="@drawable/circle_avatar" />
 
 
                 </FrameLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="@color/black"
-                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/almaraibold"
                 android:text="@string/login"
-                android:textStyle="bold" />
+                android:textColor="@color/black2"
+                android:textSize="18sp"
+                 />
+
             <LinearLayout
                 android:id="@+id/llEditAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:layout_marginTop="30dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_edit" />
+                    android:src="@drawable/ic_edit2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/edit_profile"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -133,7 +137,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -145,10 +152,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/language"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
 
                 <androidx.legacy.widget.Space
@@ -162,17 +170,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/almira"
                     android:text='@{lang.equals("en")?"عربى":"En"}'
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -183,7 +192,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -195,10 +207,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/terms_and_conditions"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -206,8 +219,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -218,7 +231,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -230,10 +246,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/privacy_policy"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -241,8 +258,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
@@ -253,7 +270,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -265,10 +285,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/contact_us"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -285,9 +306,11 @@
                 android:id="@+id/llLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -299,10 +322,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/almira"
                     android:text="@string/logout"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black2"
                     android:textSize="16sp" />
             </LinearLayout>
 

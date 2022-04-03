@@ -8,50 +8,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/rounded_white_stroke_grey6"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/circle_avatar" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/almaraibold"
                     android:text="@string/name"
                     android:textColor="@color/black2"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="6dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/almira"
                         android:text="22/10/11111"
                         android:textColor="@color/grey7"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <androidx.legacy.widget.Space
                         android:layout_width="0dp"
@@ -60,9 +63,8 @@
 
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        >
+                        android:layout_height="14dp"
+                        android:layout_gravity="center_vertical">
 
                         <me.zhanghai.android.materialratingbar.MaterialRatingBar
                             android:layout_width="match_parent"
@@ -70,7 +72,7 @@
                             android:layout_gravity="center"
                             android:numStars="5"
                             android:rating="3.5"
-                            android:theme="@style/RatingBar"/>
+                            android:theme="@style/RatingBar" />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -80,12 +82,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/almira"
             android:text="details"
             android:textColor="@color/grey7"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 </layout>

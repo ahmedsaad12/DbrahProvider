@@ -74,7 +74,7 @@ public class FragmentOrder extends BaseFragment {
             Log.e("i",i+"");
             View view = ((ViewGroup) binding.tab.getChildAt(0)).getChildAt(i);
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-            params.setMargins(15, 0, 15, 0);
+            params.setMargins(16, 0, 16, 0);
         }
     }
 

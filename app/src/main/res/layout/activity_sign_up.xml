@@ -57,7 +57,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="24dp"
                             android:background="@drawable/circle_shape2"
-                            android:padding="24dp"
+                            android:padding="3dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -69,7 +69,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:clickable="false"
-
                                 android:longClickable="false"
                                 app:civ_border_color="@color/grey6"
                                 app:civ_border_width="1dp"
@@ -81,10 +80,17 @@
                                 android:layout_height="match_parent"
                                 android:clickable="false"
                                 android:longClickable="false"
-                                android:padding="8dp"
-                                android:src="@drawable/ic_logo" />
+                                android:src="@drawable/circle_avatar"
+                                android:visibility="gone"/>
 
-
+                            <ImageView
+                                android:id="@+id/lLogo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="24dp"
+                                android:src="@drawable/ic_logo"
+                                android:layout_gravity="center"
+                                android:visibility="visible"/>
                         </FrameLayout>
 
                         <FrameLayout
@@ -124,7 +130,7 @@
 
                         <ImageView
                             android:layout_width="24dp"
-                            android:layout_height="24sp"
+                            android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/ic_store" />
 
@@ -134,31 +140,31 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/store_name"
                             android:fontFamily="@font/almira"
-                            android:textColor="@color/black"
+                            android:text="@string/store_name"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="53dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
-                        android:padding="16dp"
-                        android:background="@drawable/rounded_shape_gray1_strock6">
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp">
 
                         <EditText
                             error="@{model.error_store_name}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/transparent"
-                            android:hint="@string/store_name"
                             android:fontFamily="@font/almira"
+                            android:hint="@string/store_name"
                             android:text="@={model.store_name}"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textColorHint="@color/grey7"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -174,7 +180,7 @@
 
                         <ImageView
                             android:layout_width="24dp"
-                            android:layout_height="24sp"
+                            android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/ic_mail2" />
 
@@ -184,21 +190,21 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/email"
                             android:fontFamily="@font/almira"
-                            android:textColor="@color/black"
+                            android:text="@string/email"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="53dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
-                        android:padding="16dp"
-                        android:background="@drawable/rounded_shape_gray1_strock6">
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp">
 
                         <EditText
                             error="@{model.error_email}"
@@ -207,7 +213,7 @@
                             android:background="@color/transparent"
                             android:hint="mail@mail.com"
                             android:text="@={model.email}"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textColorHint="@color/grey7"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -234,7 +240,7 @@
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/almira"
                             android:text="@string/phone"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
 
                     </LinearLayout>
@@ -243,13 +249,14 @@
                         android:id="@+id/consPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="30dp">
 
                         <FrameLayout
                             android:id="@+id/fl"
                             android:layout_width="wrap_content"
-                            android:layout_height="56dp"
-                            android:layout_marginStart="30dp"
+                            android:layout_height="53dp"
                             android:background="@drawable/rounded_shape_gray1_strock6"
                             android:padding="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -285,9 +292,8 @@
                         <LinearLayout
                             android:id="@+id/llPhone"
                             android:layout_width="0dp"
-                            android:layout_height="56dp"
+                            android:layout_height="53dp"
                             android:layout_marginStart="10dp"
-                            android:layout_marginEnd="30dp"
                             android:background="@drawable/rounded_shape_gray1_strock6"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
@@ -302,7 +308,7 @@
                                 android:id="@+id/edtPhone"
                                 error="@{model.error_phone}"
                                 android:layout_width="0dp"
-                                android:layout_height="40dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@color/transparent"
                                 android:fontFamily="@font/almira"
@@ -310,7 +316,7 @@
                                 android:inputType="number"
                                 android:singleLine="true"
                                 android:text="@={model.phone}"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black2"
                                 android:textColorHint="@color/grey7"
                                 android:textSize="14sp"
                                 tools:ignore="TextFields" />
@@ -337,44 +343,42 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/category"
                             android:fontFamily="@font/almira"
-                            android:textColor="@color/black"
+                            android:text="@string/category"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="53dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
-                        android:padding="16dp"
-                        android:background="@drawable/rounded_shape_gray1_strock6">
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp">
 
                         <Spinner
                             android:id="@+id/spinnerCategory"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            />
+                            android:layout_gravity="center_vertical" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
-                        android:padding="16dp"
-                        android:background="@drawable/rounded_shape_gray1_strock6">
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recViewCategory"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                             />
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -398,28 +402,28 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/vat_number"
                             android:fontFamily="@font/almira"
-                            android:textColor="@color/black"
+                            android:text="@string/vat_number"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="53dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
-                        android:padding="16dp"
-                        android:background="@drawable/rounded_shape_gray1_strock6">
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp">
 
                         <EditText
                             error="@{model.error_vat_num}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/transparent"
-                            android:hint="@string/vat_number"
                             android:fontFamily="@font/almira"
+                            android:hint="@string/vat_number"
                             android:text="@={model.vat_num}"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey7"
@@ -449,7 +453,7 @@
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/almira"
                             android:text="@string/commercial_record"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -459,8 +463,8 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
-                        android:padding="16dp"
-                        android:background="@drawable/rounded_shape_gray1_strock6">
+                        android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp">
 
                         <ImageView
                             android:id="@+id/imageRecord"
@@ -497,41 +501,40 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/password"
                             android:fontFamily="@font/almira"
-                            android:textColor="@color/black"
+                            android:text="@string/password"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
                     </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="53dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
                         android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp"
                         app:counterEnabled="false"
                         app:errorEnabled="false"
                         app:errorTextColor="@color/colorPrimary"
                         app:hintEnabled="false"
                         app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/colorPrimary"
-                        android:padding="16dp"
-                        >
+                        app:passwordToggleTint="@color/colorPrimary">
 
                         <EditText
                             error="@{model.error_password}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/transparent"
+                            android:fontFamily="@font/almira"
                             android:gravity="start|center_vertical"
                             android:hint="@string/password"
-                            android:fontFamily="@font/almira"
                             android:inputType="textPassword"
                             android:lines="1"
                             android:text="@={model.password}"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textColorHint="@color/grey7"
                             android:textSize="14sp"
 
@@ -549,7 +552,7 @@
 
                         <ImageView
                             android:layout_width="24dp"
-                            android:layout_height="24sp"
+                            android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:src="@drawable/ic_lock" />
 
@@ -559,41 +562,40 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="@string/repeat_password"
                             android:fontFamily="@font/almira"
-                            android:textColor="@color/black"
+                            android:text="@string/repeat_password"
+                            android:textColor="@color/black2"
                             android:textSize="16sp" />
                     </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="53dp"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp"
                         android:background="@drawable/rounded_shape_gray1_strock6"
+                        android:padding="16dp"
                         app:counterEnabled="false"
                         app:errorEnabled="false"
                         app:errorTextColor="@color/colorPrimary"
                         app:hintEnabled="false"
                         app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@color/colorAccent"
-                        android:padding="16dp"
-                        >
+                        app:passwordToggleTint="@color/colorAccent">
 
                         <EditText
                             error="@{model.error_repeat_password}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/transparent"
+                            android:fontFamily="@font/almira"
                             android:gravity="start|center_vertical"
                             android:hint="@string/password"
-                            android:fontFamily="@font/almira"
                             android:inputType="textPassword"
                             android:lines="1"
                             android:text="@={model.repeat_password}"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textColorHint="@color/grey7"
                             android:textSize="14sp"
 
@@ -607,12 +609,12 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="32dp"
                         android:background="@drawable/rounded_primary"
+                        android:fontFamily="@font/almira"
                         android:minWidth="200dp"
                         android:text="@string/register"
-                        android:fontFamily="@font/almira"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -628,7 +630,7 @@
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/almira"
                             android:text="@string/already_have_an_account"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textSize="14sp" />
 
                         <TextView
@@ -638,8 +640,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/login"
                             android:fontFamily="@font/almira"
+                            android:text="@string/login"
                             android:textColor="@color/colorAccent"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -692,8 +694,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="@string/gallery"
                             android:fontFamily="@font/almira"
+                            android:text="@string/gallery"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -727,8 +729,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="@string/camera"
                             android:fontFamily="@font/almira"
+                            android:text="@string/camera"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -741,8 +743,8 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="25dp"
                     android:background="@color/colorPrimary"
-                    android:text="@string/cancel"
                     android:fontFamily="@font/almira"
+                    android:text="@string/cancel"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </LinearLayout>

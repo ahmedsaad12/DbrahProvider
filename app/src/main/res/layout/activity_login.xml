@@ -35,9 +35,9 @@
                 android:id="@+id/top"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
+                android:layoutDirection="ltr"
                 android:scaleType="fitXY"
                 android:src="@drawable/top"
-                android:layoutDirection="ltr"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,23 +57,22 @@
                     android:fontFamily="@font/almira"
                     android:text="@string/choose_your_preferred_method_of_logging_in"
                     android:textColor="@color/grey7"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="32dp">
 
                     <TextView
                         android:id="@+id/tvPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="26dp"
-                        android:layout_marginEnd="32dp"
                         android:fontFamily="@font/almaraibold"
+                        android:gravity="center_vertical"
                         android:text="@string/phone2"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
@@ -84,25 +83,20 @@
                         android:id="@+id/tvEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="26dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_gravity="center_vertical"
                         android:fontFamily="@font/almaraibold"
                         android:text="@string/email"
                         android:textColor="@color/black2"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias=".3"
+                        app:layout_constraintHorizontal_bias=".2"
                         app:layout_constraintStart_toEndOf="@+id/tvPhone"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginStart="32dp"
+                        android:layout_height="2dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
                         android:background="@color/grey8"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
@@ -134,14 +128,14 @@
                     android:id="@+id/consPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="32dp">
 
                     <FrameLayout
                         android:id="@+id/fl"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
                         android:background="@drawable/rounded_shape_gray1_strock6"
                         android:padding="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -179,8 +173,6 @@
                         android:layout_width="0dp"
                         android:layout_height="56dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="32dp"
                         android:background="@drawable/rounded_shape_gray1_strock6"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
@@ -200,8 +192,8 @@
                             android:id="@+id/edtPhone"
                             error="@{model.error_phone}"
                             android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="16dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:background="@color/transparent"
                             android:fontFamily="@font/almira"
@@ -209,7 +201,7 @@
                             android:inputType="number"
                             android:singleLine="true"
                             android:text="@={model.phone}"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textColorHint="@color/grey7"
                             android:textSize="14sp"
                             tools:ignore="TextFields" />
@@ -221,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/rounded_shape_gray1_strock6"
                     android:padding="16dp">
@@ -243,16 +235,15 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:background="@color/transparent"
+                        android:fontFamily="@font/almira"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
                         android:lines="1"
                         android:singleLine="true"
                         android:text="@={model.email}"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black2"
                         android:textColorHint="@color/grey7"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/almira"
-                        />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -294,16 +285,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/transparent"
+                            android:fontFamily="@font/almira"
                             android:gravity="start|center_vertical"
                             android:hint="@string/password"
                             android:inputType="number"
                             android:lines="1"
                             android:text="@={model.password}"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black2"
                             android:textColorHint="@color/grey7"
                             android:textSize="14sp"
-                            android:fontFamily="@font/almira"
 
                             />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -317,8 +308,8 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
-                    android:text="@string/forget_password"
                     android:fontFamily="@font/almira"
+                    android:text="@string/forget_password"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
 
@@ -332,13 +323,11 @@
                     android:layout_marginTop="39dp"
                     android:layout_marginBottom="62dp"
                     android:background="@drawable/rounded_primary"
+                    android:fontFamily="@font/almira"
                     android:gravity="center"
                     android:minWidth="200dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:fontFamily="@font/almira"
-                    android:textAllCaps="false"
                     android:text="@string/login"
+                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -347,20 +336,19 @@
                 android:id="@+id/llSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:layout_marginBottom="32dp"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llLogin"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/llLogin">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/don_t_have_an_account"
                     android:fontFamily="@font/almira"
+                    android:text="@string/don_t_have_an_account"
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
 
@@ -372,8 +360,8 @@
                     android:id="@+id/tvSignUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_up"
                     android:fontFamily="@font/almira"
+                    android:text="@string/sign_up"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
 
