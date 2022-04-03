@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,29 +11,28 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_white_stroke_grey6"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:padding="8dp">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_date" />
+            android:src="@drawable/ic_date"
+            app:riv_corner_radius="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/almira"
                 android:text="product name"
                 android:textColor="@color/black2"
                 android:textSize="14sp" />
@@ -40,13 +40,15 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/almira"
                     android:text="@string/ordered"
+                    android:layout_gravity="center_vertical"
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
 
@@ -56,10 +58,10 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/almaraibold"
                     android:text="2 X"
                     android:textColor="@color/black2"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -37,23 +37,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        >
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="16dp"
                             android:background="@drawable/rounded_color1_stroke_color8"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="21dp"
+                                android:layout_marginEnd="16dp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -68,13 +68,14 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/order_number"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
 
                                 <androidx.legacy.widget.Space
                                     android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="0dp"
                                     android:layout_weight="1" />
 
                                 <TextView
@@ -82,17 +83,18 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:text="#123111"
+                                    android:fontFamily="@font/almaraibold"
                                     android:textColor="@color/black2"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textSize="16sp"
+                                    />
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -113,6 +115,7 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="8dp"
+                                        android:fontFamily="@font/almira"
                                         android:text="2/2/22222"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
@@ -136,15 +139,20 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="8dp"
+                                        android:fontFamily="@font/almira"
                                         android:text="03:30 pm"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
                                 </LinearLayout>
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="15dp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -159,10 +167,12 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
+                                    android:fontFamily="@font/almira"
                                     android:text="location"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
                             </LinearLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -170,27 +180,29 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_grey9_stroke_color10"
                             android:orientation="vertical"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="14dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
-                            android:padding="8dp">
+                            >
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginTop="13dp"
+                                android:fontFamily="@font/almira"
                                 android:text="@string/expected_delivery_time2"
                                 android:textColor="@color/grey7"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="8dp"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="13dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -201,6 +213,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="16/12/32222"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
@@ -216,8 +229,10 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/almira"
                                     android:text="08:45 pm"
                                     android:textSize="14sp"
+                                    android:layout_gravity="center_vertical"
                                     android:textColor="@color/black2"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"/>
@@ -232,34 +247,35 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="22dp"
+                            android:layout_marginEnd="22dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:background="@drawable/small_rounded_grey7"
                             android:orientation="horizontal"
-                            android:padding="10dp"
+                            android:padding="16dp"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/almira"
                                 android:text="@string/total_cost"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"
                                 android:layout_gravity="center_vertical"/>
                             <androidx.legacy.widget.Space
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="0dp"
                                 android:layout_weight="1"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/almaraibold"
                                 android:text="350 R.S"
                                 android:textColor="@color/white"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="16dp"/>
+                                />
 
                         </LinearLayout>
 
@@ -282,15 +298,17 @@
                         android:id="@+id/btnSendOffer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
+                        android:layout_marginStart="29dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginEnd="29dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/rounded_color9"
+                        android:fontFamily="@font/almira"
                         android:text="@string/send_offer"
                         android:textAllCaps="false"
+                        android:padding="12dp"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
