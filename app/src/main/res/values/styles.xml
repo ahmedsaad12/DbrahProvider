@@ -28,6 +28,8 @@
     </style>
     <style name="tabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
     </style>
-
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/almaraibold</item>
+    </style>
 
 </resources>

@@ -26,6 +26,7 @@
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="fixed"
                 app:tabPadding="8dp"
+                app:tabTextAppearance="@style/tab_text"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextColor="@color/grey7" />
         </FrameLayout>

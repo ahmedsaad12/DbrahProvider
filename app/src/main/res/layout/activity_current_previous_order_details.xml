@@ -342,7 +342,7 @@
                         android:layout_height="match_parent"
                         android:progress="10"
 
-                        android:progressDrawable="@drawable/small_rounded_primary" />
+                        android:progressDrawable="@drawable/top_rounded_primary" />
 
                     <TextView
                         android:id="@+id/status"
@@ -351,6 +351,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:text="Status"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:fontFamily="@font/almira"/>
