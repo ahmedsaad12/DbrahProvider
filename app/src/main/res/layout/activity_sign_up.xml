@@ -81,16 +81,16 @@
                                 android:clickable="false"
                                 android:longClickable="false"
                                 android:src="@drawable/circle_avatar"
-                                android:visibility="gone"/>
+                                android:visibility="gone" />
 
                             <ImageView
                                 android:id="@+id/lLogo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:padding="24dp"
                                 android:src="@drawable/ic_logo"
-                                android:layout_gravity="center"
-                                android:visibility="visible"/>
+                                android:visibility="visible" />
                         </FrameLayout>
 
                         <FrameLayout
@@ -250,8 +250,8 @@
                         android:id="@+id/consPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_marginStart="30dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="30dp">
 
                         <FrameLayout
@@ -591,7 +591,7 @@
                             android:background="@color/transparent"
                             android:fontFamily="@font/almira"
                             android:gravity="start|center_vertical"
-                            android:hint="@string/password"
+                            android:hint="@string/repeat_password"
                             android:inputType="textPassword"
                             android:lines="1"
                             android:text="@={model.repeat_password}"

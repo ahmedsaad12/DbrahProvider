@@ -51,6 +51,7 @@
                     android:linksClickable="true"
                     android:maxWidth="230dp"
                     android:padding="3dp"
+                    android:fontFamily="@font/almira"
                     android:textColor="@color/black"
                     android:textColorLink="@color/colorPrimary"
                     android:textSize="15sp"

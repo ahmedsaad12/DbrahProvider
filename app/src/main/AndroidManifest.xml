@@ -49,12 +49,15 @@
             android:exported="false" />
         <activity
             android:name=".uis.activity_reset_password.ResetPasswordActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".uis.activity_forget_password.ForgetPasswordActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
         <activity
             android:name=".uis.activity_language.LanguageActivity"
             android:exported="false" />
