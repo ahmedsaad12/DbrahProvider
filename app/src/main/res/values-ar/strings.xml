@@ -8,7 +8,7 @@
     <string name="subject">العنوان</string>
     <string name="message">الرسالة</string>
     <string name="send">ارسال</string>
-    <string name="home">الرئيسيه</string>
+    <string name="home">الرئيسية</string>
     <string name="profile">حسابي</string>
     <string name="logout">تسجيل خروج</string>
     <string name="create_your_account_now">قم بانشاء حسابك الأن</string>
@@ -72,10 +72,10 @@
     <string name="register">إنشاء حساب</string>
     <string name="already_have_an_account">لديك حساب بالفعل ؟</string>
     <string name="choose_your_preferred_method_of_logging_in">اختر طريقتك المفضلة لتسجيل الدخول.</string>
-    <string name="country_code">كود الدوله</string>
+    <string name="country_code">كود الدولة</string>
     <string name="password">كلمة المرور</string>
     <string name="inv_email">بريد الكترونى خاطئ</string>
-    <string name="pass_short">كلمة المرور قصيره جدا</string>
+    <string name="pass_short">كلمة المرور قصيرة جدا</string>
     <string name="don_t_have_an_account">لا يوجد لديك حساب ؟ </string>
     <string name="forget_password">نسيت كلمة المرور ؟ </string>
     <string name="welcome">مرحبا</string>
@@ -84,7 +84,7 @@
     <string name="this_month_s_clients">عملاء هذا الشهر</string>
     <string name="order">طلب</string>
     <string name="this_month_s_order">طلبات هذا الشهر</string>
-    <string name="this_month_s_miss_order">الطلبات المفقوده هذا الشهر</string>
+    <string name="this_month_s_miss_order">الطلبات المفقودة هذا الشهر</string>
     <string name="total_clients_this_year">إجمالي العملاء هذا العام</string>
     <string name="customer_reviews">اراء العملاء</string>
     <string name="vat_number2">الرقم الضريبى : </string>
@@ -113,7 +113,7 @@
     <string name="offer">العرض</string>
     <string name="preview">معاينة</string>
     <string name="send_offer">ارسال العرض</string>
-    <string name="language">اللغه</string>
+    <string name="language">اللغة</string>
     <string name="available_quantity">الكمية المتاحة :</string>
     <string name="single_price2">سعر الواحد :</string>
     <string name="total_price2">إجمالي السعر :</string>

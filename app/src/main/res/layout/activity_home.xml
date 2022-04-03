@@ -36,6 +36,8 @@
             app:itemIconTint="@drawable/bottom_item_nav_bg"
             app:itemTextColor="@drawable/bottom_item_nav_bg"
             app:labelVisibilityMode="labeled"
+            app:itemTextAppearanceActive="@style/nav_style"
+            app:itemTextAppearanceInactive="@style/nav_style"
             />
 
 
