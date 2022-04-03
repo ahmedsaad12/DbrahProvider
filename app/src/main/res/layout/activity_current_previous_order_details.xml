@@ -119,7 +119,7 @@
                             android:layout_marginEnd="16dp"
                             android:background="@drawable/rounded_color1_stroke_color8"
                             android:orientation="vertical"
-                            android:padding="8dp">
+                            >
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -289,42 +289,34 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="22dp"
-                            android:layout_marginTop="16dp"
                             android:layout_marginEnd="22dp"
-                            android:layout_marginBottom="27dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
                             android:background="@drawable/small_rounded_grey7"
                             android:orientation="horizontal"
-                            android:padding="8dp">
-
+                            android:padding="16dp"
+                            >
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginBottom="16dp"
-                                android:text="@string/total_cost"
                                 android:fontFamily="@font/almira"
+                                android:text="@string/total_cost"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
-
+                                android:textSize="16sp"
+                                android:layout_gravity="center_vertical"/>
                             <androidx.legacy.widget.Space
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="16dp"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginBottom="16dp"
-                                android:text="350 R.S"
+                                android:textSize="18sp"
                                 android:fontFamily="@font/almaraibold"
+                                android:text="350 R.S"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:layout_gravity="center_vertical"
+                                />
 
                         </LinearLayout>
 
