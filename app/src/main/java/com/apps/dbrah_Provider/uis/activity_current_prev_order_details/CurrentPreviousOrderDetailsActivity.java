@@ -27,7 +27,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
-        setUpToolbar(binding.toolbar, getString(R.string.preview), R.color.white, R.color.black);
+        setUpToolbar(binding.toolbar, getString(R.string.orderDetails), R.color.white, R.color.black);
         offerList = new ArrayList<>();
         offerAdapter = new OfferAdapter(offerList, this);
         binding.recViewOffer.setLayoutManager(new LinearLayoutManager(this));

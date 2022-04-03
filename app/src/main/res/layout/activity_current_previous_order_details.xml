@@ -28,7 +28,7 @@
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintBottom_toTopOf="@id/carBottom"
+                    app:layout_constraintBottom_toTopOf="@id/flStatus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +42,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="10dp"
@@ -51,34 +51,40 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
+                                android:layout_marginTop="13dp"
                                 android:orientation="horizontal">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="70dp"
                                     android:layout_height="70dp"
-                                    android:layout_gravity="center_vertical"
+
+                                    android:layout_gravity="top"
+                                    android:layout_marginStart="16dp"
+
                                     android:src="@drawable/circle_avatar" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginStart="13dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="13dp"
+                                    android:layout_marginBottom="11dp"
                                     android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:fontFamily="@font/almaraibold"
                                         android:text="@string/name"
                                         android:textColor="@color/black2"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
+                                        android:textSize="16sp" />
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_marginTop="16dp"
+                                        android:layout_marginBottom="11dp"
                                         android:orientation="horizontal">
 
                                         <ImageView
@@ -109,7 +115,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="20dp"
                             android:layout_marginEnd="16dp"
                             android:background="@drawable/rounded_color1_stroke_color8"
                             android:orientation="vertical"
@@ -118,9 +124,9 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -135,74 +141,89 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/order_number"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
 
                                 <androidx.legacy.widget.Space
                                     android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="0dp"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:fontFamily="@font/almaraibold"
                                     android:text="#123111"
                                     android:textColor="@color/black2"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
                                 android:orientation="horizontal">
 
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:src="@drawable/ic_date" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:text="2/2/22222"
-                                    android:textColor="@color/black2"
-                                    android:textSize="14sp" />
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
 
-                                <androidx.legacy.widget.Space
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content" />
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_date" />
 
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:src="@drawable/ic_time" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:fontFamily="@font/almira"
+                                        android:text="2/2/22222"
+                                        android:textColor="@color/black2"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:text="03:30 pm"
-                                    android:textColor="@color/black2"
-                                    android:textSize="14sp" />
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_time" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:fontFamily="@font/almira"
+                                        android:text="03:30 pm"
+                                        android:textColor="@color/black2"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -217,19 +238,21 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
-                                    android:text="location"
                                     android:fontFamily="@font/almira"
+                                    android:text="location"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
                             </LinearLayout>
+
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="70dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="70dp"
+                                android:layout_marginBottom="9dp"
                                 android:background="@drawable/rounded_primary"
                                 android:gravity="center"
                                 android:minWidth="200dp"
@@ -247,6 +270,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
+                                    android:fontFamily="@font/almira"
                                     android:text="@string/map"
                                     android:textColor="@color/white"
                                     android:textSize="14sp" />
@@ -264,10 +288,10 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="22dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginEnd="22dp"
+                            android:layout_marginBottom="27dp"
                             android:background="@drawable/small_rounded_grey7"
                             android:orientation="horizontal"
                             android:padding="8dp">
@@ -277,7 +301,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 android:text="@string/total_cost"
+                                android:fontFamily="@font/almira"
                                 android:textColor="@color/white"
                                 android:textSize="16sp" />
 
@@ -291,7 +318,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 android:text="350 R.S"
+                                android:fontFamily="@font/almaraibold"
                                 android:textColor="@color/white"
                                 android:textSize="16sp" />
 
@@ -330,7 +361,7 @@
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/almira"/>
 
                     <ProgressBar
                         android:id="@+id/progBar2"
