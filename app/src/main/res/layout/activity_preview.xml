@@ -138,11 +138,20 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="8dp"
-                                        android:layout_marginEnd="8dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="03:30 pm"
+                                        android:text="03:30"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/almira"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:text="Pm"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/grey7"/>
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -229,13 +238,22 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/almira"
-                                    android:text="08:45 pm"
-                                    android:textSize="14sp"
                                     android:layout_gravity="center_vertical"
-                                    android:textColor="@color/black2"
                                     android:layout_marginStart="8dp"
-                                    android:layout_marginEnd="8dp"/>
+                                    android:fontFamily="@font/almira"
+                                    android:text="03:30"
+                                    android:textColor="@color/black2"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:fontFamily="@font/almira"
+                                    android:text="Pm"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/grey7"/>
                             </LinearLayout>
                         </LinearLayout>
                         <androidx.recyclerview.widget.RecyclerView
@@ -267,15 +285,26 @@
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"/>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="18sp"
-                                android:fontFamily="@font/almaraibold"
-                                android:text="350 R.S"
-                                android:textColor="@color/white"
                                 android:layout_gravity="center_vertical"
-                                />
+                                android:fontFamily="@font/almaraibold"
+                                android:text="350"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp"
+                                android:fontFamily="@font/almira"
+                                android:text="@string/sar"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"/>
 
                         </LinearLayout>
 

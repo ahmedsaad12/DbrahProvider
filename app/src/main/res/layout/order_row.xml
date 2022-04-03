@@ -107,11 +107,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="4dp"
                     android:fontFamily="@font/almira"
-                    android:text="03:30 pm"
+                    android:text="03:30"
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/almira"
+                    android:text="Pm"
+                    android:textColor="@color/grey7"
+                    android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
 

@@ -93,10 +93,10 @@
                                 android:layout_marginEnd="16dp"
                                 android:background="@drawable/rounded_primary"
                                 android:fontFamily="@font/almira"
-                                android:paddingTop="8dp"
-                                android:paddingBottom="8dp"
                                 android:paddingStart="16dp"
+                                android:paddingTop="8dp"
                                 android:paddingEnd="16dp"
+                                android:paddingBottom="8dp"
                                 android:text="@string/next"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white"
@@ -149,9 +149,9 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/almira"
                                         android:text="@string/ordered"
-                                        android:layout_gravity="center_vertical"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
 
@@ -159,8 +159,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_marginStart="3dp"
-                                        android:layout_marginEnd="3dp"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_marginEnd="4dp"
                                         android:fontFamily="@font/almaraibold"
                                         android:text="2 X"
                                         android:textColor="@color/black2"
@@ -387,16 +387,15 @@
                                             android:singleLine="true"
                                             android:textColor="@color/black2"
                                             android:textColorHint="@color/grey7"
-                                            android:textSize="14sp"
-                                            />
+                                            android:textSize="14sp" />
 
                                         <TextView
                                             android:layout_width="57dp"
                                             android:layout_height="47dp"
                                             android:layout_gravity="center_vertical"
                                             android:background="@drawable/small_rounded_grey7"
-                                            android:gravity="center"
                                             android:fontFamily="@font/almira"
+                                            android:gravity="center"
                                             android:text="@string/item"
                                             android:textColor="@color/white"
                                             android:textSize="12sp" />
@@ -433,10 +432,10 @@
                                             android:layout_height="47dp"
                                             android:layout_gravity="center_vertical"
                                             android:background="@drawable/small_rounded_grey7"
-                                            android:gravity="center"
                                             android:fontFamily="@font/almira"
-                                            android:textAllCaps="true"
+                                            android:gravity="center"
                                             android:text="@string/sar"
+                                            android:textAllCaps="true"
                                             android:textColor="@color/white"
                                             android:textSize="12sp" />
                                     </LinearLayout>
@@ -468,9 +467,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/almira"
                             android:gravity="center"
                             android:padding="7dp"
-                            android:fontFamily="@font/almira"
                             android:text="@string/single_price"
                             android:textColor="@color/black2"
                             android:textSize="14sp"
@@ -487,9 +486,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/almira"
                             android:gravity="center"
                             android:padding="7dp"
-                            android:fontFamily="@font/almira"
                             android:text="@string/total_price"
                             android:textColor="@color/black2"
                             android:textSize="14sp" />
@@ -508,17 +507,33 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:padding="7dp"
-                            android:fontFamily="@font/almira"
-                            android:text="80"
-                            android:textColor="@color/black2"
-                            android:textSize="18sp"
-                            tools:ignore="NestedWeights" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/almira"
+                                android:text="80"
+                                android:textColor="@color/black2"
+                                android:textSize="18sp"
+                                tools:ignore="NestedWeights" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:fontFamily="@font/almira"
+                                android:text="@string/sar"
+                                android:textColor="@color/grey7"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
 
                         <View
                             android:layout_width="1px"
@@ -527,16 +542,32 @@
 
                             />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:padding="7dp"
-                            android:fontFamily="@font/almaraibold"
-                            android:text="@string/sar"
-                            android:textColor="@color/black2"
-                            android:textSize="18sp" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/almaraibold"
+                                android:text="150"
+                                android:textColor="@color/black2"
+                                android:textSize="18sp"
+                                tools:ignore="NestedWeights" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:fontFamily="@font/almira"
+                                android:text="@string/sar"
+                                android:textColor="@color/grey7"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,8 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:fontFamily="@font/almaraibold"
                 android:text="2 X"
                 android:textColor="@color/black2"
@@ -118,8 +118,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:fontFamily="@font/almaraibold"
                 android:layout_gravity="center_vertical"
                 android:text="2 X"
@@ -176,16 +176,27 @@
                 android:textSize="14sp"
                 android:textColor="@color/black2"
                 android:layout_gravity="center_vertical"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/almira"
-                android:text="30 R.S"
-                android:textSize="18sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="4dp"
+                android:text="80"
                 android:textColor="@color/black2"
-                android:layout_gravity="center_vertical"/>
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almira"
+                android:text="@string/sar"
+                android:textColor="@color/grey7"
+                android:textSize="14sp"/>
             <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -198,16 +209,27 @@
                 android:textSize="14sp"
                 android:textColor="@color/black2"
                 android:layout_gravity="center_vertical"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/almaraibold"
-                android:text="150 R.S"
-                android:textSize="18sp"
+                android:layout_marginStart="4dp"
+                android:text="160"
                 android:textColor="@color/black2"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_gravity="center_vertical"/>
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almira"
+                android:text="@string/sar"
+                android:textColor="@color/grey7"
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

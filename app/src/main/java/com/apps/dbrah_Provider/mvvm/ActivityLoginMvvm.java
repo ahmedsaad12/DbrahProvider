@@ -1,9 +1,7 @@
 package com.apps.dbrah_Provider.mvvm;
 
 import android.app.Application;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,25 +11,12 @@ import androidx.lifecycle.MutableLiveData;
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.UserModel;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Response;
 
 public class ActivityLoginMvvm extends AndroidViewModel {
     private static final String TAG = "ActivityVerificationMvvm";

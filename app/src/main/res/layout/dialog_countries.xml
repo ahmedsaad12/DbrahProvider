@@ -12,10 +12,10 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:fontFamily="@font/almira"
             android:text="@string/country_code"
-            android:textColor="@color/black"
+            android:textColor="@color/black2"
             android:textSize="16sp"
-
             />
 
         <View

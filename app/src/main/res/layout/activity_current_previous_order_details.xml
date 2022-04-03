@@ -118,8 +118,7 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginEnd="16dp"
                             android:background="@drawable/rounded_color1_stroke_color8"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -210,11 +209,21 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="8dp"
-                                        android:layout_marginEnd="8dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="03:30 pm"
+                                        android:text="03:30"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/almira"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:text="Pm"
+                                        android:textColor="@color/grey7"
+                                        android:textSize="12sp" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -289,34 +298,46 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="22dp"
-                            android:layout_marginEnd="22dp"
                             android:layout_marginTop="16dp"
+                            android:layout_marginEnd="22dp"
                             android:layout_marginBottom="16dp"
                             android:background="@drawable/small_rounded_grey7"
                             android:orientation="horizontal"
-                            android:padding="16dp"
-                            >
+                            android:padding="16dp">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/almira"
                                 android:text="@string/total_cost"
                                 android:textColor="@color/white"
-                                android:textSize="16sp"
-                                android:layout_gravity="center_vertical"/>
+                                android:textSize="16sp" />
+
                             <androidx.legacy.widget.Space
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:layout_weight="1"/>
+                                android:layout_weight="1" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="18sp"
-                                android:fontFamily="@font/almaraibold"
-                                android:text="350 R.S"
-                                android:textColor="@color/white"
                                 android:layout_gravity="center_vertical"
-                                />
+                                android:fontFamily="@font/almaraibold"
+                                android:text="350"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp"
+                                android:fontFamily="@font/almira"
+                                android:text="@string/sar"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"/>
 
                         </LinearLayout>
 
@@ -350,11 +371,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/almira"
                         android:gravity="center"
                         android:text="Status"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/almira"/>
+                        android:textSize="14sp" />
 
                     <ProgressBar
                         android:id="@+id/progBar2"
