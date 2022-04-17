@@ -17,7 +17,7 @@ public class LoginModel extends BaseObservable implements Serializable {
     private String phone;
     private String email;
     private String password;
-    private int type;
+    private String type;
     public ObservableField<String> error_email = new ObservableField<>();
     public ObservableField<String> error_password = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
@@ -30,8 +30,9 @@ public class LoginModel extends BaseObservable implements Serializable {
     }
 
     public boolean isDataValid(Context context) {
-        if ((type == 1 && !phone.isEmpty())
-                || (type == 2 && !email.isEmpty() &&
+        if ((type.equals("phone") && !phone.isEmpty()&&
+                password.length() >= 6)
+                || (type.equals("email") && !email.isEmpty() &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
                 password.length() >= 6)) {
             error_phone.set(null);
@@ -40,7 +41,7 @@ public class LoginModel extends BaseObservable implements Serializable {
 
             return true;
         } else {
-            if (type == 1) {
+            if (type.equals("phone")) {
                 if (phone.isEmpty()) {
                     error_phone.set(context.getString(R.string.field_required));
 
@@ -48,7 +49,17 @@ public class LoginModel extends BaseObservable implements Serializable {
                     error_phone.set(null);
 
                 }
-            } else if (type == 2) {
+                if (password.isEmpty()) {
+                    error_password.set(context.getString(R.string.field_required));
+
+                } else if (password.length() < 6) {
+                    error_password.set(context.getString(R.string.pass_short));
+
+                } else {
+                    error_password.set(null);
+
+                }
+            } else if (type.equals("email")) {
                 if (email.isEmpty()) {
                     error_email.set(context.getString(R.string.field_required));
                 }
@@ -96,11 +107,11 @@ public class LoginModel extends BaseObservable implements Serializable {
 
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

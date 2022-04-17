@@ -1,6 +1,8 @@
 package com.apps.dbrah_Provider.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.DoubleStream;
 
 public class UserModel extends StatusResponse {
     private Data data;
@@ -10,33 +12,36 @@ public class UserModel extends StatusResponse {
     }
 
     public static class Data implements Serializable {
-        private int id;
-        private String user_type;
-        private String logo;
+        private String id;
         private String name;
+        private String fake_name;
+        private String email;
         private String phone_code;
         private String phone;
-        private String gender;
-        private double latitude;
-        private double longitude;
-        private String address;
-        private String token;
-        private static String firebase_token;
+        private String password;
+        private String vat_number;
+        private String image;
+        private String commercial_record;
+        private String created_at;
+        private String updated_at;
+        private String rate;
+        private List<CommercialRecords> commercial_records;
+        private List<Categories> categories;
 
-        public int getId() {
+        public String getId() {
             return id;
-        }
-
-        public String getUser_type() {
-            return user_type;
-        }
-
-        public String getLogo() {
-            return logo;
         }
 
         public String getName() {
             return name;
+        }
+
+        public String getFake_name() {
+            return fake_name;
+        }
+
+        public String getEmail() {
+            return email;
         }
 
         public String getPhone_code() {
@@ -47,32 +52,122 @@ public class UserModel extends StatusResponse {
             return phone;
         }
 
-        public String getGender() {
-            return gender;
+        public String getPassword() {
+            return password;
         }
 
-        public double getLatitude() {
-            return latitude;
+        public String getVat_number() {
+            return vat_number;
         }
 
-        public double getLongitude() {
-            return longitude;
+        public String getImage() {
+            return image;
         }
 
-        public String getAddress() {
-            return address;
+        public String getCommercial_record() {
+            return commercial_record;
         }
 
-        public String getToken() {
-            return token;
+        public String getCreated_at() {
+            return created_at;
         }
 
-        public String getFirebase_token() {
-            return firebase_token;
+        public String getUpdated_at() {
+            return updated_at;
         }
 
-        public void setFirebase_token(String firebase_token) {
-            this.firebase_token = firebase_token;
+        public String getRate() {
+            return rate;
+        }
+
+        public List<CommercialRecords> getCommercial_records() {
+            return commercial_records;
+        }
+
+        public List<Categories> getCategories() {
+            return categories;
+        }
+
+        public class CommercialRecords implements Serializable{
+            private String provider_id;
+            private String image;
+
+            public String getProvider_id() {
+                return provider_id;
+            }
+
+            public String getImage() {
+                return image;
+            }
+        }
+        public  class Categories implements Serializable{
+            private String id;
+            private String provider_id;
+            private String category_id;
+            private String created_at;
+            private String updated_at;
+            private Category category;
+
+            public String getId() {
+                return id;
+            }
+
+            public String getProvider_id() {
+                return provider_id;
+            }
+
+            public String getCategory_id() {
+                return category_id;
+            }
+
+            public String getCreated_at() {
+                return created_at;
+            }
+
+            public String getUpdated_at() {
+                return updated_at;
+            }
+
+            public Category getCategory() {
+                return category;
+            }
+            public class Category implements Serializable{
+                private String id;
+                private String title_ar;
+                private String title_en;
+                private String image;
+                private String level;
+                private String created_at;
+                private String updated_at;
+
+                public String getId() {
+                    return id;
+                }
+
+                public String getTitle_ar() {
+                    return title_ar;
+                }
+
+                public String getTitle_en() {
+                    return title_en;
+                }
+
+                public String getImage() {
+                    return image;
+                }
+
+                public String getLevel() {
+                    return level;
+                }
+
+                public String getCreated_at() {
+                    return created_at;
+                }
+
+                public String getUpdated_at() {
+                    return updated_at;
+                }
+            }
         }
     }
 

@@ -28,15 +28,19 @@ public interface Service {
                                                   @Query(value = "key") String key);
 
 
-
-
-
-
     @FormUrlEncoded
-    @POST("api/login")
-    Single<Response<UserModel>> login(@Field("api_key") String api_key,
-                                      @Field("phone_code") String phone_code,
-                                      @Field("phone") String phone);
+    @POST("api/provider/login")
+    Single<Response<UserModel>> login(@Field("phone_code") String phone_code,
+                                      @Field("phone") String phone,
+                                      @Field("email") String email,
+                                      @Field("password") String password,
+                                      @Field("type") String type);
+
+//    @FormUrlEncoded
+//    @POST("api/login")
+//    Single<Response<UserModel>> loginWithEmail(@Header("AUTHORIZATION") String token,
+//                                               @Field("email") String email,
+//                                               @Field("password") String password);
 
     @FormUrlEncoded
     @POST("api/client-register")
@@ -61,7 +65,6 @@ public interface Service {
 
 
     );
-
 
 
     @FormUrlEncoded

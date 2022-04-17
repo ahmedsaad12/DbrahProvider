@@ -22,6 +22,7 @@ import com.apps.dbrah_Provider.databinding.ActivityLoginBinding;
 import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.LoginModel;
+import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.mvvm.ActivityLoginMvvm;
 import com.apps.dbrah_Provider.uis.activity_forget_password.ForgetPasswordActivity;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
@@ -58,16 +59,21 @@ public class LoginActivity extends BaseActivity {
         activityLoginMvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
         binding.tvSignUp.setPaintFlags(binding.tvSignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         binding.setLang(getLang());
-        activityLoginMvvm.getCoListMutableLiveData().observe(this, new Observer<List<CountryModel>>() {
-            @Override
-            public void onChanged(List<CountryModel> countryModels) {
-                if (countryModels != null && countryModels.size() > 0) {
-                    countryModelList.clear();
-                    countryModelList.addAll(countryModels);
-                }
+        activityLoginMvvm.getCoListMutableLiveData().observe(this, countryModels -> {
+            if (countryModels != null && countryModels.size() > 0) {
+                countryModelList.clear();
+                countryModelList.addAll(countryModels);
             }
         });
         activityLoginMvvm.setCountry();
+
+
+
+         activityLoginMvvm.getUserModelMutableLiveData().observe(this, userModel -> {
+             setUserModel(userModel);
+             navigateToHomeActivity();
+         });
+
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 setResult(RESULT_OK);
@@ -105,7 +111,7 @@ public class LoginActivity extends BaseActivity {
         binding.consPhone.setVisibility(View.VISIBLE);
         binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_eg));
         model.setPhone_code("+20");
-        model.setType(1);
+        model.setType("phone");
         binding.llEmail.setVisibility(View.GONE);
         binding.tvEmail.setOnClickListener(view -> {
             binding.viewEmail.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -114,7 +120,7 @@ public class LoginActivity extends BaseActivity {
             binding.tvPhone.setTextColor(getResources().getColor(R.color.black2));
             binding.llEmail.setVisibility(View.VISIBLE);
             binding.consPhone.setVisibility(View.GONE);
-            model.setType(2);
+            model.setType("email");
 
         });
         binding.tvPhone.setOnClickListener(view -> {
@@ -124,16 +130,15 @@ public class LoginActivity extends BaseActivity {
             binding.tvPhone.setTextColor(getResources().getColor(R.color.colorAccent));
             binding.consPhone.setVisibility(View.VISIBLE);
             binding.llEmail.setVisibility(View.GONE);
-            model.setType(1);
+            model.setType("phone");
 
         });
         binding.arrow.setOnClickListener(view -> dialog.show());
         sortCountries();
         createCountriesDialog();
         binding.btnLogin.setOnClickListener(view -> {
-            navigateToHomeActivity();
             if (model.isDataValid(LoginActivity.this)) {
-
+                activityLoginMvvm.login(model,this);
             }
         });
     }

@@ -53,7 +53,11 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onNext(@NonNull Long aLong) {
-                        navigateToHomeActivity();
+                        if(getUserModel()!=null){
+                        navigateToHomeActivity();}
+                        else{
+                            navigateToLoginActivity();
+                        }
                     }
 
                     @Override
@@ -70,9 +74,16 @@ public class SplashActivity extends BaseActivity {
 
     }
 
+    private void navigateToLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
