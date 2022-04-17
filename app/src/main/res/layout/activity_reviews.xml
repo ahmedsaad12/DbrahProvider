@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="rate"
+    type="float" />
+        <variable
+            name="size"
+            type="int" />
     </data>
 
     <FrameLayout
@@ -20,51 +25,77 @@
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-            <androidx.core.widget.NestedScrollView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+
+                >
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:rating='@{rate}'
+                    android:theme="@style/RatingBar"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="11dp"
+                android:text='@{"("+size+" "+@string/rate+")"}'
+                android:textColor="@color/black2"
+                android:textSize="12sp" />
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recViewReviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fillViewport="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="21dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_gravity="center_horizontal"
-
-                        >
-                        <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:rating="4"
-                            android:theme="@style/RatingBar"
-                            />
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="11dp"
-                        android:text="(14 rate)"
-                        android:textColor="@color/black2"
-                        android:textSize="12sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recViewReviews"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"/>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
+                android:layout_marginTop="22dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"/>
+    <TextView
+        android:id="@+id/tvNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/almira"
+        android:text="@string/no_data_to_show"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:visibility="gone" />
+</FrameLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <ProgressBar
+        android:id="@+id/progBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+</FrameLayout>
         </LinearLayout>
     </FrameLayout>
 </layout>

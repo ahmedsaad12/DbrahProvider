@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+<variable
+    name="model"
+    type="com.apps.dbrah_Provider.model.ReviewModel" />
     </data>
 
     <LinearLayout
@@ -23,6 +25,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                user_image="@{model.user.image}"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/circle_avatar" />
 
@@ -37,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/almaraibold"
-                    android:text="@string/name"
+                    android:text="@{model.user.name}"
                     android:textColor="@color/black2"
                     android:textSize="18sp" />
 
@@ -52,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/almira"
-                        android:text="22/10/11111"
+                        android:text='@{model.created_at.split("T")[0]}'
                         android:textColor="@color/grey7"
                         android:textSize="12sp" />
 
@@ -71,7 +74,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:numStars="5"
-                            android:rating="3.5"
+                            android:rating='@{Float.parseFloat(model.rate)}'
                             android:theme="@style/RatingBar" />
                     </FrameLayout>
                 </LinearLayout>
@@ -85,9 +88,10 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="13dp"
+            android:lineSpacingExtra="5dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/almira"
-            android:text="details"
+            android:text="@{model.text}"
             android:textColor="@color/grey7"
             android:textSize="14sp" />
     </LinearLayout>

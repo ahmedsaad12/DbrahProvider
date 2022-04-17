@@ -8,7 +8,9 @@
         <variable
             name="lang"
             type="String" />
-
+<variable
+    name="model"
+    type="com.apps.dbrah_Provider.model.UserModel" />
     </data>
 
     <FrameLayout
@@ -37,6 +39,7 @@
                         android:id="@+id/image"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
+                        user_image="@{model.data.image}"
                         android:layout_gravity="center"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
@@ -82,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/almaraibold"
-                            android:text="happiness store"
+                            android:text="@{model.data.name}"
                             android:textColor="@color/black2"
                             android:textSize="14sp"
 
@@ -589,7 +592,7 @@
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/almaraibold"
                             android:gravity="center"
-                            android:text="123 123 231"
+                            android:text="@{model.data.vat_number}"
                             android:textColor="@color/grey7"
                             android:textSize="14sp"
                             android:textStyle="bold" />

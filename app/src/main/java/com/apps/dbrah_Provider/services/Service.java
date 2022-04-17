@@ -2,7 +2,9 @@ package com.apps.dbrah_Provider.services;
 
 
 import com.apps.dbrah_Provider.model.NotificationDataModel;
+import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
+import com.apps.dbrah_Provider.model.ReviewDataModel;
 import com.apps.dbrah_Provider.model.StatusResponse;
 import com.apps.dbrah_Provider.model.UserModel;
 
@@ -104,5 +106,10 @@ public interface Service {
                                                              @Query(value = "api_key") String api_key,
                                                              @Query(value = "user_id") String user_id
     );
+
+    @GET("api/provider/reviews")
+    Single<Response<ReviewDataModel>> getReviews(@Query(value = "provider_id") String provider_id);
+    @GET("api/provider/orders")
+    Single<Response<OrderDataModel>> getOrders(@Query(value = "provider_id") String provider_id);
 
 }

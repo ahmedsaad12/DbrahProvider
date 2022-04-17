@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.OrderRowBinding;
+import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.uis.activity_home.order_module.fragments.FragmentCurrentOrders;
 import com.apps.dbrah_Provider.uis.activity_home.order_module.fragments.FragmentNewOrders;
 import com.apps.dbrah_Provider.uis.activity_home.order_module.fragments.FragmentPreviousOrders;
@@ -20,14 +21,13 @@ import com.apps.dbrah_Provider.uis.activity_home.order_module.fragments.Fragment
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Object> list;
+    private List<OrderModel> list;
     private Context context;
     private LayoutInflater inflater;
     private Fragment fragment;
     private String lang;
 
-    public OrderAdapter(List<Object> list, Context context, Fragment fragment,String lang) {
-        this.list = list;
+    public OrderAdapter( Context context, Fragment fragment,String lang) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.fragment = fragment;
@@ -45,6 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setLang(lang);
+        myHolder.binding.setModel(list.get(position));
         myHolder.binding.llDetails.setOnClickListener(view -> {
             if (fragment instanceof FragmentNewOrders) {
                 FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
@@ -74,7 +75,11 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 5;
+        if (list != null) {
+            return list.size();
+        } else {
+            return 0;
+        }
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
@@ -87,7 +92,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public void updateList(List<Object> list) {
+    public void updateList(List<OrderModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }

@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.ReviewRowBinding;
+import com.apps.dbrah_Provider.model.ReviewModel;
 
 import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private List<Object> list;
+    private List<ReviewModel> list;
     private Context context;
     private LayoutInflater inflater;
     private AppCompatActivity appCompatActivity;
 
-    public ReviewAdapter(List<Object> list, Context context) {
-        this.list = list;
+    public ReviewAdapter( Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         appCompatActivity = (AppCompatActivity) context;
@@ -37,11 +37,16 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
+        myHolder.binding.setModel(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        if (list != null) {
+            return list.size();
+        } else {
+            return 0;
+        }
     }
 
 
@@ -55,7 +60,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public void updateList(List<Object> list) {
+    public void updateList(List<ReviewModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }

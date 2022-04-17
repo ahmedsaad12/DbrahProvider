@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_Provider.model.OrderModel" />
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
@@ -53,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/almaraibold"
-                android:text="#123111"
+                android:text='@{"#"+model.id}'
                 android:textColor="@color/black2"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -85,7 +90,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/almira"
-                    android:text="2/2/22222"
+                    android:text='@{model.day}'
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -109,7 +114,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/almira"
-                    android:text="03:30"
+                    android:text='@{model.time.split(" ")[0]}'
                     android:textColor="@color/black2"
                     android:textSize="14sp" />
 
@@ -118,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/almira"
-                    android:text="Pm"
+                    android:text='@{model.time.split(" ")[1]}'
                     android:textColor="@color/grey7"
                     android:textSize="12sp" />
 
@@ -146,7 +151,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/almira"
-                android:text="location"
+                android:text='@{model.address.address}'
                 android:textColor="@color/black2"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -160,13 +165,14 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility='@{model.offer_status_code.equals("200")?View.VISIBLE:View.GONE,default=gone}'
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/rounded_white_stroke_grey7"
+                android:background='@{model.is_pin.equals("0")?@drawable/rounded_white_stroke_grey7:@drawable/rounded_grey7}'
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -176,7 +182,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_pin" />
+                    android:src="@drawable/ic_pin"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,8 +191,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="6dp"
                     android:fontFamily="@font/almira"
-                    android:text="@string/pin"
-                    android:textColor="@color/grey7"
+                    android:text='@{model.is_pin.equals("0")?@string/pin:@string/pined}'
+                    android:textColor='@{model.is_pin.equals("0")?@color/grey7:@color/white}'
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -233,7 +240,8 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_color5"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility='@{model.offer_status_code.equals("201")?View.VISIBLE:View.GONE,default=gone}'
+            >
 
             <ImageView
                 android:layout_width="32dp"
@@ -266,7 +274,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_color6"
-            android:visibility="gone"
+            android:visibility='@{model.offer_status_code.equals("202")?View.VISIBLE:View.GONE,default=gone}'
+
             android:orientation="horizontal">
 
             <ImageView
@@ -289,13 +298,46 @@
                 android:textColor="@color/black2"
                 android:textSize="14sp" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llRejected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_color6"
+            android:visibility='@{model.offer_status_code.equals("205")?View.VISIBLE:View.GONE,default=gone}'
 
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_rejected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="@font/almira"
+                android:text="@string/your_offer_has_been_rejected"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
+            android:visibility='@{model.offer_status_code.equals("203")||model.offer_status_code.equals("204")||model.offer_status_code.equals("206")?View.VISIBLE:View.GONE,default=gone}'
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
@@ -307,7 +349,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:progress="100"
-                android:progressDrawable="@drawable/small_rounded_primary" />
+                android:progressDrawable='@drawable/small_rounded_primary'/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -315,7 +357,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="26dp"
                 android:fontFamily="@font/almaraibold"
-                android:text="@string/done"
+                android:text='@{model.offer_status_code.equals("203")?@string/preparing:(model.offer_status_code.equals("204")?@string/on_way:@string/deliverd)}'
                 android:textColor="@color/black2"
                 android:textSize="14sp"
                 android:textStyle="bold" />

@@ -131,5 +131,9 @@
     <string name="reviews">Reviews</string>
     <string name="type_a_message">Type Here</string>
     <string name="chat">Chat</string>
-
+    <string name="rate">Rate</string>
+    <string name="your_offer_has_been_rejected">Your Offer Has Been Rejected</string>
+    <string name="preparing">Preparing</string>
+    <string name="on_way">On Way</string>
+    <string name="deliverd">Deliverd</string>
 </resources>
