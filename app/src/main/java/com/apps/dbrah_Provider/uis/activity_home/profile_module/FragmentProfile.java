@@ -27,6 +27,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.databinding.FragmentProfileBinding;
 import com.apps.dbrah_Provider.uis.activity_contact_us.ContactUsActivity;
+import com.apps.dbrah_Provider.uis.activity_edit_account.EditAccountActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
@@ -87,7 +88,7 @@ public class FragmentProfile extends BaseFragment {
             startActivity(intent);
         });
         binding.llEditAccount.setOnClickListener(view -> {
-            Intent intent=new Intent(activity, SignUpActivity.class);
+            Intent intent=new Intent(activity, EditAccountActivity.class);
             startActivity(intent);
         });
     }

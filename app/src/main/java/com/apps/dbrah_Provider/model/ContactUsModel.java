@@ -16,7 +16,12 @@ public class ContactUsModel extends BaseObservable {
     private String email;
     private String subject;
     private String message;
-  
+
+    public ObservableField<String> error_name = new ObservableField<>();
+    public ObservableField<String> error_email = new ObservableField<>();
+    public ObservableField<String> error_subject = new ObservableField<>();
+    public ObservableField<String> error_message = new ObservableField<>();
+
 
     public boolean isDataValid(Context context) {
 
@@ -27,15 +32,46 @@ public class ContactUsModel extends BaseObservable {
                 !message.isEmpty()
 
         ) {
-
+            error_name.set(null);
+            error_email.set(null);
+            error_subject.set(null);
+            error_message.set(null);
 
             return true;
 
         } else {
+            if (name.isEmpty()){
+                error_name.set(context.getString(R.string.field_required));
+            }else {
+                error_name.set(null);
 
+            }
+
+
+            if (email.isEmpty()){
+                error_email.set(context.getString(R.string.field_required));
+            }if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                error_email.set(context.getString(R.string.inv_email));
+            }else {
+                error_email.set(null);
+
+            }
+
+            if (subject.isEmpty()){
+                error_subject.set(context.getString(R.string.field_required));
+            }else {
+                error_subject.set(null);
+
+            }
+
+            if (message.isEmpty()){
+                error_message.set(context.getString(R.string.field_required));
+            }else {
+                error_message.set(null);
+
+            }
 
             return false;
-
         }
 
     }

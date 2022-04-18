@@ -12,6 +12,7 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_shape2.xml" value="0.2574074074074074" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/circle_white.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/horizontal_line.xml" value="0.22870370370370371" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_add_photo.xml" value="0.23333333333333334" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_call.xml" value="0.22870370370370371" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_chat.xml" value="0.22870370370370371" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_close.xml" value="0.2490740740740741" />
@@ -20,8 +21,11 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_left_arrow1.xml" value="0.2351851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_logo.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_mail.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_mail3.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_order.xml" value="0.2351851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_star.xml" value="0.22870370370370371" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_user.xml" value="0.2601851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/ic_write.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/pin_view_item.xml" value="0.2574074074074074" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_category.xml" value="0.2574074074074074" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_color1.xml" value="0.24814814814814815" />
@@ -30,6 +34,7 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_color56.xml" value="0.24814814814814815" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_color7.xml" value="0.24814814814814815" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_color9.xml" value="0.24814814814814815" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_color_white_stroke_grey8.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_grey6_stroke.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_grey9.xml" value="0.2574074074074074" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_primary.xml" value="0.2601851851851852" />
@@ -37,7 +42,9 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_selected.xml" value="0.2518518518518518" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_shape_gray1_strock6.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/small_rounded_grey7.xml" value="0.24351851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_contact_us.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_current_previous_order_details.xml" value="0.2111111111111111" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_edit_account.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_forget_password.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_home.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
@@ -50,6 +57,7 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_splash.xml" value="0.2064814814814815" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_verification_code.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/add_commercial_row.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/base_fragment_order.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/category_row.xml" value="0.25416666666666665" />
@@ -72,6 +80,7 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/product_row.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/review_row.xml" value="0.2064814814814815" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/slider.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/spinner_category_row.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/toolbar.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/menu/menu.xml" value="0.2064814814814815" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/Dbrah/app/src/main/res/drawable/bottom_item_nav_bg.xml" value="0.21614583333333334" />
@@ -103,8 +112,6 @@
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/gradient_home_visit.xml" value="0.2890625" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/ic_lines.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/ic_mail.xml" value="0.15625" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/progress1_shape.xml" value="0.1484375" />
-        <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/progress2_shape.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/rounded_color1.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/rounded_color1_stroke_grey8.xml" value="0.26851851851851855" />
         <entry key="..\:/Users/HP/Desktop/DbrahProvider/app/src/main/res/drawable/rounded_color5.xml" value="0.13333333333333333" />

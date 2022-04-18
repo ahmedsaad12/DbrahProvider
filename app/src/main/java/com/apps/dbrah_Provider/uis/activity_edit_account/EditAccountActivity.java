@@ -1,13 +1,12 @@
-package com.apps.dbrah_Provider.uis.activity_sign_up;
+package com.apps.dbrah_Provider.uis.activity_edit_account;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,14 +16,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,7 +32,7 @@ import com.apps.dbrah_Provider.adapter.AddCommercialRecordAdapter;
 import com.apps.dbrah_Provider.adapter.CategoryAdapter;
 import com.apps.dbrah_Provider.adapter.CountryAdapter;
 import com.apps.dbrah_Provider.adapter.SpinnerCategoryAdapter;
-import com.apps.dbrah_Provider.databinding.ActivitySignUpBinding;
+import com.apps.dbrah_Provider.databinding.ActivityEditAccountBinding;
 import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
 import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
@@ -45,7 +42,7 @@ import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
 import com.apps.dbrah_Provider.preferences.Preferences;
 import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
-import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
+import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -54,8 +51,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SignUpActivity extends BaseActivity {
-    private ActivitySignUpBinding binding;
+public class EditAccountActivity extends BaseActivity {
+    private ActivityEditAccountBinding binding;
     private String phone_code = "";
     private String phone = "";
     private List<CountryModel> countryModelList = new ArrayList<>();
@@ -64,10 +61,10 @@ public class SignUpActivity extends BaseActivity {
     private SpinnerCategoryAdapter spinnerCategoryAdapter;
     private List<CategoryModel> categoryModelList;
     private List<CategoryModel> selectedCategoryList;
-    private AddCommercialRecordAdapter recordAdapter;
     private List<String> imagesUriList;
     private AlertDialog dialog;
     private SignUpModel model;
+    private UserModel userModel;
     private ActivitySignUpMvvm activitySignUpMvvm;
     private Preferences preferences;
     private ActivityResultLauncher<Intent> launcher;
@@ -76,56 +73,47 @@ public class SignUpActivity extends BaseActivity {
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int READ_REQ = 1, CAMERA_REQ = 2;
     private int selectedReq = 0;
-    private String type;
     private Uri uri = null;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
-        getDataFromIntent();
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_edit_account);
         initView();
-    }
-
-    private void getDataFromIntent() {
-        Intent intent = getIntent();
-        phone_code = intent.getStringExtra("phone_code");
-        phone = intent.getStringExtra("phone");
     }
 
     private void initView() {
         preferences = Preferences.getInstance();
         model = new SignUpModel();
+        userModel=getUserModel();
         categoryModelList = new ArrayList<>();
         selectedCategoryList = new ArrayList<>();
         imagesUriList = new ArrayList<>();
-        recordAdapter = new AddCommercialRecordAdapter(imagesUriList, this);
-        binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.recViewImages.setAdapter(recordAdapter);
+
         spinnerCategoryAdapter = new SpinnerCategoryAdapter(categoryModelList, this,getLang());
         binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
 
-        setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
+        setUpToolbar(binding.toolbar, getString(R.string.edit_profile), R.color.white, R.color.black);
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
-//        if (userModel!=null){
-//            phone_code=userModel.getData().getPhone_code();
-//            phone=userModel.getData().getPhone();
-//
-//            model.setPhone_code(phone_code);
-//            model.setPhone(phone);
-//            model.setStore_name(userModel.getData().getName());
-//
-//            if (userModel.getData().getEmail()!=null){
-//                model.setEmail(userModel.getData().getEmail());
-//            }
-//            if (userModel.getData().getImage()!=null){
-//                String url =  userModel.getData().getImage();
-//                Picasso.get().load(Uri.parse(url)).into(binding.image);
-//                model.setImage(url);
-//                binding.icon.setVisibility(View.GONE);
-//            }
-//        }
 
+        if (userModel!=null){
+            phone_code=userModel.getData().getPhone_code();
+            phone=userModel.getData().getPhone();
+
+            model.setPhone_code(phone_code);
+            model.setPhone(phone);
+            model.setStore_name(userModel.getData().getName());
+
+            if (userModel.getData().getEmail()!=null){
+                model.setEmail(userModel.getData().getEmail());
+            }
+            if (userModel.getData().getImage()!=null){
+                String url =  userModel.getData().getImage();
+                Picasso.get().load(Uri.parse(url)).into(binding.image);
+                model.setImage(url);
+                binding.icon.setVisibility(View.GONE);
+            }
+        }
         binding.setModel(model);
 
         activitySignUpMvvm.getOnCategoryDataSuccess().observe(this, categoryModels -> {
@@ -146,7 +134,7 @@ public class SignUpActivity extends BaseActivity {
                     if (!isItemInCategoryList(model)) {
                         selectedCategoryList.add(model);
                         categoryAdapter.notifyItemInserted(selectedCategoryList.size() - 1);
-                        SignUpActivity.this.model.setCategoryList(selectedCategoryList);
+                        EditAccountActivity.this.model.setCategoryList(selectedCategoryList);
                     }
                 }
 
@@ -164,6 +152,7 @@ public class SignUpActivity extends BaseActivity {
                 countryModelList.addAll(countryModels);
             }
         });
+
         activitySignUpMvvm.setCountry();
 
         activitySignUpMvvm.userModelMutableLiveData.observe(this, userModel -> {
@@ -171,11 +160,11 @@ public class SignUpActivity extends BaseActivity {
             setResult(RESULT_OK);
             finish();
         });
-//        activitySignUpMvvm.signUp(this,model);
 
         categoryAdapter = new CategoryAdapter(selectedCategoryList, this,getLang());
         binding.recViewCategory.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(categoryAdapter);
+
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 if (selectedReq == READ_REQ) {
@@ -183,16 +172,8 @@ public class SignUpActivity extends BaseActivity {
 
                     uri = result.getData().getData();
                     File file = new File(Common.getImagePath(this, uri));
-                    if (type.equals("mainImage")) {
                         Picasso.get().load(file).fit().into(binding.image);
                         binding.lLogo.setVisibility(View.GONE);
-                    } else if (type.equals("commercialImages")) {
-                        binding.iconUpload.setVisibility(View.GONE);
-                        binding.llImages.setVisibility(View.VISIBLE);
-                        imagesUriList.add(uri.toString());
-
-//                        Picasso.get().load(file).fit().into(binding.imageRecord);
-                    }
 
                 } else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
@@ -202,24 +183,14 @@ public class SignUpActivity extends BaseActivity {
                         String path = Common.getImagePath(this, uri);
 
                         if (path != null) {
-                            if (type.equals("mainImage")) {
                                 Picasso.get().load(new File(path)).fit().into(binding.image);
                                 binding.lLogo.setVisibility(View.GONE);
-                            } else if (type.equals("commercialImages")) {
-                                imagesUriList.add(uri.toString());
-                                recordAdapter.notifyItemInserted(imagesUriList.size() - 1);
-                                binding.iconUpload.setVisibility(View.GONE);
-                                binding.llImages.setVisibility(View.VISIBLE);
                             }
 
-                        } else {
-                            if (type.equals("mainImage")) {
+                        else {
                                 Picasso.get().load(uri).fit().into(binding.image);
                                 binding.lLogo.setVisibility(View.GONE);
-                            } else if (type.equals("commercialImages")) {
-                                imagesUriList.add(uri.toString());
-                                recordAdapter.notifyItemInserted(imagesUriList.size() - 1);
-                            }
+
 
                         }
                     }
@@ -251,28 +222,11 @@ public class SignUpActivity extends BaseActivity {
         sortCountries();
         createCountriesDialog();
 
-        binding.btnSignup.setOnClickListener(view -> {
-            if (model.isDataValid(SignUpActivity.this)){
-                    activitySignUpMvvm.signUp(SignUpActivity.this,model);
-            }
+        binding.btnConfirm.setOnClickListener(view -> {
+            activitySignUpMvvm.update(EditAccountActivity.this,model,userModel);
         });
 
-        binding.tvLogin.setPaintFlags(binding.tvLogin.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        binding.tvLogin.setOnClickListener(view -> {
-            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-            startActivity(intent);
-        });
-
-        binding.iconUpload.setOnClickListener(view -> {
-            type = "commercialImages";
-            openSheet();
-        });
         binding.flImage.setOnClickListener(view -> {
-            type = "mainImage";
-            openSheet();
-        });
-        binding.cardAddImage.setOnClickListener(view -> {
-            type = "commercialImages";
             openSheet();
         });
 
@@ -288,7 +242,6 @@ public class SignUpActivity extends BaseActivity {
 
         binding.arrow.setOnClickListener(view -> dialog.show());
         binding.btnCancel.setOnClickListener(view -> closeSheet());
-
     }
 
     private void createCountriesDialog() {
@@ -414,13 +367,6 @@ public class SignUpActivity extends BaseActivity {
         binding.imFalg.setImageResource(countryModel.getFlag());
     }
 
-    public void deleteImage(int adapterPosition) {
-        if (imagesUriList.size() > 0) {
-            imagesUriList.remove(adapterPosition);
-            recordAdapter.notifyItemRemoved(adapterPosition);
-
-        }
-    }
 
     public void deleteSelectedCategory(int adapterPosition)
     {

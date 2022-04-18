@@ -3,17 +3,23 @@
 
     <data>
 
+        <variable
+            name="lang"
+            type="String" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_Provider.model.CategoryModel" />
     </data>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="5dp"
         android:background="@drawable/rounded_category"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:layout_width="0dp"
@@ -21,13 +27,15 @@
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="10dp"
+            android:gravity="center"
             android:layout_weight="1"
             android:fontFamily="@font/almira"
-            android:text="category"
+            android:text='@{lang.equals("ar")?model.title_ar:model.title_en}'
             android:textColor="@color/white"
             android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/imageClose"
             android:layout_width="20dp"
             android:layout_height="19.44dp"
             android:layout_gravity="center"

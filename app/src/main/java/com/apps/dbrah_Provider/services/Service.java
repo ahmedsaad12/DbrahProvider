@@ -1,12 +1,16 @@
 package com.apps.dbrah_Provider.services;
 
 
+import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.NotificationDataModel;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
+import com.apps.dbrah_Provider.model.SettingModel;
 import com.apps.dbrah_Provider.model.StatusResponse;
 import com.apps.dbrah_Provider.model.UserModel;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -38,35 +42,34 @@ public interface Service {
                                       @Field("password") String password,
                                       @Field("type") String type);
 
-//    @FormUrlEncoded
-//    @POST("api/login")
-//    Single<Response<UserModel>> loginWithEmail(@Header("AUTHORIZATION") String token,
-//                                               @Field("email") String email,
-//                                               @Field("password") String password);
-
-    @FormUrlEncoded
-    @POST("api/client-register")
-    Single<Response<UserModel>> signUp(@Field("api_key") String api_key,
-                                       @Field("name") String name,
-                                       @Field("phone_code") String phone_code,
-                                       @Field("phone") String phone,
-                                       @Field("software_type") String software_type
-
-
-    );
-
 
     @Multipart
-    @POST("api/client-register")
-    Observable<Response<UserModel>> signUpwithImage(@Part("api_key") RequestBody api_key,
-                                                    @Part("name") RequestBody name,
-                                                    @Part("phone_code") RequestBody phone_code,
-                                                    @Part("phone") RequestBody phone,
-                                                    @Part("software_type") RequestBody software_type,
-                                                    @Part MultipartBody.Part logo
+    @POST("api/provider/register")
+    Single<Response<UserModel>> signUp(@Part("phone") RequestBody phone,
+                                       @Part("phone_code") RequestBody phone_code,
+                                       @Part("email") RequestBody email,
+                                       @Part("name") RequestBody name,
+                                       @Part("vat_number") RequestBody vat_number,
+                                       @Part("password") RequestBody password,
+                                       @Part List<RequestBody> categories,
+                                       @Part List<MultipartBody.Part> commercial_records,
+                                       @Part MultipartBody.Part image);
+
+    @Multipart
+    @POST("api/provider/update_profile")
+    Single<Response<UserModel>> update(@Part("provider_id") RequestBody provider_id,
+                                       @Part("phone") RequestBody phone,
+                                       @Part("phone_code") RequestBody phone_code,
+                                       @Part("email") RequestBody email,
+                                       @Part("name") RequestBody name,
+                                       @Part("vat_number") RequestBody vat_number,
+                                       @Part("password") RequestBody password,
+                                       @Part List<RequestBody> categories,
+                                       @Part MultipartBody.Part image);
 
 
-    );
+    @GET("api/main_categories")
+    Single<Response<CategoryDataModel>> getCategory();
 
 
     @FormUrlEncoded
@@ -89,10 +92,13 @@ public interface Service {
 
     );
 
+
+    @GET("api/setting")
+    Single<Response<SettingModel>> getSetting();
+
     @FormUrlEncoded
-    @POST("api/contact-us")
-    Single<Response<StatusResponse>> contactUs(@Field("api_key") String api_key,
-                                               @Field("name") String name,
+    @POST("api/contact_us")
+    Single<Response<StatusResponse>> contactUs(@Field("name") String name,
                                                @Field("email") String email,
                                                @Field("subject") String phone,
                                                @Field("message") String message
@@ -109,6 +115,7 @@ public interface Service {
 
     @GET("api/provider/reviews")
     Single<Response<ReviewDataModel>> getReviews(@Query(value = "provider_id") String provider_id);
+
     @GET("api/provider/orders")
     Single<Response<OrderDataModel>> getOrders(@Query(value = "provider_id") String provider_id);
 

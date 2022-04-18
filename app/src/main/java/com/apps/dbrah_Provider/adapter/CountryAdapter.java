@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.CountriesRowBinding;
 import com.apps.dbrah_Provider.model.CountryModel;
+import com.apps.dbrah_Provider.uis.activity_edit_account.EditAccountActivity;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 
@@ -42,16 +43,16 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
-        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (context instanceof LoginActivity) {
-                    LoginActivity activity = (LoginActivity) context;
-                    activity.setItemData(list.get(holder.getLayoutPosition()));
-                }else if (context instanceof SignUpActivity){
-                    SignUpActivity activity=(SignUpActivity) context;
-                    activity.setItemData(list.get(holder.getLayoutPosition()));
-                }
+        myHolder.itemView.setOnClickListener(view -> {
+            if (context instanceof LoginActivity) {
+                LoginActivity activity = (LoginActivity) context;
+                activity.setItemData(list.get(holder.getLayoutPosition()));
+            }else if (context instanceof SignUpActivity){
+                SignUpActivity activity=(SignUpActivity) context;
+                activity.setItemData(list.get(holder.getLayoutPosition()));
+            }else if (context instanceof EditAccountActivity){
+                EditAccountActivity activity=(EditAccountActivity) context;
+                activity.setItemData(list.get(holder.getLayoutPosition()));
             }
         });
 

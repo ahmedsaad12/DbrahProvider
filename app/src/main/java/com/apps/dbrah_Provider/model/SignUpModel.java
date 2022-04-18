@@ -15,16 +15,17 @@ import java.util.List;
 
 
 public class SignUpModel extends BaseObservable {
-    private String main_image;
+    private String image;
     private String store_name;
     private String phone_code;
     private String phone;
     private String email;
-    private List<String> categoryList;
+    private List<CategoryModel> categoryList;
     private String vat_num;
     private String password;
     private String repeat_password;
-    private String second_image;
+    private List<String> commercial_images;
+    private String selected_category;
 
     public ObservableField<String> error_store_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
@@ -98,43 +99,52 @@ public class SignUpModel extends BaseObservable {
             }else {
                 Toast.makeText(context,R.string.choose_category, Toast.LENGTH_SHORT).show();
             }
+            if (commercial_images.size()>0){
+
+            }else {
+                Toast.makeText(context,R.string.add_commercial_record, Toast.LENGTH_SHORT).show();
+            }
 
             return false;
         }
     }
 
     public SignUpModel() {
-        this.main_image = "";
+
+        this.image = "";
+        notifyPropertyChanged(BR.image);
         store_name="";
+        notifyPropertyChanged(BR.store_name);
         email="";
+        notifyPropertyChanged(BR.email);
         password="";
+        notifyPropertyChanged(BR.password);
         repeat_password="";
+        notifyPropertyChanged(BR.repeat_password);
         vat_num="";
+        notifyPropertyChanged(BR.vat_num);
         phone_code = "+20";
+        notifyPropertyChanged(BR.phone_code);
         phone = "";
+        notifyPropertyChanged(BR.phone);
         categoryList = new ArrayList<>();
-        this.second_image="";
+        commercial_images=new ArrayList<>();
+        this.selected_category = "";
+        notifyPropertyChanged(BR.selected_category);
     }
+
 
     @Bindable
-    public String getMain_image() {
-        return main_image;
+    public String getImage() {
+        return image;
     }
 
-    public void setMain_image(String main_image) {
-        this.main_image = main_image;
-        notifyPropertyChanged(BR.main_image);
+    public void setImage(String image) {
+        this.image = image;
+        notifyPropertyChanged(BR.image);
     }
 
-    @Bindable
-    public String getSecond_image() {
-        return second_image;
-    }
 
-    public void setSecond_image(String second_image) {
-        this.second_image = second_image;
-        notifyPropertyChanged(BR.second_image);
-    }
 
     @Bindable
     public String getStore_name() {
@@ -176,14 +186,20 @@ public class SignUpModel extends BaseObservable {
         notifyPropertyChanged(BR.email);
     }
 
-    @Bindable
-    public List<String> getCategoryList() {
+    public List<CategoryModel> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<String> categoryList) {
+    public void setCategoryList(List<CategoryModel> categoryList) {
         this.categoryList = categoryList;
-        notifyPropertyChanged(BR.categoryList);
+    }
+
+    public List<String> getCommercial_images() {
+        return commercial_images;
+    }
+
+    public void setCommercial_images(List<String> commercial_images) {
+        this.commercial_images = commercial_images;
     }
 
     @Bindable
@@ -214,5 +230,15 @@ public class SignUpModel extends BaseObservable {
     public void setRepeat_password(String repeat_password) {
         this.repeat_password = repeat_password;
         notifyPropertyChanged(BR.repeat_password);
+    }
+
+    @Bindable
+    public String getSelected_category() {
+        return selected_category;
+    }
+
+    public void setSelected_category(String selected_category) {
+        this.selected_category = selected_category;
+        notifyPropertyChanged(BR.selected_category);
     }
 }
