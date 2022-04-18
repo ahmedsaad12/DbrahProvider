@@ -51,6 +51,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:rating='@{rate}'
+                    android:numStars="5"
+                    android:isIndicator="false"
                     android:theme="@style/RatingBar"
                     />
             </LinearLayout>

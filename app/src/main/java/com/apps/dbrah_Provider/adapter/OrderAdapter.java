@@ -1,12 +1,14 @@
 package com.apps.dbrah_Provider.adapter;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,10 +48,21 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setLang(lang);
         myHolder.binding.setModel(list.get(position));
+        if(list.get(position).getIs_pin().equals("1")){
+            ((MyHolder) holder).binding.imPin.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
+
+        }
         myHolder.binding.llDetails.setOnClickListener(view -> {
             if (fragment instanceof FragmentNewOrders) {
                 FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
-                fragmentNew.navigateToDetails();
+                fragmentNew.navigateToDetails(list.get(holder.getAdapterPosition()));
+            }
+        });
+        myHolder.binding.llpin.setOnClickListener(view -> {
+            if (fragment instanceof FragmentNewOrders) {
+
+                FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
+                fragmentNew.pinOrder(list.get(holder.getAdapterPosition()));
             }
         });
         myHolder.itemView.setOnClickListener(view -> {

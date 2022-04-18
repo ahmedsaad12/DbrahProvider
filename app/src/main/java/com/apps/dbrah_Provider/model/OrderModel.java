@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class OrderModel implements Serializable {
     private String id;
@@ -22,6 +23,7 @@ public class OrderModel implements Serializable {
     private AddressModel address;
     private String day;
     private String time;
+    private List<OrderProductModel> details;
 
     public String getId() {
         return id;
@@ -97,5 +99,9 @@ public class OrderModel implements Serializable {
 
     public String getTime() {
         return time;
+    }
+
+    public List<OrderProductModel> getDetails() {
+        return details;
     }
 }

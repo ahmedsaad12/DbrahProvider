@@ -1,39 +1,110 @@
 package com.apps.dbrah_Provider.uis.activity_order_details;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import com.apps.dbrah_Provider.R;
+import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.adapter.ProductAdapter;
 import com.apps.dbrah_Provider.databinding.ActivityOrderDetailsBinding;
+import com.apps.dbrah_Provider.model.OrderModel;
+import com.apps.dbrah_Provider.mvvm.ActivityOrderDetailsMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_offer.OfferActivity;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class OrderDetailsActivity extends BaseActivity {
+public class OrderDetailsActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private ActivityOrderDetailsBinding binding;
     private ProductAdapter productAdapter;
-    private List<Object> orderList;
+    private ActivityOrderDetailsMvvm activityOrderDetailsMvvm;
+    private String order_id;
+    private TimePickerDialog timePickerDialog;
+    private DatePickerDialog datePickerDialog;
+    private String time = null, date = null;
+    private OrderModel orderModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_order_details);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_order_details);
+        getDataFromIntent();
         initView();
     }
 
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        order_id = intent.getStringExtra("order_id");
+    }
+
     private void initView() {
+        activityOrderDetailsMvvm = ViewModelProviders.of(this).get(ActivityOrderDetailsMvvm.class);
+        activityOrderDetailsMvvm.getIsOrderDataLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    binding.llData.setVisibility(View.GONE);
+                    binding.progBar.setVisibility(View.VISIBLE);
+                } else {
+                    binding.progBar.setVisibility(View.GONE);
+                    binding.llData.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        activityOrderDetailsMvvm.getOnOrderStatusSuccess().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer == 1) {
+                    activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
+                }
+            }
+        });
+        activityOrderDetailsMvvm.getOnOrderDetailsSuccess().observe(this, new Observer<OrderModel>() {
+            @Override
+            public void onChanged(OrderModel orderModel) {
+                if (orderModel != null) {
+                    OrderDetailsActivity.this.orderModel = orderModel;
+                    binding.setModel(orderModel);
+                    productAdapter.updateList(orderModel.getDetails());
+                    if (orderModel.getIs_pin().equals("1")) {
+                        binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.white), PorterDuff.Mode.SRC_IN);
+
+                    }
+                }
+            }
+        });
+        activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
+        binding.llpin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityOrderDetailsMvvm.pinOrder(order_id, getUserModel().getData().getId(), OrderDetailsActivity.this);
+            }
+        });
         binding.setLang(getLang());
         setUpToolbar(binding.toolbar, getString(R.string.orderDetails), R.color.white, R.color.black);
 
-        orderList=new ArrayList<>();
-        productAdapter=new ProductAdapter(orderList,this);
+        productAdapter = new ProductAdapter(this, getLang());
         binding.recViewProducts.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewProducts.setAdapter(productAdapter);
         binding.btnAddOffer.setOnClickListener(new View.OnClickListener() {
@@ -43,16 +114,88 @@ public class OrderDetailsActivity extends BaseActivity {
             }
         });
         binding.btnConfirm.setOnClickListener(view -> {
-            binding.flExpectedTime.setVisibility(View.GONE);
-            Intent intent=new Intent(OrderDetailsActivity.this, OfferActivity.class);
-            startActivity(intent);
-        });
-        binding.flExpectedTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            if (time != null && date != null) {
                 binding.flExpectedTime.setVisibility(View.GONE);
+                binding.tvDate.setError(null);
+                binding.tvTime.setError(null);
+                Intent intent = new Intent(OrderDetailsActivity.this, OfferActivity.class);
+                intent.putExtra("time", time);
+                intent.putExtra("date", date);
+                intent.putExtra("order", orderModel);
+                startActivity(intent);
+            } else {
+                if (time == null) {
+                    binding.tvTime.setError(getResources().getString(R.string.field_required));
+                } else {
+                    binding.tvTime.setError(null);
 
+                }
+                if (date == null) {
+                    binding.tvDate.setError(getResources().getString(R.string.field_required));
+                } else {
+                    binding.tvDate.setError(null);
+
+                }
             }
+
         });
+        binding.tvTime.setOnClickListener(view -> timePickerDialog.show(getSupportFragmentManager(), ""));
+        binding.tvDate.setOnClickListener(view -> datePickerDialog.show(getSupportFragmentManager(), ""));
+
+
+        createDateDialog();
+        createTimeDialog();
+    }
+
+    private void createDateDialog() {
+
+        Calendar calendar = Calendar.getInstance();
+        datePickerDialog = DatePickerDialog.newInstance(OrderDetailsActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.dismissOnPause(true);
+        datePickerDialog.setAccentColor(ActivityCompat.getColor(this, R.color.colorPrimary));
+        datePickerDialog.setCancelColor(ActivityCompat.getColor(this, R.color.grey4));
+        datePickerDialog.setOkColor(ActivityCompat.getColor(this, R.color.colorPrimary));
+
+        datePickerDialog.setOkText(getString(R.string.select));
+        datePickerDialog.setCancelText(getString(R.string.cancel));
+        datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+
+    }
+
+    private void createTimeDialog() {
+
+        Calendar calendar = Calendar.getInstance();
+        timePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND), true);
+        timePickerDialog.dismissOnPause(true);
+        timePickerDialog.setAccentColor(ActivityCompat.getColor(this, R.color.colorPrimary));
+        timePickerDialog.setCancelColor(ActivityCompat.getColor(this, R.color.grey4));
+        timePickerDialog.setOkColor(ActivityCompat.getColor(this, R.color.colorPrimary));
+
+        // datePickerDialog.setOkText(getString(R.string.select));
+        //datePickerDialog.setCancelText(getString(R.string.cancel));
+        timePickerDialog.setVersion(TimePickerDialog.Version.VERSION_2);
+        //  timePickerDialog.setMinTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
+
+    }
+
+
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        time = (hourOfDay < 10 ? "0" + hourOfDay : hourOfDay) + ":" + (minute < 10 ? "0" + minute : minute);
+        binding.tvTime.setText(time);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        calendar.set(Calendar.MONTH, monthOfYear);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        date = dateFormat.format(new Date(calendar.getTimeInMillis()));
+        binding.tvDate.setText(date);
     }
 }

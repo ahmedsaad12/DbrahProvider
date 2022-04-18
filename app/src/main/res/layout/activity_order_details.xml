@@ -8,6 +8,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_Provider.model.OrderModel" />
     </data>
 
     <FrameLayout
@@ -16,9 +19,11 @@
         android:background="@color/grey3">
 
         <LinearLayout
+            android:id="@+id/llData"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <include
                 android:id="@+id/toolbar"
@@ -87,11 +92,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:text="#123111"
                                     android:fontFamily="@font/almaraibold"
+                                    android:text='@{"#"+model.id}'
                                     android:textColor="@color/black2"
-                                    android:textSize="16sp"
-                                    />
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -121,7 +125,7 @@
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="8dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="2/2/22222"
+                                        android:text="@{model.day}"
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -145,17 +149,18 @@
                                         android:layout_marginStart="8dp"
                                         android:layout_marginEnd="4dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="03:30"
+                                        android:text='@{model.time.split(" ")[0]}'
                                         android:textColor="@color/black2"
                                         android:textSize="14sp" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/almira"
-                                        android:text="Pm"
-                                        android:textSize="12sp"
-                                        android:textColor="@color/grey7"/>
+                                        android:text='@{model.time.split(" ")[1]}'
+                                        android:textColor="@color/grey7"
+                                        android:textSize="12sp" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -180,7 +185,7 @@
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
                                     android:fontFamily="@font/almira"
-                                    android:text="location"
+                                    android:text="@{model.address.address}"
                                     android:textColor="@color/black2"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -197,17 +202,20 @@
                                 android:visibility="visible">
 
                                 <LinearLayout
+                                    android:id="@+id/llpin"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:background="@drawable/rounded_white_stroke_grey7"
+                                    android:clickable='@{model.is_pin.equals("0")?true:false}'
+                                    android:background='@{model.is_pin.equals("0")?@drawable/rounded_white_stroke_grey7:@drawable/rounded_grey7}'
                                     android:orientation="horizontal"
                                     android:paddingStart="12dp"
-                                    android:paddingEnd="12dp"
                                     android:paddingTop="6dp"
+                                    android:paddingEnd="12dp"
                                     android:paddingBottom="6dp">
 
                                     <ImageView
+                                        android:id="@+id/imPin"
                                         android:layout_width="16dp"
                                         android:layout_height="16dp"
                                         android:layout_gravity="center_vertical"
@@ -221,10 +229,11 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginEnd="6dp"
                                         android:fontFamily="@font/almira"
-                                        android:text="@string/pin"
-                                        android:textColor="@color/grey7"
+                                        android:text='@{model.is_pin.equals("0")?@string/pin:@string/pined}'
+                                        android:textColor='@{model.is_pin.equals("0")?@color/grey7:@color/white}'
                                         android:textSize="12sp" />
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -232,11 +241,10 @@
                                     android:background="@drawable/rounded_primary"
                                     android:gravity="center"
                                     android:orientation="horizontal"
-                                    android:paddingTop="8dp"
-                                    android:paddingBottom="8dp"
                                     android:paddingStart="12dp"
+                                    android:paddingTop="8dp"
                                     android:paddingEnd="12dp"
-                                    >
+                                    android:paddingBottom="8dp">
 
                                     <ImageView
                                         android:layout_width="24dp"
@@ -290,15 +298,15 @@
                             android:id="@+id/btnHide"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_primary"
-                            android:minWidth="100dp"
-                            android:fontFamily="@font/almira"
                             android:layout_marginStart="30dp"
+                            android:background="@drawable/rounded_primary"
+                            android:fontFamily="@font/almira"
+                            android:minWidth="100dp"
+                            android:padding="12dp"
                             android:text="@string/hide"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:padding="12dp"/>
+                            android:textSize="14sp" />
 
                         <Button
                             android:id="@+id/btnAddOffer"
@@ -307,8 +315,8 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="30dp"
                             android:background="@drawable/rounded_color9"
-                            android:minWidth="200dp"
                             android:fontFamily="@font/almira"
+                            android:minWidth="200dp"
                             android:text="@string/add_offer"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
@@ -319,6 +327,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <FrameLayout
             android:id="@+id/flExpectedTime"
@@ -347,8 +361,7 @@
                     android:fontFamily="@font/almaraibold"
                     android:text="@string/expected_delivery_time"
                     android:textColor="@color/black2"
-                    android:textSize="18sp"
-                    />
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -366,7 +379,8 @@
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_expected_date" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tvDate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -396,7 +410,8 @@
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_expected_time" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tvTime"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -418,13 +433,13 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="26dp"
                     android:background="@drawable/rounded__white_stroke_primary"
-                    android:minWidth="150dp"
                     android:fontFamily="@font/almira"
+                    android:minWidth="150dp"
+                    android:padding="13dp"
                     android:text="@string/confirm"
-                    android:textSize="14sp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:padding="13dp"/>
+                    android:textSize="14sp" />
             </LinearLayout>
         </FrameLayout>
     </FrameLayout>

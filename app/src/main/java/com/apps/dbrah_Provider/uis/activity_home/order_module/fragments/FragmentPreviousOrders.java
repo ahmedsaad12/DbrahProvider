@@ -97,6 +97,7 @@ public class FragmentPreviousOrders extends BaseFragment {
             }
         });
         fragmentOrderMvvm.getOrders(getUserModel());
+        binding.swipeRefresh.setOnRefreshListener(() -> fragmentOrderMvvm.getOrders(getUserModel()));
 
     }
 

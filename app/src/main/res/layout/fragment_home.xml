@@ -8,6 +8,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="statisticModel"
+            type="com.apps.dbrah_Provider.model.StatisticsModel" />
 <variable
     name="model"
     type="com.apps.dbrah_Provider.model.UserModel" />
@@ -148,8 +151,10 @@
                         android:background="@color/grey8">
 
                         <LinearLayout
+                            android:id="@+id/llStatistic"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -207,7 +212,7 @@
                                                     android:layout_gravity="center"
                                                     android:fontFamily="@font/almaraibold"
                                                     android:gravity="center"
-                                                    android:text="23"
+                                                    android:text="@{statisticModel.client_month}"
                                                     android:textColor="@color/color2"
                                                     android:textSize="20sp" />
 
@@ -287,7 +292,7 @@
                                                     android:layout_gravity="center"
                                                     android:fontFamily="@font/almaraibold"
                                                     android:gravity="center"
-                                                    android:text="23"
+                                                    android:text="@{statisticModel.orders}"
                                                     android:textColor="@color/color3"
                                                     android:textSize="20sp"
                                                     android:textStyle="bold" />
@@ -374,7 +379,7 @@
                                                     android:layout_gravity="center"
                                                     android:fontFamily="@font/almaraibold"
                                                     android:gravity="center"
-                                                    android:text="23"
+                                                    android:text="@{statisticModel.miss_orders}"
                                                     android:textColor="@color/colorPrimary"
                                                     android:textSize="20sp" />
 
@@ -454,7 +459,7 @@
                                                     android:layout_gravity="center"
                                                     android:fontFamily="@font/almaraibold"
                                                     android:gravity="center"
-                                                    android:text="23"
+                                                    android:text="@{statisticModel.client_year}"
                                                     android:textColor="@color/color4"
                                                     android:textSize="20sp" />
 
@@ -486,6 +491,17 @@
                             </LinearLayout>
 
                         </LinearLayout>
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"/>
+                        <ProgressBar
+                            android:id="@+id/progBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            />
                     </FrameLayout>
 
                     <androidx.cardview.widget.CardView

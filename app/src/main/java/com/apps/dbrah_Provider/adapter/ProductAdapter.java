@@ -12,21 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.ProductRowBinding;
+import com.apps.dbrah_Provider.model.OrderProductModel;
 import com.apps.dbrah_Provider.uis.activity_order_details.OrderDetailsActivity;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private List<Object> list;
+    private List<OrderProductModel> list;
     private Context context;
     private LayoutInflater inflater;
-    private AppCompatActivity appCompatActivity;
+    private String lang;
 
-    public ProductAdapter(List<Object> list, Context context) {
-        this.list = list;
+    public ProductAdapter( Context context,String lang) {
         this.context = context;
+        this.lang=lang;
         inflater = LayoutInflater.from(context);
-        appCompatActivity = (AppCompatActivity) context;
     }
 
     @NonNull
@@ -39,14 +39,17 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
-        if (appCompatActivity instanceof OrderDetailsActivity){
-            OrderDetailsActivity orderDetailsActivity=(OrderDetailsActivity)  appCompatActivity;
-        }
+        myHolder.binding.setLang(lang);
+        myHolder.binding.setModel(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        if (list != null) {
+            return list.size();
+        } else {
+            return 0;
+        }
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
@@ -59,7 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public void updateList(List<Object> list) {
+    public void updateList(List<OrderProductModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }

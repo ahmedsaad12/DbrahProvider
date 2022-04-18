@@ -14,12 +14,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
 import com.apps.dbrah_Provider.R;
 
 import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.databinding.FragmentOrdersBinding;
 import com.apps.dbrah_Provider.model.OrderDataModel;
+import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.ReviewModel;
 import com.apps.dbrah_Provider.mvvm.FragmentOrderMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
@@ -68,6 +71,14 @@ private FragmentOrderMvvm fragmentOrderMvvm;
         orderAdapter = new OrderAdapter( activity, this,getLang());
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(activity));
         binding.recViewOrders.setAdapter(orderAdapter);
+        fragmentOrderMvvm.getOnOrderStatusSuccess().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer==1){
+                    fragmentOrderMvvm.getOrders(getUserModel());
+                }
+            }
+        });
         fragmentOrderMvvm.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -94,12 +105,17 @@ private FragmentOrderMvvm fragmentOrderMvvm;
             }
         });
         fragmentOrderMvvm.getOrders(getUserModel());
-
+binding.swipeRefresh.setOnRefreshListener(() -> fragmentOrderMvvm.getOrders(getUserModel()));
 
     }
 
-    public void navigateToDetails() {
+    public void navigateToDetails(OrderModel orderModel) {
         Intent intent=new Intent(activity, OrderDetailsActivity.class);
+        intent.putExtra("order_id",orderModel.getId());
         startActivity(intent);
+    }
+
+    public void pinOrder(OrderModel orderModel) {
+        fragmentOrderMvvm.pinOrder(orderModel.getId(),getUserModel().getData().getId(),activity);
     }
 }

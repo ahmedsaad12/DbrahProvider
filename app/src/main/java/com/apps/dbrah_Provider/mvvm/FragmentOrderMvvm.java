@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.mvvm;
 
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -8,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
 import com.apps.dbrah_Provider.model.ReviewModel;
+import com.apps.dbrah_Provider.model.StatusResponse;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.remote.Api;
+import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.tags.Tags;
 
 import java.util.List;
@@ -32,6 +36,7 @@ public class FragmentOrderMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isLoadingLivData;
 
     private CompositeDisposable disposable = new CompositeDisposable();
+    private MutableLiveData<Integer> onStatusSuccess;
 
 
     public FragmentOrderMvvm(@NonNull Application application) {
@@ -52,7 +57,12 @@ public class FragmentOrderMvvm extends AndroidViewModel {
         }
         return isLoadingLivData;
     }
-
+    public MutableLiveData<Integer> getOnOrderStatusSuccess() {
+        if (onStatusSuccess == null) {
+            onStatusSuccess = new MutableLiveData<>();
+        }
+        return onStatusSuccess;
+    }
     //_________________________hitting api_________________________________
 
     public void getOrders(UserModel userModel) {
@@ -86,6 +96,44 @@ public class FragmentOrderMvvm extends AndroidViewModel {
                     }
                 });
 
+    }
+    public void pinOrder( String order_id, String provider_id, Context context) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url).PinOrder(order_id, provider_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                        getOnOrderStatusSuccess().setValue(1);
+
+
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.getMessage());
+                        dialog.dismiss();
+                    }
+                });
     }
 
 

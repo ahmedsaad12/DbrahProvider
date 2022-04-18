@@ -136,6 +136,7 @@
     <string name="preparing">Preparing</string>
     <string name="on_way">On Way</string>
     <string name="deliverd">Deliverd</string>
+    <string name="select">Select</string>
     <string name="add_commercial_record">Add commercial record</string>
 
 </resources>

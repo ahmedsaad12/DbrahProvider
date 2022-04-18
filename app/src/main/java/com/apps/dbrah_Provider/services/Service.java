@@ -6,6 +6,8 @@ import com.apps.dbrah_Provider.model.NotificationDataModel;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
+import com.apps.dbrah_Provider.model.SingleOrderDataModel;
+import com.apps.dbrah_Provider.model.StatisticsDataModel;
 import com.apps.dbrah_Provider.model.SettingModel;
 import com.apps.dbrah_Provider.model.StatusResponse;
 import com.apps.dbrah_Provider.model.UserModel;
@@ -118,5 +120,16 @@ public interface Service {
 
     @GET("api/provider/orders")
     Single<Response<OrderDataModel>> getOrders(@Query(value = "provider_id") String provider_id);
+
+    @GET("api/provider/statistics")
+    Single<Response<StatisticsDataModel>> getStatistics(@Query(value = "provider_id") String provider_id);
+
+    @FormUrlEncoded
+    @POST("api/provider/pin_order")
+    Single<Response<StatusResponse>> PinOrder(@Field("order_id") String order_id,
+                                              @Field("provider_id") String provider_id);
+    @GET("api/provider/order_details")
+    Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id,
+                                                           @Query("provider_id") String provider_id);
 
 }
