@@ -348,8 +348,8 @@
                 android:layout_height="10dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:progress="100"
-                android:progressDrawable='@drawable/small_rounded_primary'/>
+                android:progress='@{model.offer_status_code.equals("203")?30:(model.offer_status_code.equals("204")?60:100)}'
+                android:progressDrawable='@{model.offer_status_code.equals("203")?@drawable/progress1_shape:(model.offer_status_code.equals("204")?@drawable/progress2_shape:@drawable/progress3_shape)}'/>
 
             <TextView
                 android:layout_width="wrap_content"
