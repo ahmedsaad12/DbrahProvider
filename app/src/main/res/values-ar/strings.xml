@@ -139,5 +139,6 @@
     <string name="deliverd">Deliverd</string>
     <string name="select">Select</string>
     <string name="add_commercial_record">أضف سجل تجاري</string>
+    <string name="ch_product">Choose Product</string>
 
 </resources>

@@ -19,6 +19,10 @@ public class ProductModel implements Serializable {
     private int amount = 0;
     private List<Image> images;
 
+    public ProductModel(String title_ar, String title_en) {
+        this.title_ar = title_ar;
+        this.title_en = title_en;
+    }
 
     public String getId() {
         return id;

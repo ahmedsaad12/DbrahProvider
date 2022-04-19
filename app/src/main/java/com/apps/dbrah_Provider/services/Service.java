@@ -5,6 +5,7 @@ import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.NotificationDataModel;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
+import com.apps.dbrah_Provider.model.ProductDataModel;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.model.StatisticsDataModel;
@@ -131,5 +132,6 @@ public interface Service {
     @GET("api/provider/order_details")
     Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id,
                                                            @Query("provider_id") String provider_id);
-
+    @GET("api/provider/control_products")
+    Single<Response<ProductDataModel>> getProduct(@Query("provider_id") String provider_id);
 }
