@@ -18,6 +18,14 @@ public class CategoryModel implements Serializable {
         this.title_en = title_en;
     }
 
+    public CategoryModel(String id, String title_ar, String title_en, String image, boolean selected) {
+        this.id = id;
+        this.title_ar = title_ar;
+        this.title_en = title_en;
+        this.image = image;
+        this.selected = selected;
+    }
+
     public String getId() {
         return id;
     }

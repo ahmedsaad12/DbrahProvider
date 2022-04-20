@@ -26,6 +26,14 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_suggest_new_product.SuggestNewProductActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_control_products.ControlProductsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_edit_account.EditAccountActivity"
             android:exported="false" />
         <activity
@@ -78,8 +86,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_contact_us.ContactUsActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_home.HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

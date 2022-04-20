@@ -27,10 +27,12 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.databinding.FragmentProfileBinding;
 import com.apps.dbrah_Provider.uis.activity_contact_us.ContactUsActivity;
+import com.apps.dbrah_Provider.uis.activity_control_products.ControlProductsActivity;
 import com.apps.dbrah_Provider.uis.activity_edit_account.EditAccountActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
+import com.apps.dbrah_Provider.uis.activity_suggest_new_product.SuggestNewProductActivity;
 
 import java.util.List;
 
@@ -82,6 +84,14 @@ public class FragmentProfile extends BaseFragment {
             } else {
                 activity.refreshActivity("en");
             }
+        });
+        binding.llControlProducts.setOnClickListener(view -> {
+            Intent intent=new Intent(activity, ControlProductsActivity.class);
+            startActivity(intent);
+        });
+        binding.llSuggestNewProduct.setOnClickListener(view -> {
+            Intent intent=new Intent(activity, SuggestNewProductActivity.class);
+            startActivity(intent);
         });
         binding.llContactUs.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ContactUsActivity.class);

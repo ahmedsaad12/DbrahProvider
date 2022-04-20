@@ -2,10 +2,12 @@ package com.apps.dbrah_Provider.services;
 
 
 import com.apps.dbrah_Provider.model.CategoryDataModel;
+import com.apps.dbrah_Provider.model.EditProductModel;
 import com.apps.dbrah_Provider.model.NotificationDataModel;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
 import com.apps.dbrah_Provider.model.ProductDataModel;
+import com.apps.dbrah_Provider.model.RecentProductDataModel;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.model.StatisticsDataModel;
@@ -20,6 +22,7 @@ import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -73,6 +76,25 @@ public interface Service {
 
     @GET("api/main_categories")
     Single<Response<CategoryDataModel>> getCategory();
+
+    @GET("api/sub_categories")
+    Single<Response<CategoryDataModel>> getSubCategory(@Query("category_id") String category_id);
+
+    @GET("api/provider/control_products")
+    Single<Response<RecentProductDataModel>> controlProducts(@Query("provider_id") String provider_id,
+                                                             @Query("category_id") String category_id,
+                                                             @Query("sub_category_id") String sub_category_id);
+
+    @POST("api/provider/edit_my_products")
+    Single<Response<StatusResponse>> editProducts(@Body EditProductModel editProductModel);
+
+    @Multipart
+    @POST("api/provider/suggest_product")
+    Single<Response<StatusResponse>> suggestProduct(@Part("provider_id") RequestBody provider_id,
+                                                    @Part MultipartBody.Part image,
+                                                    @Part("title") RequestBody title,
+                                                    @Part("main_category_id") RequestBody main_category_id,
+                                                    @Part("specifications") RequestBody specifications);
 
 
     @FormUrlEncoded
@@ -129,9 +151,11 @@ public interface Service {
     @POST("api/provider/pin_order")
     Single<Response<StatusResponse>> PinOrder(@Field("order_id") String order_id,
                                               @Field("provider_id") String provider_id);
+
     @GET("api/provider/order_details")
     Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id,
                                                            @Query("provider_id") String provider_id);
+
     @GET("api/provider/control_products")
     Single<Response<ProductDataModel>> getProduct(@Query("provider_id") String provider_id);
 }

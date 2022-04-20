@@ -18,6 +18,8 @@ public class ProductModel implements Serializable {
     private String updated_at;
     private int amount = 0;
     private List<Image> images;
+    @SerializedName("main_category")
+    private CategoryModel categoryModel;
 
     public ProductModel(String title_ar, String title_en) {
         this.title_ar = title_ar;
@@ -91,6 +93,11 @@ public class ProductModel implements Serializable {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public CategoryModel getCategoryModel() {
+        return categoryModel;
+    }
+
 
 
     public static class Image implements Serializable {

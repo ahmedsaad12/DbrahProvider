@@ -139,6 +139,17 @@
     <string name="deliverd">Deliverd</string>
     <string name="select">Select</string>
     <string name="add_commercial_record">أضف سجل تجاري</string>
+    <string name="product_image">صورة المنتج</string>
+    <string name="product_title">اسم المنتج</string>
+    <string name="main_category">الفئة الرئيسية</string>
+    <string name="specifications">المواصفات</string>
+    <string name="write_here">اكتب هنا ...</string>
+    <string name="control_products">التحكم في المنتجات</string>
+    <string name="suggest_new_product">اقترح منتجات جديدة</string>
+    <string name="no_products_to_show">لا توجد منتجات لعرضها</string>
+    <string name="add_product_image">أضف صورة المنتج</string>
     <string name="ch_product">Choose Product</string>
+    <string name="save">حفظ</string>
+    <string name="updated_suc">تم التحديث بنجاح</string>
 
 </resources>

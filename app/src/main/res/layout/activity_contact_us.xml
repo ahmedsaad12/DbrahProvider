@@ -83,6 +83,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:text="@string/name"
+                            android:fontFamily="@font/almira"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -107,6 +108,7 @@
                             android:layout_weight="1"
                             android:background="@color/transparent"
                             android:hint="@string/name"
+                            android:fontFamily="@font/almira"
                             android:lines="1"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
@@ -142,6 +144,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:text="@string/email"
+                            android:fontFamily="@font/almira"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -164,6 +167,7 @@
                             android:layout_marginStart="15dp"
                             android:layout_marginEnd="15dp"
                             android:layout_weight="1"
+                            android:fontFamily="@font/almira"
                             android:background="@color/transparent"
                             android:hint="@string/email"
                             android:inputType="textEmailAddress"
@@ -202,6 +206,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:text="@string/subject"
+                            android:fontFamily="@font/almira"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -225,6 +230,7 @@
                             android:layout_weight="1"
                             android:background="@color/transparent"
                             android:hint="@string/subject"
+                            android:fontFamily="@font/almira"
                             android:lines="1"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
@@ -259,6 +265,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:text="@string/message"
+                            android:fontFamily="@font/almira"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -282,6 +289,7 @@
                             android:background="@color/transparent"
                             android:gravity="top"
                             android:hint="@string/message"
+                            android:fontFamily="@font/almira"
                             android:inputType="textMultiLine"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"

@@ -138,6 +138,17 @@
     <string name="deliverd">Deliverd</string>
     <string name="select">Select</string>
     <string name="add_commercial_record">Add commercial record</string>
+    <string name="product_image">Product image</string>
+    <string name="product_title">Product title</string>
+    <string name="main_category">Main category</string>
+    <string name="specifications">Specifications</string>
+    <string name="write_here">Write here ...</string>
+    <string name="control_products">Control products</string>
+    <string name="suggest_new_product">Suggest a new products</string>
+    <string name="no_products_to_show">No products to show</string>
+    <string name="add_product_image">Add product image</string>
     <string name="ch_product">Choose Product</string>
+    <string name="save">Save</string>
+    <string name="updated_suc">Updated successfully</string>
 
 </resources>
