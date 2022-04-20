@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,8 +23,11 @@ import com.apps.dbrah_Provider.mvvm.ActivityOfferMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_preview.PreviewActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -43,6 +47,7 @@ public class OfferActivity extends BaseActivity {
     private AddOFFerDataModel addOFFerDataModel;
     private SpinnerProductAdapter spinnerProductAdapter;
     private ActivityOfferMvvm activityOfferMvvm;
+    private double total = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class OfferActivity extends BaseActivity {
         orderModel = (OrderModel) intent.getSerializableExtra("order");
     }
 
+    @SuppressLint("CheckResult")
     private void initView() {
         binding.tvindex.setText((index + 1) + "");
         binding.tvSize.setText((orderModel.getDetails().size()) + "");
@@ -136,6 +142,7 @@ public class OfferActivity extends BaseActivity {
             OfferDataModel offerDataModel = new OfferDataModel();
             boolean add = false;
             if (avilable == 1) {
+
                 String price = binding.edtprice.getText().toString();
                 if (!price.isEmpty()) {
                     binding.edtprice.setError(null);
@@ -144,6 +151,7 @@ public class OfferActivity extends BaseActivity {
                     offerDataModel.setTotal_price((Double.parseDouble(price) * Double.parseDouble(orderModel.getDetails().get(index).getQty()) + ""));
                     offerDataModel.setProduct_id(orderModel.getDetails().get(index).getProduct_id());
                     offerDataModel.setPrice(price);
+                    total+=Double.parseDouble(offerDataModel.getTotal_price());
                     offerDataModel.setType("price");
                     add = true;
                 } else {
@@ -162,6 +170,7 @@ public class OfferActivity extends BaseActivity {
                         offerDataModel.setAvailable_qty(qty);
                         offerDataModel.setTotal_price((Double.parseDouble(price) * Double.parseDouble(qty) + ""));
                         offerDataModel.setProduct_id(orderModel.getDetails().get(index).getProduct_id());
+                        total+=Double.parseDouble(offerDataModel.getTotal_price());
                         offerDataModel.setPrice(price);
                         offerDataModel.setType("less");
                         add = true;
@@ -188,6 +197,8 @@ public class OfferActivity extends BaseActivity {
                         offerDataModel.setProduct_id(orderModel.getDetails().get(index).getProduct_id());
                         offerDataModel.setOther_product_id(activityOfferMvvm.getOnRecentProductDataModel().getValue().get(pos - 1).getId());
                         offerDataModel.setPrice(price);
+                        total+=Double.parseDouble(offerDataModel.getTotal_price());
+                        offerDataModel.setProductModel(activityOfferMvvm.getOnRecentProductDataModel().getValue().get(pos - 1));
                         offerDataModel.setType("other");
                         add = true;
                     } else {
@@ -209,13 +220,27 @@ public class OfferActivity extends BaseActivity {
                 if (index < orderModel.getDetails().size()) {
                     binding.setModel(orderModel.getDetails().get(index));
                     binding.edtprice.setText("");
-                    binding.tvSinglePrice.setText("");
-                    binding.tvTotalPrice.setText("");
+                    binding.tvSinglePrice.setText("0");
+                    binding.tvTotalPrice.setText("0");
                     binding.edtAprice.setText("");
                     binding.edtQuantity.setText("");
                     binding.spBrand.setSelection(0);
                     binding.tvindex.setText((index + 1) + "");
                 } else {
+                    String expectedtime=date+" "+time;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.ENGLISH);
+
+                    addOFFerDataModel.setOffer_details(offerDataModelList);
+                    addOFFerDataModel.setOrder_id(orderModel.getId());
+                    addOFFerDataModel.setTime(time);
+                    addOFFerDataModel.setDate(date);
+                    addOFFerDataModel.setTotal_price(total+"");
+                    try {
+                        addOFFerDataModel.setDelivery_date_time(dateFormat.parse(expectedtime).getTime()+"");
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    addOFFerDataModel.setProvider_id(getUserModel().getData().getId());
                     Intent intent = new Intent(OfferActivity.this, PreviewActivity.class);
                     startActivity(intent);
                 }
@@ -224,8 +249,8 @@ public class OfferActivity extends BaseActivity {
         });
         binding.tvOTher.setOnClickListener(view -> {
             binding.edtprice.setText("");
-            binding.tvSinglePrice.setText("");
-            binding.tvTotalPrice.setText("");
+            binding.tvSinglePrice.setText("0");
+            binding.tvTotalPrice.setText("0");
             binding.edtAprice.setText("");
             binding.edtQuantity.setText("");
             binding.spBrand.setSelection(0);
@@ -265,8 +290,94 @@ public class OfferActivity extends BaseActivity {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
-                  binding.tvSinglePrice.setText(query);
-                  binding.tvTotalPrice.setText((Double.parseDouble(query)*Double.parseDouble(orderModel.getDetails().get(index).getQty()))+"");
+                    if (query != null && !query.isEmpty()) {
+                        binding.tvSinglePrice.setText(query);
+                        binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty())) + "");
+                    } else {
+                        binding.tvSinglePrice.setText("0");
+                        binding.tvTotalPrice.setText("0");
+                    }
+                });
+        Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            binding.edtAprice.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    emitter.onNext(editable.toString());
+                }
+            });
+
+        }).debounce(2, TimeUnit.SECONDS)
+                .distinctUntilChanged()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(query -> {
+                    if (query != null && !query.isEmpty()) {
+                        if (less == 0) {
+                            binding.tvSinglePrice.setText(query);
+                            binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty())) + "");
+                        } else {
+                            String qty = binding.edtQuantity.getText().toString();
+                            if (!qty.isEmpty()) {
+                                binding.tvSinglePrice.setText(query);
+                                binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(qty)) + "");
+                            } else {
+                                binding.tvSinglePrice.setText(query);
+
+                            }
+                        }
+                    } else {
+                        binding.tvSinglePrice.setText("0");
+                        binding.tvTotalPrice.setText("0");
+                    }
+                });
+        Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            binding.edtQuantity.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    emitter.onNext(editable.toString());
+                }
+            });
+
+        }).debounce(2, TimeUnit.SECONDS)
+                .distinctUntilChanged()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(query -> {
+                    if (!query.isEmpty()) {
+                        String price = binding.edtAprice.getText().toString();
+                        if (!price.isEmpty()) {
+                            binding.tvSinglePrice.setText(price);
+                            binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(price)) + "");
+                        } else {
+                            binding.tvSinglePrice.setText("0");
+                            binding.tvTotalPrice.setText("0");
+
+                        }
+                    } else {
+                        binding.tvSinglePrice.setText("0");
+                        binding.tvTotalPrice.setText("0");
+                    }
+
                 });
     }
 }

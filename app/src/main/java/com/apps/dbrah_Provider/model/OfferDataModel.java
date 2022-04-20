@@ -10,6 +10,7 @@ public class OfferDataModel implements Serializable {
     private String total_price;
     private String available_qty;
     private String other_product_id;
+    private ProductModel productModel;
 
     public String getProduct_id() {
         return product_id;
@@ -65,5 +66,13 @@ public class OfferDataModel implements Serializable {
 
     public void setOther_product_id(String other_product_id) {
         this.other_product_id = other_product_id;
+    }
+
+    public ProductModel getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
 }

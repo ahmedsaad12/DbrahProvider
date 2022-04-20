@@ -42,7 +42,9 @@
             android:exported="false" />
         <activity
             android:name=".uis.activity_offer.OfferActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity
             android:name=".uis.activity_order_details.OrderDetailsActivity"
             android:exported="false" />

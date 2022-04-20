@@ -184,7 +184,8 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
-        time = (hourOfDay < 10 ? "0" + hourOfDay : hourOfDay) + ":" + (minute < 10 ? "0" + minute : minute);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
+        date = dateFormat.format(new Date(calendar.getTimeInMillis()));
         binding.tvTime.setText(time);
     }
 

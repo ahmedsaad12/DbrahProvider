@@ -1,6 +1,9 @@
 package com.apps.dbrah_Provider.model;
 
+import androidx.lifecycle.LifecycleService;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class AddOFFerDataModel implements Serializable {
     private String provider_id;
@@ -8,7 +11,9 @@ public class AddOFFerDataModel implements Serializable {
     private String delivery_date_time;
     private String total_price;
     private String note;
-    private String offer_details;
+    private String time;
+    private String date;
+    private List<OfferDataModel> offer_details;
 
     public String getProvider_id() {
         return provider_id;
@@ -50,11 +55,27 @@ public class AddOFFerDataModel implements Serializable {
         this.note = note;
     }
 
-    public String getOffer_details() {
+    public List<OfferDataModel> getOffer_details() {
         return offer_details;
     }
 
-    public void setOffer_details(String offer_details) {
+    public void setOffer_details(List<OfferDataModel> offer_details) {
         this.offer_details = offer_details;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
