@@ -21,6 +21,7 @@ import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.databinding.FragmentOrdersBinding;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.mvvm.FragmentOrderMvvm;
+import com.apps.dbrah_Provider.mvvm.GeneralMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_current_prev_order_details.CurrentPreviousOrderDetailsActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
@@ -33,6 +34,7 @@ public class FragmentCurrentOrders extends BaseFragment {
     private HomeActivity activity;
     private OrderAdapter orderAdapter;
     private FragmentOrderMvvm fragmentOrderMvvm;
+    private GeneralMvvm generalMvvm;
 
     public static FragmentCurrentOrders newInstance() {
         FragmentCurrentOrders fragment = new FragmentCurrentOrders();
@@ -62,9 +64,17 @@ public class FragmentCurrentOrders extends BaseFragment {
     }
 
     private void initView() {
-        fragmentOrderMvvm= ViewModelProviders.of(this).get(FragmentOrderMvvm.class);
-
-        orderAdapter = new OrderAdapter( activity, this,getLang());
+        fragmentOrderMvvm = ViewModelProviders.of(this).get(FragmentOrderMvvm.class);
+        generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
+        generalMvvm.getOrderpage().observe(activity, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer == 1) {
+                    fragmentOrderMvvm.getOrders(getUserModel());
+                }
+            }
+        });
+        orderAdapter = new OrderAdapter(activity, this, getLang());
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(activity));
         binding.recViewOrders.setAdapter(orderAdapter);
         fragmentOrderMvvm.getIsLoading().observe(this, new Observer<Boolean>() {
@@ -77,14 +87,13 @@ public class FragmentCurrentOrders extends BaseFragment {
         fragmentOrderMvvm.getMutableLiveData().observe(this, new Observer<OrderDataModel.Data>() {
             @Override
             public void onChanged(OrderDataModel.Data data) {
-                if(data!=null){
-                    if(data.getCurrent()!=null&&data.getCurrent().size()>0){
+                if (data != null) {
+                    if (data.getCurrent() != null && data.getCurrent().size() > 0) {
                         orderAdapter.updateList(data.getCurrent());
                         binding.tvNoData.setVisibility(View.GONE);
 
 
-                    }
-                    else {
+                    } else {
                         orderAdapter.updateList(new ArrayList<>());
                         binding.tvNoData.setVisibility(View.VISIBLE);
 
@@ -98,7 +107,7 @@ public class FragmentCurrentOrders extends BaseFragment {
     }
 
     public void navigateToDetails() {
-        Intent intent=new Intent(activity, CurrentPreviousOrderDetailsActivity.class);
+        Intent intent = new Intent(activity, CurrentPreviousOrderDetailsActivity.class);
         startActivity(intent);
     }
 }

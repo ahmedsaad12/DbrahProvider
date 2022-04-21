@@ -1,5 +1,7 @@
 package com.apps.dbrah_Provider.uis.activity_order_details;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -9,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -44,6 +47,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
     private DatePickerDialog datePickerDialog;
     private String time = null, date = null;
     private OrderModel orderModel;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,12 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
     }
 
     private void initView() {
+            launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
         activityOrderDetailsMvvm = ViewModelProviders.of(this).get(ActivityOrderDetailsMvvm.class);
         activityOrderDetailsMvvm.getIsOrderDataLoading().observe(this, new Observer<Boolean>() {
             @Override
@@ -87,10 +97,10 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
                     OrderDetailsActivity.this.orderModel = orderModel;
                     binding.setModel(orderModel);
                     productAdapter.updateList(orderModel.getDetails());
-                    if (orderModel.getIs_pin().equals("1")) {
-                        binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.white), PorterDuff.Mode.SRC_IN);
-
-                    }
+//                    if (orderModel.getIs_pin().equals("1")) {
+//                        binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.white), PorterDuff.Mode.SRC_IN);
+//
+//                    }
                 }
             }
         });
@@ -122,7 +132,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
                 intent.putExtra("time", time);
                 intent.putExtra("date", date);
                 intent.putExtra("order", orderModel);
-                startActivity(intent);
+                launcher.launch(intent);
             } else {
                 if (time == null) {
                     binding.tvTime.setError(getResources().getString(R.string.field_required));
@@ -185,7 +195,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
-        date = dateFormat.format(new Date(calendar.getTimeInMillis()));
+        time = dateFormat.format(new Date(calendar.getTimeInMillis()));
         binding.tvTime.setText(time);
     }
 

@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.services;
 
 
+import com.apps.dbrah_Provider.model.AddOFFerDataModel;
 import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.EditProductModel;
 import com.apps.dbrah_Provider.model.NotificationDataModel;
@@ -158,4 +159,8 @@ public interface Service {
 
     @GET("api/provider/control_products")
     Single<Response<ProductDataModel>> getProduct(@Query("provider_id") String provider_id);
+
+    @POST("api/provider/add_offer")
+    Single<Response<StatusResponse>> addOffer(@Body AddOFFerDataModel addOFFerDataModel);
+
 }

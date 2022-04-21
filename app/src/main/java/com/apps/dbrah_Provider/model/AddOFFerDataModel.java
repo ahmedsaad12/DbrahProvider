@@ -13,6 +13,7 @@ public class AddOFFerDataModel implements Serializable {
     private String note;
     private String time;
     private String date;
+    private OrderModel orderModel;
     private List<OfferDataModel> offer_details;
 
     public String getProvider_id() {
@@ -77,5 +78,13 @@ public class AddOFFerDataModel implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public OrderModel getOrderModel() {
+        return orderModel;
+    }
+
+    public void setOrderModel(OrderModel orderModel) {
+        this.orderModel = orderModel;
     }
 }

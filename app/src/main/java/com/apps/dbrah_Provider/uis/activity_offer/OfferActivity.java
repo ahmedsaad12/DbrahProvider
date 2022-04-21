@@ -1,10 +1,13 @@
 package com.apps.dbrah_Provider.uis.activity_offer;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,6 +51,7 @@ public class OfferActivity extends BaseActivity {
     private SpinnerProductAdapter spinnerProductAdapter;
     private ActivityOfferMvvm activityOfferMvvm;
     private double total = 0;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +65,18 @@ public class OfferActivity extends BaseActivity {
         Intent intent = getIntent();
         time = intent.getStringExtra("time");
         date = intent.getStringExtra("date");
+
         orderModel = (OrderModel) intent.getSerializableExtra("order");
     }
 
     @SuppressLint("CheckResult")
     private void initView() {
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
         binding.tvindex.setText((index + 1) + "");
         binding.tvSize.setText((orderModel.getDetails().size()) + "");
         activityOfferMvvm = ViewModelProviders.of(this).get(ActivityOfferMvvm.class);
@@ -73,6 +84,7 @@ public class OfferActivity extends BaseActivity {
         binding.spBrand.setAdapter(spinnerProductAdapter);
         offerDataModelList = new ArrayList<>();
         addOFFerDataModel = new AddOFFerDataModel();
+        addOFFerDataModel.setOrderModel(orderModel);
         binding.setModel(orderModel.getDetails().get(index));
         binding.setLang(getLang());
         activityOfferMvvm.getIsLoadingRecentProduct().observe(this, new Observer<Boolean>() {
@@ -140,6 +152,7 @@ public class OfferActivity extends BaseActivity {
         });
         binding.btnNext.setOnClickListener(view -> {
             OfferDataModel offerDataModel = new OfferDataModel();
+            offerDataModel.setProductModel(orderModel.getDetails().get(index).getProduct());
             boolean add = false;
             if (avilable == 1) {
 
@@ -151,7 +164,7 @@ public class OfferActivity extends BaseActivity {
                     offerDataModel.setTotal_price((Double.parseDouble(price) * Double.parseDouble(orderModel.getDetails().get(index).getQty()) + ""));
                     offerDataModel.setProduct_id(orderModel.getDetails().get(index).getProduct_id());
                     offerDataModel.setPrice(price);
-                    total+=Double.parseDouble(offerDataModel.getTotal_price());
+                    total += Double.parseDouble(offerDataModel.getTotal_price());
                     offerDataModel.setType("price");
                     add = true;
                 } else {
@@ -170,7 +183,7 @@ public class OfferActivity extends BaseActivity {
                         offerDataModel.setAvailable_qty(qty);
                         offerDataModel.setTotal_price((Double.parseDouble(price) * Double.parseDouble(qty) + ""));
                         offerDataModel.setProduct_id(orderModel.getDetails().get(index).getProduct_id());
-                        total+=Double.parseDouble(offerDataModel.getTotal_price());
+                        total += Double.parseDouble(offerDataModel.getTotal_price());
                         offerDataModel.setPrice(price);
                         offerDataModel.setType("less");
                         add = true;
@@ -195,10 +208,10 @@ public class OfferActivity extends BaseActivity {
                         offerDataModel.setAvailable_qty(orderModel.getDetails().get(index).getQty());
                         offerDataModel.setTotal_price((Double.parseDouble(price) * Double.parseDouble(orderModel.getDetails().get(index).getQty()) + ""));
                         offerDataModel.setProduct_id(orderModel.getDetails().get(index).getProduct_id());
-                        offerDataModel.setOther_product_id(activityOfferMvvm.getOnRecentProductDataModel().getValue().get(pos - 1).getId());
+                        offerDataModel.setOther_product_id(activityOfferMvvm.getOnRecentProductDataModel().getValue().get(pos).getId());
                         offerDataModel.setPrice(price);
-                        total+=Double.parseDouble(offerDataModel.getTotal_price());
-                        offerDataModel.setProductModel(activityOfferMvvm.getOnRecentProductDataModel().getValue().get(pos - 1));
+                        total += Double.parseDouble(offerDataModel.getTotal_price());
+                        offerDataModel.setOther(activityOfferMvvm.getOnRecentProductDataModel().getValue().get(pos));
                         offerDataModel.setType("other");
                         add = true;
                     } else {
@@ -227,22 +240,23 @@ public class OfferActivity extends BaseActivity {
                     binding.spBrand.setSelection(0);
                     binding.tvindex.setText((index + 1) + "");
                 } else {
-                    String expectedtime=date+" "+time;
+                    String expectedtime = date + " " + time;
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.ENGLISH);
 
                     addOFFerDataModel.setOffer_details(offerDataModelList);
                     addOFFerDataModel.setOrder_id(orderModel.getId());
                     addOFFerDataModel.setTime(time);
                     addOFFerDataModel.setDate(date);
-                    addOFFerDataModel.setTotal_price(total+"");
+                    addOFFerDataModel.setTotal_price(total + "");
                     try {
-                        addOFFerDataModel.setDelivery_date_time(dateFormat.parse(expectedtime).getTime()+"");
+                        addOFFerDataModel.setDelivery_date_time(dateFormat.parse(expectedtime).getTime() + "");
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     addOFFerDataModel.setProvider_id(getUserModel().getData().getId());
                     Intent intent = new Intent(OfferActivity.this, PreviewActivity.class);
-                    startActivity(intent);
+                    intent.putExtra("data", addOFFerDataModel);
+                    launcher.launch(intent);
                 }
             }
 //
@@ -290,7 +304,7 @@ public class OfferActivity extends BaseActivity {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
-                    if (query != null && !query.isEmpty()) {
+                    if (query != null && !query.isEmpty() && index < orderModel.getDetails().size()) {
                         binding.tvSinglePrice.setText(query);
                         binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty())) + "");
                     } else {
@@ -321,7 +335,7 @@ public class OfferActivity extends BaseActivity {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
-                    if (query != null && !query.isEmpty()) {
+                    if (query != null && !query.isEmpty() && index < orderModel.getDetails().size()) {
                         if (less == 0) {
                             binding.tvSinglePrice.setText(query);
                             binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty())) + "");
@@ -363,7 +377,7 @@ public class OfferActivity extends BaseActivity {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(query -> {
-                    if (!query.isEmpty()) {
+                    if (!query.isEmpty() && index < orderModel.getDetails().size()) {
                         String price = binding.edtAprice.getText().toString();
                         if (!price.isEmpty()) {
                             binding.tvSinglePrice.setText(price);

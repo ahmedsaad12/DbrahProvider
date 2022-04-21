@@ -11,6 +11,7 @@ public class OfferDataModel implements Serializable {
     private String available_qty;
     private String other_product_id;
     private ProductModel productModel;
+    private ProductModel other;
 
     public String getProduct_id() {
         return product_id;
@@ -74,5 +75,13 @@ public class OfferDataModel implements Serializable {
 
     public void setProductModel(ProductModel productModel) {
         this.productModel = productModel;
+    }
+
+    public ProductModel getOther() {
+        return other;
+    }
+
+    public void setOther(ProductModel other) {
+        this.other = other;
     }
 }

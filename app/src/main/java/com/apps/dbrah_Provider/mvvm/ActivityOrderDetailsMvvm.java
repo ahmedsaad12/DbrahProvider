@@ -53,6 +53,7 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
 
     public void getOrderDetails(String order_id,String provider_id) {
         getIsOrderDataLoading().setValue(true);
+        Log.e("oooo",provider_id);
         Api.getService(Tags.base_url).getOrderDetails(order_id,provider_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

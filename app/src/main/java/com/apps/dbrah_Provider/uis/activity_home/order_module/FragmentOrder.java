@@ -11,12 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.MyPagerAdapter;
 import com.apps.dbrah_Provider.databinding.FragmentHomeBinding;
 import com.apps.dbrah_Provider.databinding.FragmentOrderBinding;
+import com.apps.dbrah_Provider.mvvm.GeneralMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_home.order_module.fragments.FragmentCurrentOrders;
@@ -33,6 +36,7 @@ public class FragmentOrder extends BaseFragment {
     private List<Fragment> fragmentList;
     private List<String> titles;
     private MyPagerAdapter pagerAdapter;
+    private GeneralMvvm generalMvvm;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -55,7 +59,13 @@ public class FragmentOrder extends BaseFragment {
     }
 
     private void initView() {
-
+        generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
+        generalMvvm.getOrderpage().observe(activity, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                binding.pager.setCurrentItem(integer);
+            }
+        });
         titles = new ArrayList<>();
         fragmentList = new ArrayList<>();
         titles.add(getString(R.string.new_));
@@ -66,12 +76,12 @@ public class FragmentOrder extends BaseFragment {
         fragmentList.add(FragmentNewOrders.newInstance());
         fragmentList.add(FragmentCurrentOrders.newInstance());
         fragmentList.add(FragmentPreviousOrders.newInstance());
-        pagerAdapter =new MyPagerAdapter(getChildFragmentManager(), PagerAdapter.POSITION_UNCHANGED,fragmentList,titles);
+        pagerAdapter = new MyPagerAdapter(getChildFragmentManager(), PagerAdapter.POSITION_UNCHANGED, fragmentList, titles);
 
         binding.pager.setAdapter(pagerAdapter);
         binding.pager.setOffscreenPageLimit(fragmentList.size());
         for (int i = 0; i < binding.tab.getTabCount(); i++) {
-            Log.e("i",i+"");
+            Log.e("i", i + "");
             View view = ((ViewGroup) binding.tab.getChildAt(0)).getChildAt(i);
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
             params.setMargins(16, 0, 16, 0);

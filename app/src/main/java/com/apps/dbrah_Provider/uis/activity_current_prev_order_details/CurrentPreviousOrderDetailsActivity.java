@@ -29,7 +29,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
     private void initView() {
         setUpToolbar(binding.toolbar, getString(R.string.orderDetails), R.color.white, R.color.black);
         offerList = new ArrayList<>();
-        offerAdapter = new OfferAdapter(offerList, this);
+        //offerAdapter = new OfferAdapter(offerList, this);
         binding.recViewOffer.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewOffer.setAdapter(offerAdapter);
     }

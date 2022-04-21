@@ -150,5 +150,8 @@
     <string name="ch_product">Choose Product</string>
     <string name="save">Save</string>
     <string name="updated_suc">Updated successfully</string>
+    <string name="not_available">Not available</string>
+    <string name="alternative_product">Alternative Product</string>
+    <string name="less_quantitiy">Smaller Quantities</string>
 
 </resources>
