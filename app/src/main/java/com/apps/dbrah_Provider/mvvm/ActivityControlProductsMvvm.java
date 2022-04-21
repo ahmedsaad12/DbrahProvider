@@ -95,7 +95,9 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
         return categoryPos;
     }
 
-
+    public void setCategoryPos(int pos) {
+        getCategoryPos().setValue(pos);
+    }
 
     public MutableLiveData<String> getCategoryId() {
         if (categoryId == null) {
@@ -234,8 +236,9 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
         dialog.setCancelable(false);
         dialog.show();
 
+        Log.e("list",editProductModel.getProducts_id()+" "+editProductModel.getProvider_id());
         Api.getService(Tags.base_url).editProducts(editProductModel)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
                     @Override
@@ -246,6 +249,7 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
                         dialog.dismiss();
+                        Log.e("status",response.code()+" "+response.body().getStatus());
                         if (response.isSuccessful()){
                             if (response.body().getStatus()==200){
                                 save.postValue(true);

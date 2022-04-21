@@ -46,6 +46,14 @@ public class FilterProductAdapter extends RecyclerView.Adapter<RecyclerView.View
         myHolder.binding.setModel(productModel);
 
         myHolder.binding.boxFilter.setOnClickListener(view -> {
+            ProductModel productModel1 = list.get(holder.getLayoutPosition());
+            if (productModel1.getHave_or_not().equals("have")){
+                productModel1.setHave_or_not("not");
+            }else if (productModel1.getHave_or_not().equals("not")){
+                productModel1.setHave_or_not("have");
+            }
+
+
             if (context instanceof ControlProductsActivity){
                 ControlProductsActivity activity=(ControlProductsActivity) context;
                 activity.addProductId(list.get(holder.getLayoutPosition()));

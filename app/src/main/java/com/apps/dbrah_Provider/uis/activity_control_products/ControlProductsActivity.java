@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apps.dbrah_Provider.R;
@@ -50,8 +52,7 @@ public class ControlProductsActivity extends BaseActivity {
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         mvvm = ViewModelProviders.of(this).get(ActivityControlProductsMvvm.class);
         mvvm.getIsLoading().observe(this, isLoading -> {
-            binding.tvNoData.setVisibility(View.GONE);
-            binding.swipeRefresh.setRefreshing(isLoading);
+                binding.swipeRefresh.setRefreshing(isLoading);
         });
         mvvm.getOnCategoryDataSuccess().observe(this, modelList -> {
             if (mainProductCategoryAdapter!=null){
@@ -103,11 +104,19 @@ public class ControlProductsActivity extends BaseActivity {
             }else {
                 binding.tvNoData.setVisibility(View.VISIBLE);
             }
+            if (filterProductAdapter!=null){
+                filterProductAdapter.updateList(productModels);
+            }
 
-            filterProductAdapter.updateList(productModels);
         });
         binding.swipeRefresh.setOnRefreshListener(() -> {
-            mvvm.controlProducts(getUserModel());
+            if (mvvm.getSubCategoryId().getValue()!=null){
+                mvvm.controlProducts(getUserModel());
+            }else {
+                binding.swipeRefresh.setRefreshing(false);
+            }
+
+
         });
         mainProductCategoryAdapter = new MainProductCategoryAdapter( this, getLang());
         binding.recViewMain.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
@@ -123,9 +132,20 @@ public class ControlProductsActivity extends BaseActivity {
 
         binding.btnSave.setOnClickListener(view -> {
             if (filterProductAdapter!=null){
-                editProductModel.setProducts_id(products);
-                editProductModel.setProvider_id(getUserModel().getData().getId());
-                mvvm.editProducts(this,editProductModel);
+                if (!products.isEmpty()){
+                    editProductModel.setProducts_id(products);
+                    editProductModel.setProvider_id(getUserModel().getData().getId());
+                    mvvm.editProducts(this,editProductModel);
+                }else {
+                    Toast.makeText(this, R.string.select_product, Toast.LENGTH_SHORT).show();
+//                    Toast toast=Toast.makeText(this, R.string.select_product, Toast.LENGTH_SHORT);
+//                    View view1=toast.getView();
+//                    TextView text = (TextView)view1.findViewById(android.R.id.message);
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        text.setTextAppearance(R.style.tab_text);
+//                    }
+                }
+
             }
         });
         mvvm.save.observe(this, aBoolean -> {
@@ -136,7 +156,10 @@ public class ControlProductsActivity extends BaseActivity {
         });
     }
 
-    public void getSubCat(CategoryModel categoryModel) {
+//    public void setItemCategory(CategoryModel categoryModel, int currentPos) {
+//        mvvm.setCategoryPos(currentPos);
+//    }
+    public void setItemCategory(CategoryModel categoryModel) {
         mvvm.setCategoryId(categoryModel.getId(),getUserModel());
     }
 
@@ -148,8 +171,6 @@ public class ControlProductsActivity extends BaseActivity {
     public void addProductId(ProductModel productModel) {
         if (!products.contains(productModel.getId())){
             products.add(productModel.getId());
-        }else {
-            products.remove(products.indexOf(productModel.getId()));
         }
     }
 }

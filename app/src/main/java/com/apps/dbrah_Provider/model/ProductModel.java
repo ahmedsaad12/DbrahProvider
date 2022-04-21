@@ -20,6 +20,8 @@ public class ProductModel implements Serializable {
     private List<Image> images;
     @SerializedName("main_category")
     private CategoryModel categoryModel;
+    private String have_or_not;
+
 
     public ProductModel(String title_ar, String title_en) {
         this.title_ar = title_ar;
@@ -92,6 +94,14 @@ public class ProductModel implements Serializable {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getHave_or_not() {
+        return have_or_not;
+    }
+
+    public void setHave_or_not(String have_or_not) {
+        this.have_or_not = have_or_not;
     }
 
     public CategoryModel getCategoryModel() {

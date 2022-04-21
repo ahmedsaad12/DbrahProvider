@@ -24,7 +24,8 @@ public class MainProductCategoryAdapter extends RecyclerView.Adapter<RecyclerVie
     private LayoutInflater inflater;
     private String lang;
     private String cat_id;
-    private int currentPos = -1;
+    private int currentPos = 0;
+    private int oldPos = currentPos;
     private MyHolder oldHolder;
 
     public MainProductCategoryAdapter(Context context, String lang) {
@@ -47,42 +48,42 @@ public class MainProductCategoryAdapter extends RecyclerView.Adapter<RecyclerVie
         myHolder.binding.setLang(lang);
 
         if (oldHolder==null){
-            if (currentPos == position){
-                oldHolder = myHolder;
+            oldHolder=myHolder;
+            CategoryModel model=list.get(position);
+            model.setSelected(true);
+            list.set(position,model);
+            myHolder.binding.setModel(model);
+            oldPos=position;
+            if (context instanceof ControlProductsActivity) {
+                ControlProductsActivity activity = (ControlProductsActivity) context;
+                activity.setItemCategory(list.get(myHolder.getAdapterPosition()));
             }
         }
 
-
-        myHolder.itemView.setOnClickListener(v -> {
-
-            CategoryModel category = list.get(myHolder.getAdapterPosition());
-
-            if (!category.isSelected()) {
-
-                if (oldHolder !=null) {
-
-                    CategoryModel oldCategory = list.get(currentPos);
-                    oldCategory.setSelected(false);
-                    list.set(currentPos, oldCategory);
-                    oldHolder.binding.setModel(oldCategory);
-
-
-                }
-                category.setSelected(true);
-                list.set(myHolder.getAdapterPosition(), category);
-                myHolder.binding.setModel(category);
-
-
-                currentPos = myHolder.getAdapterPosition();
-                oldHolder = myHolder;
-                if (context instanceof ControlProductsActivity) {
-                    ControlProductsActivity activity = (ControlProductsActivity) context;
-                    activity.getSubCat(list.get(myHolder.getAdapterPosition()));
-                }
-
+        myHolder.itemView.setOnClickListener(view -> {
+            if (oldHolder!=null){
+                CategoryModel oldCategoryModel=list.get(oldPos);
+                oldCategoryModel.setSelected(false);
+                list.set(oldPos,oldCategoryModel);
+                MyHolder oHolder=(MyHolder) oldHolder;
+                oHolder.binding.setModel(oldCategoryModel);
             }
 
+            currentPos=myHolder.getAdapterPosition();
+            CategoryModel categoryModel=list.get(currentPos);
+            categoryModel.setSelected(true);
+            list.set(currentPos,categoryModel);
+            myHolder.binding.setModel(categoryModel);
+
+            oldHolder=myHolder;
+            oldPos=currentPos;
+
+            if (context instanceof ControlProductsActivity) {
+                    ControlProductsActivity activity = (ControlProductsActivity) context;
+                    activity.setItemCategory(list.get(myHolder.getAdapterPosition()));
+                }
         });
+
     }
 
     @Override
