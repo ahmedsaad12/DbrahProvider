@@ -20,6 +20,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.databinding.FragmentOrdersBinding;
 import com.apps.dbrah_Provider.model.OrderDataModel;
+import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.mvvm.FragmentOrderMvvm;
 import com.apps.dbrah_Provider.mvvm.GeneralMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
@@ -106,8 +107,9 @@ public class FragmentCurrentOrders extends BaseFragment {
 
     }
 
-    public void navigateToDetails() {
+    public void navigateToDetails(OrderModel orderModel) {
         Intent intent = new Intent(activity, CurrentPreviousOrderDetailsActivity.class);
+        intent.putExtra("order_id",orderModel.getId());
         startActivity(intent);
     }
 }

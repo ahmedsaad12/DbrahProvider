@@ -53,7 +53,7 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
 
     public void getOrderDetails(String order_id,String provider_id) {
         getIsOrderDataLoading().setValue(true);
-        Log.e("oooo",provider_id);
+       // Log.e("oooo",provider_id);
         Api.getService(Tags.base_url).getOrderDetails(order_id,provider_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -109,6 +109,44 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
                             if (response.body() != null) {
                                 if (response.body().getStatus() == 200) {
                                     getOnOrderStatusSuccess().setValue(1);
+
+
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.getMessage());
+                        dialog.dismiss();
+                    }
+                });
+    }
+    public void hideOrder( String order_id, String provider_id, Context context) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url).hideOrder(order_id, provider_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    getOnOrderStatusSuccess().setValue(2);
 
 
                                 }

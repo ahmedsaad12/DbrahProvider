@@ -149,6 +149,10 @@ public interface Service {
     @POST("api/provider/pin_order")
     Single<Response<StatusResponse>> PinOrder(@Field("order_id") String order_id,
                                               @Field("provider_id") String provider_id);
+    @FormUrlEncoded
+    @POST("api/provider/hide_order")
+    Single<Response<StatusResponse>> hideOrder(@Field("order_id") String order_id,
+                                              @Field("provider_id") String provider_id);
 
     @GET("api/provider/order_details")
     Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id,

@@ -154,5 +154,6 @@
     <string name="not_available">Not available</string>
     <string name="alternative_product">Alternative Product</string>
     <string name="less_quantitiy">Smaller Quantities</string>
+    <string name="not_avail_now">Not Available Now</string>
 
 </resources>

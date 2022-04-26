@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -48,6 +49,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
     private String time = null, date = null;
     private OrderModel orderModel;
     private ActivityResultLauncher<Intent> launcher;
+    private boolean isDatachanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
     }
 
     private void initView() {
-            launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 setResult(RESULT_OK);
                 finish();
@@ -86,7 +88,13 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
             @Override
             public void onChanged(Integer integer) {
                 if (integer == 1) {
+                    isDatachanged = true;
                     activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
+                } else {
+                    Intent intent = getIntent();
+                    intent.putExtra("data", "hidden");
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
         });
@@ -97,10 +105,10 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
                     OrderDetailsActivity.this.orderModel = orderModel;
                     binding.setModel(orderModel);
                     productAdapter.updateList(orderModel.getDetails());
-//                    if (orderModel.getIs_pin().equals("1")) {
-//                        binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.white), PorterDuff.Mode.SRC_IN);
-//
-//                    }
+                    if (orderModel.getIs_pin().equals("1")) {
+                        binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.white), PorterDuff.Mode.SRC_IN);
+
+                    }
                 }
             }
         });
@@ -109,6 +117,20 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
             @Override
             public void onClick(View view) {
                 activityOrderDetailsMvvm.pinOrder(order_id, getUserModel().getData().getId(), OrderDetailsActivity.this);
+            }
+        });
+        binding.llMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getAddress().getLatitude()), Double.parseDouble(orderModel.getAddress().getLatitude()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
+        binding.btnHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityOrderDetailsMvvm.hideOrder(order_id, getUserModel().getData().getId(), OrderDetailsActivity.this);
             }
         });
         binding.setLang(getLang());
@@ -208,5 +230,16 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         date = dateFormat.format(new Date(calendar.getTimeInMillis()));
         binding.tvDate.setText(date);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isDatachanged) {
+            Intent intent = getIntent();
+            intent.putExtra("data", "hidden");
+            setResult(RESULT_OK, intent);
+        }
+        finish();
+
     }
 }

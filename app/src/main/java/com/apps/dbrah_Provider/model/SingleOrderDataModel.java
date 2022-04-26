@@ -13,9 +13,14 @@ public class SingleOrderDataModel extends StatusResponse implements Serializable
 
     public class Data implements Serializable {
         private OrderModel order;
+        private OrderModel.Offers offer;
 
         public OrderModel getOrder() {
             return order;
         }
+        public OrderModel.Offers getOffer() {
+            return offer;
+        }
+
     }
 }

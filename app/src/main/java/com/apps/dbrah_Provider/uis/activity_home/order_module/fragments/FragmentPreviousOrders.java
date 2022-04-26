@@ -21,6 +21,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.databinding.FragmentOrdersBinding;
 import com.apps.dbrah_Provider.model.OrderDataModel;
+import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.mvvm.FragmentOrderMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_current_prev_order_details.CurrentPreviousOrderDetailsActivity;
@@ -83,7 +84,7 @@ public class FragmentPreviousOrders extends BaseFragment {
             public void onChanged(OrderDataModel.Data data) {
                 if(data!=null){
                     if(data.getPrevious()!=null&&data.getPrevious().size()>0){
-                        orderAdapter.updateList(data.getNews());
+                        orderAdapter.updateList(data.getPrevious());
                         binding.tvNoData.setVisibility(View.GONE);
 
 
@@ -101,8 +102,9 @@ public class FragmentPreviousOrders extends BaseFragment {
 
     }
 
-    public void navigateToDetails() {
+    public void navigateToDetails(OrderModel orderModel) {
         Intent intent=new Intent(activity, CurrentPreviousOrderDetailsActivity.class);
+        intent.putExtra("order_id",orderModel.getId());
         startActivity(intent);
     }
 }

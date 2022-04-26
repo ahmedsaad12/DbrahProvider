@@ -53,9 +53,11 @@ public class FragmentNewOrders extends BaseFragment {
         activity = (HomeActivity) context;
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
-                fragmentOrderMvvm.getOrders(getUserModel());
 
-                generalMvvm.getOrderpage().postValue(1);
+                fragmentOrderMvvm.getOrders(getUserModel());
+                if (result.getData() == null) {
+                    generalMvvm.getOrderpage().postValue(1);
+                }
             }
         });
     }
@@ -75,7 +77,7 @@ public class FragmentNewOrders extends BaseFragment {
     }
 
     private void initView() {
-        generalMvvm=ViewModelProviders.of(activity).get(GeneralMvvm.class);
+        generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
         fragmentOrderMvvm = ViewModelProviders.of(this).get(FragmentOrderMvvm.class);
 
         orderAdapter = new OrderAdapter(activity, this, getLang());

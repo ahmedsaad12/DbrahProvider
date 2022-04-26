@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-<import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="lang"
             type="String" />
@@ -33,7 +35,6 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_date"
                 app:riv_corner_radius="8dp" />
 
             <TextView
@@ -84,8 +85,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility='@{model.type.equals("price")?View.GONE:View.VISIBLE,default=gone}'
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility='@{model.type.equals("price")?View.GONE:View.VISIBLE,default=gone}'>
 
                 <ImageView
                     android:id="@+id/imDot"
@@ -113,8 +114,8 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="18dp"
-            android:visibility='@{model.type.equals("less")&amp;&amp;!model.available_qty.equals("0")?View.VISIBLE:View.GONE,default=gone}'
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility='@{model.type.equals("less")&amp;&amp;!model.available_qty.equals("0")?View.VISIBLE:View.GONE,default=gone}'>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -143,18 +144,18 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="6dp"
-            android:visibility='@{model.type.equals("other")?View.VISIBLE:View.GONE,default=gone}'
             android:background="@drawable/rounded_color1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility='@{model.type.equals("other")?View.VISIBLE:View.GONE,default=gone}'>
 
             <com.makeramen.roundedimageview.RoundedImageView
+                image="@{model.other.main_image}"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 app:riv_corner_radius="10dp"
-                image="@{model.other.main_image}"
                 app:riv_mutate_background="true" />
 
             <TextView

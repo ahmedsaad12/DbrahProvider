@@ -68,22 +68,13 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         myHolder.itemView.setOnClickListener(view -> {
            if (fragment instanceof FragmentCurrentOrders) {
                 FragmentCurrentOrders fragmentCurrent = (FragmentCurrentOrders) fragment;
-                fragmentCurrent.navigateToDetails();
+                fragmentCurrent.navigateToDetails(list.get(holder.getAdapterPosition()));
             } else if (fragment instanceof FragmentPreviousOrders) {
                 FragmentPreviousOrders fragmentPrevious = (FragmentPreviousOrders) fragment;
-                fragmentPrevious.navigateToDetails();
+                fragmentPrevious.navigateToDetails(list.get(holder.getAdapterPosition()));
             }
         });
-        if (fragment instanceof FragmentNewOrders) {
-            FragmentNewOrders fragmentNew = (FragmentNewOrders) fragment;
-            myHolder.binding.llNewOrders.setVisibility(View.VISIBLE);
 
-        } else if (fragment instanceof FragmentCurrentOrders) {
-            FragmentCurrentOrders fragmentCurrent = (FragmentCurrentOrders) fragment;
-            myHolder.binding.llWaiting.setVisibility(View.VISIBLE);
-        } else if (fragment instanceof FragmentPreviousOrders) {
-            FragmentPreviousOrders fragmentPrevious = (FragmentPreviousOrders) fragment;
-        }
     }
 
     @Override
