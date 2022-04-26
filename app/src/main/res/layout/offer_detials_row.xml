@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="lang"
+            type="String" />
+
+        <import type="android.view.View" />
+
+        <variable
+
+            name="model"
+            type="com.apps.dbrah_Provider.model.OrderModel.OfferDetail" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_white_stroke_grey8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="horizontal">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                image="@{model.product.main_image}"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                app:riv_corner_radius="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:fontFamily="@font/almira"
+                android:text='@{lang.equals("ar")?model.product.title_ar:model.product.title_en}'
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almira"
+                android:text="@string/ordered"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvQunatity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/almaraibold"
+                android:text='@{model.qty+"X"}'
+                android:textColor="@color/black2"
+                android:textSize="18sp" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility='@{model.type.equals("price")?View.GONE:View.VISIBLE,default=gone}'>
+
+                <ImageView
+                    type="@{model.type}"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/circle_primary" />
+
+                <TextView
+                    type="@{model.type}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/almira"
+                    android:textColor="@color/black2"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="18dp"
+            android:orientation="horizontal"
+            android:visibility='@{model.type.equals("price")||model.type.equals("not_found")?View.GONE:View.VISIBLE,default=gone}'>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almira"
+                android:text="@string/available_quantity"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/almaraibold"
+                android:text='@{model.available_qty+"X"}'
+                android:textColor="@color/black2"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/rounded_color1"
+            android:orientation="horizontal"
+            android:visibility='@{model.type.equals("other")?View.VISIBLE:View.GONE,default=gone}'>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                image="@{model.other_product.main_image}"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:riv_corner_radius="10dp"
+                app:riv_mutate_background="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/almira"
+                android:text='@{lang.equals("ar")?model.other_product.title_ar:model.other_product.title_en}'
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="18dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almira"
+                android:text="@string/single_price2"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almira"
+                android:text="@{model.price}"
+                android:textColor="@color/black2"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almira"
+                android:text="@string/sar"
+                android:textColor="@color/grey8"
+                android:textSize="14sp" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almira"
+                android:text="@string/total_price2"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almaraibold"
+                android:text="@{model.total_price}"
+                android:textColor="@color/black2"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/almira"
+                android:text="@string/sar"
+                android:textColor="@color/grey8"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
