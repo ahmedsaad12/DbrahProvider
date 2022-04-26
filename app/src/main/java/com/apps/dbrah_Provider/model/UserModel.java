@@ -27,6 +27,15 @@ public class UserModel extends StatusResponse {
         private String rate;
         private List<CommercialRecords> commercial_records;
         private List<Categories> categories;
+        private String firebase_token;
+
+        public  String getFirebase_token() {
+            return firebase_token;
+        }
+
+        public  void setFirebase_token(String firebase_token) {
+            this.firebase_token = firebase_token;
+        }
 
         public String getId() {
             return id;
@@ -88,25 +97,13 @@ public class UserModel extends StatusResponse {
             return categories;
         }
 
-        public class CommercialRecords implements Serializable{
-            private String provider_id;
-            private String image;
-
-            public String getProvider_id() {
-                return provider_id;
-            }
-
-            public String getImage() {
-                return image;
-            }
-        }
-        public  class Categories implements Serializable{
+        public class Categories implements Serializable{
             private String id;
             private String provider_id;
             private String category_id;
             private String created_at;
             private String updated_at;
-            private Category category;
+            private CategoryModel category;
 
             public String getId() {
                 return id;
@@ -128,45 +125,20 @@ public class UserModel extends StatusResponse {
                 return updated_at;
             }
 
-            public Category getCategory() {
+            public CategoryModel getCategory() {
                 return category;
             }
-            public class Category implements Serializable{
-                private String id;
-                private String title_ar;
-                private String title_en;
-                private String image;
-                private String level;
-                private String created_at;
-                private String updated_at;
+        }
+        public class CommercialRecords implements Serializable{
+            private String provider_id;
+            private String image;
 
-                public String getId() {
-                    return id;
-                }
+            public String getProvider_id() {
+                return provider_id;
+            }
 
-                public String getTitle_ar() {
-                    return title_ar;
-                }
-
-                public String getTitle_en() {
-                    return title_en;
-                }
-
-                public String getImage() {
-                    return image;
-                }
-
-                public String getLevel() {
-                    return level;
-                }
-
-                public String getCreated_at() {
-                    return created_at;
-                }
-
-                public String getUpdated_at() {
-                    return updated_at;
-                }
+            public String getImage() {
+                return image;
             }
         }
     }

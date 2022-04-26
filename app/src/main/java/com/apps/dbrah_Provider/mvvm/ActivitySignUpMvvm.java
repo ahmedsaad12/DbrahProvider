@@ -14,6 +14,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
+import com.apps.dbrah_Provider.model.EditAccountModel;
 import com.apps.dbrah_Provider.model.SignUpModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.remote.Api;
@@ -108,22 +109,21 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-
         RequestBody phone = Common.getRequestBodyText(signUpModel.getPhone());
         RequestBody phone_code = Common.getRequestBodyText(signUpModel.getPhone_code());
         RequestBody email = Common.getRequestBodyText(signUpModel.getEmail());
         RequestBody name = Common.getRequestBodyText(signUpModel.getStore_name());
         RequestBody vat_number = Common.getRequestBodyText(signUpModel.getVat_num());
         RequestBody password = Common.getRequestBodyText(signUpModel.getPassword());
-        List<RequestBody> categories = getRequestBodyList(signUpModel.getCategoryList());
-        List<MultipartBody.Part> commercial_records = getMultipartBodyList(signUpModel.getCommercial_images(), "images[]", context);
-
+        List<RequestBody> category_ids = getRequestBodyList(signUpModel.getCategoryList());
+        List<MultipartBody.Part> commercial_records_images = getMultipartBodyList(signUpModel.getCommercial_images(), "commercial_records_images[]", context);
+        Log.e("size",commercial_records_images.size()+" ");
         MultipartBody.Part image = null;
         if (signUpModel.getImage() != null && !signUpModel.getImage().isEmpty()) {
             image = Common.getMultiPartImage(context, Uri.parse(signUpModel.getImage()), "image");
         }
 
-        Api.getService(Tags.base_url).signUp(phone, phone_code, email, name, vat_number, password, categories, commercial_records, image)
+        Api.getService(Tags.base_url).signUp(phone, phone_code, email, name, vat_number, password, category_ids, commercial_records_images, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<UserModel>>() {
@@ -135,6 +135,7 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<UserModel> response) {
                         dialog.dismiss();
+                        Log.e("sttt",response.code()+" "+response.body().getStatus()+" "+response.body().getMessage());
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
                                 userModelMutableLiveData.postValue(response.body());
@@ -152,25 +153,22 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
 
     }
 
-    public void update(Context context, SignUpModel signUpModel, UserModel userModel) {
+    public void update(Context context, EditAccountModel model, UserModel userModel) {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
         RequestBody provider_id = Common.getRequestBodyText(userModel.getData().getId());
-        RequestBody phone = Common.getRequestBodyText(signUpModel.getPhone());
-        RequestBody phone_code = Common.getRequestBodyText(signUpModel.getPhone_code());
-        RequestBody email = Common.getRequestBodyText(signUpModel.getEmail());
-        RequestBody name = Common.getRequestBodyText(signUpModel.getStore_name());
-        RequestBody vat_number = Common.getRequestBodyText(signUpModel.getVat_num());
-        RequestBody password = Common.getRequestBodyText(signUpModel.getPassword());
-        List<RequestBody> categories = getRequestBodyList(signUpModel.getCategoryList());
+        RequestBody phone = Common.getRequestBodyText(model.getPhone());
+        RequestBody phone_code = Common.getRequestBodyText(model.getPhone_code());
+        RequestBody email = Common.getRequestBodyText(model.getEmail());
+        RequestBody password = Common.getRequestBodyText(model.getPassword());
         MultipartBody.Part image = null;
-        if (signUpModel.getImage() != null && !signUpModel.getImage().isEmpty()) {
-            image = Common.getMultiPartImage(context, Uri.parse(signUpModel.getImage()), "image");
+        if (model.getImage() != null && !model.getImage().isEmpty()) {
+            image = Common.getMultiPartImage(context, Uri.parse(model.getImage()), "image");
         }
 
-        Api.getService(Tags.base_url).update(provider_id, phone, phone_code, email, name, vat_number, password, categories, image)
+        Api.getService(Tags.base_url).update(provider_id, phone, phone_code, email, password, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<UserModel>>() {

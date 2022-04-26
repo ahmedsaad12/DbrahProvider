@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.apps.dbrah_Provider.adapter.MyPagerAdapter;
 import com.apps.dbrah_Provider.interfaces.Listeners;
 import com.apps.dbrah_Provider.model.UserModel;
+import com.apps.dbrah_Provider.mvvm.ActivityHomeMvvm;
 import com.apps.dbrah_Provider.uis.FragmentBaseNavigation;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 
@@ -41,7 +42,7 @@ import io.paperdb.Paper;
 
 public class HomeActivity extends BaseActivity implements ViewPager.OnPageChangeListener, NavigationBarView.OnItemSelectedListener {
     private ActivityHomeBinding binding;
-    //private HomeActivityMvvm homeActivityMvvm;
+    private ActivityHomeMvvm homeActivityMvvm;
     private Stack<Integer> stack;
     private Map<Integer, Integer> map;
     private MyPagerAdapter adapter;
@@ -84,7 +85,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         binding.pager.addOnPageChangeListener(this);
         binding.bottomNavigationView.setOnItemSelectedListener(this);
 
-       /* homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
+        homeActivityMvvm = ViewModelProviders.of(this).get(ActivityHomeMvvm.class);
 
 
         homeActivityMvvm.firebase.observe(this, token -> {
@@ -98,7 +99,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
-        }*/
+        }
     }
 
 
@@ -117,11 +118,11 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
 
-    public void updateFirebase() {
-        if (getUserModel() != null) {
-            // homeActivityMvvm.updateFirebase(this, getUserModel());
-        }
-    }
+//    public void updateFirebase() {
+//        if (getUserModel() != null) {
+//             homeActivityMvvm.updateFirebase(this, getUserModel());
+//        }
+//    }
 
 
     @Override

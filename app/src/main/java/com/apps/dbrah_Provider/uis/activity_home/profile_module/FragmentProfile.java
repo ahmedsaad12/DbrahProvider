@@ -14,7 +14,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 
@@ -24,6 +26,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apps.dbrah_Provider.R;
+import com.apps.dbrah_Provider.model.UserModel;
+import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
+import com.apps.dbrah_Provider.mvvm.FragmentProfileMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.databinding.FragmentProfileBinding;
 import com.apps.dbrah_Provider.uis.activity_contact_us.ContactUsActivity;
@@ -43,6 +48,8 @@ public class FragmentProfile extends BaseFragment {
     private FragmentProfileBinding binding;
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
+    private FragmentProfileMvvm mvvm;
+    private UserModel userModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -74,6 +81,9 @@ public class FragmentProfile extends BaseFragment {
     }
 
     private void initView() {
+        userModel=getUserModel();
+        mvvm = ViewModelProviders.of(this).get(FragmentProfileMvvm.class);
+
         if (getUserModel() != null) {
             binding.setModel(getUserModel());
         }
@@ -101,6 +111,23 @@ public class FragmentProfile extends BaseFragment {
             Intent intent=new Intent(activity, EditAccountActivity.class);
             startActivity(intent);
         });
+
+        binding.llLogOut.setOnClickListener(view -> {
+            if (getUserModel()==null){
+                logout();
+            }else {
+                mvvm.logout(activity,getUserModel());
+
+            }
+        });
+
+        mvvm.logout.observe(this, aBoolean -> {
+            if (aBoolean){
+                logout();
+            }
+        });
+
+
     }
 
     private void navigateToLoginActivity() {
@@ -110,5 +137,12 @@ public class FragmentProfile extends BaseFragment {
 
     }
 
+    private void logout() {
+        clearUserModel(activity);
+        userModel = getUserModel();
+        binding.setModel(null);
+        binding.icon.setVisibility(View.VISIBLE);
+        navigateToLoginActivity();
+    }
 
 }

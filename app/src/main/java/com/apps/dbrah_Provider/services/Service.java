@@ -58,8 +58,8 @@ public interface Service {
                                        @Part("name") RequestBody name,
                                        @Part("vat_number") RequestBody vat_number,
                                        @Part("password") RequestBody password,
-                                       @Part List<RequestBody> categories,
-                                       @Part List<MultipartBody.Part> commercial_records,
+                                       @Part("category_ids[]") List<RequestBody> category_ids,
+                                       @Part List<MultipartBody.Part> commercial_records_images,
                                        @Part MultipartBody.Part image);
 
     @Multipart
@@ -68,10 +68,7 @@ public interface Service {
                                        @Part("phone") RequestBody phone,
                                        @Part("phone_code") RequestBody phone_code,
                                        @Part("email") RequestBody email,
-                                       @Part("name") RequestBody name,
-                                       @Part("vat_number") RequestBody vat_number,
                                        @Part("password") RequestBody password,
-                                       @Part List<RequestBody> categories,
                                        @Part MultipartBody.Part image);
 
 
@@ -162,5 +159,19 @@ public interface Service {
 
     @POST("api/provider/add_offer")
     Single<Response<StatusResponse>> addOffer(@Body AddOFFerDataModel addOFFerDataModel);
+
+
+    @FormUrlEncoded
+    @POST("api/provider/logout")
+    Single<Response<StatusResponse>> logout(@Field("provider_id") String provider_id,
+                                            @Field("token") String token
+    );
+
+    @FormUrlEncoded
+    @POST("api/storeToken")
+    Single<Response<StatusResponse>> updateFirebasetoken(@Field("provider_id") String provider_id,
+                                                         @Field("token") String token,
+                                                         @Field("type") String type
+    );
 
 }

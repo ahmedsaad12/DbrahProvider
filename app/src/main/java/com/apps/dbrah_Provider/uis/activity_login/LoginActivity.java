@@ -83,6 +83,7 @@ public class LoginActivity extends BaseActivity {
         binding.tvSignUp.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(intent);
+            finish();
         });
         binding.tvForgetPassword.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);

@@ -12,7 +12,7 @@
 
         <variable
             name="model"
-            type="com.apps.dbrah_Provider.model.SignUpModel" />
+            type="com.apps.dbrah_Provider.model.EditAccountModel" />
     </data>
 
     <FrameLayout
@@ -163,18 +163,18 @@
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="30dp"
-                            android:background="@drawable/rounded_shape_gray1_strock6"
+                            android:background="@drawable/rounded_shape_gray8_strock6"
                             android:padding="16dp">
 
                             <EditText
-                                error="@{model.error_store_name}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
                                 android:fontFamily="@font/almira"
                                 android:hint="@string/store_name"
-                                android:text="@={model.store_name}"
+                                android:text="@{model.store_name}"
                                 android:textColor="@color/black2"
+                                android:enabled="false"
                                 android:textColorHint="@color/grey7"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -217,7 +217,6 @@
                             android:padding="16dp">
 
                             <EditText
-                                error="@{model.error_email}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
@@ -317,7 +316,6 @@
 
                                 <EditText
                                     android:id="@+id/edtPhone"
-                                    error="@{model.error_phone}"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -363,27 +361,11 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="53dp"
-                            android:layout_marginStart="30dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="30dp"
-                            android:background="@drawable/rounded_shape_gray1_strock6"
-                            android:padding="16dp">
-
-                            <Spinner
-                                android:id="@+id/spinnerCategory"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="30dp"
-                            android:background="@drawable/rounded_shape_gray1_strock6"
+                            android:background="@drawable/rounded_shape_gray8_strock6"
                             android:padding="16dp">
 
                             <androidx.recyclerview.widget.RecyclerView
@@ -435,7 +417,6 @@
                             app:passwordToggleTint="@color/colorPrimary">
 
                             <EditText
-                                error="@{model.error_password}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
@@ -497,7 +478,6 @@
                             app:passwordToggleTint="@color/colorAccent">
 
                             <EditText
-                                error="@{model.error_repeat_password}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"

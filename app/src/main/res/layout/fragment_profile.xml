@@ -88,7 +88,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/almaraibold"
-                android:text="@string/login"
+                android:text='@{model==null?@string/login:model.data.name,default=@string/login}'
                 android:textColor="@color/black2"
                 android:textSize="18sp"
                  />

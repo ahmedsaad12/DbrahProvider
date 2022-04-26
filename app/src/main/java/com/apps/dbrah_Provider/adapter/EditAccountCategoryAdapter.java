@@ -2,7 +2,6 @@ package com.apps.dbrah_Provider.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,20 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.databinding.CategoryRowBinding;
+import com.apps.dbrah_Provider.databinding.EditAccountCategoryRowBinding;
 import com.apps.dbrah_Provider.model.CategoryModel;
+import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.uis.activity_edit_account.EditAccountActivity;
 import com.apps.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private List<CategoryModel> list;
+public class EditAccountCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    private List<UserModel.Data.Categories> list;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
     private AppCompatActivity appCompatActivity;
 
-    public CategoryAdapter(List<CategoryModel> list, Context context,String lang) {
+    public EditAccountCategoryAdapter(List<UserModel.Data.Categories> list, Context context, String lang) {
         this.list = list;
         this.context = context;
         this.lang=lang;
@@ -39,25 +40,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CategoryRowBinding binding= DataBindingUtil.inflate(inflater, R.layout.category_row,parent,false);
+        EditAccountCategoryRowBinding binding= DataBindingUtil.inflate(inflater, R.layout.edit_account_category_row,parent,false);
         return new MyHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
-        myHolder.binding.setModel(list.get(position));
+        myHolder.binding.setModel(list.get(position).getCategory());
         myHolder.binding.setLang(lang);
-
-        myHolder.binding.imageClose.setOnClickListener(view -> {
-            if (context instanceof SignUpActivity){
-                SignUpActivity signUpActivity=(SignUpActivity) context;
-                signUpActivity.deleteSelectedCategory(myHolder.getAdapterPosition());
-            }else if (context instanceof EditAccountActivity){
-                EditAccountActivity editAccountActivity=(EditAccountActivity)context;
-//                editAccountActivity.deleteSelectedCategory(myHolder.getAdapterPosition());
-            }
-        });
     }
 
     @Override
@@ -70,15 +61,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        public CategoryRowBinding binding;
+        public EditAccountCategoryRowBinding binding;
 
-        public MyHolder(CategoryRowBinding binding) {
+        public MyHolder(EditAccountCategoryRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
         }
     }
-    public void updateList(List<CategoryModel> list) {
+    public void updateList(List<UserModel.Data.Categories> list) {
         this.list = list;
         notifyDataSetChanged();
     }

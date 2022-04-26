@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,11 +32,13 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.AddCommercialRecordAdapter;
 import com.apps.dbrah_Provider.adapter.CategoryAdapter;
 import com.apps.dbrah_Provider.adapter.CountryAdapter;
+import com.apps.dbrah_Provider.adapter.EditAccountCategoryAdapter;
 import com.apps.dbrah_Provider.adapter.SpinnerCategoryAdapter;
 import com.apps.dbrah_Provider.databinding.ActivityEditAccountBinding;
 import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
 import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
+import com.apps.dbrah_Provider.model.EditAccountModel;
 import com.apps.dbrah_Provider.model.SignUpModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
@@ -57,13 +60,9 @@ public class EditAccountActivity extends BaseActivity {
     private String phone = "";
     private List<CountryModel> countryModelList = new ArrayList<>();
     private CountryAdapter countriesAdapter;
-    private CategoryAdapter categoryAdapter;
-    private SpinnerCategoryAdapter spinnerCategoryAdapter;
-    private List<CategoryModel> categoryModelList;
-    private List<CategoryModel> selectedCategoryList;
-    private List<String> imagesUriList;
+    private EditAccountCategoryAdapter categoryAdapter;
     private AlertDialog dialog;
-    private SignUpModel model;
+    private EditAccountModel model;
     private UserModel userModel;
     private ActivitySignUpMvvm activitySignUpMvvm;
     private Preferences preferences;
@@ -78,73 +77,38 @@ public class EditAccountActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_edit_account);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_account);
         initView();
     }
 
     private void initView() {
         preferences = Preferences.getInstance();
-        model = new SignUpModel();
-        userModel=getUserModel();
-        categoryModelList = new ArrayList<>();
-        selectedCategoryList = new ArrayList<>();
-        imagesUriList = new ArrayList<>();
+        model = new EditAccountModel();
+        userModel = getUserModel();
 
-        spinnerCategoryAdapter = new SpinnerCategoryAdapter(categoryModelList, this,getLang());
-        binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
+
 
         setUpToolbar(binding.toolbar, getString(R.string.edit_profile), R.color.white, R.color.black);
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
 
-        if (userModel!=null){
-            phone_code=userModel.getData().getPhone_code();
-            phone=userModel.getData().getPhone();
+        phone_code = userModel.getData().getPhone_code();
+        phone = userModel.getData().getPhone();
 
-            model.setPhone_code(phone_code);
-            model.setPhone(phone);
-            model.setStore_name(userModel.getData().getName());
+        model.setPhone_code(phone_code);
+        model.setPhone(phone);
+        model.setStore_name(userModel.getData().getName());
 
-            if (userModel.getData().getEmail()!=null){
-                model.setEmail(userModel.getData().getEmail());
-            }
-            if (userModel.getData().getImage()!=null){
-                String url =  userModel.getData().getImage();
-                Picasso.get().load(Uri.parse(url)).into(binding.image);
-                model.setImage(url);
-                binding.icon.setVisibility(View.GONE);
-            }
+        if (userModel.getData().getEmail() != null) {
+            model.setEmail(userModel.getData().getEmail());
         }
+        if (userModel.getData().getImage() != null) {
+            String url = userModel.getData().getImage();
+            Picasso.get().load(Uri.parse(url)).into(binding.image);
+            model.setImage(url);
+            binding.icon.setVisibility(View.GONE);
+        }
+
         binding.setModel(model);
-
-        activitySignUpMvvm.getOnCategoryDataSuccess().observe(this, categoryModels -> {
-            if (spinnerCategoryAdapter != null) {
-                categoryModels.add(0, new CategoryModel("اختر القسم", "Choose category"));
-                categoryModelList.clear();
-                categoryModelList.addAll(categoryModels);
-                spinnerCategoryAdapter.updateList(categoryModels);
-            }
-        });
-        activitySignUpMvvm.getCategory();
-
-        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                CategoryModel model = categoryModelList.get(i);
-                if (model.getId() != null) {
-                    if (!isItemInCategoryList(model)) {
-                        selectedCategoryList.add(model);
-                        categoryAdapter.notifyItemInserted(selectedCategoryList.size() - 1);
-                        EditAccountActivity.this.model.setCategoryList(selectedCategoryList);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         activitySignUpMvvm.getCoListMutableLiveData().observe(this, countryModels -> {
             if (countryModels != null && countryModels.size() > 0) {
@@ -161,7 +125,7 @@ public class EditAccountActivity extends BaseActivity {
             finish();
         });
 
-        categoryAdapter = new CategoryAdapter(selectedCategoryList, this,getLang());
+        categoryAdapter = new EditAccountCategoryAdapter(userModel.getData().getCategories(), this, getLang());
         binding.recViewCategory.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(categoryAdapter);
 
@@ -172,8 +136,8 @@ public class EditAccountActivity extends BaseActivity {
 
                     uri = result.getData().getData();
                     File file = new File(Common.getImagePath(this, uri));
-                        Picasso.get().load(file).fit().into(binding.image);
-                        binding.lLogo.setVisibility(View.GONE);
+                    Picasso.get().load(file).fit().into(binding.image);
+                    binding.lLogo.setVisibility(View.GONE);
 
                 } else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
@@ -183,13 +147,11 @@ public class EditAccountActivity extends BaseActivity {
                         String path = Common.getImagePath(this, uri);
 
                         if (path != null) {
-                                Picasso.get().load(new File(path)).fit().into(binding.image);
-                                binding.lLogo.setVisibility(View.GONE);
-                            }
-
-                        else {
-                                Picasso.get().load(uri).fit().into(binding.image);
-                                binding.lLogo.setVisibility(View.GONE);
+                            Picasso.get().load(new File(path)).fit().into(binding.image);
+                            binding.lLogo.setVisibility(View.GONE);
+                        } else {
+                            Picasso.get().load(uri).fit().into(binding.image);
+                            binding.lLogo.setVisibility(View.GONE);
 
 
                         }
@@ -223,7 +185,9 @@ public class EditAccountActivity extends BaseActivity {
         createCountriesDialog();
 
         binding.btnConfirm.setOnClickListener(view -> {
-            activitySignUpMvvm.update(EditAccountActivity.this,model,userModel);
+            if (model.isDAtaValid(this)) {
+                activitySignUpMvvm.update(EditAccountActivity.this, model, userModel);
+            }
         });
 
         binding.flImage.setOnClickListener(view -> {
@@ -368,43 +332,43 @@ public class EditAccountActivity extends BaseActivity {
     }
 
 
-    public void deleteSelectedCategory(int adapterPosition)
-    {
-        selectedCategoryList.remove(adapterPosition);
-        categoryAdapter.notifyItemRemoved(adapterPosition);
-        if (selectedCategoryList.size()>0){
-            int pos = getItemSpinnerPos(selectedCategoryList.get(selectedCategoryList.size()-1));
+//    public void deleteSelectedCategory(int adapterPosition)
+//    {
+//        selectedCategoryList.remove(adapterPosition);
+//        categoryAdapter.notifyItemRemoved(adapterPosition);
+//        if (selectedCategoryList.size()>0){
+//            int pos = getItemSpinnerPos(selectedCategoryList.get(selectedCategoryList.size()-1));
+//
+//            if (pos!=-1){
+//                binding.spinnerCategory.setSelection(pos);
+//            }else {
+//                binding.spinnerCategory.setSelection(0);
+//            }
+//        }else {
+//            binding.spinnerCategory.setSelection(0);
+//
+//        }
+//    }
 
-            if (pos!=-1){
-                binding.spinnerCategory.setSelection(pos);
-            }else {
-                binding.spinnerCategory.setSelection(0);
-            }
-        }else {
-            binding.spinnerCategory.setSelection(0);
-
-        }
-    }
-
-    private boolean isItemInCategoryList(CategoryModel diseaseModel)
-    {
-        for (CategoryModel model :selectedCategoryList){
-            if (diseaseModel.getId()==model.getId()){
-                return true;
-            }
-        }
-        return false;
-    }
-    private int getItemSpinnerPos(CategoryModel diseaseModel)
-    {
-        int pos = -1;
-        for (int index=0;index<categoryModelList.size();index++) {
-            CategoryModel model = categoryModelList.get(index);
-            if (model.getId()==diseaseModel.getId()){
-                pos = index;
-                return pos;
-            }
-        }
-        return pos;
-    }
+//    private boolean isItemInCategoryList(CategoryModel diseaseModel)
+//    {
+//        for (CategoryModel model :selectedCategoryList){
+//            if (diseaseModel.getId()==model.getId()){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//    private int getItemSpinnerPos(CategoryModel diseaseModel)
+//    {
+//        int pos = -1;
+//        for (int index=0;index<categoryModelList.size();index++) {
+//            CategoryModel model = categoryModelList.get(index);
+//            if (model.getId()==diseaseModel.getId()){
+//                pos = index;
+//                return pos;
+//            }
+//        }
+//        return pos;
+//    }
 }

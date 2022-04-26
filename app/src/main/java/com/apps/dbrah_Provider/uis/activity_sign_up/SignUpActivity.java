@@ -45,6 +45,7 @@ import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
 import com.apps.dbrah_Provider.preferences.Preferences;
 import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
+import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.squareup.picasso.Picasso;
 
@@ -102,7 +103,7 @@ public class SignUpActivity extends BaseActivity {
         recordAdapter = new AddCommercialRecordAdapter(imagesUriList, this);
         binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewImages.setAdapter(recordAdapter);
-        spinnerCategoryAdapter = new SpinnerCategoryAdapter(categoryModelList, this,getLang());
+        spinnerCategoryAdapter = new SpinnerCategoryAdapter(categoryModelList, this, getLang());
         binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
 
         setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
@@ -169,11 +170,11 @@ public class SignUpActivity extends BaseActivity {
         activitySignUpMvvm.userModelMutableLiveData.observe(this, userModel -> {
             setUserModel(userModel);
             setResult(RESULT_OK);
-            finish();
+            navigateToHomeActivity();
         });
 //        activitySignUpMvvm.signUp(this,model);
 
-        categoryAdapter = new CategoryAdapter(selectedCategoryList, this,getLang());
+        categoryAdapter = new CategoryAdapter(selectedCategoryList, this, getLang());
         binding.recViewCategory.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(categoryAdapter);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -186,11 +187,14 @@ public class SignUpActivity extends BaseActivity {
                     if (type.equals("mainImage")) {
                         Picasso.get().load(file).fit().into(binding.image);
                         binding.lLogo.setVisibility(View.GONE);
+                        model.setImage(uri.toString());
+
                     } else if (type.equals("commercialImages")) {
                         binding.iconUpload.setVisibility(View.GONE);
                         binding.llImages.setVisibility(View.VISIBLE);
                         imagesUriList.add(uri.toString());
-
+                        recordAdapter.notifyItemInserted(imagesUriList.size() - 1);
+                        model.setCommercial_images(imagesUriList);
 //                        Picasso.get().load(file).fit().into(binding.imageRecord);
                     }
 
@@ -205,20 +209,28 @@ public class SignUpActivity extends BaseActivity {
                             if (type.equals("mainImage")) {
                                 Picasso.get().load(new File(path)).fit().into(binding.image);
                                 binding.lLogo.setVisibility(View.GONE);
+                                model.setImage(uri.toString());
+
                             } else if (type.equals("commercialImages")) {
                                 imagesUriList.add(uri.toString());
                                 recordAdapter.notifyItemInserted(imagesUriList.size() - 1);
                                 binding.iconUpload.setVisibility(View.GONE);
                                 binding.llImages.setVisibility(View.VISIBLE);
+                                model.setCommercial_images(imagesUriList);
+
                             }
 
                         } else {
                             if (type.equals("mainImage")) {
                                 Picasso.get().load(uri).fit().into(binding.image);
                                 binding.lLogo.setVisibility(View.GONE);
+                                model.setImage(uri.toString());
+
                             } else if (type.equals("commercialImages")) {
                                 imagesUriList.add(uri.toString());
                                 recordAdapter.notifyItemInserted(imagesUriList.size() - 1);
+                                model.setCommercial_images(imagesUriList);
+
                             }
 
                         }
@@ -252,8 +264,8 @@ public class SignUpActivity extends BaseActivity {
         createCountriesDialog();
 
         binding.btnSignup.setOnClickListener(view -> {
-            if (model.isDataValid(SignUpActivity.this)){
-                    activitySignUpMvvm.signUp(SignUpActivity.this,model);
+            if (model.isDataValid(SignUpActivity.this)) {
+                activitySignUpMvvm.signUp(SignUpActivity.this, model);
             }
         });
 
@@ -289,6 +301,12 @@ public class SignUpActivity extends BaseActivity {
         binding.arrow.setOnClickListener(view -> dialog.show());
         binding.btnCancel.setOnClickListener(view -> closeSheet());
 
+    }
+
+    private void navigateToHomeActivity() {
+        Intent intent=new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void createCountriesDialog() {
@@ -422,39 +440,37 @@ public class SignUpActivity extends BaseActivity {
         }
     }
 
-    public void deleteSelectedCategory(int adapterPosition)
-    {
+    public void deleteSelectedCategory(int adapterPosition) {
         selectedCategoryList.remove(adapterPosition);
         categoryAdapter.notifyItemRemoved(adapterPosition);
-        if (selectedCategoryList.size()>0){
-            int pos = getItemSpinnerPos(selectedCategoryList.get(selectedCategoryList.size()-1));
+        if (selectedCategoryList.size() > 0) {
+            int pos = getItemSpinnerPos(selectedCategoryList.get(selectedCategoryList.size() - 1));
 
-            if (pos!=-1){
+            if (pos != -1) {
                 binding.spinnerCategory.setSelection(pos);
-            }else {
+            } else {
                 binding.spinnerCategory.setSelection(0);
             }
-        }else {
+        } else {
             binding.spinnerCategory.setSelection(0);
 
         }
     }
 
-    private boolean isItemInCategoryList(CategoryModel diseaseModel)
-    {
-        for (CategoryModel model :selectedCategoryList){
-            if (diseaseModel.getId()==model.getId()){
+    private boolean isItemInCategoryList(CategoryModel diseaseModel) {
+        for (CategoryModel model : selectedCategoryList) {
+            if (diseaseModel.getId() == model.getId()) {
                 return true;
             }
         }
         return false;
     }
-    private int getItemSpinnerPos(CategoryModel diseaseModel)
-    {
+
+    private int getItemSpinnerPos(CategoryModel diseaseModel) {
         int pos = -1;
-        for (int index=0;index<categoryModelList.size();index++) {
+        for (int index = 0; index < categoryModelList.size(); index++) {
             CategoryModel model = categoryModelList.get(index);
-            if (model.getId()==diseaseModel.getId()){
+            if (model.getId() == diseaseModel.getId()) {
                 pos = index;
                 return pos;
             }
