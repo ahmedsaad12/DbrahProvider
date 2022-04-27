@@ -155,5 +155,9 @@
     <string name="alternative_product">Alternative Product</string>
     <string name="less_quantitiy">Smaller Quantities</string>
     <string name="not_avail_now">Not Available Now</string>
+    <string name="attach_sent">Attach Sent</string>
+    <string name="start_preparing">Start Preparing</string>
+    <string name="start_delivring">Start Delivering</string>
+    <string name="finish_delivery">Finish Delivery</string>
 
 </resources>

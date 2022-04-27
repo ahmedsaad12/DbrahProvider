@@ -7,6 +7,9 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.apps.dbrah_Provider.model.MessageModel" />
 
         <import type="android.view.View" />
 
@@ -74,10 +77,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:fontFamily="@font/almira"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="5dp"
+                android:fontFamily="@font/almira"
+                android:text='@{model.created_at.split("T")[0]}'
                 android:textColor="@color/grey7"
                 android:textSize="12sp" />
         </LinearLayout>

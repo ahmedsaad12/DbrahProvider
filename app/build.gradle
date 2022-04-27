@@ -72,6 +72,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+    implementation 'org.greenrobot:eventbus:3.2.0'
 
 
 

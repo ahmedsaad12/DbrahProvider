@@ -24,6 +24,7 @@ import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.mvvm.ActivityCurrentPreviousOrderDetailsMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
+import com.apps.dbrah_Provider.uis.activity_chat.ChatActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -36,6 +37,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
     private SingleOrderDataModel singleOrderDataModel;
     private Intent intent;
     private static final int REQUEST_PHONE_CALL = 1;
+    private boolean isDatachanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,24 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
                 }
             }
         });
+        activityCurrentPreviousOrderDetailsMvvm.getOnStatuschangeSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    isDatachanged = true;
+                    if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("202")) {
+                        singleOrderDataModel.getData().getOrder().setOffer_status_code("203");
+                    } else if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("203")) {
+                        singleOrderDataModel.getData().getOrder().setOffer_status_code("204");
 
+                    } else if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("204")) {
+                        singleOrderDataModel.getData().getOrder().setOffer_status_code("206");
+
+                    }
+                    binding.setModel(singleOrderDataModel.getData().getOrder());
+                }
+            }
+        });
         activityCurrentPreviousOrderDetailsMvvm.getOnDataSuccess().observe(this, new Observer<SingleOrderDataModel>() {
             @Override
             public void onChanged(SingleOrderDataModel singleOrderDataModel) {
@@ -115,6 +134,28 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
         binding.recViewOffer.setAdapter(offerDetialsAdapter);
 
         activityCurrentPreviousOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
+        binding.imChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, ChatActivity.class);
+                intent.putExtra("order_id", order_id);
+                startActivity(intent);
+            }
+        });
+        binding.flStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("202")) {
+                    activityCurrentPreviousOrderDetailsMvvm.changgeOrderStatus(order_id, "preparing", CurrentPreviousOrderDetailsActivity.this);
+                } else if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("203")) {
+                    activityCurrentPreviousOrderDetailsMvvm.changgeOrderStatus(order_id, "on_way", CurrentPreviousOrderDetailsActivity.this);
+
+                } else if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("204")) {
+                    activityCurrentPreviousOrderDetailsMvvm.changgeOrderStatus(order_id, "delivered", CurrentPreviousOrderDetailsActivity.this);
+
+                }
+            }
+        });
     }
 
     @Override
@@ -144,5 +185,15 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isDatachanged) {
+
+            setResult(RESULT_OK);
+        }
+        finish();
+
     }
 }

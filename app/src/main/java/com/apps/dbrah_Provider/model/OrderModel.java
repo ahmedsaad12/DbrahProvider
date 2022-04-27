@@ -77,6 +77,10 @@ public class OrderModel implements Serializable {
         return offer_status_code;
     }
 
+    public void setOffer_status_code(String offer_status_code) {
+        this.offer_status_code = offer_status_code;
+    }
+
     public String getOffer_status() {
         return offer_status;
     }

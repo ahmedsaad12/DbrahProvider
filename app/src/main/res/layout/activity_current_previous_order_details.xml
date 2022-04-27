@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="model"
             type="com.apps.dbrah_Provider.model.OrderModel" />
@@ -96,20 +98,26 @@
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginEnd="5dp"
                                             android:src="@drawable/ic_call2" />
 
                                         <ImageView
+                                            android:id="@+id/imChat"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:src="@drawable/ic_chat" />
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:src="@drawable/ic_chat"
+                                            android:visibility='@{model.offer_status_code.equals("201")||model.offer_status_code.equals("205")||model.offer_status_code.equals("206")?View.GONE:View.VISIBLE,default=gone}' />
 
                                         <ImageView
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginEnd="5dp"
                                             android:src="@drawable/ic_share" />
                                     </LinearLayout>
                                 </LinearLayout>
@@ -359,6 +367,7 @@
                     android:layout_gravity="bottom"
                     android:background="@color/black2"
                     android:gravity="center"
+                    android:visibility='@{model.offer_status_code.equals("201")?View.GONE:View.VISIBLE,default=gone}'
                     app:layout_constraintBottom_toBottomOf="parent">
 
                     <ProgressBar
@@ -367,19 +376,19 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:progress="10"
+                        orderStatus="@{model.offer_status_code}"
 
                         android:progressDrawable="@drawable/top_rounded_primary" />
 
                     <TextView
                         android:id="@+id/status"
 
+                        orderStatus="@{model.offer_status_code}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/almira"
                         android:gravity="center"
-                        android:text="Status"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
@@ -393,6 +402,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
         <ProgressBar
             android:id="@+id/progBar"
             android:layout_width="wrap_content"

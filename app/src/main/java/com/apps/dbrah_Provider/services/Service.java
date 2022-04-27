@@ -4,12 +4,14 @@ package com.apps.dbrah_Provider.services;
 import com.apps.dbrah_Provider.model.AddOFFerDataModel;
 import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.EditProductModel;
+import com.apps.dbrah_Provider.model.MessagesDataModel;
 import com.apps.dbrah_Provider.model.NotificationDataModel;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
 import com.apps.dbrah_Provider.model.ProductDataModel;
 import com.apps.dbrah_Provider.model.RecentProductDataModel;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
+import com.apps.dbrah_Provider.model.SingleMessageModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.model.StatisticsDataModel;
 import com.apps.dbrah_Provider.model.SettingModel;
@@ -177,5 +179,19 @@ public interface Service {
                                                          @Field("token") String token,
                                                          @Field("type") String type
     );
+    @GET("api/getChat")
+    Single<Response<MessagesDataModel>> getChatMessages(@Query("order_id") String order_id);
 
+    @Multipart
+    @POST("api/storeMessage")
+    Single<Response<SingleMessageModel>> sendMessages(@Part("order_id") RequestBody order_id,
+                                                      @Part("type") RequestBody type,
+                                                      @Part("from_type") RequestBody from,
+                                                      @Part("message") RequestBody message,
+                                                      @Part MultipartBody.Part image
+    );
+    @FormUrlEncoded
+    @POST("api/updateOrderStatus")
+    Single<Response<StatusResponse>> changeOrderStatus(@Field("order_id") String order_id,
+                                                       @Field("status") String status);
 }

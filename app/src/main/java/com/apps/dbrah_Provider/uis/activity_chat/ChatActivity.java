@@ -26,16 +26,24 @@ import android.widget.Toast;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.ChatAdapter;
+import com.apps.dbrah_Provider.chat_service.ChatService;
 import com.apps.dbrah_Provider.databinding.ActivityChatBinding;
+import com.apps.dbrah_Provider.model.AddChatMessageModel;
+import com.apps.dbrah_Provider.model.MessageModel;
+import com.apps.dbrah_Provider.mvvm.ActivityChatMvvm;
 import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class ChatActivity extends BaseActivity {
     private ActivityChatBinding binding;
-//    private ActivityChatMvvm mvvm;
+    private ActivityChatMvvm mvvm;
     private String imagePath = "";
     private ChatAdapter adapter;
     private ActivityResultLauncher<Intent> launcher;
@@ -46,22 +54,28 @@ public class ChatActivity extends BaseActivity {
     private String type;
     private int selectedReq = 0;
     private Uri uri = null;
+    private String order_id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        order_id = intent.getStringExtra("order_id");
     }
 
     private void initView() {
         setUpToolbar(binding.toolbar, getString(R.string.chat), R.color.white, R.color.black);
-//        mvvm = ViewModelProviders.of(this).get(ActivityChatMvvm.class);
-//        mvvm.getIsLoading().observe(this, isLoading -> {
-//            binding.swipeRefresh.setRefreshing(isLoading);
-//        });
-
+        mvvm = ViewModelProviders.of(this).get(ActivityChatMvvm.class);
+        mvvm.getIsLoading().observe(this, isLoading -> {
+            binding.swipeRefresh.setRefreshing(isLoading);
+        });
 
 
         binding.flGallery.setOnClickListener(view -> {
@@ -98,15 +112,15 @@ public class ChatActivity extends BaseActivity {
                 }
             }
         });
-//        adapter = new ChatAdapter(this, getUserModel().getData().getUser().getId(), binding.recView);
+        adapter = new ChatAdapter(this, binding.recView);
         binding.recView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.recView.setAdapter(adapter);
 
-//        mvvm.onDataSuccess().observe(this, list -> {
-//            if (adapter != null) {
-//                adapter.updateList(list);
-//            }
-//        });
+        mvvm.onDataSuccess().observe(this, list -> {
+            if (adapter != null) {
+                adapter.updateList(list);
+            }
+        });
 
 
         binding.imageCamera.setOnClickListener(v -> {
@@ -117,27 +131,26 @@ public class ChatActivity extends BaseActivity {
             if (selectedReq == READ_REQ) {
                 uri = result.getData().getData();
                 File file = new File(Common.getImagePath(this, uri));
-                sendMessage("image", "", file.getAbsolutePath());
-                Log.e("lll",uri.toString());
+                sendMessage("file", "", file.getAbsolutePath());
+                Log.e("lll", uri.toString());
 
             } else if (selectedReq == CAMERA_REQ) {
                 Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
                 uri = getUriFromBitmap(bitmap);
                 if (uri != null) {
                     String path = Common.getImagePath(this, uri);
-                    sendMessage("image", "", path);
+                    sendMessage("file", "", path);
                 }
             }
 
         });
 
 
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
 
-//        if (!EventBus.getDefault().isRegistered(this)) {
-//            EventBus.getDefault().register(this);
-//        }
-
-//        mvvm.getChatMessages(getUserModel());
+        mvvm.getChatMessages(order_id);
 
         binding.send.setOnClickListener(v -> {
             sendMessage("text", binding.edtMessage.getText().toString(), null);
@@ -148,15 +161,15 @@ public class ChatActivity extends BaseActivity {
         binding.cardLastMsg.setOnClickListener(v -> {
             binding.setMsg("");
             binding.cardLastMsg.setVisibility(View.GONE);
-//            binding.recView.scrollToPosition(mvvm.onDataSuccess().getValue().size() - 1);
+            binding.recView.scrollToPosition(mvvm.onDataSuccess().getValue().size() - 1);
             adapter.notifyDataSetChanged();
             //binding.recView.post(() -> );
         });
-
-//        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(getUserModel()));
+                binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(order_id));
 
 
     }
+
     private Uri getUriFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -164,20 +177,20 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void sendMessage(String type, String msg, String image_url) {
-//        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type, msg, image_url,getUserModel().getData().getAccess_token());
-//        Intent intent = new Intent(this, ChatService.class);
-//        intent.putExtra("data", addChatMessageModel);
-//        startService(intent);
+        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type, msg, image_url,order_id);
+        Intent intent = new Intent(this, ChatService.class);
+       intent.putExtra("data", addChatMessageModel);
+        startService(intent);
 
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onNewMessage(MessageModel messageModel) {
-//        imagePath = "";
-//        mvvm.addNewMessage(messageModel);
-//        adapter.notifyItemInserted(mvvm.onDataSuccess().getValue().size() - 1);
-//
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onNewMessage(MessageModel messageModel) {
+        imagePath = "";
+        mvvm.addNewMessage(messageModel);
+        adapter.notifyItemInserted(mvvm.onDataSuccess().getValue().size() - 1);
+
+    }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -202,24 +215,24 @@ public class ChatActivity extends BaseActivity {
     }
 
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (EventBus.getDefault().isRegistered(this)) {
-//            EventBus.getDefault().unregister(this);
-//        }
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
 
-//    public void displayLastMessage(MessageModel messageModel) {
-//        if (messageModel.getType().equals("image")) {
-//            // binding.setMsg(getString(R.string.attach_sent));
-//        } else {
-//            binding.setMsg(messageModel.getText());
-//        }
-//        binding.cardLastMsg.setVisibility(View.VISIBLE);
-//
-//
-//    }
+    public void displayLastMessage(MessageModel messageModel) {
+        if (messageModel.getType().equals("image")) {
+            binding.setMsg(getString(R.string.attach_sent));
+        } else {
+            binding.setMsg(messageModel.getMessage());
+        }
+        binding.cardLastMsg.setVisibility(View.VISIBLE);
+
+
+    }
 
     public void hideLastMessageView() {
         binding.setMsg("");

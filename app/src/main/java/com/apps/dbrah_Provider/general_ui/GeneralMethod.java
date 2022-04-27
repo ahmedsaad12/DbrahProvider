@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -171,6 +172,7 @@ public class GeneralMethod {
             textView.setText(m_date);
         }
     }
+
     @BindingAdapter("type")
     public static void OfferType(ImageView imDot, String type) {
 
@@ -184,7 +186,36 @@ public class GeneralMethod {
 
     }
 
+    @BindingAdapter("orderStatus")
+    public static void orderStatus(TextView btnStatus, String offer_code) {
+        if (offer_code != null) {
+            if (offer_code.equals("202")) {
+                btnStatus.setText(R.string.start_preparing);
+            } else if (offer_code.equals("203")) {
+                btnStatus.setText(R.string.start_delivring);
+            } else if (offer_code.equals("204")) {
+                btnStatus.setText(R.string.finish_delivery);
+            } else if (offer_code.equals("206")) {
+                btnStatus.setText(R.string.done);
+            }
+        }
     }
+
+    @BindingAdapter("orderStatus")
+    public static void orderStatus(ProgressBar progressBar, String offer_code) {
+        if (offer_code != null) {
+            if (offer_code.equals("202")) {
+                progressBar.setProgress(10);
+            } else if (offer_code.equals("203")) {
+                progressBar.setProgress(30);
+            } else if (offer_code.equals("204")) {
+                progressBar.setProgress(70);
+            } else if (offer_code.equals("206")) {
+                progressBar.setProgress(100);
+            }
+        }
+    }
+}
 
 
 

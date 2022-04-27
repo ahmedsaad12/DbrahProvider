@@ -1,6 +1,8 @@
 package com.apps.dbrah_Provider.mvvm;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,9 +10,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 
+import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
+import com.apps.dbrah_Provider.model.StatusResponse;
 import com.apps.dbrah_Provider.remote.Api;
+import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.tags.Tags;
 
 import java.io.IOException;
@@ -29,6 +34,7 @@ public class ActivityCurrentPreviousOrderDetailsMvvm extends AndroidViewModel {
     private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<Boolean> isLoading;
     private MutableLiveData<SingleOrderDataModel> onDataSuccess;
+    private MutableLiveData<Boolean> onStatuschangeSuccess;
 
     public ActivityCurrentPreviousOrderDetailsMvvm(@NonNull Application application) {
         super(application);
@@ -39,6 +45,13 @@ public class ActivityCurrentPreviousOrderDetailsMvvm extends AndroidViewModel {
             onDataSuccess = new MutableLiveData<>();
         }
         return onDataSuccess;
+    }
+
+    public MutableLiveData<Boolean> getOnStatuschangeSuccess() {
+        if (onStatuschangeSuccess == null) {
+            onStatuschangeSuccess = new MutableLiveData<>();
+        }
+        return onStatuschangeSuccess;
     }
 
     public MutableLiveData<Boolean> getIsLoading() {
@@ -85,6 +98,44 @@ public class ActivityCurrentPreviousOrderDetailsMvvm extends AndroidViewModel {
                     public void onError(@NonNull Throwable e) {
                         Log.e("error", e.getMessage());
                         getIsLoading().setValue(false);
+                    }
+                });
+    }
+
+    public void changgeOrderStatus(String order_id, String status, Context context) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url).changeOrderStatus(order_id, status)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    onStatuschangeSuccess.postValue(true);
+
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.getMessage());
+                        dialog.dismiss();
                     }
                 });
     }

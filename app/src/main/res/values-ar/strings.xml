@@ -131,13 +131,13 @@
     <string name="other_brand">ماركة أخرى</string>
     <string name="reviews">المراجعات</string>
     <string name="type_a_message">اكتب هنا</string>
-    <string name="chat">Chat</string>
+    <string name="chat">شات</string>
     <string name="rate">تقييم</string>
-    <string name="your_offer_has_been_rejected">Your Offer Has Been Rejected</string>
-    <string name="preparing">Preparing</string>
-    <string name="on_way">On Way</string>
-    <string name="deliverd">Deliverd</string>
-    <string name="select">Select</string>
+    <string name="your_offer_has_been_rejected">تم رفض عرضك</string>
+    <string name="preparing">تم التحضير</string>
+    <string name="on_way">فى الطريق</string>
+    <string name="deliverd">تم التسليم</string>
+    <string name="select">اختر</string>
     <string name="add_commercial_record">أضف سجل تجاري</string>
     <string name="product_image">صورة المنتج</string>
     <string name="product_title">اسم المنتج</string>
@@ -148,13 +148,17 @@
     <string name="suggest_new_product">اقترح منتجات جديدة</string>
     <string name="no_products_to_show">لا توجد منتجات لعرضها</string>
     <string name="add_product_image">أضف صورة المنتج</string>
-    <string name="ch_product">Choose Product</string>
+    <string name="ch_product">اختر منتج</string>
     <string name="save">حفظ</string>
     <string name="updated_suc">تم التحديث بنجاح</string>
     <string name="select_product">حدد منتج</string>
     <string name="not_available">غير متاح</string>
     <string name="alternative_product">منتج بديل</string>
     <string name="less_quantitiy">كميات أقل</string>
-    <string name="not_avail_now">Not Available Now</string>
+    <string name="not_avail_now">غير متاح</string>
+    <string name="attach_sent">تم ارسال مرفق</string>
+    <string name="start_preparing">بدأ التحضير</string>
+    <string name="start_delivring">بدأ التجهيز</string>
+    <string name="finish_delivery">إنهاء التسليم</string>
 
 </resources>

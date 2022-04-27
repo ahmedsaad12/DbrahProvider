@@ -16,6 +16,7 @@ import com.apps.dbrah_Provider.databinding.ChatImageLeftRowBinding;
 import com.apps.dbrah_Provider.databinding.ChatImageRightRowBinding;
 import com.apps.dbrah_Provider.databinding.ChatMessageLeftRowBinding;
 import com.apps.dbrah_Provider.databinding.ChatMessageRightRowBinding;
+import com.apps.dbrah_Provider.model.MessageModel;
 import com.apps.dbrah_Provider.uis.activity_chat.ChatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -29,17 +30,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private final int img_right = 4;
     private final int load = 9;
     private LayoutInflater inflater;
-    private List<Object> list;
+    private List<MessageModel> list;
     private Context context;
-    private String current_user_id;
     private ChatActivity activity;
     private RecyclerView recyclerView;
     private boolean isScrolledUp = false;
 
 
-    public ChatAdapter(Context context, String current_user_id, RecyclerView recView) {
+    public ChatAdapter(Context context, RecyclerView recView) {
         this.context = context;
-        this.current_user_id = current_user_id;
         inflater = LayoutInflater.from(context);
         activity = (ChatActivity) context;
         this.recyclerView = recView;
@@ -63,7 +62,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             Log.e("5", "5");
 
                             isScrolledUp = false;
-//                            activity.hideLastMessageView();
+                            activity.hideLastMessageView();
 
                         }
                     } else {
@@ -116,7 +115,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-//        MessageModel model = list.get(position);
+        MessageModel model = list.get(position);
 
 
         ///////////////////
@@ -124,30 +123,30 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         if (holder instanceof HolderMsgLeft) {
             HolderMsgLeft holderMsgLeft = (HolderMsgLeft) holder;
-//            holderMsgLeft.binding.setModel(model);
+            holderMsgLeft.binding.setModel(model);
 
 
         } else if (holder instanceof HolderMsgRight) {
             HolderMsgRight holderMsgRight = (HolderMsgRight) holder;
-//            holderMsgRight.binding.setModel(model);
+            holderMsgRight.binding.setModel(model);
 
 
         } else if (holder instanceof HolderImageLeft) {
             HolderImageLeft holderImageLeft = (HolderImageLeft) holder;
-//            holderImageLeft.binding.setModel(model);
-//            Glide.with(context)
-//                    .load(Uri.parse( model.getImage()))
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(holderImageLeft.binding.imageChat);
+            holderImageLeft.binding.setModel(model);
+            Glide.with(context)
+                    .load(Uri.parse( model.getFile()))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderImageLeft.binding.imageChat);
 
 
         } else if (holder instanceof HolderImageRight) {
             HolderImageRight holderImageRight = (HolderImageRight) holder;
-//            holderImageRight.binding.setModel(model);
-//            Glide.with(context)
-//                    .load(Uri.parse( model.getImage()))
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(holderImageRight.binding.image);
+            holderImageRight.binding.setModel(model);
+            Glide.with(context)
+                    .load(Uri.parse( model.getFile()))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderImageRight.binding.image);
 
         }
 
@@ -195,76 +194,76 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//
-//        MessageModel messageModel = list.get(position);
-//        if (messageModel.getType().equals("text")) {
-//
-//            if (messageModel.getFrom_user_id().equals(current_user_id)) {
-//
-//                return msg_right;
-//            } else {
-//                return msg_left;
-//            }
-//        } else {
-//
-//            if (messageModel.getFrom_user_id().equals(current_user_id)) {
-//
-//                return img_right;
-//            } else {
-//                return img_left;
-//            }
-//        }
-//
-//
-//    }
+    @Override
+    public int getItemViewType(int position) {
+
+        MessageModel messageModel = list.get(position);
+        if (messageModel.getType().equals("text")) {
+
+            if (messageModel.getFrom_type().equals("provider")) {
+
+                return msg_right;
+            } else {
+                return msg_left;
+            }
+        } else {
+
+            if (messageModel.getFrom_type().equals("provider")) {
+
+                return img_right;
+            } else {
+                return img_left;
+            }
+        }
 
 
-//    public void updateList(List<MessageModel> list) {
-//        if (list != null) {
-//            this.list = list;
-//
-//        }
-//
-//        if (this.list != null) {
-//            recyclerView.scrollToPosition(this.list.size()-1);
-//            notifyDataSetChanged();
-//
-//        }
-//
-//
-//
-//    }
+    }
 
-//    public void addMessage(MessageModel messageModel) {
-//        if (list != null) {
-//            list.add(messageModel);
-//            notifyItemChanged(list.size());
-//
-//            recyclerView.post(() -> {
-//                if (this.list != null) {
-//
-//
-//                    if (!isScrolledUp){
-//
-//                        recyclerView.scrollToPosition(this.list.size()-1);
-//                        notifyDataSetChanged();
-//
-//                    }else {
-//                        if (!messageModel.getFrom_user_id().equals(current_user_id)){
-//                            activity.displayLastMessage(messageModel);
-//
-//                        }else {
-//                            recyclerView.scrollToPosition(this.list.size()-1);
-//                            notifyDataSetChanged();
-//
-//                        }
-//                    }
-//
-//                }
-//            });
-//
-//        }
-//    }
+
+    public void updateList(List<MessageModel> list) {
+        if (list != null) {
+            this.list = list;
+
+        }
+
+        if (this.list != null) {
+            recyclerView.scrollToPosition(this.list.size()-1);
+            notifyDataSetChanged();
+
+        }
+
+
+
+    }
+
+    public void addMessage(MessageModel messageModel) {
+        if (list != null) {
+            list.add(messageModel);
+            notifyItemChanged(list.size());
+
+            recyclerView.post(() -> {
+                if (this.list != null) {
+
+
+                    if (!isScrolledUp){
+
+                        recyclerView.scrollToPosition(this.list.size()-1);
+                        notifyDataSetChanged();
+
+                    }else {
+                        if (!messageModel.getType().equals("from")){
+                            activity.displayLastMessage(messageModel);
+
+                        }else {
+                            recyclerView.scrollToPosition(this.list.size()-1);
+                            notifyDataSetChanged();
+
+                        }
+                    }
+
+                }
+            });
+
+        }
+    }
 }

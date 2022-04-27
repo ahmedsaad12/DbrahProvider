@@ -7,7 +7,9 @@
 
     <data>
 
-
+<variable
+    name="model"
+    type="com.apps.dbrah_Provider.model.MessageModel" />
         <import type="android.view.View" />
 
     </data>
@@ -51,6 +53,7 @@
                     android:linksClickable="true"
                     android:maxWidth="230dp"
                     android:padding="3dp"
+                    android:text="@{model.message}"
                     android:fontFamily="@font/almira"
                     android:textColor="@color/black"
                     android:textColorLink="@color/colorPrimary"
@@ -69,6 +72,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="5dp"
+                android:text='@{model.created_at.split("T")[0]}'
                 android:textColor="@color/grey7"
                 android:textSize="12sp" />
         </LinearLayout>
