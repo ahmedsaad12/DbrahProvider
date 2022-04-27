@@ -27,7 +27,7 @@ public class UserModel extends StatusResponse {
         private String rate;
         private List<CommercialRecords> commercial_records;
         private List<Categories> categories;
-        private String firebase_token;
+        private static String firebase_token;
 
         public  String getFirebase_token() {
             return firebase_token;

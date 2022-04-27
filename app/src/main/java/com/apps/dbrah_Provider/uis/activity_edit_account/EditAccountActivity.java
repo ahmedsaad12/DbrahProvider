@@ -86,8 +86,6 @@ public class EditAccountActivity extends BaseActivity {
         model = new EditAccountModel();
         userModel = getUserModel();
 
-
-
         setUpToolbar(binding.toolbar, getString(R.string.edit_profile), R.color.white, R.color.black);
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
 
@@ -104,7 +102,6 @@ public class EditAccountActivity extends BaseActivity {
         if (userModel.getData().getImage() != null) {
             String url = userModel.getData().getImage();
             Picasso.get().load(Uri.parse(url)).into(binding.image);
-            model.setImage(url);
             binding.icon.setVisibility(View.GONE);
         }
 
@@ -331,44 +328,4 @@ public class EditAccountActivity extends BaseActivity {
         binding.imFalg.setImageResource(countryModel.getFlag());
     }
 
-
-//    public void deleteSelectedCategory(int adapterPosition)
-//    {
-//        selectedCategoryList.remove(adapterPosition);
-//        categoryAdapter.notifyItemRemoved(adapterPosition);
-//        if (selectedCategoryList.size()>0){
-//            int pos = getItemSpinnerPos(selectedCategoryList.get(selectedCategoryList.size()-1));
-//
-//            if (pos!=-1){
-//                binding.spinnerCategory.setSelection(pos);
-//            }else {
-//                binding.spinnerCategory.setSelection(0);
-//            }
-//        }else {
-//            binding.spinnerCategory.setSelection(0);
-//
-//        }
-//    }
-
-//    private boolean isItemInCategoryList(CategoryModel diseaseModel)
-//    {
-//        for (CategoryModel model :selectedCategoryList){
-//            if (diseaseModel.getId()==model.getId()){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    private int getItemSpinnerPos(CategoryModel diseaseModel)
-//    {
-//        int pos = -1;
-//        for (int index=0;index<categoryModelList.size();index++) {
-//            CategoryModel model = categoryModelList.get(index);
-//            if (model.getId()==diseaseModel.getId()){
-//                pos = index;
-//                return pos;
-//            }
-//        }
-//        return pos;
-//    }
 }

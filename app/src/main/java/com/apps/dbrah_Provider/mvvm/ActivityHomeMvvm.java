@@ -37,7 +37,6 @@ public class ActivityHomeMvvm extends AndroidViewModel {
             if (task.isSuccessful()) {
                 String token = task.getResult().getToken();
 
-                Log.e("token",token+"_");
                 Api.getService(Tags.base_url).updateFirebasetoken( userModel.getData().getId(),token , "android")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

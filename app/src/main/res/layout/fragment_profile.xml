@@ -74,6 +74,7 @@
                         android:background="@drawable/circle_white"
                         android:clickable="false"
                         android:longClickable="false"
+                        image="@{model.data.image}"
                         android:src="@drawable/circle_avatar" />
 
 

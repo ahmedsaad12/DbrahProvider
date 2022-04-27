@@ -311,6 +311,7 @@
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/small_rounded_primary"
                         android:text="@string/send"
+                        android:fontFamily="@font/almira"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="15sp"

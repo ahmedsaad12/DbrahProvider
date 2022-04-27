@@ -29,6 +29,8 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
 import com.apps.dbrah_Provider.mvvm.FragmentProfileMvvm;
+import com.apps.dbrah_Provider.tags.Tags;
+import com.apps.dbrah_Provider.uis.activity_app.AppActivity;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.databinding.FragmentProfileBinding;
 import com.apps.dbrah_Provider.uis.activity_contact_us.ContactUsActivity;
@@ -84,8 +86,8 @@ public class FragmentProfile extends BaseFragment {
         userModel=getUserModel();
         mvvm = ViewModelProviders.of(this).get(FragmentProfileMvvm.class);
 
-        if (getUserModel() != null) {
-            binding.setModel(getUserModel());
+        if (userModel != null) {
+            binding.setModel(userModel);
         }
         binding.setLang(getLang());
         binding.tvLang.setOnClickListener(view -> {
@@ -112,11 +114,14 @@ public class FragmentProfile extends BaseFragment {
             startActivity(intent);
         });
 
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url+"webView?type=terms"));
+
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy",Tags.base_url+"webView?type=privacy"));
         binding.llLogOut.setOnClickListener(view -> {
-            if (getUserModel()==null){
+            if (userModel==null){
                 logout();
             }else {
-                mvvm.logout(activity,getUserModel());
+                mvvm.logout(activity,userModel);
 
             }
         });
@@ -128,6 +133,13 @@ public class FragmentProfile extends BaseFragment {
         });
 
 
+    }
+
+    private void navigateToAppActivity(String type, String url) {
+        Intent intent=new Intent(activity, AppActivity.class);
+        intent.putExtra("data", type);
+        intent.putExtra("url",url);
+        startActivity(intent);
     }
 
     private void navigateToLoginActivity() {

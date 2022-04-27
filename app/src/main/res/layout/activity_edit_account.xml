@@ -217,6 +217,7 @@
                             android:padding="16dp">
 
                             <EditText
+                                error="@{model.error_email}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
@@ -315,6 +316,7 @@
 
 
                                 <EditText
+                                    error="@{model.error_phone}"
                                     android:id="@+id/edtPhone"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
@@ -417,6 +419,7 @@
                             app:passwordToggleTint="@color/colorPrimary">
 
                             <EditText
+                                error="@{model.error_password}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"
@@ -478,6 +481,7 @@
                             app:passwordToggleTint="@color/colorAccent">
 
                             <EditText
+                                error="@{model.error_repeat_password}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/transparent"

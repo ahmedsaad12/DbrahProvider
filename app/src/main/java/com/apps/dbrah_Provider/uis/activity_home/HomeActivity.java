@@ -47,6 +47,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private Map<Integer, Integer> map;
     private MyPagerAdapter adapter;
     private List<Fragment> fragments;
+    private UserModel userModel;
 
 
     @Override
@@ -60,6 +61,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 
     private void initView() {
+        userModel=getUserModel();
         fragments = new ArrayList<>();
         stack = new Stack<>();
         map = new HashMap<>();
@@ -90,15 +92,15 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
         homeActivityMvvm.firebase.observe(this, token -> {
             if (getUserModel() != null) {
-                UserModel userModel = getUserModel();
+                userModel = getUserModel();
                 userModel.getData().setFirebase_token(token);
                 setUserModel(userModel);
             }
         });
 
 
-        if (getUserModel() != null) {
-            homeActivityMvvm.updateFirebase(this, getUserModel());
+        if (userModel != null) {
+            homeActivityMvvm.updateFirebase(this, userModel);
         }
     }
 

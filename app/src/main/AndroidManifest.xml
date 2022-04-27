@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -27,13 +27,16 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
-            android:name=".uis.activity_suggest_new_product.SuggestNewProductActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".uis.activity_app.AppActivity"
             android:exported="false" />
         <activity
+            android:name=".uis.activity_suggest_new_product.SuggestNewProductActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".uis.activity_control_products.ControlProductsActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_edit_account.EditAccountActivity"
             android:exported="false" />
@@ -52,8 +55,7 @@
         <activity
             android:name=".uis.activity_offer.OfferActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_order_details.OrderDetailsActivity"
             android:exported="false" />
