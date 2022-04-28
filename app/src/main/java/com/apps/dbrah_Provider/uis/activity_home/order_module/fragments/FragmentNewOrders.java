@@ -60,6 +60,7 @@ public class FragmentNewOrders extends BaseFragment {
                 }
             }
         });
+
     }
 
     @Override
@@ -79,7 +80,11 @@ public class FragmentNewOrders extends BaseFragment {
     private void initView() {
         generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
         fragmentOrderMvvm = ViewModelProviders.of(this).get(FragmentOrderMvvm.class);
-
+        generalMvvm.getOnCurrentOrderRefreshed().observe(activity, isRefreshed -> {
+            if (isRefreshed) {
+                fragmentOrderMvvm.getOrders(getUserModel());
+            }
+        });
         orderAdapter = new OrderAdapter(activity, this, getLang());
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(activity));
         binding.recViewOrders.setAdapter(orderAdapter);

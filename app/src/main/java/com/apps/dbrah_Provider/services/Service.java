@@ -11,6 +11,7 @@ import com.apps.dbrah_Provider.model.PlaceGeocodeData;
 import com.apps.dbrah_Provider.model.ProductDataModel;
 import com.apps.dbrah_Provider.model.RecentProductDataModel;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
+import com.apps.dbrah_Provider.model.SettingDataModel;
 import com.apps.dbrah_Provider.model.SingleMessageModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.model.StatisticsDataModel;
@@ -132,10 +133,8 @@ public interface Service {
     );
 
 
-    @GET("api/notifications")
-    Single<Response<NotificationDataModel>> getNotifications(@Header("AUTHORIZATION") String token,
-                                                             @Query(value = "api_key") String api_key,
-                                                             @Query(value = "user_id") String user_id
+    @GET("api/getNotifications")
+    Single<Response<NotificationDataModel>> getNotifications(@Query(value = "provider_id") String provider_id
     );
 
     @GET("api/provider/reviews")
@@ -151,10 +150,11 @@ public interface Service {
     @POST("api/provider/pin_order")
     Single<Response<StatusResponse>> PinOrder(@Field("order_id") String order_id,
                                               @Field("provider_id") String provider_id);
+
     @FormUrlEncoded
     @POST("api/provider/hide_order")
     Single<Response<StatusResponse>> hideOrder(@Field("order_id") String order_id,
-                                              @Field("provider_id") String provider_id);
+                                               @Field("provider_id") String provider_id);
 
     @GET("api/provider/order_details")
     Single<Response<SingleOrderDataModel>> getOrderDetails(@Query("order_id") String order_id,
@@ -179,6 +179,7 @@ public interface Service {
                                                          @Field("token") String token,
                                                          @Field("type") String type
     );
+
     @GET("api/getChat")
     Single<Response<MessagesDataModel>> getChatMessages(@Query("order_id") String order_id);
 
@@ -190,8 +191,11 @@ public interface Service {
                                                       @Part("message") RequestBody message,
                                                       @Part MultipartBody.Part image
     );
+
     @FormUrlEncoded
     @POST("api/updateOrderStatus")
     Single<Response<StatusResponse>> changeOrderStatus(@Field("order_id") String order_id,
                                                        @Field("status") String status);
+    @GET("api/setting")
+    Single<Response<SettingDataModel>> getSettings();
 }

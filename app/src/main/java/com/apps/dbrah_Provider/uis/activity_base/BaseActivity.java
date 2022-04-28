@@ -19,10 +19,10 @@ import io.paperdb.Paper;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public static final String READ_REQ = Manifest.permission.READ_EXTERNAL_STORAGE;
-    public static final String WRITE_REQ = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-    public static final String CAM_REQ = Manifest.permission.CAMERA;
-    public static final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
+    public static final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
+    public static final String WRITE_PERM = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+    public static final String CAM_PERM = Manifest.permission.CAMERA;
+    public static final String FINELOCPerm = Manifest.permission.ACCESS_FINE_LOCATION;
 
 
     @Override
@@ -77,6 +77,21 @@ public class BaseActivity extends AppCompatActivity {
         binding.tvTitle.setTextColor(ContextCompat.getColor(this, arrowTitleColor));
         binding.toolbar.setBackgroundResource(background);
         binding.llBack.setOnClickListener(v -> finish());
+    }
+    public void setRoomId(String order_id) {
+        Preferences preferences = Preferences.getInstance();
+        preferences.create_update_room(this, order_id);
+    }
+
+    public void clearRoomId() {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearRoomId(this);
+    }
+
+
+    public void clearUserData() {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearUserData(this);
     }
 
 

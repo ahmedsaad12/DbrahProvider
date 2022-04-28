@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.apps.dbrah_Provider.model.ProductDataModel;
 import com.apps.dbrah_Provider.model.ProductModel;
+import com.apps.dbrah_Provider.model.SettingDataModel;
 import com.apps.dbrah_Provider.remote.Api;
 import com.apps.dbrah_Provider.tags.Tags;
 
@@ -31,6 +32,7 @@ public class ActivityOfferMvvm extends AndroidViewModel {
     private CompositeDisposable disposable = new CompositeDisposable();
 
     private MutableLiveData<Boolean> isLoadingRecentProduct;
+    private MutableLiveData<SettingDataModel.Data> onDataSuccess;
 
     public ActivityOfferMvvm(@NonNull Application application) {
         super(application);
@@ -38,7 +40,12 @@ public class ActivityOfferMvvm extends AndroidViewModel {
 
     }
 
-
+    public MutableLiveData<SettingDataModel.Data> getOnDataSuccess() {
+        if (onDataSuccess == null) {
+            onDataSuccess = new MutableLiveData<>();
+        }
+        return onDataSuccess;
+    }
 
     public MutableLiveData<Boolean> getIsLoadingRecentProduct() {
         if (isLoadingRecentProduct == null) {
@@ -85,6 +92,32 @@ public class ActivityOfferMvvm extends AndroidViewModel {
                 });
     }
 
+    public void getSettings(Context context) {
+        Api.getService(Tags.base_url)
+                .getSettings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SettingDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SettingDataModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null && response.body().getStatus() == 200) {
+                                getOnDataSuccess().setValue(response.body().getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.toString());
+                    }
+                });
+    }
 
 
 

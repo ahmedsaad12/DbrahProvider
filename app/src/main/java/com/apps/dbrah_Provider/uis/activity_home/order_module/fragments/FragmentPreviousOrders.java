@@ -79,6 +79,7 @@ public class FragmentPreviousOrders extends BaseFragment {
 
             }
         });
+
         fragmentOrderMvvm.getMutableLiveData().observe(this, new Observer<OrderDataModel.Data>() {
             @Override
             public void onChanged(OrderDataModel.Data data) {

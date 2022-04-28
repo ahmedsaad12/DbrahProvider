@@ -7,6 +7,7 @@
 
     <data>
 
+
         <variable
             name="model"
             type="com.apps.dbrah_Provider.model.MessageModel" />
@@ -27,64 +28,69 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp">
-
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="234dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal"
+                tools:ignore="RtlCompat,UnusedAttribute">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/corner_left" />
 
-                <FrameLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="234dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/msg_left_image_bg"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
 
 
-                    >
+                        >
 
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/imageChat"
-                        android:layout_width="220dp"
-                        android:layout_height="250dp"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_marginBottom="2dp"
-                        android:scaleType="centerCrop"
-                        app:riv_border_color="@color/transparent"
-                        app:riv_border_width="0dp"
-                        app:riv_corner_radius="5dp"
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/imageChat"
+                            android:layout_width="220dp"
+                            android:layout_height="250dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="2dp"
+                            android:scaleType="centerCrop"
+                            app:riv_border_color="@color/transparent"
+                            app:riv_border_width="0dp"
+                            app:riv_corner_radius="5dp"
 
 
-                        />
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            createTime="@{model.created_at}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/grey12"
+                            android:textSize="12sp" />
 
 
-                </FrameLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/almira"
-                android:text='@{model.created_at.split("T")[0]}'
-                android:textColor="@color/grey7"
-                android:textSize="12sp" />
 
         </LinearLayout>
     </RelativeLayout>

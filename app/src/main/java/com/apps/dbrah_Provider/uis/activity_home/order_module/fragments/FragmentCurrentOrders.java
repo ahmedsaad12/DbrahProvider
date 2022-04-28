@@ -75,6 +75,11 @@ public class FragmentCurrentOrders extends BaseFragment {
                 }
             }
         });
+        generalMvvm.getOnCurrentOrderRefreshed().observe(activity, isRefreshed -> {
+            if (isRefreshed) {
+                fragmentOrderMvvm.getOrders(getUserModel());
+            }
+        });
         orderAdapter = new OrderAdapter(activity, this, getLang());
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(activity));
         binding.recViewOrders.setAdapter(orderAdapter);

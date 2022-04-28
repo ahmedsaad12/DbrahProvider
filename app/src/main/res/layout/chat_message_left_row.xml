@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
 
     <data>
 
-<variable
-    name="model"
-    type="com.apps.dbrah_Provider.model.MessageModel" />
+        <variable
+            name="model"
+            type="com.apps.dbrah_Provider.model.MessageModel" />
         <import type="android.view.View" />
 
     </data>
@@ -22,59 +22,67 @@
         tools:ignore="UnusedAttribute"
 
         >
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
+            android:orientation="vertical"
+            >
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layoutDirection="ltr"
                 android:orientation="horizontal"
+                tools:ignore="RtlCompat,UnusedAttribute">
 
 
-                >
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/corner_left" />
-
-                <TextView
-                    android:id="@+id/tv_message_content"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:autoLink="web"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/msg_left_bg"
-                    android:linksClickable="true"
-                    android:maxWidth="230dp"
-                    android:padding="3dp"
-                    android:text="@{model.message}"
-                    android:fontFamily="@font/almira"
-                    android:textColor="@color/black"
-                    android:textColorLink="@color/colorPrimary"
-                    android:textSize="15sp"
-
-                    />
+                    android:orientation="vertical"
 
 
+                    >
+
+
+
+                    <TextView
+                        android:id="@+id/tv_message_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="230dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:text="@{model.message}"
+                        android:autoLink="web"
+                        android:linksClickable="true"
+                        android:textColorLink="@color/colorPrimary"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        createTime="@{model.created_at}"
+
+                        />
+
+
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginBottom="5dp"
-                android:text='@{model.created_at.split("T")[0]}'
-                android:textColor="@color/grey7"
-                android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

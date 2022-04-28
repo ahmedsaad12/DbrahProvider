@@ -20,11 +20,16 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OfferAdapter;
 import com.apps.dbrah_Provider.adapter.OfferDetialsAdapter;
 import com.apps.dbrah_Provider.databinding.ActivityCurrentPreviousOrderDetailsBinding;
+import com.apps.dbrah_Provider.model.NotiFire;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.mvvm.ActivityCurrentPreviousOrderDetailsMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_chat.ChatActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -156,6 +161,9 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
                 }
             }
         });
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
@@ -195,5 +203,11 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
         }
         finish();
 
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onOrderStatusChanged(NotiFire model) {
+        if (!model.getOrder_status().isEmpty()) {
+            activityCurrentPreviousOrderDetailsMvvm.getOrderDetails(order_id,getUserModel().getData().getId());
+        }
     }
 }

@@ -9,7 +9,9 @@ public class AddOFFerDataModel implements Serializable {
     private String provider_id;
     private String order_id;
     private String delivery_date_time;
+    private String total_before_tax;
     private String total_price;
+    private String total_tax;
     private String note;
     private String time;
     private String date;
@@ -46,6 +48,22 @@ public class AddOFFerDataModel implements Serializable {
 
     public void setTotal_price(String total_price) {
         this.total_price = total_price;
+    }
+
+    public String getTotal_before_tax() {
+        return total_before_tax;
+    }
+
+    public void setTotal_before_tax(String total_before_tax) {
+        this.total_before_tax = total_before_tax;
+    }
+
+    public String getTotal_tax() {
+        return total_tax;
+    }
+
+    public void setTotal_tax(String total_tax) {
+        this.total_tax = total_tax;
     }
 
     public String getNote() {

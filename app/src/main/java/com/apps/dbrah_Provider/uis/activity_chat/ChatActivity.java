@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,11 +26,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.apps.dbrah_Provider.BuildConfig;
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.ChatAdapter;
 import com.apps.dbrah_Provider.chat_service.ChatService;
 import com.apps.dbrah_Provider.databinding.ActivityChatBinding;
 import com.apps.dbrah_Provider.model.AddChatMessageModel;
+import com.apps.dbrah_Provider.model.ChatUserModel;
 import com.apps.dbrah_Provider.model.MessageModel;
 import com.apps.dbrah_Provider.mvvm.ActivityChatMvvm;
 import com.apps.dbrah_Provider.share.Common;
@@ -40,6 +44,10 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ChatActivity extends BaseActivity {
     private ActivityChatBinding binding;
@@ -54,7 +62,8 @@ public class ChatActivity extends BaseActivity {
     private String type;
     private int selectedReq = 0;
     private Uri uri = null;
-    private String order_id;
+    private ChatUserModel model;
+    private int req;
 
 
     @Override
@@ -67,29 +76,18 @@ public class ChatActivity extends BaseActivity {
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        order_id = intent.getStringExtra("order_id");
+        model = (ChatUserModel) intent.getSerializableExtra("data");
     }
 
     private void initView() {
-        setUpToolbar(binding.toolbar, getString(R.string.chat), R.color.white, R.color.black);
         mvvm = ViewModelProviders.of(this).get(ActivityChatMvvm.class);
         mvvm.getIsLoading().observe(this, isLoading -> {
             binding.swipeRefresh.setRefreshing(isLoading);
         });
 
 
-        binding.flGallery.setOnClickListener(view -> {
-            closeSheet();
-            checkReadPermission();
-        });
-
-        binding.flCamera.setOnClickListener(view -> {
-            closeSheet();
-            checkCameraPermission();
-        });
-
-        binding.btnCancel.setOnClickListener(view -> closeSheet());
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        binding.setModel(model);
         binding.setLang(getLang());
         binding.edtMessage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,9 +103,9 @@ public class ChatActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().isEmpty()) {
-                    binding.send.setVisibility(View.GONE);
+                    binding.send.setImageResource(R.drawable.ic_file);
                 } else {
-                    binding.send.setVisibility(View.VISIBLE);
+                    binding.send.setImageResource(R.drawable.ic_send);
 
                 }
             }
@@ -123,38 +121,31 @@ public class ChatActivity extends BaseActivity {
         });
 
 
-        binding.imageCamera.setOnClickListener(v -> {
-            openSheet();
-        });
-
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (selectedReq == READ_REQ) {
-                uri = result.getData().getData();
-                File file = new File(Common.getImagePath(this, uri));
-                sendMessage("file", "", file.getAbsolutePath());
-                Log.e("lll", uri.toString());
+            if (req == 1 && result.getResultCode() == RESULT_OK) {
+                sendMessage("file", "", imagePath);
 
-            } else if (selectedReq == CAMERA_REQ) {
-                Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
-                uri = getUriFromBitmap(bitmap);
-                if (uri != null) {
-                    String path = Common.getImagePath(this, uri);
-                    sendMessage("file", "", path);
-                }
             }
-
         });
 
+        binding.llBack.setOnClickListener(v -> {
+            finish();
+        });
 
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
 
-        mvvm.getChatMessages(order_id);
+        mvvm.getChatMessages(model.getOrder_id());
 
         binding.send.setOnClickListener(v -> {
-            sendMessage("text", binding.edtMessage.getText().toString(), null);
-            binding.edtMessage.setText(null);
+            if (binding.edtMessage.getText().toString().length()>0){
+                sendMessage("text", binding.edtMessage.getText().toString(), null);
+                binding.edtMessage.setText(null);
+            }else {
+                checkCameraFilePermission();
+            }
+
 
         });
 
@@ -165,21 +156,17 @@ public class ChatActivity extends BaseActivity {
             adapter.notifyDataSetChanged();
             //binding.recView.post(() -> );
         });
-                binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(order_id));
+
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(model.getOrder_id()));
+        setRoomId(model.getOrder_id());
 
 
-    }
-
-    private Uri getUriFromBitmap(Bitmap bitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        return Uri.parse(MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "", ""));
     }
 
     private void sendMessage(String type, String msg, String image_url) {
-        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type, msg, image_url,order_id);
+        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type,msg,image_url,model.getOrder_id());
         Intent intent = new Intent(this, ChatService.class);
-       intent.putExtra("data", addChatMessageModel);
+        intent.putExtra("data", addChatMessageModel);
         startService(intent);
 
     }
@@ -192,39 +179,71 @@ public class ChatActivity extends BaseActivity {
 
     }
 
+    private void checkCameraFilePermission() {
+        if (ActivityCompat.checkSelfPermission(this, BaseActivity.WRITE_PERM) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, BaseActivity.CAM_PERM) == PackageManager.PERMISSION_GRANTED
+        ) {
+            openCamera();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{BaseActivity.WRITE_PERM, BaseActivity.CAM_PERM}, 100);
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == READ_REQ) {
-
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                SelectImage(requestCode);
-            } else {
-                Toast.makeText(this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
-            }
-
-        } else if (requestCode == CAMERA_REQ) {
-            if (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                    grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-
-                SelectImage(requestCode);
-            } else {
-                Toast.makeText(this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
+        if (requestCode == 100) {
+            if (grantResults.length == 2) {
+                openCamera();
             }
         }
     }
 
+    private void openCamera() {
+
+        req = 1;
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File imageFile = getImageFile();
+
+        if (imageFile != null) {
+            Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", imageFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            launcher.launch(intent);
+        }
+
+
+    }
+
+    private File getImageFile() {
+        File imageFile = null;
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HH:mm", Locale.ENGLISH).format(new Date());
+        String imageName = "JPEG_" + timeStamp + "_";
+        File file = new File(Environment.getExternalStorageDirectory().getPath(), "Etbo5lyClientImages");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        try {
+            imageFile = File.createTempFile(imageName, ".jpg", file);
+            imagePath = imageFile.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return imageFile;
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        clearRoomId();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
     }
 
     public void displayLastMessage(MessageModel messageModel) {
-        if (messageModel.getType().equals("image")) {
+        if (messageModel.getType().equals("file")) {
             binding.setMsg(getString(R.string.attach_sent));
         } else {
             binding.setMsg(messageModel.getMessage());
@@ -238,70 +257,4 @@ public class ChatActivity extends BaseActivity {
         binding.setMsg("");
         binding.cardLastMsg.setVisibility(View.GONE);
     }
-
-    public void openSheet() {
-        binding.expandLayout.setExpanded(true, true);
-    }
-
-    public void closeSheet() {
-        binding.expandLayout.collapse(true);
-
-    }
-
-    public void checkReadPermission() {
-        closeSheet();
-        if (ActivityCompat.checkSelfPermission(this, READ_PERM) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{READ_PERM}, READ_REQ);
-        } else {
-            SelectImage(READ_REQ);
-        }
-    }
-
-    public void checkCameraPermission() {
-
-        closeSheet();
-
-        if (ContextCompat.checkSelfPermission(this, write_permission) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, camera_permission) == PackageManager.PERMISSION_GRANTED
-        ) {
-            SelectImage(CAMERA_REQ);
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{camera_permission, write_permission}, CAMERA_REQ);
-        }
-    }
-
-    private void SelectImage(int req) {
-        selectedReq = req;
-        Intent intent = new Intent();
-
-        if (req == READ_REQ) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-            } else {
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-
-            }
-
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setType("image/*");
-
-            launcher.launch(intent);
-
-        } else if (req == CAMERA_REQ) {
-            try {
-                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                launcher.launch(intent);
-            } catch (SecurityException e) {
-                Toast.makeText(this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                Toast.makeText(this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
-
-            }
-
-
-        }
-    }
-
-
 }

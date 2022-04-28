@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.apps.dbrah_Provider.model.AddOFFerDataModel;
 import com.apps.dbrah_Provider.model.OfferDataModel;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.ProductModel;
+import com.apps.dbrah_Provider.model.SettingDataModel;
 import com.apps.dbrah_Provider.mvvm.ActivityOfferMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_preview.PreviewActivity;
@@ -52,6 +54,7 @@ public class OfferActivity extends BaseActivity {
     private ActivityOfferMvvm activityOfferMvvm;
     private double total = 0;
     private ActivityResultLauncher<Intent> launcher;
+    private SettingDataModel.Data setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,10 @@ public class OfferActivity extends BaseActivity {
         binding.tvindex.setText((index + 1) + "");
         binding.tvSize.setText((orderModel.getDetails().size()) + "");
         activityOfferMvvm = ViewModelProviders.of(this).get(ActivityOfferMvvm.class);
+         activityOfferMvvm.getOnDataSuccess().observe(this, model -> {
+            setting = model;
+        });
+
         spinnerProductAdapter = new SpinnerProductAdapter(this, getLang());
         binding.spBrand.setAdapter(spinnerProductAdapter);
         offerDataModelList = new ArrayList<>();
@@ -247,7 +254,9 @@ public class OfferActivity extends BaseActivity {
                     addOFFerDataModel.setOrder_id(orderModel.getId());
                     addOFFerDataModel.setTime(time);
                     addOFFerDataModel.setDate(date);
-                    addOFFerDataModel.setTotal_price(total + "");
+                    addOFFerDataModel.setTotal_before_tax(total + "");
+                    addOFFerDataModel.setTotal_tax(((total*Double.parseDouble(setting.getTax()))/100)+"");
+                    addOFFerDataModel.setTotal_price((total+Double.parseDouble(addOFFerDataModel.getTotal_tax()))+"");
                     try {
                         addOFFerDataModel.setDelivery_date_time(dateFormat.parse(expectedtime).getTime() + "");
                     } catch (ParseException e) {
@@ -393,5 +402,6 @@ public class OfferActivity extends BaseActivity {
                     }
 
                 });
+        activityOfferMvvm.getSettings(this);
     }
 }

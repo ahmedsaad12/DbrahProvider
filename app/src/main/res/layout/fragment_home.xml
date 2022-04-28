@@ -8,12 +8,14 @@
         <variable
             name="lang"
             type="String" />
+
         <variable
             name="statisticModel"
             type="com.apps.dbrah_Provider.model.StatisticsModel" />
-<variable
-    name="model"
-    type="com.apps.dbrah_Provider.model.UserModel" />
+
+        <variable
+            name="model"
+            type="com.apps.dbrah_Provider.model.UserModel" />
     </data>
 
     <FrameLayout
@@ -40,9 +42,9 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/image"
+                        user_image="@{model.data.image}"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        user_image="@{model.data.image}"
                         android:layout_gravity="center"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
@@ -96,7 +98,17 @@
 
                     </LinearLayout>
 
+                    <ImageView
+                        android:id="@+id/imgNotification"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="20dp"
+                        android:src="@drawable/ic_notification"
 
+                        />
                 </LinearLayout>
             </FrameLayout>
 
@@ -164,8 +176,8 @@
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
                                     android:layout_marginStart="16dp"
+                                    android:layout_marginTop="16dp"
                                     android:layout_marginEnd="15dp"
                                     android:layout_marginBottom="8dp"
                                     android:layout_weight="1"
@@ -232,9 +244,9 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="12dp"
                                                 android:fontFamily="@font/almira"
+                                                android:lines="2"
                                                 android:text="@string/this_month_s_clients"
                                                 android:textColor="@color/black2"
-                                                android:lines="2"
                                                 android:textSize="14sp" />
                                         </LinearLayout>
 
@@ -313,8 +325,8 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="12dp"
                                                 android:fontFamily="@font/almira"
-                                                android:text="@string/this_month_s_order"
                                                 android:lines="2"
+                                                android:text="@string/this_month_s_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
                                         </LinearLayout>
@@ -399,8 +411,8 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="12dp"
                                                 android:fontFamily="@font/almira"
-                                                android:text="@string/this_month_s_miss_order"
                                                 android:lines="2"
+                                                android:text="@string/this_month_s_miss_order"
                                                 android:textColor="@color/black2"
                                                 android:textSize="14sp" />
                                         </LinearLayout>
@@ -479,9 +491,9 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="12dp"
                                                 android:fontFamily="@font/almira"
+                                                android:lines="2"
                                                 android:text="@string/total_clients_this_year"
                                                 android:textColor="@color/black2"
-                                                android:lines="2"
                                                 android:textSize="14sp" />
                                         </LinearLayout>
 
@@ -490,17 +502,18 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
                         <View
                             android:id="@+id/view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/white"/>
+                            android:background="@color/white" />
+
                         <ProgressBar
                             android:id="@+id/progBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            />
+                            android:layout_gravity="center" />
                     </FrameLayout>
 
                     <androidx.cardview.widget.CardView

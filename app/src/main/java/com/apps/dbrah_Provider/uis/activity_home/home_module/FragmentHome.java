@@ -22,6 +22,7 @@ import com.apps.dbrah_Provider.model.StatisticsModel;
 import com.apps.dbrah_Provider.mvvm.FragmentHomeMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
+import com.apps.dbrah_Provider.uis.activity_notification.NotificationActivity;
 import com.apps.dbrah_Provider.uis.activity_reviews.ReviewsActivity;
 
 import java.util.ArrayList;
@@ -59,6 +60,10 @@ public class FragmentHome extends BaseFragment {
         binding.setModel(getUserModel());
         binding.cardReviews.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ReviewsActivity.class);
+            startActivity(intent);
+        });
+        binding.imgNotification.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, NotificationActivity.class);
             startActivity(intent);
         });
         fragmentHomeMvvm.getIsLoading().observe(this, new Observer<Boolean>() {

@@ -6,11 +6,9 @@
     >
 
     <data>
-
         <variable
             name="model"
             type="com.apps.dbrah_Provider.model.MessageModel" />
-
         <import type="android.view.View" />
 
     </data>
@@ -29,61 +27,53 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layoutDirection="ltr"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            tools:ignore="RtlCompat">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="234dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/msg_right_image_bg"
 
-                android:orientation="horizontal"
-                tools:ignore="RtlCompat">
 
-                <FrameLayout
-                    android:layout_width="0dp"
+
+                >
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image"
+                    android:layout_width="220dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    app:riv_border_color="@color/transparent"
+                    app:riv_border_width="0dp"
+                    app:riv_corner_radius="5dp"
+                    android:scaleType="centerCrop"
+                    image="@{model.file}"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@drawable/msg_right_image_bg"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    createTime="@{model.created_at}"
+
+                    />
 
 
-                    >
-
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/image"
-                        android:layout_width="220dp"
-                        android:layout_height="250dp"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:scaleType="fitXY"
-                        app:riv_border_color="@color/transparent"
-                        app:riv_border_width="0dp"
-                        app:riv_corner_radius="5dp" />
 
 
-                </FrameLayout>
-
-                <ImageView
-                    android:layout_width="8dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/corner_right" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/almira"
-                android:text='@{model.created_at.split("T")[0]}'
-                android:textColor="@color/grey7"
-                android:textSize="12sp" />
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
 </layout>

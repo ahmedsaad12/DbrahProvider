@@ -19,9 +19,12 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import com.apps.dbrah_Provider.adapter.MyPagerAdapter;
+import com.apps.dbrah_Provider.general_ui.GeneralMethod;
 import com.apps.dbrah_Provider.interfaces.Listeners;
+import com.apps.dbrah_Provider.model.NotiFire;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.mvvm.ActivityHomeMvvm;
+import com.apps.dbrah_Provider.mvvm.GeneralMvvm;
 import com.apps.dbrah_Provider.uis.FragmentBaseNavigation;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 
@@ -31,6 +34,10 @@ import com.apps.dbrah_Provider.databinding.ActivityHomeBinding;
 import com.apps.dbrah_Provider.language.Language;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.google.android.material.navigation.NavigationBarView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +55,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private MyPagerAdapter adapter;
     private List<Fragment> fragments;
     private UserModel userModel;
-
+    private GeneralMvvm generalMvvm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,25 +68,24 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 
     private void initView() {
-        userModel=getUserModel();
+        generalMvvm=ViewModelProviders.of(this).get(GeneralMvvm.class);
+        userModel = getUserModel();
         fragments = new ArrayList<>();
         stack = new Stack<>();
         map = new HashMap<>();
-        if (stack.isEmpty()){
+        if (stack.isEmpty()) {
             stack.push(0);
 
         }
 
-        map.put(0,R.id.home);
-        map.put(1,R.id.order);
-        map.put(2,R.id.settings);
+        map.put(0, R.id.home);
+        map.put(1, R.id.order);
+        map.put(2, R.id.settings);
 
 
-
-
-        fragments.add(FragmentBaseNavigation.newInstance( R.layout.base_fragment_home, R.id.navHostFragmentHome));
-        fragments.add(FragmentBaseNavigation.newInstance( R.layout.base_fragment_order, R.id.navHostFragmentOrder));
-        fragments.add(FragmentBaseNavigation.newInstance( R.layout.base_fragment_profile, R.id.navHostFragmentProfile));
+        fragments.add(FragmentBaseNavigation.newInstance(R.layout.base_fragment_home, R.id.navHostFragmentHome));
+        fragments.add(FragmentBaseNavigation.newInstance(R.layout.base_fragment_order, R.id.navHostFragmentOrder));
+        fragments.add(FragmentBaseNavigation.newInstance(R.layout.base_fragment_profile, R.id.navHostFragmentProfile));
 
         adapter = new MyPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments, null);
         binding.pager.setAdapter(adapter);
@@ -101,6 +107,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
         if (userModel != null) {
             homeActivityMvvm.updateFirebase(this, userModel);
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this);
+            }
         }
     }
 
@@ -181,5 +190,21 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         }
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onOrderStatusChanged(NotiFire model) {
+        if (!model.getOrder_status().isEmpty()) {
+            String status = model.getOrder_status();
+            if (status.equals("new")) {
+                generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
+            } else if (status.equals("accepted")) {
+                generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
+
+            } else if (status.equals("rejected")) {
+                generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
+
+            }
+        }
     }
 }

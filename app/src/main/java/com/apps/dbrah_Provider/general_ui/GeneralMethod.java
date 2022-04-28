@@ -1,5 +1,6 @@
 package com.apps.dbrah_Provider.general_ui;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.view.View;
@@ -15,14 +16,17 @@ import androidx.databinding.BindingAdapter;
 
 import com.apps.dbrah_Provider.R;
 
+import com.apps.dbrah_Provider.model.NotificationModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -214,6 +218,78 @@ public class GeneralMethod {
                 progressBar.setProgress(100);
             }
         }
+    }
+    @BindingAdapter("createTime")
+    public static void createAtTime(TextView textView, String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        if (date != null) {
+
+            try {
+                Date parse = dateFormat.parse(date);
+
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                format.setTimeZone(TimeZone.getDefault());
+                String time = format.format(parse);
+                textView.setText(time);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+        }
+
+    }
+    @BindingAdapter("createAt")
+    public static void createAt(TextView textView, String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        if (date != null) {
+
+            try {
+                Date parse = dateFormat.parse(date);
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.ENGLISH);
+                format.setTimeZone(TimeZone.getDefault());
+                String time = format.format(parse);
+                textView.setText(time);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+        }
+
+    }
+
+    @BindingAdapter("notification")
+    public static void notification(TextView textView, NotificationModel model) {
+        if (model != null) {
+            Context context = textView.getContext();
+            String text = "";
+            if (model.getOrder_id() != null && !model.getOrder_id().isEmpty()) {
+                if (model.getStatus().equals("new")) {
+                    text = context.getString(R.string.new_order) + "-" + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
+                } else if (model.getStatus().equals("accepted")) {
+
+                    text = context.getString(R.string.your_offer_has_been_accepted) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" +  model.getOrder_id();
+
+                } else if (model.getStatus().equals("rejected")) {
+                    text = context.getString(R.string.your_offer_has_been_rejected) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" +  model.getOrder_id();
+
+                } else {
+                    text = model.getBody();
+
+                }
+
+                textView.setText(text);
+
+            } else {
+                textView.setText(model.getBody());
+
+            }
+        }
+
     }
 }
 

@@ -160,5 +160,8 @@
     <string name="start_preparing">بدأ التحضير</string>
     <string name="start_delivring">بدأ التجهيز</string>
     <string name="finish_delivery">إنهاء التسليم</string>
+    <string name="new_order">طلب جديد</string>
+    <string name="order_num">رقم الطلب : </string>
+    <string name="new_client">عميل </string>
 
 </resources>

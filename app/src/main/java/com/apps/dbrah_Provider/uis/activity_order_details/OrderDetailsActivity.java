@@ -24,6 +24,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.adapter.ProductAdapter;
 import com.apps.dbrah_Provider.databinding.ActivityOrderDetailsBinding;
+import com.apps.dbrah_Provider.model.NotiFire;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.mvvm.ActivityOrderDetailsMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
@@ -31,6 +32,10 @@ import com.apps.dbrah_Provider.uis.activity_offer.OfferActivity;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -177,6 +182,9 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
 
         createDateDialog();
         createTimeDialog();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     private void createDateDialog() {
@@ -241,5 +249,11 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         }
         finish();
 
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onOrderStatusChanged(NotiFire model) {
+        if (!model.getOrder_status().isEmpty()) {
+           activityOrderDetailsMvvm.getOrderDetails(order_id,getUserModel().getData().getId());
+        }
     }
 }
