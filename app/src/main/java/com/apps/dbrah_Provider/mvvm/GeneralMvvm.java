@@ -13,6 +13,7 @@ import java.util.List;
 public class GeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Integer> orderpage;
     private MutableLiveData<Boolean> onCurrentOrderRefreshed;
+    private MutableLiveData<Boolean> onPreOrderRefreshed;
 
 
     public GeneralMvvm(@NonNull Application application) {
@@ -31,5 +32,10 @@ public class GeneralMvvm extends AndroidViewModel {
         }
         return onCurrentOrderRefreshed;
     }
-
+    public MutableLiveData<Boolean> getOnPreOrderRefreshed() {
+        if (onPreOrderRefreshed == null) {
+            onPreOrderRefreshed = new MutableLiveData<>();
+        }
+        return onPreOrderRefreshed;
+    }
 }

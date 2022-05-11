@@ -23,6 +23,7 @@ import com.apps.dbrah_Provider.databinding.FragmentOrdersBinding;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.mvvm.FragmentOrderMvvm;
+import com.apps.dbrah_Provider.mvvm.GeneralMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_current_prev_order_details.CurrentPreviousOrderDetailsActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
@@ -36,6 +37,7 @@ public class FragmentPreviousOrders extends BaseFragment {
     private HomeActivity activity;
     private OrderAdapter orderAdapter;
     private FragmentOrderMvvm fragmentOrderMvvm;
+    private GeneralMvvm generalMvvm;
 
 
     public static FragmentPreviousOrders newInstance() {
@@ -68,7 +70,13 @@ public class FragmentPreviousOrders extends BaseFragment {
 
     private void initView() {
         fragmentOrderMvvm= ViewModelProviders.of(this).get(FragmentOrderMvvm.class);
+        generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
 
+        generalMvvm.getOnPreOrderRefreshed().observe(activity, isRefreshed -> {
+            if (isRefreshed) {
+                fragmentOrderMvvm.getOrders(getUserModel());
+            }
+        });
         orderAdapter = new OrderAdapter( activity, this,getLang());
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(activity));
         binding.recViewOrders.setAdapter(orderAdapter);

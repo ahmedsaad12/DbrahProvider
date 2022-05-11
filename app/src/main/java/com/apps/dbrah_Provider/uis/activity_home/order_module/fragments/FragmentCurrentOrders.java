@@ -1,9 +1,12 @@
 package com.apps.dbrah_Provider.uis.activity_home.order_module.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -36,6 +39,7 @@ public class FragmentCurrentOrders extends BaseFragment {
     private OrderAdapter orderAdapter;
     private FragmentOrderMvvm fragmentOrderMvvm;
     private GeneralMvvm generalMvvm;
+    private ActivityResultLauncher<Intent> launcher;
 
     public static FragmentCurrentOrders newInstance() {
         FragmentCurrentOrders fragment = new FragmentCurrentOrders();
@@ -48,6 +52,13 @@ public class FragmentCurrentOrders extends BaseFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (HomeActivity) context;
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+
+                fragmentOrderMvvm.getOrders(getUserModel());
+                generalMvvm.getOnPreOrderRefreshed().postValue(true);
+            }
+        });
     }
 
     @Override
@@ -114,7 +125,7 @@ public class FragmentCurrentOrders extends BaseFragment {
 
     public void navigateToDetails(OrderModel orderModel) {
         Intent intent = new Intent(activity, CurrentPreviousOrderDetailsActivity.class);
-        intent.putExtra("order_id",orderModel.getId());
-        startActivity(intent);
+        intent.putExtra("order_id", orderModel.getId());
+        launcher.launch(intent);
     }
 }

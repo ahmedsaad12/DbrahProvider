@@ -20,6 +20,7 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OfferAdapter;
 import com.apps.dbrah_Provider.adapter.OfferDetialsAdapter;
 import com.apps.dbrah_Provider.databinding.ActivityCurrentPreviousOrderDetailsBinding;
+import com.apps.dbrah_Provider.model.ChatUserModel;
 import com.apps.dbrah_Provider.model.NotiFire;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
@@ -143,7 +144,9 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, ChatActivity.class);
-                intent.putExtra("order_id", order_id);
+                ChatUserModel model = new ChatUserModel(singleOrderDataModel.getData().getOrder().getUser_id(), singleOrderDataModel.getData().getOrder().getUser().getName(), singleOrderDataModel.getData().getOrder().getUser().getPhone(), singleOrderDataModel.getData().getOrder().getUser().getImage(), order_id);
+                intent.putExtra("data", model);
+
                 startActivity(intent);
             }
         });
