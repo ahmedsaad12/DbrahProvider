@@ -15,6 +15,7 @@ import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.EditAccountModel;
+import com.apps.dbrah_Provider.model.NationalitiesModel;
 import com.apps.dbrah_Provider.model.SignUpModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.remote.Api;
@@ -41,11 +42,20 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
     public MutableLiveData<UserModel> userModelMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<List<CountryModel>> coListMutableLiveData;
     private MutableLiveData<List<CategoryModel>> onCategoryDataSuccess;
+    private MutableLiveData<List<NationalitiesModel.Data>> onNationalitiesSuccess;
+
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public ActivitySignUpMvvm(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
+    }
+
+    public MutableLiveData<List<NationalitiesModel.Data>> getOnNationalitiesSuccess() {
+        if (onNationalitiesSuccess==null){
+            onNationalitiesSuccess=new MutableLiveData<>();
+        }
+        return onNationalitiesSuccess;
     }
 
     public MutableLiveData<List<CountryModel>> getCoListMutableLiveData() {
@@ -73,6 +83,34 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
         CountryModel[] countries = new CountryModel[]{
                 new CountryModel("EG", "Egypt", "+20", R.drawable.flag_eg, "EGP"), new CountryModel("SA", "Saudi Arabia", "+966", R.drawable.flag_sa, "SAR")};
         coListMutableLiveData.postValue(new ArrayList<>(Arrays.asList(countries)));
+    }
+
+    public void getNationalities(){
+        Api.getService(Tags.base_url).getNationalities()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<NationalitiesModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<NationalitiesModel> response) {
+
+                        if (response.isSuccessful() && response.body()!=null){
+                            if (response.body().getData()!=null && response.body().getStatus()==200){
+                                getOnNationalitiesSuccess().setValue(response.body().getData());
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error",e.toString());
+                    }
+                });
     }
 
     public void getCategory() {
@@ -113,6 +151,10 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
         RequestBody phone_code = Common.getRequestBodyText(signUpModel.getPhone_code());
         RequestBody email = Common.getRequestBodyText(signUpModel.getEmail());
         RequestBody name = Common.getRequestBodyText(signUpModel.getStore_name());
+        RequestBody nationality_id_part = Common.getRequestBodyText(signUpModel.getNationality_id()+"");
+        RequestBody town_id_part = Common.getRequestBodyText(signUpModel.getTown_id()+"");
+        RequestBody latitude_part = Common.getRequestBodyText(signUpModel.getLatitude());
+        RequestBody longitude_part = Common.getRequestBodyText(signUpModel.getLongitude());
         RequestBody vat_number = Common.getRequestBodyText(signUpModel.getVat_num());
         RequestBody password = Common.getRequestBodyText(signUpModel.getPassword());
         List<RequestBody> category_ids = getRequestBodyList(signUpModel.getCategoryList());
@@ -123,7 +165,7 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
             image = Common.getMultiPartImage(context, Uri.parse(signUpModel.getImage()), "image");
         }
 
-        Api.getService(Tags.base_url).signUp(phone, phone_code, email, name, vat_number, password, category_ids, commercial_records_images, image)
+        Api.getService(Tags.base_url).signUp(phone, phone_code, email, name, vat_number, password, category_ids,nationality_id_part,town_id_part,latitude_part,longitude_part, commercial_records_images, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<UserModel>>() {

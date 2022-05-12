@@ -29,6 +29,11 @@
         <activity
             android:name=".uis.activity_app.AppActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".uis.activity_map.MapActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_suggest_new_product.SuggestNewProductActivity"
             android:exported="false"

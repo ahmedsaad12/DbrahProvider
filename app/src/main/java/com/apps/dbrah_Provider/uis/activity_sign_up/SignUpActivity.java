@@ -35,10 +35,14 @@ import com.apps.dbrah_Provider.adapter.AddCommercialRecordAdapter;
 import com.apps.dbrah_Provider.adapter.CategoryAdapter;
 import com.apps.dbrah_Provider.adapter.CountryAdapter;
 import com.apps.dbrah_Provider.adapter.SpinnerCategoryAdapter;
+import com.apps.dbrah_Provider.adapter.SpinnerNationalityAdapter;
+import com.apps.dbrah_Provider.adapter.SpinnerTownAdapter;
 import com.apps.dbrah_Provider.databinding.ActivitySignUpBinding;
 import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
 import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
+import com.apps.dbrah_Provider.model.NationalitiesModel;
+import com.apps.dbrah_Provider.model.SelectedLocation;
 import com.apps.dbrah_Provider.model.SignUpModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
@@ -47,6 +51,7 @@ import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_login.LoginActivity;
+import com.apps.dbrah_Provider.uis.activity_map.MapActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -69,6 +74,7 @@ public class SignUpActivity extends BaseActivity {
     private List<String> imagesUriList;
     private AlertDialog dialog;
     private SignUpModel model;
+    private SelectedLocation selectedLocation;
     private ActivitySignUpMvvm activitySignUpMvvm;
     private Preferences preferences;
     private ActivityResultLauncher<Intent> launcher;
@@ -79,6 +85,9 @@ public class SignUpActivity extends BaseActivity {
     private int selectedReq = 0;
     private String type;
     private Uri uri = null;
+    private SpinnerNationalityAdapter spinnerNationalityAdapter;
+    private SpinnerTownAdapter spinnerTownAdapter;
+    private List<NationalitiesModel.Data.Town> townModelList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +106,7 @@ public class SignUpActivity extends BaseActivity {
     private void initView() {
         preferences = Preferences.getInstance();
         model = new SignUpModel();
+        townModelList = new ArrayList<>();
         categoryModelList = new ArrayList<>();
         selectedCategoryList = new ArrayList<>();
         imagesUriList = new ArrayList<>();
@@ -108,26 +118,73 @@ public class SignUpActivity extends BaseActivity {
 
         setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
-//        if (userModel!=null){
-//            phone_code=userModel.getData().getPhone_code();
-//            phone=userModel.getData().getPhone();
-//
-//            model.setPhone_code(phone_code);
-//            model.setPhone(phone);
-//            model.setStore_name(userModel.getData().getName());
-//
-//            if (userModel.getData().getEmail()!=null){
-//                model.setEmail(userModel.getData().getEmail());
-//            }
-//            if (userModel.getData().getImage()!=null){
-//                String url =  userModel.getData().getImage();
-//                Picasso.get().load(Uri.parse(url)).into(binding.image);
-//                model.setImage(url);
-//                binding.icon.setVisibility(View.GONE);
-//            }
-//        }
+
 
         binding.setModel(model);
+
+        activitySignUpMvvm.getOnNationalitiesSuccess().observe(this, nationalities -> {
+            if (spinnerNationalityAdapter != null) {
+                nationalities.add(0,new NationalitiesModel.Data("اختر الجنسية", "Choose nationality"));
+                spinnerNationalityAdapter.updateList(nationalities);
+                townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
+                spinnerTownAdapter.updateList(townModelList);
+
+            }
+
+        });
+
+        activitySignUpMvvm.getNationalities();
+
+        spinnerNationalityAdapter = new SpinnerNationalityAdapter(this, getLang());
+        binding.spinnerNationality.setAdapter(spinnerNationalityAdapter);
+        binding.spinnerNationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    townModelList.clear();
+                    townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
+                    model.setNationality_id(0);
+                    spinnerTownAdapter.updateList(townModelList);
+
+                } else {
+                    model.setNationality_id(Integer.parseInt(activitySignUpMvvm.getOnNationalitiesSuccess().getValue().get(i).getId()));
+                    townModelList.clear();
+                    townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
+                    townModelList.addAll(activitySignUpMvvm.getOnNationalitiesSuccess().getValue().get(i).getTowns());
+                    spinnerTownAdapter.updateList(townModelList);
+                }
+                binding.setModel(model);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        binding.llLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToMapActivity();
+            }
+        });
+        spinnerTownAdapter = new SpinnerTownAdapter(this, getLang());
+        binding.spinnerTown.setAdapter(spinnerTownAdapter);
+        binding.spinnerTown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    model.setTown_id(0);
+                } else {
+                    model.setTown_id(Integer.parseInt(townModelList.get(i).getId()));
+                }
+                binding.setModel(model);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         activitySignUpMvvm.getOnCategoryDataSuccess().observe(this, categoryModels -> {
             if (spinnerCategoryAdapter != null) {
@@ -235,6 +292,15 @@ public class SignUpActivity extends BaseActivity {
 
                         }
                     }
+                }else if (selectedReq == 100 && result.getData() != null) {
+                    if (result.getData().hasExtra("location")) {
+                        selectedLocation = (SelectedLocation) result.getData().getSerializableExtra("location");
+                        model.setLatitude(String.valueOf(selectedLocation.getLat()));
+                        model.setLongitude(String.valueOf(selectedLocation.getLng()));
+                        model.setAddress(selectedLocation.getAddress());
+                        binding.setModel(model);
+
+                    }
                 }
             }
         });
@@ -301,6 +367,12 @@ public class SignUpActivity extends BaseActivity {
         binding.arrow.setOnClickListener(view -> dialog.show());
         binding.btnCancel.setOnClickListener(view -> closeSheet());
 
+    }
+
+    private void navigateToMapActivity() {
+        selectedReq=100;
+        Intent intent=new Intent(this, MapActivity.class);
+        launcher.launch(intent);
     }
 
     private void navigateToHomeActivity() {

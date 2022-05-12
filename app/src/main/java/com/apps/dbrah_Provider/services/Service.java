@@ -5,9 +5,11 @@ import com.apps.dbrah_Provider.model.AddOFFerDataModel;
 import com.apps.dbrah_Provider.model.CategoryDataModel;
 import com.apps.dbrah_Provider.model.EditProductModel;
 import com.apps.dbrah_Provider.model.MessagesDataModel;
+import com.apps.dbrah_Provider.model.NationalitiesModel;
 import com.apps.dbrah_Provider.model.NotificationDataModel;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.PlaceGeocodeData;
+import com.apps.dbrah_Provider.model.PlaceMapDetailsData;
 import com.apps.dbrah_Provider.model.ProductDataModel;
 import com.apps.dbrah_Provider.model.RecentProductDataModel;
 import com.apps.dbrah_Provider.model.ReviewDataModel;
@@ -25,6 +27,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -38,11 +41,11 @@ import retrofit2.http.Query;
 
 public interface Service {
 
-    @GET("geocode/json")
-    Single<Response<PlaceGeocodeData>> getGeoData(@Query(value = "latlng") String latlng,
-                                                  @Query(value = "language") String language,
-                                                  @Query(value = "key") String key);
 
+    @GET("geocode/json")
+    Call<PlaceGeocodeData> getGeoData(@Query(value = "latlng") String latlng,
+                                      @Query(value = "language") String language,
+                                      @Query(value = "key") String key);
 
     @FormUrlEncoded
     @POST("api/provider/login")
@@ -62,6 +65,10 @@ public interface Service {
                                        @Part("vat_number") RequestBody vat_number,
                                        @Part("password") RequestBody password,
                                        @Part("category_ids[]") List<RequestBody> category_ids,
+                                       @Part("nationality_id") RequestBody nationality_id,
+                                       @Part("town_id") RequestBody town_id,
+                                       @Part("latitude") RequestBody latitude,
+                                       @Part("longitude") RequestBody longitude,
                                        @Part List<MultipartBody.Part> commercial_records_images,
                                        @Part MultipartBody.Part image);
 
@@ -198,4 +205,16 @@ public interface Service {
                                                        @Field("status") String status);
     @GET("api/setting")
     Single<Response<SettingDataModel>> getSettings();
+
+    @GET("api/representative/nationalities")
+    Single<Response<NationalitiesModel>> getNationalities();
+
+    @GET("place/findplacefromtext/json")
+    Call<PlaceMapDetailsData> searchOnMap(@Query(value = "inputtype") String inputtype,
+                                          @Query(value = "input") String input,
+                                          @Query(value = "fields") String fields,
+                                          @Query(value = "language") String language,
+                                          @Query(value = "key") String key
+    );
+
 }

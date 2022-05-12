@@ -26,6 +26,11 @@ public class SignUpModel extends BaseObservable {
     private String repeat_password;
     private List<String> commercial_images;
     private String selected_category;
+    private int nationality_id;
+    private int town_id;
+    private String latitude;
+    private String longitude;
+    private String address;
 
     public ObservableField<String> error_store_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
@@ -33,25 +38,28 @@ public class SignUpModel extends BaseObservable {
     public ObservableField<String> error_password = new ObservableField<>();
     public ObservableField<String> error_repeat_password = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
-
-
+    public ObservableField<String> error_address = new ObservableField<>();
 
 
     public boolean isDataValid(Context context) {
         if (!store_name.trim().isEmpty()
-                &&!email.isEmpty()
-                &&!phone.isEmpty()
-                &&!vat_num.isEmpty()
-                &&password.length() >= 6
-                &&repeat_password.length() >= 6
-                &&password.equals(repeat_password)
+                && !email.isEmpty()
+                && !phone.isEmpty() &&
+                nationality_id != 0 &&
+                town_id != 0
+                && !vat_num.isEmpty()
+                && password.length() >= 6
+                && repeat_password.length() >= 6
+                && password.equals(repeat_password)
+                && !address.isEmpty()
         ) {
-           error_store_name.set(null);
-           error_email.set(null);
-           error_phone.set(null);
-           error_vat_num.set(null);
-           error_password.set(null);
-           error_repeat_password.set(null);
+            error_store_name.set(null);
+            error_email.set(null);
+            error_phone.set(null);
+            error_vat_num.set(null);
+            error_password.set(null);
+            error_repeat_password.set(null);
+            error_address.set(null);
 
             return true;
         } else {
@@ -78,31 +86,44 @@ public class SignUpModel extends BaseObservable {
                 error_phone.set(null);
 
             }
-            if (vat_num.isEmpty()){
+            if (nationality_id == 0) {
+                Toast.makeText(context, R.string.choose_nationality, Toast.LENGTH_SHORT).show();
+            }
+            if (town_id == 0) {
+                Toast.makeText(context, R.string.choose_town, Toast.LENGTH_SHORT).show();
+            }
+            if (vat_num.isEmpty()) {
                 error_vat_num.set(context.getString(R.string.field_required));
-            }else {
+            } else {
                 error_vat_num.set(null);
             }
 
-            if (password.isEmpty()){
+            if (password.isEmpty()) {
                 error_password.set(context.getString(R.string.field_required));
-            }else {
+            } else {
                 error_password.set(null);
             }
-            if (repeat_password.isEmpty()){
+            if (repeat_password.isEmpty()) {
                 error_repeat_password.set(context.getString(R.string.field_required));
-            }else {
+            } else {
                 error_repeat_password.set(null);
             }
-            if (categoryList.size()>0){
+            if (categoryList.size() > 0) {
 
-            }else {
-                Toast.makeText(context,R.string.choose_category, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, R.string.choose_category, Toast.LENGTH_SHORT).show();
             }
-            if (commercial_images.size()>0){
+            if (commercial_images.size() > 0) {
 
-            }else {
-                Toast.makeText(context,R.string.add_commercial_record, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, R.string.add_commercial_record, Toast.LENGTH_SHORT).show();
+            }
+            if (address.isEmpty()) {
+                error_address.set(context.getString(R.string.field_required));
+
+            } else {
+                error_address.set(null);
+
             }
 
             return false;
@@ -113,24 +134,28 @@ public class SignUpModel extends BaseObservable {
 
         this.image = "";
         notifyPropertyChanged(BR.image);
-        store_name="";
+        store_name = "";
         notifyPropertyChanged(BR.store_name);
-        email="";
+        email = "";
         notifyPropertyChanged(BR.email);
-        password="";
+        password = "";
         notifyPropertyChanged(BR.password);
-        repeat_password="";
+        repeat_password = "";
         notifyPropertyChanged(BR.repeat_password);
-        vat_num="";
+        vat_num = "";
         notifyPropertyChanged(BR.vat_num);
         phone_code = "+20";
         notifyPropertyChanged(BR.phone_code);
         phone = "";
         notifyPropertyChanged(BR.phone);
         categoryList = new ArrayList<>();
-        commercial_images=new ArrayList<>();
+        commercial_images = new ArrayList<>();
         this.selected_category = "";
         notifyPropertyChanged(BR.selected_category);
+        this.address = "";
+        notifyPropertyChanged(BR.address);
+        setNationality_id(0);
+        setTown_id(0);
     }
 
 
@@ -143,7 +168,6 @@ public class SignUpModel extends BaseObservable {
         this.image = image;
         notifyPropertyChanged(BR.image);
     }
-
 
 
     @Bindable
@@ -184,6 +208,26 @@ public class SignUpModel extends BaseObservable {
     public void setEmail(String email) {
         this.email = email;
         notifyPropertyChanged(BR.email);
+    }
+
+    @Bindable
+    public int getNationality_id() {
+        return nationality_id;
+    }
+
+    public void setNationality_id(int nationality_id) {
+        this.nationality_id = nationality_id;
+        notifyPropertyChanged(BR.nationality_id);
+    }
+
+    @Bindable
+    public int getTown_id() {
+        return town_id;
+    }
+
+    public void setTown_id(int town_id) {
+        this.town_id = town_id;
+        notifyPropertyChanged(BR.town_id);
     }
 
     public List<CategoryModel> getCategoryList() {
@@ -240,5 +284,35 @@ public class SignUpModel extends BaseObservable {
     public void setSelected_category(String selected_category) {
         this.selected_category = selected_category;
         notifyPropertyChanged(BR.selected_category);
+    }
+
+    @Bindable
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+        notifyPropertyChanged(BR.address);
+    }
+
+    @Bindable
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+        notifyPropertyChanged(BR.latitude);
+    }
+
+    @Bindable
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+        notifyPropertyChanged(BR.longitude);
     }
 }

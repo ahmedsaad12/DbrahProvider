@@ -163,5 +163,10 @@
     <string name="new_order">طلب جديد</string>
     <string name="order_num">رقم الطلب : </string>
     <string name="new_client">عميل </string>
-
+    <string name="nationality">الجنسية</string>
+    <string name="town">المدينة</string>
+    <string name="choose_nationality">اختر الجنسية</string>
+    <string name="choose_town">اختر المدينة</string>
+    <string name="location">الموقع</string>
+    <string name="select_location_on_map">حدد موقعك</string>
 </resources>

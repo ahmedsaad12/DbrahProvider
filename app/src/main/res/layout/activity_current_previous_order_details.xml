@@ -368,7 +368,7 @@
                     android:layout_gravity="bottom"
                     android:background="@color/black2"
                     android:gravity="center"
-                    android:visibility='@{model.offer_status_code.equals("201")?View.GONE:View.VISIBLE,default=gone}'
+                    android:visibility='@{model.offer_status_code.equals("201")?View.GONE:View.VISIBLE,default=visible}'
                     app:layout_constraintBottom_toBottomOf="parent">
 
                     <ProgressBar
