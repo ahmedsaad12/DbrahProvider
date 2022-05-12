@@ -147,6 +147,7 @@ public class FragmentProfile extends BaseFragment {
         Intent intent = new Intent(activity, LoginActivity.class);
         launcher.launch(intent);
 
+
     }
 
     private void logout() {

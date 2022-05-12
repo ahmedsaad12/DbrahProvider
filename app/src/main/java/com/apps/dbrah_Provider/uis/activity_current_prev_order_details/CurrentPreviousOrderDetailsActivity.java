@@ -128,7 +128,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
         binding.llMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLatitude()), Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLatitude()));
+                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLatitude()), Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLongitude()));
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(intent);
             }
