@@ -140,13 +140,13 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
         binding.recViewOffer.setAdapter(offerDetialsAdapter);
 
         activityCurrentPreviousOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
-        binding.imChat.setOnClickListener(new View.OnClickListener() {
+        binding.imChatUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, ChatActivity.class);
-                ChatUserModel model = new ChatUserModel(singleOrderDataModel.getData().getOrder().getUser_id(), singleOrderDataModel.getData().getOrder().getUser().getName(), singleOrderDataModel.getData().getOrder().getUser().getPhone(), singleOrderDataModel.getData().getOrder().getUser().getImage(), order_id);
-                intent.putExtra("data", model);
 
+                Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, ChatActivity.class);
+                ChatUserModel model = new ChatUserModel(getUserModel().getData().getId(), singleOrderDataModel.getData().getOrder().getUser_id(),"",singleOrderDataModel.getData().getOrder().getUser().getName(),singleOrderDataModel.getData().getOrder().getUser().getPhone(),singleOrderDataModel.getData().getOrder().getUser().getImage() , order_id);
+                intent.putExtra("data", model);
                 startActivity(intent);
             }
         });

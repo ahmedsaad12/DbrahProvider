@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import com.apps.dbrah_Provider.databinding.ToolbarBinding;
 import com.apps.dbrah_Provider.language.Language;
+import com.apps.dbrah_Provider.model.ChatUserModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.model.UserSettingsModel;
 import com.apps.dbrah_Provider.preferences.Preferences;
@@ -78,14 +79,14 @@ public class BaseActivity extends AppCompatActivity {
         binding.toolbar.setBackgroundResource(background);
         binding.llBack.setOnClickListener(v -> finish());
     }
-    public void setRoomId(String order_id) {
-        Preferences preferences = Preferences.getInstance();
-        preferences.create_update_room(this, order_id);
-    }
-
     public void clearRoomId() {
         Preferences preferences = Preferences.getInstance();
         preferences.clearRoomId(this);
+    }
+
+    public void setRoomId(ChatUserModel order_id) {
+        Preferences preferences = Preferences.getInstance();
+        preferences.create_update_room(this, order_id);
     }
 
 

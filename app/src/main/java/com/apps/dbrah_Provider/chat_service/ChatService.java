@@ -42,20 +42,28 @@ public class ChatService extends Service {
 
     public void sendMessage() {
 
-
         RequestBody msg_part = Common.getRequestBodyText(model.getText());
         RequestBody order_part = Common.getRequestBodyText(model.getOrder_id());
-        RequestBody from_part = Common.getRequestBodyText("provider");
-
+        RequestBody from_part = Common.getRequestBodyText("representative");
+        RequestBody repsentative_part = null;
         RequestBody msg_type_part = Common.getRequestBodyText(model.getType());
         MultipartBody.Part imagePart = null;
+        RequestBody user_part = null;
+        RequestBody provider_part = Common.getRequestBodyText(model.getProvider_id());
 
+        if (model.getRepresentative_id() != null) {
+            repsentative_part =Common.getRequestBodyText(model.getRepresentative_id());
+        }
+        if (model.getUser_id() != null) {
+            user_part = Common.getRequestBodyText(model.getUser_id());
+
+        }
         if (model.getType().equals("file") && model.getImage() != null) {
             imagePart = Common.getMultiPartFromPath(model.getImage(), "file");
         }
 
 
-        Api.getService(Tags.base_url).sendMessages(order_part, msg_type_part,from_part, msg_part, imagePart)
+        Api.getService(Tags.base_url).sendMessages(order_part, msg_type_part, from_part, msg_part, repsentative_part, user_part, provider_part, imagePart)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<SingleMessageModel>>() {
@@ -67,7 +75,7 @@ public class ChatService extends Service {
                     @Override
                     public void onSuccess(@NonNull Response<SingleMessageModel> response) {
                         try {
-                            Log.e("jfjj",response.code()+""+response.errorBody().string());
+                            Log.e("jfjj", response.code() + "" + response.errorBody().string());
                         } catch (Exception e) {
                             //e.printStackTrace();
                         }

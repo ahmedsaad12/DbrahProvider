@@ -55,13 +55,6 @@ public class ChatActivity extends BaseActivity {
     private String imagePath = "";
     private ChatAdapter adapter;
     private ActivityResultLauncher<Intent> launcher;
-    private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
-    private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-    private final String camera_permission = Manifest.permission.CAMERA;
-    private final int READ_REQ = 1, CAMERA_REQ = 2;
-    private String type;
-    private int selectedReq = 0;
-    private Uri uri = null;
     private ChatUserModel model;
     private int req;
 
@@ -136,13 +129,13 @@ public class ChatActivity extends BaseActivity {
             EventBus.getDefault().register(this);
         }
 
-        mvvm.getChatMessages(model.getOrder_id());
+        mvvm.getChatMessages(model.getOrder_id(), model.getProvider_id(), model.getUser_id(), model.getRepresentative_id());
 
         binding.send.setOnClickListener(v -> {
-            if (binding.edtMessage.getText().toString().length()>0){
+            if (binding.edtMessage.getText().toString().length() > 0) {
                 sendMessage("text", binding.edtMessage.getText().toString(), null);
                 binding.edtMessage.setText(null);
-            }else {
+            } else {
                 checkCameraFilePermission();
             }
 
@@ -157,14 +150,14 @@ public class ChatActivity extends BaseActivity {
             //binding.recView.post(() -> );
         });
 
-        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(model.getOrder_id()));
-        setRoomId(model.getOrder_id());
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(model.getOrder_id(), model.getProvider_id(), model.getUser_id(), model.getRepresentative_id()));
+        setRoomId(model);
 
 
     }
 
     private void sendMessage(String type, String msg, String image_url) {
-        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type,msg,image_url,model.getOrder_id());
+        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type, msg, image_url, model.getOrder_id(), model.getProvider_id(), model.getUser_id(), model.getRepresentative_id());
         Intent intent = new Intent(this, ChatService.class);
         intent.putExtra("data", addChatMessageModel);
         startService(intent);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
+import com.apps.dbrah_Provider.model.ChatUserModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.model.UserSettingsModel;
 import com.google.gson.Gson;
@@ -64,18 +65,21 @@ public class Preferences {
     }
 
 
-    public void create_update_room(Context context, String order_id) {
+    public void create_update_room(Context context, ChatUserModel model) {
         SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("order_id", order_id);
+        String data = new Gson().toJson(model);
+        editor.putString("order_id", data);
         editor.apply();
 
 
     }
 
-    public String getRoomId(Context context) {
+    public ChatUserModel getRoomId(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
-        return preferences.getString("order_id", "");
+        ChatUserModel model = new Gson().fromJson(preferences.getString("order_id",""),ChatUserModel.class);
+
+        return model;
     }
 
     public void clearRoomId(Context context) {

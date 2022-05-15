@@ -103,7 +103,7 @@
                                             android:src="@drawable/ic_call2" />
 
                                         <ImageView
-                                            android:id="@+id/imChat"
+                                            android:id="@+id/imChatUser"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
@@ -368,6 +368,7 @@
                     android:layout_gravity="bottom"
                     android:background="@color/black2"
                     android:gravity="center"
+                    android:clickable='@{model.offer_status_code.equals("202")?true:false}'
                     android:visibility='@{model.offer_status_code.equals("201")?View.GONE:View.VISIBLE,default=visible}'
                     app:layout_constraintBottom_toBottomOf="parent">
 

@@ -23,6 +23,7 @@ public class OrderModel implements Serializable {
     private AddressModel address;
     private String day;
     private String time;
+    private RepresentModel representative;
     private List<OrderProductModel> details;
 
     public String getId() {
@@ -81,6 +82,10 @@ public class OrderModel implements Serializable {
         this.offer_status_code = offer_status_code;
     }
 
+    public RepresentModel getRepresentative() {
+        return representative;
+    }
+
     public String getOffer_status() {
         return offer_status;
     }
@@ -109,6 +114,7 @@ public class OrderModel implements Serializable {
     public List<OrderProductModel> getDetails() {
         return details;
     }
+
     public static class Offers implements Serializable {
         private String id;
         private String order_id;
