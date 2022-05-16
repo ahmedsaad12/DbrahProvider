@@ -44,7 +44,7 @@ public class ChatService extends Service {
 
         RequestBody msg_part = Common.getRequestBodyText(model.getText());
         RequestBody order_part = Common.getRequestBodyText(model.getOrder_id());
-        RequestBody from_part = Common.getRequestBodyText("representative");
+        RequestBody from_part = Common.getRequestBodyText("provider");
         RequestBody repsentative_part = null;
         RequestBody msg_type_part = Common.getRequestBodyText(model.getType());
         MultipartBody.Part imagePart = null;

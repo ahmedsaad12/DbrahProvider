@@ -169,4 +169,8 @@
     <string name="choose_town">اختر المدينة</string>
     <string name="location">الموقع</string>
     <string name="select_location_on_map">حدد موقعك</string>
+    <string name="copy">تم النسخ</string>
+    <string name="on_the_way">فى الطريق</string>
+    <string name="picked_up">تم التسليم للمندوب</string>
+    <string name="your_order_accepted">تم قبول طلبك من مندوب </string>
 </resources>

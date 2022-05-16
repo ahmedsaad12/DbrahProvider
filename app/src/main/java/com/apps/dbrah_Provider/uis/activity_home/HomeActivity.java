@@ -198,13 +198,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             String status = model.getOrder_status();
             if (status.equals("new")) {
                 generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
-            } else if (status.equals("accepted")) {
+            } else{
                 generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
-
-            } else if (status.equals("rejected")) {
-                generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
+                if(model.getOrder_status().equals("delivered")){
+                    generalMvvm.getOnPreOrderRefreshed().setValue(true);
+                }
 
             }
+
         }
     }
 }

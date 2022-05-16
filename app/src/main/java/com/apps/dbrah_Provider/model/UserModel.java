@@ -25,15 +25,16 @@ public class UserModel extends StatusResponse {
         private String created_at;
         private String updated_at;
         private String rate;
+        private String provider_code;
         private List<CommercialRecords> commercial_records;
         private List<Categories> categories;
         private static String firebase_token;
 
-        public  String getFirebase_token() {
+        public String getFirebase_token() {
             return firebase_token;
         }
 
-        public  void setFirebase_token(String firebase_token) {
+        public void setFirebase_token(String firebase_token) {
             this.firebase_token = firebase_token;
         }
 
@@ -97,7 +98,11 @@ public class UserModel extends StatusResponse {
             return categories;
         }
 
-        public class Categories implements Serializable{
+        public String getProvider_code() {
+            return provider_code;
+        }
+
+        public class Categories implements Serializable {
             private String id;
             private String provider_id;
             private String category_id;
@@ -129,7 +134,8 @@ public class UserModel extends StatusResponse {
                 return category;
             }
         }
-        public class CommercialRecords implements Serializable{
+
+        public class CommercialRecords implements Serializable {
             private String provider_id;
             private String image;
 

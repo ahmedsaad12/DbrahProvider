@@ -1,6 +1,8 @@
 package com.apps.dbrah_Provider.uis.activity_home.profile_module;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.UserModel;
@@ -83,7 +86,7 @@ public class FragmentProfile extends BaseFragment {
     }
 
     private void initView() {
-        userModel=getUserModel();
+        userModel = getUserModel();
         mvvm = ViewModelProviders.of(this).get(FragmentProfileMvvm.class);
 
         if (userModel != null) {
@@ -98,11 +101,11 @@ public class FragmentProfile extends BaseFragment {
             }
         });
         binding.llControlProducts.setOnClickListener(view -> {
-            Intent intent=new Intent(activity, ControlProductsActivity.class);
+            Intent intent = new Intent(activity, ControlProductsActivity.class);
             startActivity(intent);
         });
         binding.llSuggestNewProduct.setOnClickListener(view -> {
-            Intent intent=new Intent(activity, SuggestNewProductActivity.class);
+            Intent intent = new Intent(activity, SuggestNewProductActivity.class);
             startActivity(intent);
         });
         binding.llContactUs.setOnClickListener(view -> {
@@ -110,24 +113,41 @@ public class FragmentProfile extends BaseFragment {
             startActivity(intent);
         });
         binding.llEditAccount.setOnClickListener(view -> {
-            Intent intent=new Intent(activity, EditAccountActivity.class);
+            Intent intent = new Intent(activity, EditAccountActivity.class);
             startActivity(intent);
         });
 
-        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url+"webView?type=terms"));
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url + "webView?type=terms"));
 
-        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy",Tags.base_url+"webView?type=privacy"));
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url + "webView?type=privacy"));
         binding.llLogOut.setOnClickListener(view -> {
-            if (userModel==null){
+            if (userModel == null) {
                 logout();
-            }else {
-                mvvm.logout(activity,userModel);
+            } else {
+                mvvm.logout(activity, userModel);
+
+            }
+        });
+        binding.llcopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int sdk = android.os.Build.VERSION.SDK_INT;
+                if (sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                    ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(getUserModel().getData().getProvider_code());
+                } else {
+                    android.content.ClipboardManager clipboard = (android.content.ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+                    android.content.ClipData clip = android.content.ClipData.newPlainText("text label", getUserModel().getData().getProvider_code());
+                    clipboard.setPrimaryClip(clip);
+
+                }
+                Toast.makeText(activity, getResources().getString(R.string.copy), Toast.LENGTH_SHORT).show();
 
             }
         });
 
         mvvm.logout.observe(this, aBoolean -> {
-            if (aBoolean){
+            if (aBoolean) {
                 logout();
             }
         });
@@ -136,9 +156,9 @@ public class FragmentProfile extends BaseFragment {
     }
 
     private void navigateToAppActivity(String type, String url) {
-        Intent intent=new Intent(activity, AppActivity.class);
+        Intent intent = new Intent(activity, AppActivity.class);
         intent.putExtra("data", type);
-        intent.putExtra("url",url);
+        intent.putExtra("url", url);
         startActivity(intent);
     }
 

@@ -69,12 +69,12 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/icon"
+                        image="@{model.data.image}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/circle_white"
                         android:clickable="false"
                         android:longClickable="false"
-                        image="@{model.data.image}"
                         android:src="@drawable/circle_avatar" />
 
 
@@ -91,18 +91,47 @@
                 android:fontFamily="@font/almaraibold"
                 android:text='@{model==null?@string/login:model.data.name,default=@string/login}'
                 android:textColor="@color/black2"
-                android:textSize="18sp"
-                 />
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/llcopy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_copy" />
+
+                <TextView
+                    android:id="@id/tvCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textIsSelectable="true"
+                    android:fontFamily="@font/almira"
+                    android:text="@{model.data.provider_code}"
+                    android:textColor="@color/black2"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llEditAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -131,14 +160,15 @@
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
+
             <LinearLayout
                 android:id="@+id/llControlProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -158,6 +188,7 @@
                     android:textColor="@color/black2"
                     android:textSize="16sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -166,14 +197,15 @@
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
+
             <LinearLayout
                 android:id="@+id/llSuggestNewProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -193,6 +225,7 @@
                     android:textColor="@color/black2"
                     android:textSize="16sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -201,6 +234,7 @@
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
+
             <LinearLayout
                 android:id="@+id/llLanguage"
                 android:layout_width="match_parent"
@@ -208,8 +242,8 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -263,8 +297,8 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -302,8 +336,8 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -341,8 +375,8 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView
@@ -378,8 +412,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="24dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
                 <ImageView

@@ -36,7 +36,7 @@ public class ActivityHomeMvvm extends AndroidViewModel {
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener((Activity) context, task -> {
             if (task.isSuccessful()) {
                 String token = task.getResult().getToken();
-
+                //Log.e("kdkkd",userModel.getData().getId());
                 Api.getService(Tags.base_url).updateFirebasetoken( userModel.getData().getId(),token , "android")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

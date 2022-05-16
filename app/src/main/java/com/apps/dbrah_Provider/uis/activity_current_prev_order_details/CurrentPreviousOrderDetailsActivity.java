@@ -125,6 +125,31 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
 
             }
         });
+        binding.imCallReprentative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (singleOrderDataModel.getData().getOrder().getRepresentative() != null) {
+                    intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", singleOrderDataModel.getData().getOrder().getRepresentative().getPhone_code() + singleOrderDataModel.getData().getOrder().getRepresentative().getPhone(), null));
+                }
+                if (intent != null) {
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(CurrentPreviousOrderDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(CurrentPreviousOrderDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                        } else {
+                            startActivity(intent);
+                        }
+                    } else {
+                        startActivity(intent);
+                    }
+                } else {
+                    Toast.makeText(CurrentPreviousOrderDetailsActivity.this, getResources().getString(R.string.not_avail_now), Toast.LENGTH_SHORT).show();
+
+                    // Common.CreateAlertDialog(QuestionsActivity.this, getResources().getString(R.string.phone_not_found));
+                }
+
+            }
+        });
+
         binding.llMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +170,17 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, ChatActivity.class);
-                ChatUserModel model = new ChatUserModel(getUserModel().getData().getId(), singleOrderDataModel.getData().getOrder().getUser_id(),"",singleOrderDataModel.getData().getOrder().getUser().getName(),singleOrderDataModel.getData().getOrder().getUser().getPhone(),singleOrderDataModel.getData().getOrder().getUser().getImage() , order_id);
+                ChatUserModel model = new ChatUserModel(getUserModel().getData().getId(), singleOrderDataModel.getData().getOrder().getUser_id(), "", singleOrderDataModel.getData().getOrder().getUser().getName(), singleOrderDataModel.getData().getOrder().getUser().getPhone(), singleOrderDataModel.getData().getOrder().getUser().getImage(), order_id);
+                intent.putExtra("data", model);
+                startActivity(intent);
+            }
+        });
+        binding.imChatRepresent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, ChatActivity.class);
+                ChatUserModel model = new ChatUserModel(getUserModel().getData().getId(), "", singleOrderDataModel.getData().getOrder().getRepresentative().getId(), singleOrderDataModel.getData().getOrder().getRepresentative().getName(), singleOrderDataModel.getData().getOrder().getRepresentative().getPhone(), singleOrderDataModel.getData().getOrder().getRepresentative().getImage(), order_id);
                 intent.putExtra("data", model);
                 startActivity(intent);
             }
@@ -207,10 +242,11 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
         finish();
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onOrderStatusChanged(NotiFire model) {
         if (!model.getOrder_status().isEmpty()) {
-            activityCurrentPreviousOrderDetailsMvvm.getOrderDetails(order_id,getUserModel().getData().getId());
+            activityCurrentPreviousOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
         }
     }
 }
