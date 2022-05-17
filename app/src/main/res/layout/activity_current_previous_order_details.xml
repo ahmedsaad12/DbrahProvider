@@ -98,6 +98,7 @@
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
                                             android:layout_gravity="center"
+                                            android:visibility='@{model.offer_status_code.equals("201")||model.offer_status_code.equals("205")||model.offer_status_code.equals("206")?View.GONE:View.VISIBLE,default=gone}'
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
                                             android:src="@drawable/ic_call2" />
@@ -178,6 +179,7 @@
                                             android:id="@+id/imCallReprentative"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
+                                            android:visibility='@{model.offer_status_code.equals("201")||model.offer_status_code.equals("205")||model.offer_status_code.equals("206")?View.GONE:View.VISIBLE,default=gone}'
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
@@ -187,6 +189,7 @@
                                             android:id="@+id/imChatRepresent"
                                             android:layout_width="35dp"
                                             android:layout_height="35dp"
+                                            android:visibility='@{model.offer_status_code.equals("201")||model.offer_status_code.equals("205")||model.offer_status_code.equals("206")?View.GONE:View.VISIBLE,default=gone}'
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginEnd="5dp"
