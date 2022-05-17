@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 <variable
@@ -69,14 +70,21 @@
                         android:layout_height="14dp"
                         android:layout_gravity="center_vertical">
 
-                        <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                            android:id="@+id/rateBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:numStars="5"
-                            android:isIndicator="true"
-                            android:rating='@{Float.parseFloat(model.rate)}'
-                            android:theme="@style/RatingBar" />
+
+                            app:srb_fillColor="@color/color11"
+                            app:srb_numberOfStars="5"
+                            app:srb_starBorderWidth="2"
+                            app:srb_starSize="15dp"
+                            app:srb_starCornerRadius="3"
+                            app:srb_isIndicator="true"
+                            rate="@{model.rate}"
+
+                            />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>

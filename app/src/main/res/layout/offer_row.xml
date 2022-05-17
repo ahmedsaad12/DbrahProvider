@@ -133,7 +133,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/almaraibold"
-                android:text='@{model.qty+"X"}'
+                android:text='@{model.available_qty+"X"}'
                 android:textColor="@color/black2"
                 android:textSize="18sp" />
         </LinearLayout>

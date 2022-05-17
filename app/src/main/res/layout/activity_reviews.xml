@@ -47,13 +47,20 @@
                 android:layout_gravity="center_horizontal"
 
                 >
-                <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:rating='@{rate}'
-                    android:numStars="5"
-                    android:isIndicator="true"
-                    android:theme="@style/RatingBar"
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/rateBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    app:srb_fillColor="@color/color11"
+                    app:srb_numberOfStars="5"
+                    app:srb_starBorderWidth="2"
+                    app:srb_starSize="15dp"
+                    app:srb_starCornerRadius="3"
+                    app:srb_isIndicator="true"
+                    rate='@{rate+""}'
+
                     />
             </LinearLayout>
 

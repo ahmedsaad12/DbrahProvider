@@ -20,6 +20,7 @@ import com.apps.dbrah_Provider.model.NotificationModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.text.ParseException;
@@ -308,6 +309,14 @@ public class GeneralMethod {
         }
 
     }
+    @BindingAdapter("rate")
+    public static void rate(SimpleRatingBar bar, String rate) {
+        if (rate != null) {
+            bar.setRating(Float.parseFloat(rate));
+        }
+
+    }
+
 }
 
 

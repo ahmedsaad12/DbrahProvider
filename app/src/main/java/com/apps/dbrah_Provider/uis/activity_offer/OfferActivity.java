@@ -86,6 +86,60 @@ public class OfferActivity extends BaseActivity {
          activityOfferMvvm.getOnDataSuccess().observe(this, model -> {
             setting = model;
         });
+        binding.edtprice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().startsWith("0")) {
+                    binding.edtprice.setText("");
+                }
+            }
+        });
+        binding.edtAprice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().startsWith("0")) {
+                    binding.edtAprice.setText("");
+                }
+            }
+        });
+        binding.edtQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().startsWith("0")) {
+                    binding.edtQuantity.setText("");
+                }
+            }
+        });
 
         spinnerProductAdapter = new SpinnerProductAdapter(this, getLang());
         binding.spBrand.setAdapter(spinnerProductAdapter);

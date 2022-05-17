@@ -76,6 +76,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
+                    setResult(RESULT_OK);
                     isDatachanged = true;
                     if (singleOrderDataModel.getData().getOrder().getOffer_status_code().equals("202")) {
                         singleOrderDataModel.getData().getOrder().setOffer_status_code("203");
