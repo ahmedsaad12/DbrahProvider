@@ -219,6 +219,7 @@ public class GeneralMethod {
             }
         }
     }
+
     @BindingAdapter("createTime")
     public static void createAtTime(TextView textView, String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
@@ -240,6 +241,7 @@ public class GeneralMethod {
         }
 
     }
+
     @BindingAdapter("createAt")
     public static void createAt(TextView textView, String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
@@ -272,14 +274,29 @@ public class GeneralMethod {
                     text = context.getString(R.string.new_order) + "-" + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
                 } else if (model.getStatus().equals("accepted")) {
 
-                    text = context.getString(R.string.your_offer_has_been_accepted) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" +  model.getOrder_id();
+                    text = context.getString(R.string.your_offer_has_been_accepted) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
 
                 } else if (model.getStatus().equals("rejected")) {
-                    text = context.getString(R.string.your_offer_has_been_rejected) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" +  model.getOrder_id();
+                    text = context.getString(R.string.your_offer_has_been_rejected) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
 
                 } else {
-                    text = model.getBody();
+                    if (model.getStatus().equals("preparing")) {
 
+                        if (model.getBody().equals("order is accepted by a representative")) {
+                            text = context.getString(R.string.your_order_accepted) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
+                        } else if (model.getBody().equals("order is picked up by the delivery")) {
+                            text = context.getString(R.string.picked_up) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
+                        }
+
+                    } else if (model.getStatus().equals("on_way")) {
+                        text = context.getString(R.string.on_the_way) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
+
+                    } else if (model.getStatus().equals("delivered")) {
+                        text = context.getString(R.string.finish_delivery) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
+
+                    } else {
+                        text = model.getBody();
+                    }
                 }
 
                 textView.setText(text);

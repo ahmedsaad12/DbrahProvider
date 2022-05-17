@@ -172,5 +172,6 @@
     <string name="on_the_way">On The Way</string>
     <string name="picked_up">Picked Up</string>
     <string name="your_order_accepted">Your Order Accepted By Representative</string>
+    <string name="your_order_has_been_rejected">Representative Reject Order</string>
 
 </resources>

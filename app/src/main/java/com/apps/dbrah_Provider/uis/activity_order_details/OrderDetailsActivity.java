@@ -190,12 +190,13 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
     private void createDateDialog() {
 
         Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
         datePickerDialog = DatePickerDialog.newInstance(OrderDetailsActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.dismissOnPause(true);
         datePickerDialog.setAccentColor(ActivityCompat.getColor(this, R.color.colorPrimary));
         datePickerDialog.setCancelColor(ActivityCompat.getColor(this, R.color.grey4));
         datePickerDialog.setOkColor(ActivityCompat.getColor(this, R.color.colorPrimary));
-
+        datePickerDialog.setMinDate(calendar);
         datePickerDialog.setOkText(getString(R.string.select));
         datePickerDialog.setCancelText(getString(R.string.cancel));
         datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
@@ -250,10 +251,11 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         finish();
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onOrderStatusChanged(NotiFire model) {
         if (!model.getOrder_status().isEmpty()) {
-           activityOrderDetailsMvvm.getOrderDetails(order_id,getUserModel().getData().getId());
+            activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
         }
     }
 }

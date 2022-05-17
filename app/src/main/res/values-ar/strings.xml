@@ -173,4 +173,5 @@
     <string name="on_the_way">فى الطريق</string>
     <string name="picked_up">تم التسليم للمندوب</string>
     <string name="your_order_accepted">تم قبول طلبك من مندوب </string>
+    <string name="your_order_has_been_rejected">تم رفض طلبك من المندوب </string>
 </resources>

@@ -208,9 +208,13 @@ public class FireBaseNotifications extends FirebaseMessagingService {
                     title = getString(R.string.your_order_accepted);
                     body = getString(R.string.your_order_accepted) + " " + getChatUserModel(map).getUser_name() + "\n" + getString(R.string.order_num) + " #" + order_id;
                 }
-                else {
+                else  if(body.equals("order is picked up by the delivery")){
                     title = getString(R.string.picked_up);
                     body = getString(R.string.picked_up) + " " + getChatUserModel(map).getUser_name() + "\n" + getString(R.string.order_num) + " #" + order_id;
+                }
+                else {
+                    title = getString(R.string.your_order_has_been_rejected);
+                    body = getString(R.string.your_order_has_been_rejected) + " " + getChatUserModel(map).getUser_name() + "\n" + getString(R.string.order_num) + " #" + order_id;
                 }
             }
             notificationCompat.setContentTitle(title);
@@ -284,7 +288,7 @@ public class FireBaseNotifications extends FirebaseMessagingService {
         ClientModel userModel;
         ChatUserModel model;
         RepresentModel representModel;
-        if (map.get("user") != null) {
+        if (map.get("user") != null&&((map.get("status")!=null&&(!map.get("status").equals("preparing")&&!map.get("status").equals("delivered"))||map.get("notification_type").equals("chat")))) {
             userModel = new Gson().fromJson(map.get("user"), ClientModel.class);
             String user_id = userModel.getId();
             //  Log.e("llkkk",user_id);
