@@ -57,6 +57,8 @@ public class FragmentCurrentOrders extends BaseFragment {
 
                 fragmentOrderMvvm.getOrders(getUserModel());
                 generalMvvm.getOnPreOrderRefreshed().postValue(true);
+                generalMvvm.getOnStaticRefreshed().setValue(true);
+
             }
         });
     }

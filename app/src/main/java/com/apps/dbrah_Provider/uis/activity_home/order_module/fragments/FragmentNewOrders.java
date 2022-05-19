@@ -57,6 +57,8 @@ public class FragmentNewOrders extends BaseFragment {
                 fragmentOrderMvvm.getOrders(getUserModel());
                 if (result.getData() == null) {
                     generalMvvm.getOrderpage().postValue(1);
+                    generalMvvm.getOnStaticRefreshed().setValue(true);
+
                 }
             }
         });

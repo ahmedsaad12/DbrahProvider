@@ -14,6 +14,7 @@ public class GeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Integer> orderpage;
     private MutableLiveData<Boolean> onCurrentOrderRefreshed;
     private MutableLiveData<Boolean> onPreOrderRefreshed;
+    private MutableLiveData<Boolean> onStaticRefreshed;
 
 
     public GeneralMvvm(@NonNull Application application) {
@@ -38,4 +39,10 @@ public class GeneralMvvm extends AndroidViewModel {
         }
         return onPreOrderRefreshed;
     }
+
+    public MutableLiveData<Boolean> getOnStaticRefreshed() {
+        if (onStaticRefreshed == null) {
+            onStaticRefreshed = new MutableLiveData<>();
+        }
+        return onStaticRefreshed;    }
 }

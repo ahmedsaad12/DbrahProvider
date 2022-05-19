@@ -68,7 +68,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 
     private void initView() {
-        generalMvvm=ViewModelProviders.of(this).get(GeneralMvvm.class);
+        generalMvvm = ViewModelProviders.of(this).get(GeneralMvvm.class);
         userModel = getUserModel();
         fragments = new ArrayList<>();
         stack = new Stack<>();
@@ -198,14 +198,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             String status = model.getOrder_status();
             if (status.equals("new")) {
                 generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
-            } else{
+            } else {
                 generalMvvm.getOnCurrentOrderRefreshed().setValue(true);
-                if(model.getOrder_status().equals("delivered")){
+                if (model.getOrder_status().equals("delivered")) {
                     generalMvvm.getOnPreOrderRefreshed().setValue(true);
                 }
 
             }
-
+            generalMvvm.getOnStaticRefreshed().setValue(true);
         }
     }
 }

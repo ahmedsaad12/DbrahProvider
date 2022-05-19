@@ -20,6 +20,7 @@ import com.apps.dbrah_Provider.databinding.FragmentHomeBinding;
 import com.apps.dbrah_Provider.model.OrderDataModel;
 import com.apps.dbrah_Provider.model.StatisticsModel;
 import com.apps.dbrah_Provider.mvvm.FragmentHomeMvvm;
+import com.apps.dbrah_Provider.mvvm.GeneralMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_notification.NotificationActivity;
@@ -33,6 +34,7 @@ public class FragmentHome extends BaseFragment {
     private HomeActivity activity;
     private FragmentHomeBinding binding;
     private FragmentHomeMvvm fragmentHomeMvvm;
+    private GeneralMvvm generalMvvm;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,6 +58,12 @@ public class FragmentHome extends BaseFragment {
 
     private void initView() {
         fragmentHomeMvvm = ViewModelProviders.of(this).get(FragmentHomeMvvm.class);
+        generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
+        generalMvvm.getOnStaticRefreshed().observe(activity, isRefreshed -> {
+            if (isRefreshed) {
+                fragmentHomeMvvm.getStatistics(getUserModel());
+            }
+        });
         binding.setLang(getLang());
         binding.setModel(getUserModel());
         binding.cardReviews.setOnClickListener(view -> {
