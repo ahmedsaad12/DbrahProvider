@@ -14,9 +14,13 @@ import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.model.OrderModel;
 import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.model.StatusResponse;
+import com.apps.dbrah_Provider.model.TimeDataModel;
+import com.apps.dbrah_Provider.model.TimeModel;
 import com.apps.dbrah_Provider.remote.Api;
 import com.apps.dbrah_Provider.share.Common;
 import com.apps.dbrah_Provider.tags.Tags;
+
+import java.util.List;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,7 +34,8 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isOrderDataLoading;
     private MutableLiveData<OrderModel> onOrderDetailsSuccess;
     private MutableLiveData<Integer> onStatusSuccess;
-
+    private MutableLiveData<Boolean> isLoading;
+    private MutableLiveData<List<TimeModel>> onDataSuccess;
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public ActivityOrderDetailsMvvm(@NonNull Application application) {
@@ -42,6 +47,21 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
             isOrderDataLoading = new MutableLiveData<>();
         }
         return isOrderDataLoading;
+    }
+
+    public MutableLiveData<Boolean> getIsLoading() {
+        if (isLoading == null) {
+            isLoading = new MutableLiveData<>();
+        }
+        return isLoading;
+    }
+
+
+    public MutableLiveData<List<TimeModel>> getOnDataSuccess() {
+        if (onDataSuccess == null) {
+            onDataSuccess = new MutableLiveData<>();
+        }
+        return onDataSuccess;
     }
 
     public MutableLiveData<OrderModel> getOnOrderDetailsSuccess() {
@@ -160,6 +180,36 @@ public class ActivityOrderDetailsMvvm extends AndroidViewModel {
                     public void onError(@NonNull Throwable e) {
                         Log.e("error", e.getMessage());
                         dialog.dismiss();
+                    }
+                });
+    }
+    public void getTime(Context context) {
+
+        getIsLoading().setValue(true);
+        Api.getService(Tags.base_url).getTime()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<TimeDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<TimeDataModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null && response.body().getStatus() == 200) {
+                                getIsLoading().setValue(false);
+                                List<TimeModel> list = response.body().getData();
+                                list.add(0, new TimeModel(context.getString(R.string.ch_time)));
+                                onDataSuccess.setValue(list);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.toString());
                     }
                 });
     }

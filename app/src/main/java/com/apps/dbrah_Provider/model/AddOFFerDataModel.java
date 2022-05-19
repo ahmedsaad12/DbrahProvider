@@ -8,6 +8,7 @@ import java.util.List;
 public class AddOFFerDataModel implements Serializable {
     private String provider_id;
     private String order_id;
+    private String delivery_date_time_id;
     private String delivery_date_time;
     private String total_before_tax;
     private String total_price;
@@ -104,5 +105,13 @@ public class AddOFFerDataModel implements Serializable {
 
     public void setOrderModel(OrderModel orderModel) {
         this.orderModel = orderModel;
+    }
+
+    public String getDelivery_date_time_id() {
+        return delivery_date_time_id;
+    }
+
+    public void setDelivery_date_time_id(String delivery_date_time_id) {
+        this.delivery_date_time_id = delivery_date_time_id;
     }
 }

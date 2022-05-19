@@ -17,15 +17,19 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.apps.dbrah_Provider.R;
 import com.apps.dbrah_Provider.adapter.OrderAdapter;
 import com.apps.dbrah_Provider.adapter.ProductAdapter;
+import com.apps.dbrah_Provider.adapter.SpinnerTimeAdapter;
 import com.apps.dbrah_Provider.databinding.ActivityOrderDetailsBinding;
 import com.apps.dbrah_Provider.model.NotiFire;
 import com.apps.dbrah_Provider.model.OrderModel;
+import com.apps.dbrah_Provider.model.TimeModel;
 import com.apps.dbrah_Provider.mvvm.ActivityOrderDetailsMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.apps.dbrah_Provider.uis.activity_offer.OfferActivity;
@@ -51,10 +55,11 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
     private String order_id;
     private TimePickerDialog timePickerDialog;
     private DatePickerDialog datePickerDialog;
-    private String time = null, date = null;
+    private String time = null, date = null, time_id;
     private OrderModel orderModel;
     private ActivityResultLauncher<Intent> launcher;
     private boolean isDatachanged;
+    private SpinnerTimeAdapter spinnerTimeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +123,41 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
             }
         });
         activityOrderDetailsMvvm.getOrderDetails(order_id, getUserModel().getData().getId());
+        activityOrderDetailsMvvm.getOnDataSuccess().observe(this, timeModels -> {
+
+            if (spinnerTimeAdapter != null) {
+                spinnerTimeAdapter.updateList(timeModels);
+
+            }
+
+
+        });
+        spinnerTimeAdapter = new SpinnerTimeAdapter(this);
+
+        binding.spinner.setAdapter(spinnerTimeAdapter);
+
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    time = "";
+                    time_id = "";
+                } else {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                    TimeModel timeModel = (TimeModel) parent.getSelectedItem();
+                    time_id = timeModel.getId();
+                    time = dateFormat.format(new Date(timeModel.getFrom() * 1000)) + " - " + dateFormat.format(new Date(timeModel.getTo() * 1000));
+                    ;
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         binding.llpin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,17 +194,21 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
             if (time != null && date != null) {
                 binding.flExpectedTime.setVisibility(View.GONE);
                 binding.tvDate.setError(null);
-                binding.tvTime.setError(null);
+
+                // binding.tvTime.setError(null);
                 Intent intent = new Intent(OrderDetailsActivity.this, OfferActivity.class);
                 intent.putExtra("time", time);
+                intent.putExtra("time_id", time_id);
+
                 intent.putExtra("date", date);
                 intent.putExtra("order", orderModel);
                 launcher.launch(intent);
             } else {
                 if (time == null) {
-                    binding.tvTime.setError(getResources().getString(R.string.field_required));
+                    Toast.makeText(this, getResources().getString(R.string.ch_time), Toast.LENGTH_LONG).show();
+                    //binding.tvTime.setError(getResources().getString(R.string.field_required));
                 } else {
-                    binding.tvTime.setError(null);
+                    // binding.tvTime.setError(null);
 
                 }
                 if (date == null) {
@@ -176,7 +220,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
             }
 
         });
-        binding.tvTime.setOnClickListener(view -> timePickerDialog.show(getSupportFragmentManager(), ""));
+        //binding.tvTime.setOnClickListener(view -> timePickerDialog.show(getSupportFragmentManager(), ""));
         binding.tvDate.setOnClickListener(view -> datePickerDialog.show(getSupportFragmentManager(), ""));
 
 
@@ -185,6 +229,8 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+        activityOrderDetailsMvvm.getTime(this);
+
     }
 
     private void createDateDialog() {
@@ -227,7 +273,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         calendar.set(Calendar.MINUTE, minute);
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
         time = dateFormat.format(new Date(calendar.getTimeInMillis()));
-        binding.tvTime.setText(time);
+        //binding.tvTime.setText(time);
     }
 
     @Override

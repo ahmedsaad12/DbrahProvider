@@ -316,7 +316,16 @@ public class GeneralMethod {
         }
 
     }
+    @BindingAdapter({"title", "from", "to"})
+    public static void displayDate(TextView textView, String title, long from, long to) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+        if (title != null) {
+            textView.setText(title);
+        } else {
+            textView.setText(dateFormat.format(new Date(from * 1000)) + " - " + dateFormat.format(new Date(to * 1000)));
+        }
 
+    }
 }
 
 

@@ -23,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,10 +40,12 @@ import com.apps.dbrah_Provider.adapter.SpinnerNationalityAdapter;
 import com.apps.dbrah_Provider.adapter.SpinnerTownAdapter;
 import com.apps.dbrah_Provider.databinding.ActivitySignUpBinding;
 import com.apps.dbrah_Provider.databinding.DialogCountriesBinding;
+import com.apps.dbrah_Provider.databinding.DialogInformationBinding;
 import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.NationalitiesModel;
 import com.apps.dbrah_Provider.model.SelectedLocation;
+import com.apps.dbrah_Provider.model.SettingDataModel;
 import com.apps.dbrah_Provider.model.SignUpModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.mvvm.ActivitySignUpMvvm;
@@ -88,6 +91,7 @@ public class SignUpActivity extends BaseActivity {
     private SpinnerNationalityAdapter spinnerNationalityAdapter;
     private SpinnerTownAdapter spinnerTownAdapter;
     private List<NationalitiesModel.Data.Town> townModelList;
+    private SettingDataModel.Data setting;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,7 +122,12 @@ public class SignUpActivity extends BaseActivity {
 
         setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
-
+        activitySignUpMvvm.getOnDataSuccess().observe(this, model -> {
+            setting = model;
+            if(setting!=null){
+                binding.imageInfo.setVisibility(View.VISIBLE);
+            }
+        });
 
         binding.setModel(model);
 
@@ -230,7 +239,10 @@ public class SignUpActivity extends BaseActivity {
             navigateToHomeActivity();
         });
 //        activitySignUpMvvm.signUp(this,model);
+        binding.imageInfo.setOnClickListener(v -> {
+            openSheetInfo();
 
+        });
         categoryAdapter = new CategoryAdapter(selectedCategoryList, this, getLang());
         binding.recViewCategory.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(categoryAdapter);
@@ -366,6 +378,7 @@ public class SignUpActivity extends BaseActivity {
 
         binding.arrow.setOnClickListener(view -> dialog.show());
         binding.btnCancel.setOnClickListener(view -> closeSheet());
+        activitySignUpMvvm.getSettings(this);
 
     }
 
@@ -549,4 +562,18 @@ public class SignUpActivity extends BaseActivity {
         }
         return pos;
     }
+    private void openSheetInfo() {
+        androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this).create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg2);
+        DialogInformationBinding informationBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_information, null, false);
+        dialog.setView(informationBinding.getRoot());
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
+        informationBinding.tvDetails.setText(Html.fromHtml(setting.getProvider_info()));
+        informationBinding.tvCancel.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+        dialog.show();
+    }
+
 }

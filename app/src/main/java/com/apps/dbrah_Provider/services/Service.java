@@ -19,6 +19,7 @@ import com.apps.dbrah_Provider.model.SingleOrderDataModel;
 import com.apps.dbrah_Provider.model.StatisticsDataModel;
 import com.apps.dbrah_Provider.model.SettingModel;
 import com.apps.dbrah_Provider.model.StatusResponse;
+import com.apps.dbrah_Provider.model.TimeDataModel;
 import com.apps.dbrah_Provider.model.UserModel;
 
 import java.util.List;
@@ -222,5 +223,6 @@ public interface Service {
                                           @Query(value = "language") String language,
                                           @Query(value = "key") String key
     );
-
+    @GET("api/delivery_times")
+    Single<Response<TimeDataModel>> getTime();
 }

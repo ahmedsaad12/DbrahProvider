@@ -16,6 +16,7 @@ import com.apps.dbrah_Provider.model.CategoryModel;
 import com.apps.dbrah_Provider.model.CountryModel;
 import com.apps.dbrah_Provider.model.EditAccountModel;
 import com.apps.dbrah_Provider.model.NationalitiesModel;
+import com.apps.dbrah_Provider.model.SettingDataModel;
 import com.apps.dbrah_Provider.model.SignUpModel;
 import com.apps.dbrah_Provider.model.UserModel;
 import com.apps.dbrah_Provider.remote.Api;
@@ -45,6 +46,7 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
     private MutableLiveData<List<NationalitiesModel.Data>> onNationalitiesSuccess;
 
     private CompositeDisposable disposable = new CompositeDisposable();
+    private MutableLiveData<SettingDataModel.Data> onDataSuccess;
 
     public ActivitySignUpMvvm(@NonNull Application application) {
         super(application);
@@ -71,7 +73,12 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
         }
         return isLoadingCategory;
     }
-
+    public MutableLiveData<SettingDataModel.Data> getOnDataSuccess() {
+        if (onDataSuccess == null) {
+            onDataSuccess = new MutableLiveData<>();
+        }
+        return onDataSuccess;
+    }
     public MutableLiveData<List<CategoryModel>> getOnCategoryDataSuccess() {
         if (onCategoryDataSuccess == null) {
             onCategoryDataSuccess = new MutableLiveData<>();
@@ -246,6 +253,32 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
 
         }
         return partList;
+    }
+    public void getSettings(Context context) {
+        Api.getService(Tags.base_url)
+                .getSettings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SettingDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SettingDataModel> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null && response.body().getStatus() == 200) {
+                                getOnDataSuccess().setValue(response.body().getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("error", e.toString());
+                    }
+                });
     }
 
     private List<RequestBody> getRequestBodyList(List<CategoryModel> categoryList) {

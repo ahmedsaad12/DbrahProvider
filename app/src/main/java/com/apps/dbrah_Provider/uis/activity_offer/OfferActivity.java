@@ -46,6 +46,7 @@ public class OfferActivity extends BaseActivity {
     private int less = 1;
     private OrderModel orderModel;
     private String time;
+    private String time_id;
     private String date;
     private int index = 0;
     private List<OfferDataModel> offerDataModelList;
@@ -67,6 +68,8 @@ public class OfferActivity extends BaseActivity {
     private void getDataFromIntent() {
         Intent intent = getIntent();
         time = intent.getStringExtra("time");
+        time_id = intent.getStringExtra("time_id");
+
         date = intent.getStringExtra("date");
 
         orderModel = (OrderModel) intent.getSerializableExtra("order");
@@ -146,6 +149,8 @@ public class OfferActivity extends BaseActivity {
         offerDataModelList = new ArrayList<>();
         addOFFerDataModel = new AddOFFerDataModel();
         addOFFerDataModel.setOrderModel(orderModel);
+        addOFFerDataModel.setDelivery_date_time_id(time_id);
+        addOFFerDataModel.setTime(time);
         binding.setModel(orderModel.getDetails().get(index));
         binding.setLang(getLang());
         activityOfferMvvm.getIsLoadingRecentProduct().observe(this, new Observer<Boolean>() {
@@ -171,6 +176,8 @@ public class OfferActivity extends BaseActivity {
             binding.edtQuantity.setText("");
             binding.spBrand.setSelection(0);
             if (avilable == 1) {
+                binding.edtprice.setEnabled(false);
+
                 avilable = 0;
                 binding.tvUnAvilable.setBackground(getResources().getDrawable(R.drawable.small_rounded_primary));
                 binding.flUnAvilable.setVisibility(View.VISIBLE);
@@ -182,6 +189,8 @@ public class OfferActivity extends BaseActivity {
                 binding.llData.setVisibility(View.GONE);
             } else {
                 avilable = 1;
+                binding.edtprice.setEnabled(true);
+
                 binding.flUnAvilable.setVisibility(View.GONE);
                 binding.tvUnAvilable.setBackground(getResources().getDrawable(R.drawable.rounded_shape_gray1_strock6));
                 binding.tvUnAvilable.setTextColor(getResources().getColor(R.color.colorAccent));
@@ -294,6 +303,7 @@ public class OfferActivity extends BaseActivity {
                 if (index < orderModel.getDetails().size()) {
                     binding.setModel(orderModel.getDetails().get(index));
                     binding.edtprice.setText("");
+                    binding.edtprice.setEnabled(true);
                     binding.tvSinglePrice.setText("0");
                     binding.tvTotalPrice.setText("0");
                     binding.edtAprice.setText("");
@@ -301,8 +311,8 @@ public class OfferActivity extends BaseActivity {
                     binding.spBrand.setSelection(0);
                     binding.tvindex.setText((index + 1) + "");
                 } else {
-                    String expectedtime = date + " " + time;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.ENGLISH);
+                    String expectedtime = date ;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
                     addOFFerDataModel.setOffer_details(offerDataModelList);
                     addOFFerDataModel.setOrder_id(orderModel.getId());

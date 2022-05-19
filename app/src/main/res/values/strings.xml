@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dbrah_Provider</string>
+    <string name="app_name">Dbrah Provider</string>
     <string name="map_api_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="search_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="name">Name</string>
@@ -157,7 +157,7 @@
     <string name="not_avail_now">Not Available Now</string>
     <string name="attach_sent">Attach Sent</string>
     <string name="start_preparing">Start Preparing</string>
-    <string name="start_delivring">Start Delivering</string>
+    <string name="start_delivring">Order Sent To Delivery</string>
     <string name="finish_delivery">Finish Delivery</string>
     <string name="new_order">New Order</string>
     <string name="order_num">Oder Num : </string>
@@ -173,5 +173,8 @@
     <string name="picked_up">Picked Up</string>
     <string name="your_order_accepted">Your Order Accepted By Representative</string>
     <string name="your_order_has_been_rejected">Representative Reject Order</string>
+    <string name="information">Information</string>
+    <string name="sign_up_inf"><![CDATA[<h4>1.Photo</h4> <p> lorem </p><br> <h4>2.Company Name</h4> <p> lorem </p> <br> <h4>3.Email</h4> <p> lorem </p> <br> <h4>4.Tax Number</h4> <p> lorem </p>]]></string>
+    <string name="ch_time">Choose Time</string>
 
 </resources>
