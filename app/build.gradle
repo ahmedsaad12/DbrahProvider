@@ -24,15 +24,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
     buildFeatures {
 
         dataBinding true
 
     }
+    namespace 'com.apps.dbrah_Provider'
 
 
 }
@@ -74,6 +72,7 @@ dependencies {
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'com.iarcuschin:simpleratingbar:0.1.5'
+    implementation 'com.android.support:multidex:1.0.3'
 
 
 
