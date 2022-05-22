@@ -43,7 +43,11 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_selected.xml" value="0.2518518518518518" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_shape_gray1_strock6.xml" value="0.2601851851851852" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_shape_gray8_strock6.xml" value="0.21666666666666667" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/rounded_white.xml" value="0.1725" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/small_rounded_grey7.xml" value="0.24351851851851852" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/tab_gallery_indicator.xml" value="0.1495" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/tab_indicator.xml" value="0.1495" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/drawable/top_rounded_primary.xml" value="0.20555555555555555" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_app.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_contact_us.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/activity_control_products.xml" value="0.17777777777777778" />
@@ -76,7 +80,7 @@
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_current_oders.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_new_orders.xml" value="0.25416666666666665" />
-        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_order.xml" value="0.176" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_orders.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_previous_orders.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/DbrahProvider/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />

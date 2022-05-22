@@ -511,7 +511,7 @@
                     android:background="@color/colorPrimary"
                     android:fontFamily="@font/almira"
                     android:minWidth="200dp"
-                    android:text="@string/confirm"
+                    android:text="@string/update"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp"
