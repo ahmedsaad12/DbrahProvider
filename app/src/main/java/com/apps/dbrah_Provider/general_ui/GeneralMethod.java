@@ -3,6 +3,7 @@ package com.apps.dbrah_Provider.general_ui;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
@@ -273,14 +274,17 @@ public class GeneralMethod {
             if (model.getOrder_id() != null && !model.getOrder_id().isEmpty()) {
                 if (model.getStatus().equals("new")) {
                     text = context.getString(R.string.new_order) + "-" + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
-                } else if (model.getStatus().equals("accepted")) {
+                }
+                else if (model.getStatus().equals("accepted")) {
 
                     text = context.getString(R.string.your_offer_has_been_accepted) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
 
-                } else if (model.getStatus().equals("rejected")) {
+                }
+                else if (model.getStatus().equals("rejected")) {
                     text = context.getString(R.string.your_offer_has_been_rejected) + " " + model.getUser().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
 
                 } else {
+                    Log.e("dldlld",model.getStatus()+" "+model.getBody());
                     if (model.getStatus().equals("preparing")) {
 
                         if (model.getBody().equals("order is accepted by a representative")) {
@@ -288,8 +292,13 @@ public class GeneralMethod {
                         } else if (model.getBody().equals("order is picked up by the delivery")) {
                             text = context.getString(R.string.picked_up) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
                         }
+                        else if(model.getBody().equals("your order is on way")){
+                            text = context.getString(R.string.on_the_way) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
 
-                    } else if (model.getStatus().equals("on_way")) {
+                        }
+
+                    }
+                    else if (model.getStatus().equals("on_way")) {
                         text = context.getString(R.string.on_the_way) + " " + model.getRepresentative().getName() + "\n" + context.getString(R.string.order_num) + " #" + model.getOrder_id();
 
                     } else if (model.getStatus().equals("delivered")) {
@@ -302,7 +311,10 @@ public class GeneralMethod {
 
                 textView.setText(text);
 
-            } else {
+            }
+
+            else {
+Log.e("lllll",model.getBody());
                 textView.setText(model.getBody());
 
             }

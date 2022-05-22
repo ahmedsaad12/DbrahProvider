@@ -13,6 +13,8 @@ import com.apps.dbrah_Provider.databinding.ActivityNotificationBinding;
 import com.apps.dbrah_Provider.mvvm.ActivityNotificationMvvm;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 
+import java.util.ArrayList;
+
 
 public class NotificationActivity extends BaseActivity {
 
@@ -41,6 +43,7 @@ public class NotificationActivity extends BaseActivity {
                 adapter.updateList(list);
                 binding.cardNoData.setVisibility(View.GONE);
             } else {
+                adapter.updateList(new ArrayList<>());
                 binding.cardNoData.setVisibility(View.VISIBLE);
 
             }
