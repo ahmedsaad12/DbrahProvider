@@ -140,7 +140,7 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    time = "";
+                    time = null;
                     time_id = "";
                 } else {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
@@ -203,7 +203,8 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
                 intent.putExtra("date", date);
                 intent.putExtra("order", orderModel);
                 launcher.launch(intent);
-            } else {
+            }
+            else {
                 if (time == null) {
                     Toast.makeText(this, getResources().getString(R.string.ch_time), Toast.LENGTH_LONG).show();
                     //binding.tvTime.setError(getResources().getString(R.string.field_required));
