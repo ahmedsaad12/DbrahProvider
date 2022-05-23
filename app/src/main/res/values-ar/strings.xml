@@ -176,6 +176,6 @@
     <string name="your_order_has_been_rejected">تم رفض طلبك من المندوب </string>
     <string name="information">معلومات</string>
     <string name="sign_up_inf"><![CDATA[<h4>1.Photo</h4> <p> lorem </p><br> <h4>2.Company Name</h4> <p> lorem </p> <br> <h4>3.Email</h4> <p> lorem </p> <br> <h4>4.Tax Number</h4> <p> lorem </p>]]></string>
-    <string name="ch_time">Choose Time</string>
+    <string name="ch_time">اختر الوقت</string>
 
 </resources>
