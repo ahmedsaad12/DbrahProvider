@@ -112,6 +112,7 @@
                             android:lines="1"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
+                            android:enabled="false"
                             android:singleLine="true"
                             android:text="@={contactModel.name}"
                             android:textColor="@color/black"

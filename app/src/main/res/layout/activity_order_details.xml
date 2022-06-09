@@ -207,7 +207,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:background='@{model.is_pin.equals("0")?@drawable/rounded_white_stroke_grey7:@drawable/rounded_grey7}'
-                                    android:clickable='@{model.is_pin.equals("0")?true:false}'
                                     android:orientation="horizontal"
                                     android:paddingStart="12dp"
                                     android:paddingTop="6dp"

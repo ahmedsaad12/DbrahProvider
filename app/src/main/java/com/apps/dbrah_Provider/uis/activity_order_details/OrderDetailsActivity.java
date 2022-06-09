@@ -119,6 +119,10 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
                         binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.white), PorterDuff.Mode.SRC_IN);
 
                     }
+                    else{
+                        binding.imPin.setColorFilter(ContextCompat.getColor(OrderDetailsActivity.this, R.color.grey7), PorterDuff.Mode.SRC_IN);
+
+                    }
                 }
             }
         });

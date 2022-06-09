@@ -15,18 +15,19 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.apps.dbrah_Provider.R;
+import com.apps.dbrah_Provider.databinding.ActivityAboutAppBinding;
 import com.apps.dbrah_Provider.databinding.ActivityAppBinding;
 import com.apps.dbrah_Provider.uis.activity_base.BaseActivity;
 
 public class AppActivity extends BaseActivity {
-    private ActivityAppBinding binding;
+    private ActivityAboutAppBinding binding;
     private String type;
     private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_app);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_about_app);
         getDataFromIntent();
         initView();
     }
@@ -41,6 +42,12 @@ public class AppActivity extends BaseActivity {
     private void initView() {
         binding.setLang(getLang());
 
+     if(type.equals("terms"))
+        setUpToolbar(binding.toolbar, getString(R.string.terms_and_conditions), R.color.white, R.color.black);
+     else
+         setUpToolbar(binding.toolbar, getString(R.string.privacy_policy), R.color.white, R.color.black);
+
+        binding.toolbar.llBack.setOnClickListener(view -> finish());
         setUpWebView();
     }
 

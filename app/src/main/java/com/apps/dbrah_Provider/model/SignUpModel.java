@@ -1,6 +1,7 @@
 package com.apps.dbrah_Provider.model;
 
 import android.content.Context;
+import android.text.TextWatcher;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
@@ -12,10 +13,12 @@ import com.apps.dbrah_Provider.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class SignUpModel extends BaseObservable {
     private String image;
+    final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
     private String store_name;
     private String phone_code;
     private String phone;
@@ -39,9 +42,12 @@ public class SignUpModel extends BaseObservable {
     public ObservableField<String> error_repeat_password = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
     public ObservableField<String> error_address = new ObservableField<>();
+    private Pattern pattern;
 
 
     public boolean isDataValid(Context context) {
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+
         if (!store_name.trim().isEmpty()
                 && !email.isEmpty()
                 && !phone.isEmpty() &&
@@ -49,6 +55,7 @@ public class SignUpModel extends BaseObservable {
                 town_id != 0
                 && !vat_num.isEmpty()
                 && password.length() >= 6
+                &&  pattern.matcher(password).matches()
                 && repeat_password.length() >= 6
                 && password.equals(repeat_password)
                 && !address.isEmpty()
@@ -86,6 +93,7 @@ public class SignUpModel extends BaseObservable {
                 error_phone.set(null);
 
             }
+
             if (nationality_id == 0) {
                 Toast.makeText(context, R.string.choose_nationality, Toast.LENGTH_SHORT).show();
             }
@@ -101,8 +109,11 @@ public class SignUpModel extends BaseObservable {
             if (password.isEmpty()) {
                 error_password.set(context.getString(R.string.field_required));
             } else {
+                if(!pattern.matcher(password).matches()){
+                    error_password.set(context.getResources().getString(R.string.password_weak));
+                }else{
                 error_password.set(null);
-            }
+            }}
             if (repeat_password.isEmpty()) {
                 error_repeat_password.set(context.getString(R.string.field_required));
             } else {
