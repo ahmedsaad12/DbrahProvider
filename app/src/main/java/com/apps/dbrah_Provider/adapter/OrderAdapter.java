@@ -52,6 +52,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((MyHolder) holder).binding.imPin.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
 
         }
+
         else{
             ((MyHolder) holder).binding.imPin.setColorFilter(ContextCompat.getColor(context, R.color.grey7), PorterDuff.Mode.SRC_IN);
 
