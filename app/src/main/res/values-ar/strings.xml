@@ -85,7 +85,7 @@
     <string name="order">طلب</string>
     <string name="this_month_s_order">طلبات هذا الشهر</string>
     <string name="this_month_s_miss_order">الطلبات المفقودة هذا الشهر</string>
-    <string name="total_clients_this_year">إجمالي العملاء هذا العام</string>
+    <string name="total_clients_this_year">اجمالى مبيعات هذا الشهر</string>
     <string name="customer_reviews">اراء العملاء</string>
     <string name="vat_number2">الرقم الضريبى : </string>
     <string name="repeat_password">أعد كتابة كلمة المرور</string>

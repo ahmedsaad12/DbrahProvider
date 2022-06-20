@@ -26,7 +26,9 @@ import com.apps.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.apps.dbrah_Provider.uis.activity_notification.NotificationActivity;
 import com.apps.dbrah_Provider.uis.activity_reviews.ReviewsActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class FragmentHome extends BaseFragment {
@@ -57,6 +59,9 @@ public class FragmentHome extends BaseFragment {
     }
 
     private void initView() {
+        Calendar cal = Calendar.getInstance();
+       String month=new SimpleDateFormat("MMM").format(cal.getTime());
+       binding.setMonth(month);
         fragmentHomeMvvm = ViewModelProviders.of(this).get(FragmentHomeMvvm.class);
         generalMvvm = ViewModelProviders.of(activity).get(GeneralMvvm.class);
         generalMvvm.getOnStaticRefreshed().observe(activity, isRefreshed -> {

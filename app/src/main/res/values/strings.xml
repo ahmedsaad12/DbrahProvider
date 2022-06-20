@@ -84,7 +84,7 @@
     <string name="order">Order</string>
     <string name="this_month_s_order">This month’s order</string>
     <string name="this_month_s_miss_order">This month’s miss order</string>
-    <string name="total_clients_this_year">Total Clients this year</string>
+    <string name="total_clients_this_year">Total sales for this month</string>
     <string name="customer_reviews">Customer Reviews</string>
     <string name="vat_number2">VAT Number :</string>
     <string name="repeat_password">Repeat Password</string>
