@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.apps.dbrah_Provider.model.SuggestNewProductModel" />
+            type="com.app.dbrah_Provider.model.SuggestNewProductModel" />
     </data>
 
     <FrameLayout

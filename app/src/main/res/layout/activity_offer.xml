@@ -9,7 +9,7 @@
             type="String" />
 <variable
     name="model"
-    type="com.apps.dbrah_Provider.model.OrderProductModel" />
+    type="com.app.dbrah_Provider.model.OrderProductModel" />
     </data>
 
     <FrameLayout

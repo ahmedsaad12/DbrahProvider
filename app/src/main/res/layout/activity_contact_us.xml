@@ -7,7 +7,7 @@
 
         <variable
             name="contactModel"
-            type="com.apps.dbrah_Provider.model.ContactUsModel" />
+            type="com.app.dbrah_Provider.model.ContactUsModel" />
 
     </data>
 

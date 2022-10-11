@@ -11,7 +11,7 @@
 
         <variable
             name="statisticModel"
-            type="com.apps.dbrah_Provider.model.StatisticsModel" />
+            type="com.app.dbrah_Provider.model.StatisticsModel" />
 
         <variable
             name="month"
@@ -19,7 +19,7 @@
 
         <variable
             name="model"
-            type="com.apps.dbrah_Provider.model.UserModel" />
+            type="com.app.dbrah_Provider.model.UserModel" />
     </data>
 
     <FrameLayout

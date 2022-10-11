@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.apps.dbrah_Provider.model.ChatUserModel" />
+            type="com.app.dbrah_Provider.model.ChatUserModel" />
 
         <variable
             name="msg"
