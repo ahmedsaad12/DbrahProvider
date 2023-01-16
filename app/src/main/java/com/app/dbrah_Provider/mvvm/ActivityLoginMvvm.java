@@ -84,11 +84,11 @@ public class ActivityLoginMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<UserModel> response) {
                         dialog.dismiss();
-                        //Log.e("llklk", response.code() + " "+response.body().getStatus());
+                        Log.e("llklk", response.code() + " "+response.body().getStatus());
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
                                 userModelMutableLiveData.postValue(response.body());
-                            } else if (response.body().getStatus() == 400) {
+                            } else if (response.body().getStatus() == 400||response.body().getStatus() == 403) {
 //                                found.postValue("not_found");
                                 Toast.makeText(context, "not found", Toast.LENGTH_LONG).show();
                             }

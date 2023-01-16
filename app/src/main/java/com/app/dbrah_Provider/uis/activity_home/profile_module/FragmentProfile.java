@@ -1,14 +1,9 @@
 package com.app.dbrah_Provider.uis.activity_home.profile_module;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -16,11 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavBackStackEntry;
-import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,10 +20,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.app.dbrah_Provider.R;
+import com.app.dbrah_Provider.model.SettingDataModel;
 import com.app.dbrah_Provider.model.UserModel;
-import com.app.dbrah_Provider.mvvm.ActivitySignUpMvvm;
 import com.app.dbrah_Provider.mvvm.FragmentProfileMvvm;
-import com.app.dbrah_Provider.tags.Tags;
 import com.app.dbrah_Provider.uis.activity_app.AppActivity;
 import com.app.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.app.dbrah_Provider.databinding.FragmentProfileBinding;
@@ -41,10 +31,7 @@ import com.app.dbrah_Provider.uis.activity_control_products.ControlProductsActiv
 import com.app.dbrah_Provider.uis.activity_edit_account.EditAccountActivity;
 import com.app.dbrah_Provider.uis.activity_home.HomeActivity;
 import com.app.dbrah_Provider.uis.activity_login.LoginActivity;
-import com.app.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 import com.app.dbrah_Provider.uis.activity_suggest_new_product.SuggestNewProductActivity;
-
-import java.util.List;
 
 
 public class FragmentProfile extends BaseFragment {
@@ -55,6 +42,7 @@ public class FragmentProfile extends BaseFragment {
     private int req = 1;
     private FragmentProfileMvvm mvvm;
     private UserModel userModel;
+    private SettingDataModel.Data setting;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -88,7 +76,10 @@ public class FragmentProfile extends BaseFragment {
     private void initView() {
         userModel = getUserModel();
         mvvm = ViewModelProviders.of(this).get(FragmentProfileMvvm.class);
-
+        mvvm.getOnDataSuccess().observe(activity, model -> {
+            setting = model;
+        });
+        mvvm.getSettings(activity);
         if (userModel != null) {
             binding.setModel(userModel);
         }
@@ -117,9 +108,10 @@ public class FragmentProfile extends BaseFragment {
             startActivity(intent);
         });
 
-        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url + "webView?type=terms"));
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", setting.getTerms_en()));
 
-        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url + "webView?type=privacy"));
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", setting.getPrivacy_en()));
+
         binding.llLogOut.setOnClickListener(view -> {
             if (userModel == null) {
                 logout();

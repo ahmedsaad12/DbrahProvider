@@ -8,6 +8,10 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="data"
+            type="String" />
+        <import type="android.text.Html"/>
     </data>
 
     <LinearLayout
@@ -24,8 +28,12 @@
             android:layout_height="match_parent"
             tools:context=".uis.activity_about_app.SignUpDelegateActivity">
 
-            <WebView
-                android:id="@+id/webView"
+            <TextView
+                android:text='@{Html.fromHtml(data)}'
+               android:fontFamily="@font/almira"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <ProgressBar
@@ -33,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 />
         </FrameLayout>
 

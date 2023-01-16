@@ -17,14 +17,12 @@ import com.app.dbrah_Provider.model.SettingDataModel;
 import com.app.dbrah_Provider.model.SingleMessageModel;
 import com.app.dbrah_Provider.model.SingleOrderDataModel;
 import com.app.dbrah_Provider.model.StatisticsDataModel;
-import com.app.dbrah_Provider.model.SettingModel;
 import com.app.dbrah_Provider.model.StatusResponse;
 import com.app.dbrah_Provider.model.TimeDataModel;
 import com.app.dbrah_Provider.model.UserModel;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -94,7 +92,7 @@ public interface Service {
                                                              @Query("category_id") String category_id,
                                                              @Query("sub_category_id") String sub_category_id);
 
-    @POST("api/provider/edit_my_products")
+    @POST("api/provider/edit_my_products_not_have")
     Single<Response<StatusResponse>> editProducts(@Body EditProductModel editProductModel);
 
     @Multipart
@@ -128,7 +126,7 @@ public interface Service {
 
 
     @GET("api/setting")
-    Single<Response<SettingModel>> getSetting();
+    Single<Response<SettingDataModel>> getSetting();
 
     @FormUrlEncoded
     @POST("api/contact_us")

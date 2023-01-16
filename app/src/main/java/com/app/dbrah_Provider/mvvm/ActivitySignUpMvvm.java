@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -189,8 +190,14 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
                             if (response.body().getStatus() == 200) {
                                 userModelMutableLiveData.postValue(response.body());
                             }
+                        }else if (response.body().getStatus() == 406) {
+                            Toast.makeText(context, R.string.ph_found, Toast.LENGTH_LONG).show();
+                        } else if (response.body().getStatus() == 407) {
+                            Toast.makeText(context, R.string.em_found, Toast.LENGTH_LONG).show();
                         }
-
+                        else if (response.body().getStatus() == 408) {
+                            Toast.makeText(context, R.string.vat_found, Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override

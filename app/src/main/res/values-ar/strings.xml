@@ -177,6 +177,11 @@
     <string name="information">معلومات</string>
     <string name="sign_up_inf"><![CDATA[<h4>1.Photo</h4> <p> lorem </p><br> <h4>2.Company Name</h4> <p> lorem </p> <br> <h4>3.Email</h4> <p> lorem </p> <br> <h4>4.Tax Number</h4> <p> lorem </p>]]></string>
     <string name="ch_time">اختر الوقت</string>
-    <string name="password_weak">Password Is Weak</string>
+    <string name="password_weak">كلمة المرور  ضعيفه</string>
+    <string name="must_equal">يجب ان تكون 15 رقم</string>
+    <string name="repeat_password_must">Repeat Pasword Must Equal Password</string>
+    <string name="vat_found">Vat Number Found</string>
+    <string name="em_found">Email Found</string>
+    <string name="ph_found">Phone Found</string>
 
 </resources>

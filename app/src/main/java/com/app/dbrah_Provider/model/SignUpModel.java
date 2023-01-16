@@ -53,9 +53,9 @@ public class SignUpModel extends BaseObservable {
                 && !phone.isEmpty() &&
                 nationality_id != 0 &&
                 town_id != 0
-                && !vat_num.isEmpty()
+                && vat_num.length() == 15
                 && password.length() >= 6
-                &&  pattern.matcher(password).matches()
+                && pattern.matcher(password).matches()
                 && repeat_password.length() >= 6
                 && password.equals(repeat_password)
                 && !address.isEmpty()
@@ -102,7 +102,11 @@ public class SignUpModel extends BaseObservable {
             }
             if (vat_num.isEmpty()) {
                 error_vat_num.set(context.getString(R.string.field_required));
-            } else {
+            }
+            else if(vat_num.length()!=15){
+                error_vat_num.set(context.getString(R.string.must_equal));
+            }
+            else {
                 error_vat_num.set(null);
             }
 
@@ -111,12 +115,17 @@ public class SignUpModel extends BaseObservable {
             } else {
                 if(!pattern.matcher(password).matches()){
                     error_password.set(context.getResources().getString(R.string.password_weak));
+               error_password.notifyChange();
                 }else{
                 error_password.set(null);
             }}
             if (repeat_password.isEmpty()) {
                 error_repeat_password.set(context.getString(R.string.field_required));
-            } else {
+            }
+            else if(!repeat_password.equals(password)){
+                error_repeat_password.set(context.getString(R.string.repeat_password_must));
+            }
+            else {
                 error_repeat_password.set(null);
             }
             if (categoryList.size() > 0) {
