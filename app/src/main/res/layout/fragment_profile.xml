@@ -405,7 +405,80 @@
                 android:background="@drawable/horizontal_line"
                 android:layerType="software"
                 android:padding="8dp" />
+            <LinearLayout
+                android:id="@+id/llAddAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="24dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_dolar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/almira"
+                    android:text="@string/add_bank_account"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/horizontal_line"
+                android:layerType="software"
+                android:padding="8dp" />
+            <LinearLayout
+                android:id="@+id/llBankAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="24dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_dolar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/almira"
+                    android:text="@string/banks"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/horizontal_line"
+                android:layerType="software"
+                android:padding="8dp" />
             <LinearLayout
                 android:id="@+id/llLogOut"
                 android:layout_width="match_parent"

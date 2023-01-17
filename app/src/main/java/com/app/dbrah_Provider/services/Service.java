@@ -2,6 +2,7 @@ package com.app.dbrah_Provider.services;
 
 
 import com.app.dbrah_Provider.model.AddOFFerDataModel;
+import com.app.dbrah_Provider.model.BankDataModel;
 import com.app.dbrah_Provider.model.CategoryDataModel;
 import com.app.dbrah_Provider.model.EditProductModel;
 import com.app.dbrah_Provider.model.MessagesDataModel;
@@ -208,6 +209,7 @@ public interface Service {
     @POST("api/updateOrderStatus")
     Single<Response<StatusResponse>> changeOrderStatus(@Field("order_id") String order_id,
                                                        @Field("status") String status);
+
     @GET("api/setting")
     Single<Response<SettingDataModel>> getSettings();
 
@@ -221,6 +223,37 @@ public interface Service {
                                           @Query(value = "language") String language,
                                           @Query(value = "key") String key
     );
+
     @GET("api/delivery_times")
     Single<Response<TimeDataModel>> getTime();
+
+    @FormUrlEncoded
+    @POST("api/provider/store")
+    Single<Response<StatusResponse>> addBankAccount(@Field("provider_id") String provider_id,
+                                                    @Field("account_holder_name") String account_holder_name,
+                                                    @Field("iban") String iban
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/provider/update")
+    Single<Response<StatusResponse>> editBankAccount(@Field("bank_account_id") String bank_account_id,
+                                                    @Field("provider_id") String provider_id,
+                                                    @Field("account_holder_name") String account_holder_name,
+                                                    @Field("iban") String iban
+
+
+    ); @FormUrlEncoded
+    @POST("api/provider/delete")
+    Single<Response<StatusResponse>> deleteBankAccount(@Field("bank_account_id") String bank_account_id,
+                                                    @Field("provider_id") String provider_id
+
+
+    );
+
+    @GET("api/provider/list")
+    Single<Response<BankDataModel>> getBanks(@Query(value = "provider_id") String provider_id
+    );
+
 }

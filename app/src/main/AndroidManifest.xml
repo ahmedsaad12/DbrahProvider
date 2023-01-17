@@ -112,6 +112,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.app.dbrah_Provider.uis.activity_addaccount.AddAccountActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity android:name="com.app.dbrah_Provider.uis.activity_bank_account.BanksActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
 
         <service
             android:name=".chat_service.ChatService"

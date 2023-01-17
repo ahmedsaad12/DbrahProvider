@@ -23,7 +23,9 @@ import com.app.dbrah_Provider.R;
 import com.app.dbrah_Provider.model.SettingDataModel;
 import com.app.dbrah_Provider.model.UserModel;
 import com.app.dbrah_Provider.mvvm.FragmentProfileMvvm;
+import com.app.dbrah_Provider.uis.activity_addaccount.AddAccountActivity;
 import com.app.dbrah_Provider.uis.activity_app.AppActivity;
+import com.app.dbrah_Provider.uis.activity_bank_account.BanksActivity;
 import com.app.dbrah_Provider.uis.activity_base.BaseFragment;
 import com.app.dbrah_Provider.databinding.FragmentProfileBinding;
 import com.app.dbrah_Provider.uis.activity_contact_us.ContactUsActivity;
@@ -107,7 +109,14 @@ public class FragmentProfile extends BaseFragment {
             Intent intent = new Intent(activity, EditAccountActivity.class);
             startActivity(intent);
         });
-
+        binding.llAddAccount.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, AddAccountActivity.class);
+            startActivity(intent);
+        });
+        binding.llBankAccounts.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, BanksActivity.class);
+            startActivity(intent);
+        });
         binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", setting.getTerms_en()));
 
         binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", setting.getPrivacy_en()));

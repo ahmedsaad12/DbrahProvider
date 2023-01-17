@@ -179,9 +179,14 @@
     <string name="ch_time">اختر الوقت</string>
     <string name="password_weak">كلمة المرور  ضعيفه</string>
     <string name="must_equal">يجب ان تكون 15 رقم</string>
-    <string name="repeat_password_must">Repeat Pasword Must Equal Password</string>
-    <string name="vat_found">Vat Number Found</string>
-    <string name="em_found">Email Found</string>
-    <string name="ph_found">Phone Found</string>
+    <string name="repeat_password_must">تاكيد كلمة المرور يجب ان تساوى كلمة المرور</string>
+    <string name="vat_found">الرقم الضريبى موجود مسبقا</string>
+    <string name="em_found">البريد الالكترونى موجود مسبقا</string>
+    <string name="ph_found">رقم الهاتف موجود مسبقا</string>
+    <string name="inv_iban">خاطئ Iban</string>
+    <string name="iban">Iban</string>
+    <string name="add_bank_account">اضافة حساب بنكى</string>
+    <string name="banks">الحسابات البنكيه</string>
+    <string name="edit_bank_account">تعديل الحساب البنكى</string>
 
 </resources>
