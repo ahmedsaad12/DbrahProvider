@@ -1,6 +1,7 @@
 package com.app.dbrah_Provider.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Patterns;
 
 import androidx.databinding.BaseObservable;
@@ -9,28 +10,48 @@ import androidx.databinding.ObservableField;
 
 import com.app.dbrah_Provider.BR;
 import com.app.dbrah_Provider.R;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.io.Serializable;
 
 public class LoginModel extends BaseObservable implements Serializable {
     private String phone_code;
     private String phone;
+    private String code;
+
     private String email;
     private String password;
     private String type;
     public ObservableField<String> error_email = new ObservableField<>();
     public ObservableField<String> error_password = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
+    PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
 
     public LoginModel() {
         phone_code = "+20";
+        code = "EG";
         phone = "";
         email = "";
         password = "";
     }
 
     public boolean isDataValid(Context context) {
-        if ((type.equals("phone") && !phone.isEmpty()&&
+        boolean isValid = false;
+        if (type.equals("phone")) {
+            Phonenumber.PhoneNumber swissNumberProto;
+
+
+            try {
+                swissNumberProto = phoneUtil.parse("0" + phone, code);
+                isValid = phoneUtil.isValidNumber(swissNumberProto);
+            } catch (NumberParseException e) {
+                Log.e("NumberParseException", e.toString());
+            }
+        }
+        if ((type.equals("phone") && !phone.isEmpty() &&
+                isValid &&
                 password.length() >= 6)
                 || (type.equals("email") && !email.isEmpty() &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
@@ -45,7 +66,11 @@ public class LoginModel extends BaseObservable implements Serializable {
                 if (phone.isEmpty()) {
                     error_phone.set(context.getString(R.string.field_required));
 
-                } else {
+                }
+                else if(!isValid){
+                    error_phone.set(context.getString(R.string.invaild_phone));
+                }
+                else {
                     error_phone.set(null);
 
                 }
@@ -105,6 +130,14 @@ public class LoginModel extends BaseObservable implements Serializable {
         this.phone = phone;
         notifyPropertyChanged(BR.phone);
 
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getType() {

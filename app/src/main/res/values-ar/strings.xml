@@ -188,5 +188,6 @@
     <string name="add_bank_account">اضافة حساب بنكى</string>
     <string name="banks">الحسابات البنكيه</string>
     <string name="edit_bank_account">تعديل الحساب البنكى</string>
+    <string name="invaild_phone">رقم تليفون خاطئ</string>
 
 </resources>

@@ -124,7 +124,7 @@ public class SignUpActivity extends BaseActivity {
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
         activitySignUpMvvm.getOnDataSuccess().observe(this, model -> {
             setting = model;
-            if(setting!=null){
+            if (setting != null) {
                 binding.imageInfo.setVisibility(View.VISIBLE);
             }
         });
@@ -133,7 +133,7 @@ public class SignUpActivity extends BaseActivity {
 
         activitySignUpMvvm.getOnNationalitiesSuccess().observe(this, nationalities -> {
             if (spinnerNationalityAdapter != null) {
-                nationalities.add(0,new NationalitiesModel.Data("اختر الجنسية", "Choose nationality"));
+                nationalities.add(0, new NationalitiesModel.Data("اختر الجنسية", "Choose nationality"));
                 spinnerNationalityAdapter.updateList(nationalities);
                 townModelList.add(new NationalitiesModel.Data.Town("اختر المدينة", "Choose town"));
                 spinnerTownAdapter.updateList(townModelList);
@@ -304,7 +304,7 @@ public class SignUpActivity extends BaseActivity {
 
                         }
                     }
-                }else if (selectedReq == 100 && result.getData() != null) {
+                } else if (selectedReq == 100 && result.getData() != null) {
                     if (result.getData().hasExtra("location")) {
                         selectedLocation = (SelectedLocation) result.getData().getSerializableExtra("location");
                         model.setLatitude(String.valueOf(selectedLocation.getLat()));
@@ -337,7 +337,7 @@ public class SignUpActivity extends BaseActivity {
         });
         binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_eg));
         model.setPhone_code("+20");
-
+        model.setCode("EG");
         sortCountries();
         createCountriesDialog();
 
@@ -383,13 +383,13 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void navigateToMapActivity() {
-        selectedReq=100;
-        Intent intent=new Intent(this, MapActivity.class);
+        selectedReq = 100;
+        Intent intent = new Intent(this, MapActivity.class);
         launcher.launch(intent);
     }
 
     private void navigateToHomeActivity() {
-        Intent intent=new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
@@ -513,6 +513,7 @@ public class SignUpActivity extends BaseActivity {
     public void setItemData(CountryModel countryModel) {
         dialog.dismiss();
         model.setPhone_code(countryModel.getDialCode());
+        model.setCode(countryModel.getCode());
         binding.setModel(model);
         binding.imFalg.setImageResource(countryModel.getFlag());
     }
@@ -562,6 +563,7 @@ public class SignUpActivity extends BaseActivity {
         }
         return pos;
     }
+
     private void openSheetInfo() {
         androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this).create();
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg2);

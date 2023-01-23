@@ -187,5 +187,6 @@
     <string name="add_bank_account">Add Bank Account</string>
     <string name="banks">Bank Accounts</string>
     <string name="edit_bank_account">Edit Bank Account</string>
+    <string name="invaild_phone">Invaild Phone</string>
 
 </resources>

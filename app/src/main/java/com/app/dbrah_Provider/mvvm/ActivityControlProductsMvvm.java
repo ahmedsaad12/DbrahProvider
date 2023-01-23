@@ -40,12 +40,14 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
     private MutableLiveData<List<CategoryModel>> onCategoryDataSuccess;
 
     private MutableLiveData<List<CategoryModel>> onSubCategoryDataSuccess;
+    private MutableLiveData<List<CategoryModel>> onSubSubCategoryDataSuccess;
 
     private MutableLiveData<List<ProductModel>> onProductsDataSuccess;
 
     private MutableLiveData<String> categoryId;
 
     private MutableLiveData<String> subCategoryId;
+    private MutableLiveData<String> subsubCategoryId;
 
     private MutableLiveData<String> query;
 
@@ -79,6 +81,12 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
         return onSubCategoryDataSuccess;
     }
 
+    public MutableLiveData<List<CategoryModel>> getOnSubSubCategoryDataSuccess() {
+        if (onSubSubCategoryDataSuccess == null) {
+            onSubSubCategoryDataSuccess = new MutableLiveData<>();
+        }
+        return onSubSubCategoryDataSuccess;
+    }
 
     public MutableLiveData<List<ProductModel>> getOnProductsDataSuccess() {
         if (onProductsDataSuccess == null) {
@@ -120,7 +128,14 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
         return subCategoryId;
     }
 
-    public void setCategoryId(String categoryId,UserModel userModel) {
+    public MutableLiveData<String> getSubsubCategoryId() {
+        if (subsubCategoryId == null) {
+            subsubCategoryId = new MutableLiveData<>();
+        }
+        return subsubCategoryId;
+    }
+
+    public void setCategoryId(String categoryId, UserModel userModel) {
         getCategoryId().setValue(categoryId);
         getSubCategory(categoryId,userModel);
     }
@@ -191,11 +206,49 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                     }
                 });
     }
+    public void getSubSubCategory(String sub_cat_id,UserModel userModel) {
+        getOnSubSubCategoryDataSuccess().setValue(new ArrayList<>());
+        Api.getService(Tags.base_url).getSubSubCategory(sub_cat_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<CategoryDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<CategoryDataModel> response) {
+                       Log.e("d;dlldl",response.code()+""+response.body().getStatus());
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getData() != null && response.body().getStatus() == 200) {
+                                List<CategoryModel> list = response.body().getData();
+
+                                if (list.size() > 0) {
+                                    CategoryModel model = new CategoryModel(null, "الكل", "All", null, true);
+                                    list.add(0, model);
+                                }
+                                Log.e("d;dlldl",response.code()+""+response.body().getStatus()+""+ list.size());
+
+                                getSubCategoryId().setValue(sub_cat_id);
+                                controlProducts(userModel);
+                                getOnSubSubCategoryDataSuccess().setValue(list);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                        Log.e("error", e.toString());
+                    }
+                });
+    }
 
     public void controlProducts(UserModel userModel) {
         getIsLoading().postValue(true);
-        Log.e("data",userModel.getData().getId()+" "+getCategoryId().getValue()+" "+getSubCategoryId().getValue());
-        Api.getService(Tags.base_url).controlProducts(userModel.getData().getId(),getCategoryId().getValue(), getSubCategoryId().getValue())
+        Log.e("data",userModel.getData().getId()+" "+getCategoryId().getValue()+" "+getSubCategoryId().getValue()+""+getSubsubCategoryId().getValue());
+        Api.getService(Tags.base_url).controlProducts(userModel.getData().getId(),getCategoryId().getValue(), getSubCategoryId().getValue(),getSubsubCategoryId().getValue())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<RecentProductDataModel>>() {

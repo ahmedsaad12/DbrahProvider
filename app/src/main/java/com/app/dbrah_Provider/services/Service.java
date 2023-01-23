@@ -88,10 +88,14 @@ public interface Service {
     @GET("api/sub_categories")
     Single<Response<CategoryDataModel>> getSubCategory(@Query("category_id") String category_id);
 
+    @GET("api/sub_sub_categories")
+    Single<Response<CategoryDataModel>> getSubSubCategory(@Query("sub_category_id") String sub_category_id);
+
     @GET("api/provider/control_products")
     Single<Response<RecentProductDataModel>> controlProducts(@Query("provider_id") String provider_id,
                                                              @Query("category_id") String category_id,
-                                                             @Query("sub_category_id") String sub_category_id);
+                                                             @Query("sub_category_id") String sub_category_id,
+                                                             @Query("sub_sub_category_id") String sub_sub_category_id);
 
     @POST("api/provider/edit_my_products_not_have")
     Single<Response<StatusResponse>> editProducts(@Body EditProductModel editProductModel);

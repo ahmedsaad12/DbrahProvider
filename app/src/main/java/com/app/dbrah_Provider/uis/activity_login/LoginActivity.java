@@ -112,6 +112,7 @@ public class LoginActivity extends BaseActivity {
         binding.consPhone.setVisibility(View.VISIBLE);
         binding.imFalg.setImageDrawable(getResources().getDrawable(R.drawable.flag_eg));
         model.setPhone_code("+20");
+        model.setCode("EG");
         model.setType("phone");
         binding.llEmail.setVisibility(View.GONE);
         binding.tvEmail.setOnClickListener(view -> {
@@ -176,6 +177,7 @@ public class LoginActivity extends BaseActivity {
     public void setItemData(CountryModel countryModel) {
         dialog.dismiss();
         model.setPhone_code(countryModel.getDialCode());
+        model.setCode(countryModel.getCode());
         binding.setModel(model);
         binding.imFalg.setImageResource(countryModel.getFlag());
     }

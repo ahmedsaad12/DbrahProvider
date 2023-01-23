@@ -6,9 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.app.dbrah_Provider.R;
 import com.app.dbrah_Provider.databinding.SubCategoryRowBinding;
@@ -17,7 +15,7 @@ import com.app.dbrah_Provider.uis.activity_control_products.ControlProductsActiv
 
 import java.util.List;
 
-public class SubProductCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SubSubProductCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CategoryModel> list;
     private Context context;
     private LayoutInflater inflater;
@@ -25,7 +23,7 @@ public class SubProductCategoryAdapter extends RecyclerView.Adapter<RecyclerView
     private MyHolder oldHolder;
     private int selectedPos = 0;
 
-    public SubProductCategoryAdapter(Context context, String lang) {
+    public SubSubProductCategoryAdapter(Context context, String lang) {
         this.context = context;
         this.lang = lang;
         inflater = LayoutInflater.from(context);
@@ -69,7 +67,7 @@ public class SubProductCategoryAdapter extends RecyclerView.Adapter<RecyclerView
 
                 if (context instanceof ControlProductsActivity){
                     ControlProductsActivity activity = (ControlProductsActivity) context;
-                    activity.showSubsubCat(categoryModel);
+                    activity.showProducts(categoryModel);
                 }
             }
 

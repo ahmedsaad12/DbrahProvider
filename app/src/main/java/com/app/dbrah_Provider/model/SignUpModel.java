@@ -2,6 +2,7 @@ package com.app.dbrah_Provider.model;
 
 import android.content.Context;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
@@ -10,6 +11,9 @@ import androidx.databinding.ObservableField;
 
 import com.app.dbrah_Provider.BR;
 import com.app.dbrah_Provider.R;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class SignUpModel extends BaseObservable {
     private String latitude;
     private String longitude;
     private String address;
+    private String code;
 
     public ObservableField<String> error_store_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
@@ -43,17 +48,28 @@ public class SignUpModel extends BaseObservable {
     public ObservableField<String> error_phone = new ObservableField<>();
     public ObservableField<String> error_address = new ObservableField<>();
     private Pattern pattern;
+    PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
 
 
     public boolean isDataValid(Context context) {
+        Phonenumber.PhoneNumber swissNumberProto;
+        boolean isValid=false;
+
+        try {
+            swissNumberProto = phoneUtil.parse("0"+phone, code);
+            isValid = phoneUtil.isValidNumber(swissNumberProto);
+        } catch (NumberParseException e) {
+            Log.e("NumberParseException" , e.toString());
+        }
         pattern = Pattern.compile(PASSWORD_PATTERN);
 
         if (!store_name.trim().isEmpty()
                 && !email.isEmpty()
                 && !phone.isEmpty() &&
+                isValid&&
                 nationality_id != 0 &&
                 town_id != 0
-                && vat_num.length() == 15
+                && (vat_num.isEmpty() || vat_num.length() == 15)
                 && password.length() >= 6
                 && pattern.matcher(password).matches()
                 && repeat_password.length() >= 6
@@ -89,7 +105,11 @@ public class SignUpModel extends BaseObservable {
             if (phone.isEmpty()) {
                 error_phone.set(context.getString(R.string.field_required));
 
-            } else {
+            }
+            else if(!isValid){
+                error_phone.set(context.getString(R.string.invaild_phone));
+            }
+            else {
                 error_phone.set(null);
 
             }
@@ -100,32 +120,31 @@ public class SignUpModel extends BaseObservable {
             if (town_id == 0) {
                 Toast.makeText(context, R.string.choose_town, Toast.LENGTH_SHORT).show();
             }
-            if (vat_num.isEmpty()) {
-                error_vat_num.set(context.getString(R.string.field_required));
-            }
-            else if(vat_num.length()!=15){
+//            if (!vat_num.isEmpty()) {
+//                error_vat_num.set(context.getString(R.string.field_required));
+//            }
+//            else
+            if (!vat_num.isEmpty() && vat_num.length() != 15) {
                 error_vat_num.set(context.getString(R.string.must_equal));
-            }
-            else {
+            } else {
                 error_vat_num.set(null);
             }
 
             if (password.isEmpty()) {
                 error_password.set(context.getString(R.string.field_required));
             } else {
-                if(!pattern.matcher(password).matches()){
+                if (!pattern.matcher(password).matches()) {
                     error_password.set(context.getResources().getString(R.string.password_weak));
-               error_password.notifyChange();
-                }else{
-                error_password.set(null);
-            }}
+                    error_password.notifyChange();
+                } else {
+                    error_password.set(null);
+                }
+            }
             if (repeat_password.isEmpty()) {
                 error_repeat_password.set(context.getString(R.string.field_required));
-            }
-            else if(!repeat_password.equals(password)){
+            } else if (!repeat_password.equals(password)) {
                 error_repeat_password.set(context.getString(R.string.repeat_password_must));
-            }
-            else {
+            } else {
                 error_repeat_password.set(null);
             }
             if (categoryList.size() > 0) {
@@ -208,6 +227,14 @@ public class SignUpModel extends BaseObservable {
     public void setPhone_code(String phone_code) {
         this.phone_code = phone_code;
         notifyPropertyChanged(BR.phone_code);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Bindable
