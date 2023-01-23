@@ -192,8 +192,16 @@ public class ControlProductsActivity extends BaseActivity {
     }
 
     public void showSubsubCat(CategoryModel categoryModel) {
-          mvvm.getSubCategoryId().setValue(categoryModel.getId());
-        mvvm.getSubSubCategory(mvvm.getSubCategoryId().getValue(), getUserModel());
+        mvvm.getSubCategoryId().setValue(categoryModel.getId());
+
+
+        if (categoryModel.getId() != null) {
+            mvvm.getSubSubCategory(mvvm.getSubCategoryId().getValue(), getUserModel());
+        } else {
+            mvvm.getOnSubSubCategoryDataSuccess().postValue(new ArrayList<>());
+            mvvm.controlProducts(getUserModel());
+
+        }
     }
 
     public void showProducts(CategoryModel categoryModel) {

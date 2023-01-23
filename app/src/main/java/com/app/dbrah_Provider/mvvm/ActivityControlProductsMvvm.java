@@ -173,6 +173,8 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
 
     public void getSubCategory(String cat_id,UserModel userModel) {
         getOnSubCategoryDataSuccess().setValue(new ArrayList<>());
+        getOnSubSubCategoryDataSuccess().setValue(new ArrayList<>());
+
         Api.getService(Tags.base_url).getSubCategory(cat_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
