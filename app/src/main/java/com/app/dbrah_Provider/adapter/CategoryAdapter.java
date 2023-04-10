@@ -55,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 signUpActivity.deleteSelectedCategory(myHolder.getAdapterPosition());
             }else if (context instanceof EditAccountActivity){
                 EditAccountActivity editAccountActivity=(EditAccountActivity)context;
-//                editAccountActivity.deleteSelectedCategory(myHolder.getAdapterPosition());
+                editAccountActivity.deleteSelectedCategory(myHolder.getAdapterPosition());
             }
         });
     }

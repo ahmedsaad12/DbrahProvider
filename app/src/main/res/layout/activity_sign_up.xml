@@ -684,6 +684,7 @@
                             android:layout_height="match_parent"
                             android:background="@color/transparent"
                             android:fontFamily="@font/almira"
+                            android:inputType="number"
                             android:hint="@string/vat_number"
                             android:text="@={model.vat_num}"
                             android:textColor="@color/black"

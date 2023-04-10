@@ -60,7 +60,6 @@ public class EditAccountActivity extends BaseActivity {
     private String phone = "";
     private List<CountryModel> countryModelList = new ArrayList<>();
     private CountryAdapter countriesAdapter;
-    private EditAccountCategoryAdapter categoryAdapter;
     private AlertDialog dialog;
     private EditAccountModel model;
     private UserModel userModel;
@@ -73,6 +72,10 @@ public class EditAccountActivity extends BaseActivity {
     private final int READ_REQ = 1, CAMERA_REQ = 2;
     private int selectedReq = 0;
     private Uri uri = null;
+    private SpinnerCategoryAdapter spinnerCategoryAdapter;
+    private List<CategoryModel> categoryModelList;
+    private List<CategoryModel> selectedCategoryList;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +85,24 @@ public class EditAccountActivity extends BaseActivity {
     }
 
     private void initView() {
+        categoryModelList = new ArrayList<>();
+        selectedCategoryList = new ArrayList<>();
         preferences = Preferences.getInstance();
         model = new EditAccountModel();
         userModel = getUserModel();
-
+        spinnerCategoryAdapter = new SpinnerCategoryAdapter(categoryModelList, this, getLang());
+        binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
         setUpToolbar(binding.toolbar, getString(R.string.edit_profile), R.color.white, R.color.black);
         activitySignUpMvvm = ViewModelProviders.of(this).get(ActivitySignUpMvvm.class);
-
+        activitySignUpMvvm.getOnCategoryDataSuccess().observe(this, categoryModels -> {
+            if (spinnerCategoryAdapter != null) {
+                categoryModels.add(0, new CategoryModel("اختر القسم", "Choose category"));
+                categoryModelList.clear();
+                categoryModelList.addAll(categoryModels);
+                spinnerCategoryAdapter.updateList(categoryModels);
+            }
+        });
+        activitySignUpMvvm.getCategory();
         phone_code = userModel.getData().getPhone_code();
         phone = userModel.getData().getPhone();
 
@@ -122,9 +136,28 @@ public class EditAccountActivity extends BaseActivity {
             finish();
         });
 
-        categoryAdapter = new EditAccountCategoryAdapter(userModel.getData().getCategories(), this, getLang());
+        categoryAdapter = new CategoryAdapter(selectedCategoryList, this, getLang());
         binding.recViewCategory.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(categoryAdapter);
+        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                CategoryModel model = categoryModelList.get(i);
+                if (model.getId() != null) {
+                    if (!isItemInCategoryList(model)) {
+                        selectedCategoryList.add(model);
+                        categoryAdapter.notifyItemInserted(selectedCategoryList.size() - 1);
+                      EditAccountActivity.this.model.setCategoryList(selectedCategoryList);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -203,6 +236,20 @@ public class EditAccountActivity extends BaseActivity {
 
         binding.arrow.setOnClickListener(view -> dialog.show());
         binding.btnCancel.setOnClickListener(view -> closeSheet());
+        updatecategory();
+    }
+
+    private void updatecategory() {
+        if(userModel!=null){
+            for(int i=0;i<userModel.getData().getCategories().size();i++){
+                CategoryModel categoryModel=userModel.getData().getCategories().get(i).getCategory();
+                selectedCategoryList.add(categoryModel);
+
+            }
+            categoryAdapter.notifyDataSetChanged();
+            EditAccountActivity.this.model.setCategoryList(selectedCategoryList);
+
+        }
     }
 
     private void createCountriesDialog() {
@@ -289,6 +336,44 @@ public class EditAccountActivity extends BaseActivity {
 
 
         }
+    }
+    public void deleteSelectedCategory(int adapterPosition) {
+        selectedCategoryList.remove(adapterPosition);
+        categoryAdapter.notifyItemRemoved(adapterPosition);
+        if (selectedCategoryList.size() > 0) {
+            int pos = getItemSpinnerPos(selectedCategoryList.get(selectedCategoryList.size() - 1));
+
+            if (pos != -1) {
+                binding.spinnerCategory.setSelection(pos);
+            } else {
+                binding.spinnerCategory.setSelection(0);
+            }
+        } else {
+            binding.spinnerCategory.setSelection(0);
+
+        }
+    }
+
+    private boolean isItemInCategoryList(CategoryModel diseaseModel) {
+        for (CategoryModel model : selectedCategoryList) {
+            Log.e("D;dlldld",diseaseModel.getId()+" "+model.getId());
+            if (diseaseModel.getId().equals(model.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getItemSpinnerPos(CategoryModel diseaseModel) {
+        int pos = -1;
+        for (int index = 0; index < categoryModelList.size(); index++) {
+            CategoryModel model = categoryModelList.get(index);
+            if (model.getId() == diseaseModel.getId()) {
+                pos = index;
+                return pos;
+            }
+        }
+        return pos;
     }
 
     @Override

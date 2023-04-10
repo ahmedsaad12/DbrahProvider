@@ -79,7 +79,9 @@ public interface Service {
                                        @Part("phone_code") RequestBody phone_code,
                                        @Part("email") RequestBody email,
                                        @Part("password") RequestBody password,
-                                       @Part MultipartBody.Part image);
+                                       @Part MultipartBody.Part image,
+                                       @Part("category_ids[]") List<RequestBody> category_ids
+                                       );
 
 
     @GET("api/main_categories")

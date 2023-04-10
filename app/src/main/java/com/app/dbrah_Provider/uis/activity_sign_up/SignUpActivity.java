@@ -545,7 +545,7 @@ public class SignUpActivity extends BaseActivity {
 
     private boolean isItemInCategoryList(CategoryModel diseaseModel) {
         for (CategoryModel model : selectedCategoryList) {
-            if (diseaseModel.getId() == model.getId()) {
+            if (diseaseModel.getId().equals(model.getId())) {
                 return true;
             }
         }

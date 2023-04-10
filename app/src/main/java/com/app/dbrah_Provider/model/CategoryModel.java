@@ -1,6 +1,7 @@
 package com.app.dbrah_Provider.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CategoryModel implements Serializable {
     private String id;
@@ -11,7 +12,6 @@ public class CategoryModel implements Serializable {
     private String created_at;
     private String updated_at;
     private boolean selected;
-
 
     public CategoryModel(String title_ar, String title_en) {
         this.title_ar = title_ar;

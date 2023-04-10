@@ -1,6 +1,7 @@
 package com.app.dbrah_Provider.model;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -20,6 +21,7 @@ public class EditAccountModel extends BaseObservable {
     private String email;
     private String password;
     private String repeat_password;
+    private List<CategoryModel> categoryList;
 
     public ObservableField<String> error_store_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
@@ -31,7 +33,9 @@ public class EditAccountModel extends BaseObservable {
         if (password.equals(repeat_password) &&
                 !store_name.isEmpty() &&
                 !email.isEmpty() &&
-                !phone.isEmpty()) {
+
+                !phone.isEmpty()
+                &&categoryList.size()>0) {
 
             error_store_name.set(null);
             error_email.set(null);
@@ -45,6 +49,11 @@ public class EditAccountModel extends BaseObservable {
             }else {
                 error_store_name.set(null);
 
+            }
+            if (categoryList.size() > 0) {
+
+            } else {
+                Toast.makeText(context, R.string.choose_category, Toast.LENGTH_SHORT).show();
             }
             if (email.trim().isEmpty()) {
                 error_email.set(context.getString(R.string.field_required));
@@ -152,6 +161,12 @@ public class EditAccountModel extends BaseObservable {
         this.repeat_password = repeat_password;
         notifyPropertyChanged(BR.repeat_password);
     }
+    public List<CategoryModel> getCategoryList() {
+        return categoryList;
+    }
 
+    public void setCategoryList(List<CategoryModel> categoryList) {
+        this.categoryList = categoryList;
+    }
 
 }

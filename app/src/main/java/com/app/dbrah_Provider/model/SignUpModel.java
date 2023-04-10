@@ -74,6 +74,7 @@ public class SignUpModel extends BaseObservable {
                 && pattern.matcher(password).matches()
                 && repeat_password.length() >= 6
                 && password.equals(repeat_password)
+                &&categoryList.size()>0
                 && !address.isEmpty()
         ) {
             error_store_name.set(null);
@@ -124,7 +125,7 @@ public class SignUpModel extends BaseObservable {
 //                error_vat_num.set(context.getString(R.string.field_required));
 //            }
 //            else
-            if (!vat_num.isEmpty() && vat_num.length() != 15) {
+                if (vat_num.length()>0 && vat_num.length() != 15) {
                 error_vat_num.set(context.getString(R.string.must_equal));
             } else {
                 error_vat_num.set(null);

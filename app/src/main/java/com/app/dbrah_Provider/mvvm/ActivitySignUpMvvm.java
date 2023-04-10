@@ -190,7 +190,7 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
                             if (response.body().getStatus() == 200) {
                                 userModelMutableLiveData.postValue(response.body());
                             }
-                        }else if (response.body().getStatus() == 406) {
+                        else if (response.body().getStatus() == 406) {
                             Toast.makeText(context, R.string.ph_found, Toast.LENGTH_LONG).show();
                         } else if (response.body().getStatus() == 407) {
                             Toast.makeText(context, R.string.em_found, Toast.LENGTH_LONG).show();
@@ -198,6 +198,9 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
                         else if (response.body().getStatus() == 408) {
                             Toast.makeText(context, R.string.vat_found, Toast.LENGTH_LONG).show();
                         }
+                        else {
+                                Toast.makeText(context, R.string.vat_found, Toast.LENGTH_LONG).show();
+                            }}
                     }
 
                     @Override
@@ -219,12 +222,14 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
         RequestBody phone_code = Common.getRequestBodyText(model.getPhone_code());
         RequestBody email = Common.getRequestBodyText(model.getEmail());
         RequestBody password = Common.getRequestBodyText(model.getPassword());
+        List<RequestBody> category_ids = getRequestBodyList(model.getCategoryList());
+
         MultipartBody.Part image = null;
         if (model.getImage() != null && !model.getImage().isEmpty()) {
             image = Common.getMultiPartImage(context, Uri.parse(model.getImage()), "image");
         }
 
-        Api.getService(Tags.base_url).update(provider_id, phone, phone_code, email, password, image)
+        Api.getService(Tags.base_url).update(provider_id, phone, phone_code, email, password, image,category_ids)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<UserModel>>() {
@@ -236,11 +241,16 @@ public class ActivitySignUpMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<UserModel> response) {
                         dialog.dismiss();
+                       // Log.e("dldlld",response.code()+"");
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
                                 userModelMutableLiveData.postValue(response.body());
                             }
+                            else{
+                                Toast.makeText(context,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                            }
                         }
+
                     }
 
                     @Override
