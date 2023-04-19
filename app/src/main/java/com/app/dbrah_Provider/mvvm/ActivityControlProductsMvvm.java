@@ -137,7 +137,7 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
 
     public void setCategoryId(String categoryId, UserModel userModel) {
         getCategoryId().setValue(categoryId);
-        getSubCategory(categoryId,userModel);
+        getSubCategory(categoryId, userModel);
     }
 
     public void getCategory() {
@@ -156,8 +156,10 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
 
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getData() != null && response.body().getStatus() == 200) {
-                                getIsLoading().setValue(false);
+                                if (response.body().getData().size() == 0) {
+                                    getIsLoading().setValue(false);
 
+                                }
                                 getOnCategoryDataSuccess().setValue(response.body().getData());
                             }
                         }
@@ -171,10 +173,12 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
     }
 
 
-    public void getSubCategory(String cat_id,UserModel userModel) {
+    public void getSubCategory(String cat_id, UserModel userModel) {
+        getIsLoading().setValue(true);
+
         getOnSubCategoryDataSuccess().setValue(new ArrayList<>());
         getOnSubSubCategoryDataSuccess().setValue(new ArrayList<>());
-
+        getOnProductsDataSuccess().setValue(new ArrayList<>());
         Api.getService(Tags.base_url).getSubCategory(cat_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -195,7 +199,8 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                                     list.add(0, model);
                                 }
                                 getCategoryId().setValue(cat_id);
-                                controlProducts(userModel);
+                                getSubCategoryId().setValue(list.get(0).getId());
+
                                 getOnSubCategoryDataSuccess().setValue(list);
                             }
                         }
@@ -208,7 +213,9 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                     }
                 });
     }
-    public void getSubSubCategory(String sub_cat_id,UserModel userModel) {
+
+    public void getSubSubCategory(String sub_cat_id, UserModel userModel) {
+
         getOnSubSubCategoryDataSuccess().setValue(new ArrayList<>());
         Api.getService(Tags.base_url).getSubSubCategory(sub_cat_id)
                 .subscribeOn(Schedulers.io())
@@ -221,20 +228,27 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@NonNull Response<CategoryDataModel> response) {
-                       Log.e("d;dlldl",response.code()+""+response.body().getStatus());
+                        Log.e("d;dlldl", response.code() + "" + response.body().getStatus());
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getData() != null && response.body().getStatus() == 200) {
+                                getIsLoading().setValue(false);
                                 List<CategoryModel> list = response.body().getData();
 
                                 if (list.size() > 0) {
                                     CategoryModel model = new CategoryModel(null, "الكل", "All", null, true);
                                     list.add(0, model);
                                 }
-                                Log.e("d;dlldl",response.code()+""+response.body().getStatus()+""+ list.size());
+                                Log.e("d;dlldl", response.code() + "" + response.body().getStatus() + "" + list.size());
 
                                 getSubCategoryId().setValue(sub_cat_id);
+                                if (list.size() > 0) {
+                                    getSubsubCategoryId().setValue(list.get(0).getId());
+                                }
                                 controlProducts(userModel);
                                 getOnSubSubCategoryDataSuccess().setValue(list);
+                            } else {
+                                controlProducts(userModel);
+
                             }
                         }
                     }
@@ -249,8 +263,8 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
 
     public void controlProducts(UserModel userModel) {
         getIsLoading().postValue(true);
-        Log.e("data",userModel.getData().getId()+" "+getCategoryId().getValue()+" "+getSubCategoryId().getValue()+""+getSubsubCategoryId().getValue());
-        Api.getService(Tags.base_url).controlProducts(userModel.getData().getId(),getCategoryId().getValue(), getSubCategoryId().getValue(),getSubsubCategoryId().getValue())
+        Log.e("data", userModel.getData().getId() + " " + getCategoryId().getValue() + " " + getSubCategoryId().getValue() + "" + getSubsubCategoryId().getValue());
+        Api.getService(Tags.base_url).controlProducts(userModel.getData().getId(), getCategoryId().getValue(), getSubCategoryId().getValue(), getSubsubCategoryId().getValue())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<RecentProductDataModel>>() {
@@ -286,12 +300,12 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
         getOnProductsDataSuccess().setValue(data);
     }
 
-    public void editProducts(Context context, EditProductModel editProductModel){
+    public void editProducts(Context context, EditProductModel editProductModel) {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
-        Log.e("list",editProductModel.getProducts_id()+" "+editProductModel.getProvider_id());
+        Log.e("list", editProductModel.getProducts_id() + " " + editProductModel.getProvider_id());
         Api.getService(Tags.base_url).editProducts(editProductModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -304,9 +318,9 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
                         dialog.dismiss();
-                        Log.e("status",response.code()+" "+response.body().getStatus());
-                        if (response.isSuccessful()){
-                            if (response.body().getStatus()==200){
+                        Log.e("status", response.code() + " " + response.body().getStatus());
+                        if (response.isSuccessful()) {
+                            if (response.body().getStatus() == 200) {
                                 save.postValue(true);
                             }
                         }
@@ -315,7 +329,7 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         dialog.dismiss();
-                        Log.e("error",e.toString());
+                        Log.e("error", e.toString());
                     }
                 });
     }

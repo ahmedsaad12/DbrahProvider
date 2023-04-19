@@ -41,10 +41,16 @@ public class SubProductCategoryAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
-        CategoryModel model = list.get(position);
         if (oldHolder==null){
-            if (selectedPos == position){
-                oldHolder = myHolder;
+            oldHolder=myHolder;
+            CategoryModel model=list.get(position);
+            model.setSelected(true);
+            list.set(position,model);
+            myHolder.binding.setModel(model);
+            selectedPos=position;
+            if (context instanceof ControlProductsActivity) {
+                ControlProductsActivity activity = (ControlProductsActivity) context;
+                activity.showSubsubCat(list.get(myHolder.getAdapterPosition()));
             }
         }
 
