@@ -89,8 +89,8 @@
     <string name="vat_number2">VAT Number :</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="choose_category">Please choose category</string>
-    <string name="please_enter_your_email">Please enter your registered email</string>
-    <string name="we_will_send_a_verification_code">We will send a verification code to your registered email</string>
+    <string name="please_enter_your_email">Please enter your registered email or Phone</string>
+    <string name="we_will_send_a_verification_code">We will send a verification code to your registered email or Phone</string>
     <string name="done">Done</string>
     <string name="please_enter_your_verification_code">Please enter your verification code .</string>
     <string name="we_have_sent_a_verification_code_to_your_registered_email">We have sent a verification code to your registered email</string>

@@ -90,8 +90,8 @@
     <string name="vat_number2">الرقم الضريبى : </string>
     <string name="repeat_password">أعد كتابة كلمة المرور</string>
     <string name="choose_category">من فضلك اختر قسم</string>
-    <string name="please_enter_your_email">الرجاء إدخال بريدك الإلكتروني المسجل</string>
-    <string name="we_will_send_a_verification_code">سوف نرسل رمز التحقق إلى بريدك الإلكتروني المسجل</string>
+    <string name="please_enter_your_email">الرجاء إدخال بريدك الإلكتروني او رقم الجوال المسجل</string>
+    <string name="we_will_send_a_verification_code">سوف نرسل رمز التحقق إلى بريدك الإلكتروني او رقم جوالك المسجل </string>
     <string name="done">تم</string>
     <string name="please_enter_your_verification_code">الرجاء إدخال رمز التحقق الخاص بك .</string>
     <string name="we_have_sent_a_verification_code_to_your_registered_email">لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني المسجل</string>
