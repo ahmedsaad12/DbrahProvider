@@ -14,6 +14,7 @@ import com.app.dbrah_Provider.R;
 import com.app.dbrah_Provider.databinding.CountriesRowBinding;
 import com.app.dbrah_Provider.model.CountryModel;
 import com.app.dbrah_Provider.uis.activity_edit_account.EditAccountActivity;
+import com.app.dbrah_Provider.uis.activity_forget_password.ForgetPasswordActivity;
 import com.app.dbrah_Provider.uis.activity_login.LoginActivity;
 import com.app.dbrah_Provider.uis.activity_sign_up.SignUpActivity;
 
@@ -52,6 +53,10 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 activity.setItemData(list.get(holder.getLayoutPosition()));
             }else if (context instanceof EditAccountActivity){
                 EditAccountActivity activity=(EditAccountActivity) context;
+                activity.setItemData(list.get(holder.getLayoutPosition()));
+            }
+            else if (context instanceof ForgetPasswordActivity){
+                ForgetPasswordActivity activity=(ForgetPasswordActivity) context;
                 activity.setItemData(list.get(holder.getLayoutPosition()));
             }
         });

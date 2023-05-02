@@ -55,6 +55,18 @@ public interface Service {
                                       @Field("password") String password,
                                       @Field("type") String type);
 
+    @FormUrlEncoded
+    @POST("api/provider/check-provider-exists")
+    Single<Response<StatusResponse>> checkUser(@Field("phone_code") String phone_code,
+                                               @Field("phone") String phone,
+                                               @Field("email") String email,
+                                               @Field("type") String type);
+    @FormUrlEncoded
+    @POST("api/auth/check/code")
+    Single<Response<StatusResponse>> checkCode(@Field("email") String email,
+                                               @Field("code") String code
+    );
+
 
     @Multipart
     @POST("api/provider/register")
@@ -81,7 +93,7 @@ public interface Service {
                                        @Part("password") RequestBody password,
                                        @Part MultipartBody.Part image,
                                        @Part("category_ids[]") List<RequestBody> category_ids
-                                       );
+    );
 
 
     @GET("api/main_categories")
@@ -245,15 +257,17 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/provider/update")
     Single<Response<StatusResponse>> editBankAccount(@Field("bank_account_id") String bank_account_id,
-                                                    @Field("provider_id") String provider_id,
-                                                    @Field("account_holder_name") String account_holder_name,
-                                                    @Field("iban") String iban
+                                                     @Field("provider_id") String provider_id,
+                                                     @Field("account_holder_name") String account_holder_name,
+                                                     @Field("iban") String iban
 
 
-    ); @FormUrlEncoded
+    );
+
+    @FormUrlEncoded
     @POST("api/provider/delete")
     Single<Response<StatusResponse>> deleteBankAccount(@Field("bank_account_id") String bank_account_id,
-                                                    @Field("provider_id") String provider_id
+                                                       @Field("provider_id") String provider_id
 
 
     );
