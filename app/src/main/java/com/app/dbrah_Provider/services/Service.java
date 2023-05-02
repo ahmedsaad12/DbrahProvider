@@ -57,10 +57,22 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/provider/check-provider-exists")
+    Single<Response<StatusResponse>> newPassword(@Field("phone_code") String phone_code,
+                                               @Field("phone") String phone,
+                                               @Field("email") String email,
+                                               @Field("type") String type,
+                                               @Field("passwor'") String password,
+                                               @Field("password_confirmation") String password_confirmation,
+
+);
+
+    @FormUrlEncoded
+    @POST("api/password/reset")
     Single<Response<StatusResponse>> checkUser(@Field("phone_code") String phone_code,
                                                @Field("phone") String phone,
                                                @Field("email") String email,
                                                @Field("type") String type);
+
     @FormUrlEncoded
     @POST("api/auth/check/code")
     Single<Response<StatusResponse>> checkCode(@Field("email") String email,

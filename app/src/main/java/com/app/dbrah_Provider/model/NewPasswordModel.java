@@ -21,7 +21,10 @@ import java.util.regex.Pattern;
 
 public class NewPasswordModel extends BaseObservable {
     final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
-
+private String phone="";
+private String email="";
+private String type="";
+private String phone_code;
     private String password;
     private String repeat_password;
 
@@ -105,5 +108,35 @@ public class NewPasswordModel extends BaseObservable {
         notifyPropertyChanged(BR.repeat_password);
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPhone_code() {
+        return phone_code;
+    }
+
+    public void setPhone_code(String phone_code) {
+        this.phone_code = phone_code;
+    }
 }

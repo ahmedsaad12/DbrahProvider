@@ -195,5 +195,6 @@
     <string name="reset_with_phone">إعادة تعيين ب رقم الجوال</string>
     <string name="user_not_found">User Not Found</string>
     <string name="incorrect_code">Incorrect Code</string>
+    <string name="password_changed">Paswword Changed Sucess</string>
 
 </resources>
