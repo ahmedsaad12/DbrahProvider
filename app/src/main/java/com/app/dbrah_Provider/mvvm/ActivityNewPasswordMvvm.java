@@ -12,7 +12,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.app.dbrah_Provider.R;
 import com.app.dbrah_Provider.model.CountryModel;
-import com.app.dbrah_Provider.model.newPasswordModel;
 import com.app.dbrah_Provider.model.NewPasswordModel;
 import com.app.dbrah_Provider.model.StatusResponse;
 import com.app.dbrah_Provider.model.UserModel;
@@ -55,7 +54,7 @@ public class ActivityNewPasswordMvvm extends AndroidViewModel {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .newPassword(newPasswordModel.getPhone_code(), newPasswordModel.getPhone(), newPasswordModel.getEmail(),newPasswordModel.getType(), newPasswordModel.getPassword(),newPasswordModel.getRepeat_password())
+                .newPassword(newPasswordModel.getPhone_code(), newPasswordModel.getPhone(), newPasswordModel.getEmail(),newPasswordModel.getType(), newPasswordModel.getPassword())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {

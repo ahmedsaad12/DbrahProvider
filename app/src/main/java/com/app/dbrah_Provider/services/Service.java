@@ -56,18 +56,17 @@ public interface Service {
                                       @Field("type") String type);
 
     @FormUrlEncoded
-    @POST("api/provider/check-provider-exists")
+    @POST("api/provider/confirm-password")
     Single<Response<StatusResponse>> newPassword(@Field("phone_code") String phone_code,
-                                               @Field("phone") String phone,
-                                               @Field("email") String email,
-                                               @Field("type") String type,
-                                               @Field("passwor'") String password,
-                                               @Field("password_confirmation") String password_confirmation,
+                                                 @Field("phone") String phone,
+                                                 @Field("email") String email,
+                                                 @Field("type") String type,
+                                                 @Field("password") String password
 
-);
+                                                 );
 
     @FormUrlEncoded
-    @POST("api/password/reset")
+    @POST("api/provider/check-provider-exists")
     Single<Response<StatusResponse>> checkUser(@Field("phone_code") String phone_code,
                                                @Field("phone") String phone,
                                                @Field("email") String email,
