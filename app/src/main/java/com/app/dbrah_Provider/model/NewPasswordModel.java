@@ -21,16 +21,16 @@ import java.util.regex.Pattern;
 
 public class NewPasswordModel extends BaseObservable {
     final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
-private String phone="";
-private String email="";
-private String type="";
-private String phone_code;
+    private String phone = "";
+    private String email = "";
+    private String type = "";
+    private String phone_code;
     private String password;
     private String repeat_password;
 
     public ObservableField<String> error_password = new ObservableField<>();
     public ObservableField<String> error_repeat_password = new ObservableField<>();
-      private Pattern pattern;
+    private Pattern pattern;
 
 
     public boolean isDataValid(Context context) {
@@ -39,9 +39,9 @@ private String phone_code;
 
         if (
                 password.length() >= 6
-                && pattern.matcher(password).matches()
-                && repeat_password.length() >= 6
-                && password.equals(repeat_password)
+                        && pattern.matcher(password).matches()
+                        && repeat_password.length() >= 6
+                        && password.equals(repeat_password)
 
         ) {
 
@@ -85,7 +85,6 @@ private String phone_code;
         notifyPropertyChanged(BR.repeat_password);
 
     }
-
 
 
     @Bindable

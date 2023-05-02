@@ -243,7 +243,14 @@ public class EditAccountActivity extends BaseActivity {
         if(userModel!=null){
             for(int i=0;i<userModel.getData().getCategories().size();i++){
                 CategoryModel categoryModel=userModel.getData().getCategories().get(i).getCategory();
-                selectedCategoryList.add(categoryModel);
+            try {
+                if(categoryModel.getId()!=null) {
+                    selectedCategoryList.add(categoryModel);
+                }
+            }
+            catch (Exception e){
+
+            }
 
             }
             categoryAdapter.notifyDataSetChanged();
