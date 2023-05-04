@@ -193,8 +193,8 @@
     <string name="please_enter_your_phone">من فضلك ادخل رقم الجوال</string>
     <string name="reset_with_email">إعادة تعيين ب البريد الإلكتروني</string>
     <string name="reset_with_phone">إعادة تعيين ب رقم الجوال</string>
-    <string name="user_not_found">User Not Found</string>
-    <string name="incorrect_code">Incorrect Code</string>
-    <string name="password_changed">Paswword Changed Sucess</string>
+    <string name="user_not_found">المستخدم غير موجود</string>
+    <string name="incorrect_code">كود خاطئ</string>
+    <string name="password_changed">تم تغيير كلمة المرور بنجاح</string>
 
 </resources>
