@@ -195,5 +195,6 @@
     <string name="user_not_found">User Not Found</string>
     <string name="incorrect_code">Incorrect Code</string>
     <string name="password_changed">Paswword Changed Sucess</string>
+    <string name="price_can_not">Price Can not Bigger than 5000</string>
 
 </resources>

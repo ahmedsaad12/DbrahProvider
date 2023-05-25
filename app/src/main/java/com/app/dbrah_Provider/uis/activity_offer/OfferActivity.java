@@ -28,9 +28,11 @@ import com.app.dbrah_Provider.mvvm.ActivityOfferMvvm;
 import com.app.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.app.dbrah_Provider.uis.activity_preview.PreviewActivity;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -104,7 +106,23 @@ public class OfferActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().startsWith("0")) {
                     binding.edtprice.setText("");
+
+
                 }
+//                double amount=Double.parseDouble(s.toString());
+////                DecimalFormat amountFormate = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
+////                amountFormate.applyPattern("###.##");
+////                Log.e("lll",amountFormate.format(amount));
+//                if(amount>5000){
+//                    binding.edtprice.setError(getString(R.string.price_can_not));
+//                }
+//                else{
+//                    binding.edtprice.setError(null);
+//                }
+//                Formatter formatter = new Formatter();
+//                String amount1=formatter.format("%.2f",amount,Locale.ENGLISH).toString();
+//                Log.e("lll",amount1);
+               // binding.edtprice.setText(amount1);
             }
         });
         binding.edtAprice.addTextChangedListener(new TextWatcher() {
@@ -122,7 +140,30 @@ public class OfferActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().startsWith("0")) {
                     binding.edtAprice.setText("");
+//                    DecimalFormat amountFormate  = new DecimalFormat("####.###");
+//                    double amount=Double.parseDouble( binding.edtAprice.getText().toString());
+//                    binding.edtAprice.setText(amountFormate.format(amount));
+//                    if(amount>5000){
+//                        binding.edtAprice.setError(getString(R.string.price_can_not));
+//                    }
+//                    else{
+//                        binding.edtprice.setError(null);
+//                    }
                 }
+             //   double amount=Double.parseDouble(s.toString());
+
+//                DecimalFormat amountFormate = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
+//                amountFormate.applyPattern("####.##");
+//                Log.e("lll",amountFormate.format(amount));
+//                Formatter formatter = new Formatter();
+//                String amount1=formatter.format("%.2f",amount,Locale.ENGLISH).toString();
+//                binding.edtAprice.setText(amount1);
+//                if(amount>5000){
+//                    binding.edtAprice.setError(getString(R.string.price_can_not));
+//                }
+//                else{
+//                    binding.edtAprice.setError(null);
+//                }
             }
         });
         binding.edtQuantity.addTextChangedListener(new TextWatcher() {
@@ -227,7 +268,9 @@ public class OfferActivity extends BaseActivity {
             if (avilable == 1) {
 
                 String price = binding.edtprice.getText().toString();
-                if (!price.isEmpty()) {
+                double amount=Double.parseDouble( binding.edtprice.getText().toString());
+
+                if (!price.isEmpty()&&amount<=5000) {
                     binding.edtprice.setError(null);
                     offerDataModel.setQty(orderModel.getDetails().get(index).getQty());
                     offerDataModel.setAvailable_qty(orderModel.getDetails().get(index).getQty());
@@ -238,15 +281,25 @@ public class OfferActivity extends BaseActivity {
                     offerDataModel.setType("price");
                     add = true;
                 } else {
-                    binding.edtprice.setError(getResources().getString(R.string.field_required));
+                    if(binding.edtprice.getText().toString().isEmpty()){
+                        binding.edtprice.setError(getResources().getString(R.string.field_required));
+
+                    }
+                  else  if(amount>5000){
+                        binding.edtprice.setError(getString(R.string.price_can_not));
+                    }
+                    else{
+                        binding.edtprice.setError(null);
+                    }
                 }
             } else {
                 binding.edtprice.setError(null);
                 binding.edtAprice.setError(null);
                 binding.edtQuantity.setError(null);
                 String price = binding.edtAprice.getText().toString();
+                double amount=Double.parseDouble( binding.edtAprice.getText().toString());
 
-                if (less == 1) {
+                if (less == 1&&amount<=5000) {
                     String qty = binding.edtQuantity.getText().toString();
                     if (!price.isEmpty() && !qty.isEmpty()) {
                         offerDataModel.setQty(orderModel.getDetails().get(index).getQty());
@@ -260,10 +313,15 @@ public class OfferActivity extends BaseActivity {
                     } else {
                         if (price.isEmpty()) {
                             binding.edtAprice.setError(getResources().getString(R.string.field_required));
-                        } else {
-                            binding.edtAprice.setError(null);
-
                         }
+
+                        else  if(amount>5000){
+                            binding.edtAprice.setError(getString(R.string.price_can_not));
+                        }
+                        else{
+                            binding.edtAprice.setError(null);
+                        }
+
                         if (qty.isEmpty()) {
                             binding.edtQuantity.setError(getResources().getString(R.string.field_required));
                         } else {
@@ -271,7 +329,8 @@ public class OfferActivity extends BaseActivity {
 
                         }
                     }
-                } else {
+                }
+                else {
                     int pos = binding.spBrand.getSelectedItemPosition();
                     if (!price.isEmpty() && pos != 0) {
                         offerDataModel.setQty(orderModel.getDetails().get(index).getQty());
@@ -369,7 +428,30 @@ public class OfferActivity extends BaseActivity {
                 @Override
                 public void afterTextChanged(Editable editable) {
                     emitter.onNext(editable.toString());
+                    if(!editable.toString().isEmpty()){
+                    if (editable.toString().startsWith("0")) {
+                        binding.edtprice.setText("");
+
+
+                    }
+                   double amount=Double.parseDouble(editable.toString());
+                    Log.e("amount",amount+"");
+//
+////                    DecimalFormat amountFormate = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
+////                    amountFormate.applyPattern("###.##");
+////                    Log.e("lll",amountFormate.format(amount));
+                    if(amount>5000){
+                        binding.edtprice.setError(getString(R.string.price_can_not));
+                    }
+                    else{
+                        binding.edtprice.setError(null);
+                    }
+    String amount1= String.format(Locale.ENGLISH,"%.3f",amount);
+    if(!amount1.equals( editable.toString())){
+                    binding.edtprice.setText(amount1);
+               binding.edtprice.setSelection(1);
                 }
+                }}
             });
 
         }).debounce(2, TimeUnit.SECONDS)
@@ -400,7 +482,26 @@ public class OfferActivity extends BaseActivity {
                 @Override
                 public void afterTextChanged(Editable editable) {
                     emitter.onNext(editable.toString());
-                }
+                    if(!editable.toString().isEmpty()){
+                    if (editable.toString().startsWith("0")) {
+                        binding.edtAprice.setText("");
+
+                    }
+                    double amount=Double.parseDouble( editable.toString());
+
+//                    DecimalFormat amountFormate = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
+                    String amount1= String.format(Locale.ENGLISH,"%.3f",amount);
+                    if(!amount1.equals( editable.toString())){
+                        binding.edtAprice.setText(amount1);
+                        binding.edtAprice.setSelection(1);
+                    }
+                    if(amount>5000){
+                        binding.edtAprice.setError(getString(R.string.price_can_not));
+                    }
+                    else{
+                        binding.edtAprice.setError(null);
+                    }
+                }}
             });
 
         }).debounce(2, TimeUnit.SECONDS)

@@ -196,6 +196,7 @@
     <string name="user_not_found">المستخدم غير موجود</string>
     <string name="incorrect_code">كود خاطئ</string>
     <string name="password_changed">تم تغيير كلمة المرور بنجاح</string>
+    <string name="price_can_not">لا يجب ان يكون سعر المنتج اكبر من 5000</string>
 
 </resources>
 
