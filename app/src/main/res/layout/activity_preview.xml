@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<import type="java.util.Locale"/>
         <variable
             name="model"
             type="com.app.dbrah_Provider.model.AddOFFerDataModel" />
@@ -300,7 +300,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/almaraibold"
-                                android:text="@{model.total_price}"
+                                android:text='@{String.format(Locale.ENGLISH,"%.2f",Double.parseDouble(model.total_price))}'
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
 

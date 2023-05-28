@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.app.dbrah_Provider.model.OrderModel;
 import com.app.dbrah_Provider.model.ProductModel;
 import com.app.dbrah_Provider.model.SettingDataModel;
 import com.app.dbrah_Provider.mvvm.ActivityOfferMvvm;
+import com.app.dbrah_Provider.share.DecimalDigitsInputFilter;
 import com.app.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.app.dbrah_Provider.uis.activity_preview.PreviewActivity;
 
@@ -79,6 +81,8 @@ public class OfferActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     private void initView() {
+        binding.edtAprice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,3)});
+        binding.edtprice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,3)});
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 setResult(RESULT_OK);
@@ -428,30 +432,13 @@ public class OfferActivity extends BaseActivity {
                 @Override
                 public void afterTextChanged(Editable editable) {
                     emitter.onNext(editable.toString());
-                    if(!editable.toString().isEmpty()){
-                    if (editable.toString().startsWith("0")) {
-                        binding.edtprice.setText("");
+                    if(!editable.toString().isEmpty()) {
+                        if (editable.toString().startsWith("0")) {
+                            binding.edtprice.setText("");
 
 
-                    }
-                   double amount=Double.parseDouble(editable.toString());
-                    Log.e("amount",amount+"");
-//
-////                    DecimalFormat amountFormate = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
-////                    amountFormate.applyPattern("###.##");
-////                    Log.e("lll",amountFormate.format(amount));
-                    if(amount>5000){
-                        binding.edtprice.setError(getString(R.string.price_can_not));
-                    }
-                    else{
-                        binding.edtprice.setError(null);
-                    }
-    String amount1= String.format(Locale.ENGLISH,"%.3f",amount);
-    if(!amount1.equals( editable.toString())){
-                    binding.edtprice.setText(amount1);
-               binding.edtprice.setSelection(1);
-                }
-                }}
+                        }
+                    }}
             });
 
         }).debounce(2, TimeUnit.SECONDS)
@@ -487,20 +474,7 @@ public class OfferActivity extends BaseActivity {
                         binding.edtAprice.setText("");
 
                     }
-                    double amount=Double.parseDouble( editable.toString());
 
-//                    DecimalFormat amountFormate = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
-                    String amount1= String.format(Locale.ENGLISH,"%.3f",amount);
-                    if(!amount1.equals( editable.toString())){
-                        binding.edtAprice.setText(amount1);
-                        binding.edtAprice.setSelection(1);
-                    }
-                    if(amount>5000){
-                        binding.edtAprice.setError(getString(R.string.price_can_not));
-                    }
-                    else{
-                        binding.edtAprice.setError(null);
-                    }
                 }}
             });
 

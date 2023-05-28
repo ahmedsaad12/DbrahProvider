@@ -5,7 +5,7 @@
     <data>
 
         <import type="android.view.View" />
-
+<import type="java.util.Locale"/>
         <variable
             name="lang"
             type="String" />
@@ -186,7 +186,7 @@
                 android:fontFamily="@font/almira"
                 android:text="@string/single_price2"
                 android:textColor="@color/black2"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
                 android:fontFamily="@font/almira"
                 android:text="@{model.price}"
                 android:textColor="@color/black2"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
                 android:fontFamily="@font/almira"
                 android:text="@string/sar"
                 android:textColor="@color/grey7"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <androidx.legacy.widget.Space
                 android:layout_width="0dp"
@@ -221,7 +221,7 @@
                 android:fontFamily="@font/almira"
                 android:text="@string/total_price2"
                 android:textColor="@color/black2"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -229,9 +229,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/almaraibold"
-                android:text="@{model.total_price}"
+                android:text='@{String.format(Locale.ENGLISH,"%.2f",Double.parseDouble(model.total_price))}'
                 android:textColor="@color/black2"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
                 android:fontFamily="@font/almira"
                 android:text="@string/sar"
                 android:textColor="@color/grey7"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </layout>
