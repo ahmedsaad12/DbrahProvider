@@ -84,6 +84,7 @@ public class OfferActivity extends BaseActivity {
         binding.edtAprice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,3)});
         binding.edtprice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,3)});
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+          index=0;
             if (result.getResultCode() == Activity.RESULT_OK) {
                 setResult(RESULT_OK);
                 finish();
@@ -124,7 +125,7 @@ public class OfferActivity extends BaseActivity {
 //                    binding.edtprice.setError(null);
 //                }
 //                Formatter formatter = new Formatter();
-//                String amount1=formatter.format("%.2f",amount,Locale.ENGLISH).toString();
+//                String amount1=formatter.format("%.3f",amount,Locale.ENGLISH).toString();
 //                Log.e("lll",amount1);
                // binding.edtprice.setText(amount1);
             }
@@ -160,7 +161,7 @@ public class OfferActivity extends BaseActivity {
 //                amountFormate.applyPattern("####.##");
 //                Log.e("lll",amountFormate.format(amount));
 //                Formatter formatter = new Formatter();
-//                String amount1=formatter.format("%.2f",amount,Locale.ENGLISH).toString();
+//                String amount1=formatter.format("%.3f",amount,Locale.ENGLISH).toString();
 //                binding.edtAprice.setText(amount1);
 //                if(amount>5000){
 //                    binding.edtAprice.setError(getString(R.string.price_can_not));
@@ -267,7 +268,8 @@ public class OfferActivity extends BaseActivity {
         });
         binding.btnNext.setOnClickListener(view -> {
             OfferDataModel offerDataModel = new OfferDataModel();
-            offerDataModel.setProductModel(orderModel.getDetails().get(index).getProduct());
+            if(orderModel.getDetails().size()>0){
+            offerDataModel.setProductModel(orderModel.getDetails().get(index).getProduct());}
             boolean add = false;
             if (avilable == 1) {
 
@@ -543,4 +545,6 @@ public class OfferActivity extends BaseActivity {
                 });
         activityOfferMvvm.getSettings(this);
     }
+
+
 }
