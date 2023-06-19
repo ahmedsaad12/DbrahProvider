@@ -4,6 +4,7 @@ package com.app.dbrah_Provider.share;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
@@ -18,7 +19,11 @@ import com.app.dbrah_Provider.language.Language;
 public class App extends MultiDexApplication {
     public static final String CHANNEL_ID = "dubrh_id_1099";
     public static final String CHANNEL_NAME = "dubrh_channel";
-
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //update your notifications there is no need for a Thread
+    }
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase, "ar"));

@@ -7,11 +7,13 @@ android {
 
     compileSdk 33
 
+
     defaultConfig {
         applicationId "com.app.dbrah_Provider"
         minSdk 19
         targetSdk 33
         versionCode 3
+        resConfigs "en", "ar"
         versionName "1.3"
         multiDexEnabled true
 
