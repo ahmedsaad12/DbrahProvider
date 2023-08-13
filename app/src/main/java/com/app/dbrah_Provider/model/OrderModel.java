@@ -13,6 +13,7 @@ public class OrderModel implements Serializable {
     private String pin;
     private String status;
     private String total_price;
+
     private String delivered_time;
     private String created_at;
     private String updated_at;
@@ -61,6 +62,7 @@ public class OrderModel implements Serializable {
     public String getTotal_price() {
         return total_price;
     }
+
 
     public String getDelivered_time() {
         return delivered_time;
@@ -116,6 +118,9 @@ public class OrderModel implements Serializable {
     }
 
     public static class Offers implements Serializable {
+        private String total_before_tax;
+        private String total_tax;
+
         private String id;
         private String order_id;
         private String provider_id;
@@ -131,6 +136,13 @@ public class OrderModel implements Serializable {
         private boolean isLess;
         private boolean isOther;
 
+        public String getTotal_before_tax() {
+            return total_before_tax;
+        }
+
+        public String getTotal_tax() {
+            return total_tax;
+        }
 
         public String getId() {
             return id;

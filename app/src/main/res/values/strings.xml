@@ -196,5 +196,7 @@
     <string name="incorrect_code">Incorrect Code</string>
     <string name="password_changed">Paswword Changed Sucess</string>
     <string name="price_can_not">Price Can not Bigger than 5000</string>
+    <string name="products_cost">Products Cost</string>
+    <string name="vat">Vat</string>
 
 </resources>

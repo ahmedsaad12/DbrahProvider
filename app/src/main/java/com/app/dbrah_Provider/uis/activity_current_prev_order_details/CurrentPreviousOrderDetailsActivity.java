@@ -87,6 +87,8 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
                         singleOrderDataModel.getData().getOrder().setOffer_status_code("206");
 
                     }
+                    binding.setModel1(singleOrderDataModel.getData().getOffer());
+
                     binding.setModel(singleOrderDataModel.getData().getOrder());
                 }
             }
@@ -98,6 +100,8 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
                     binding.tvTotalPrice.setText(singleOrderDataModel.getData().getOffer().getTotal_price());
                     CurrentPreviousOrderDetailsActivity.this.singleOrderDataModel = singleOrderDataModel;
                     offerDetialsAdapter.updateList(singleOrderDataModel.getData().getOffer().getOffer_details());
+                    binding.setModel1(singleOrderDataModel.getData().getOffer());
+
                     binding.setModel(singleOrderDataModel.getData().getOrder());
                 }
             }

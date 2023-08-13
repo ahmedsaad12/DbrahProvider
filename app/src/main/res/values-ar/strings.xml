@@ -197,6 +197,8 @@
     <string name="incorrect_code">كود خاطئ</string>
     <string name="password_changed">تم تغيير كلمة المرور بنجاح</string>
     <string name="price_can_not">لا يجب ان يكون سعر المنتج اكبر من 5000</string>
+    <string name="products_cost">تكلفة المنتجات </string>
+    <string name="vat">الضريبه</string>
 
 </resources>
 
