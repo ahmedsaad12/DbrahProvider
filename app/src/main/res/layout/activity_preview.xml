@@ -300,7 +300,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/almaraibold"
-                                android:text='@{String.format(Locale.ENGLISH,"%.3f",Double.parseDouble(model.total_price))}'
+                                android:text='@{String.format(Locale.ENGLISH,"%.2f",Double.parseDouble(model.total_price))}'
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
 

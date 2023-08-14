@@ -432,7 +432,7 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/almira"
             android:text='@{model1.total_before_tax!=null?String.format(Locale.ENGLISH,"%.2f",Double.parseDouble(model1.total_before_tax.trim())):""}'
-            android:textColor="@color/black2"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <TextView

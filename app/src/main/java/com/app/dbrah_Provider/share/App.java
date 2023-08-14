@@ -15,9 +15,12 @@ import androidx.multidex.MultiDexApplication;
 
 import com.app.dbrah_Provider.language.Language;
 
+import java.util.UUID;
+
 
 public class App extends MultiDexApplication {
-    public static final String CHANNEL_ID = "dubrh_id_1099";
+    public static final String CHANNEL_ID= UUID.randomUUID().toString();
+    ;
     public static final String CHANNEL_NAME = "dubrh_channel";
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -37,7 +40,8 @@ public class App extends MultiDexApplication {
         createChannel();
     }
 
-    private void createChannel() {
+
+     public  void createChannel() {
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String sound_Path = "";

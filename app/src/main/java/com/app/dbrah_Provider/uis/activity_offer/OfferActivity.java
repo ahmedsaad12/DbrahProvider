@@ -125,7 +125,7 @@ public class OfferActivity extends BaseActivity {
 //                    binding.edtprice.setError(null);
 //                }
 //                Formatter formatter = new Formatter();
-//                String amount1=formatter.format("%.3f",amount,Locale.ENGLISH).toString();
+//                String amount1=formatter.format("%.2f",amount,Locale.ENGLISH).toString();
 //                Log.e("lll",amount1);
                // binding.edtprice.setText(amount1);
             }
@@ -161,7 +161,7 @@ public class OfferActivity extends BaseActivity {
 //                amountFormate.applyPattern("####.##");
 //                Log.e("lll",amountFormate.format(amount));
 //                Formatter formatter = new Formatter();
-//                String amount1=formatter.format("%.3f",amount,Locale.ENGLISH).toString();
+//                String amount1=formatter.format("%.2f",amount,Locale.ENGLISH).toString();
 //                binding.edtAprice.setText(amount1);
 //                if(amount>5000){
 //                    binding.edtAprice.setError(getString(R.string.price_can_not));

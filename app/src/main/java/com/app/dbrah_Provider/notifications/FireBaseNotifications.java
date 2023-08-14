@@ -1,12 +1,14 @@
 package com.app.dbrah_Provider.notifications;
 
 import android.app.ActivityManager;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -26,7 +28,6 @@ import com.app.dbrah_Provider.model.StatusResponse;
 import com.app.dbrah_Provider.model.UserModel;
 import com.app.dbrah_Provider.preferences.Preferences;
 import com.app.dbrah_Provider.remote.Api;
-import com.app.dbrah_Provider.share.App;
 import com.app.dbrah_Provider.tags.Tags;
 import com.app.dbrah_Provider.uis.activity_chat.ChatActivity;
 import com.app.dbrah_Provider.uis.activity_home.HomeActivity;
@@ -41,6 +42,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,18 +55,46 @@ import retrofit2.Response;
 public class FireBaseNotifications extends FirebaseMessagingService {
     private CompositeDisposable disposable = new CompositeDisposable();
     private Map<String, String> map;
+    public  String CHANNEL_ID;
+    public   int not_id ;
+
+    public static final String CHANNEL_NAME = "dubrh_channel";
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         map = remoteMessage.getData();
-
+        createChannel(map);
         for (String key : map.keySet()) {
             Log.e("Key=", key + "_value=" + map.get(key));
         }
 
-        manageNotification(map);
 
+
+
+    }
+    public  void createChannel(Map<String, String> map) {
+        CHANNEL_ID= UUID.randomUUID().toString();
+      not_id=  ((int) (Math.random()*(1000000-1)+1));
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String sound_Path = "";
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            sound_Path = uri.toString();
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            channel.setShowBadge(true);
+            channel.setDescription("dubrh channel");
+            channel.setSound(Uri.parse(sound_Path), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
+                    .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+                    .build());
+
+            manager.createNotificationChannel(channel);
+
+        }
+        manageNotification(map);
 
     }
 
@@ -81,14 +111,15 @@ public class FireBaseNotifications extends FirebaseMessagingService {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         sound_Path = uri.toString();
         Intent cancelIntent = new Intent(this, BroadcastCancelNotification.class);
-        PendingIntent cancelPending = PendingIntent.getBroadcast(this, 0, cancelIntent, 0);
+        cancelIntent.putExtra("not",not_id);
+        PendingIntent cancelPending = PendingIntent.getBroadcast(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(this, App.CHANNEL_ID)
-                .setAutoCancel(true)
+        NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setAutoCancel(false)
                 .setOngoing(false)
-                .setChannelId(App.CHANNEL_ID)
+                .setChannelId(CHANNEL_ID)
                 .setDeleteIntent(cancelPending)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -147,14 +178,14 @@ public class FireBaseNotifications extends FirebaseMessagingService {
                                     @Override
                                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                         notificationCompat.setLargeIcon(resource);
-                                        manager.notify(Tags.not_id, notificationCompat.build());
+                                        manager.notify(not_id, notificationCompat.build());
 
                                     }
                                 });
                     } else {
                         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round);
                         notificationCompat.setLargeIcon(bitmap);
-                        manager.notify(Tags.not_id, notificationCompat.build());
+                        manager.notify(not_id, notificationCompat.build());
                     }
 
 
@@ -168,14 +199,14 @@ public class FireBaseNotifications extends FirebaseMessagingService {
                                 @Override
                                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                     notificationCompat.setLargeIcon(resource);
-                                    manager.notify(Tags.not_id, notificationCompat.build());
+                                    manager.notify(not_id, notificationCompat.build());
 
                                 }
                             });
                 } else {
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round);
                     notificationCompat.setLargeIcon(bitmap);
-                    manager.notify(Tags.not_id, notificationCompat.build());
+                    manager.notify(not_id, notificationCompat.build());
                 }
 
             }
@@ -230,7 +261,7 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round);
             notificationCompat.setLargeIcon(bitmap);
-            manager.notify(Tags.not_id, notificationCompat.build());
+            manager.notify(not_id, notificationCompat.build());
             EventBus.getDefault().post(new NotiFire(order_status));
 
         } else {
@@ -249,7 +280,7 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round);
             notificationCompat.setLargeIcon(bitmap);
-            manager.notify(Tags.not_id, notificationCompat.build());
+            manager.notify(not_id, notificationCompat.build());
             EventBus.getDefault().post(new NotiFire(order_status));
 
         }
