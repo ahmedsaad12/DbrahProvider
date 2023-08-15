@@ -49,11 +49,14 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         myHolder.binding.setLang(lang);
         myHolder.binding.setModel(list.get(position));
         if(list.get(position).getIs_pin().equals("1")){
+            ((MyHolder) holder).binding.imPin.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_pin2));
             ((MyHolder) holder).binding.imPin.setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN);
 
         }
 
         else{
+            ((MyHolder) holder).binding.imPin.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_pin));
+
             ((MyHolder) holder).binding.imPin.setColorFilter(ContextCompat.getColor(context, R.color.grey7), PorterDuff.Mode.SRC_IN);
 
         }
