@@ -14,21 +14,24 @@ import org.apache.commons.validator.routines.checkdigit.IBANCheckDigit;
 
 public class AddBankAccountModel extends BaseObservable {
     private String name;
+    private String bankname;
     private String iban;
 
 
     public ObservableField<String> error_name = new ObservableField<>();
+    public ObservableField<String> error_bankname = new ObservableField<>();
     public ObservableField<String> error_iban = new ObservableField<>();
     IBANCheckDigit a = new IBANCheckDigit();
 
     public boolean isDataValid(Context context) {
-        if (!name.isEmpty() &&
+        if (!name.isEmpty() &&!bankname.isEmpty() &&
                 !iban.isEmpty() &&
                 a.isValid(iban)
 
         ) {
             error_name.set(null);
             error_iban.set(null);
+            error_bankname.set(null);
 
             return true;
 
@@ -37,6 +40,12 @@ public class AddBankAccountModel extends BaseObservable {
                 error_name.set(context.getString(R.string.field_required));
             }else {
                 error_name.set(null);
+
+            }
+            if (bankname.isEmpty()){
+                error_bankname.set(context.getString(R.string.field_required));
+            }else {
+                error_bankname.set(null);
 
             }
 
@@ -84,6 +93,14 @@ public class AddBankAccountModel extends BaseObservable {
         notifyPropertyChanged(BR.email);
 
     }
+    @Bindable
+    public String getBankname() {
+        return bankname;
+    }
 
+    public void setBankname(String bankname) {
+        this.bankname = bankname;
+        notifyPropertyChanged(BR.bankname);
 
+    }
 }

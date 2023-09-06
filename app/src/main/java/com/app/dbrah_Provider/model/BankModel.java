@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class BankModel implements Serializable {
     private String id;
     private String account_holder_name;
+    private String account_bank_name;
     private String iban;
     private String provider_id;
 
@@ -24,5 +25,9 @@ public class BankModel implements Serializable {
 
     public String getProvider_id() {
         return provider_id;
+    }
+
+    public String getAccount_bank_name() {
+        return account_bank_name;
     }
 }

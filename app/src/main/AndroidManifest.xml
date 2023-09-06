@@ -122,6 +122,9 @@
         <activity android:name="com.app.dbrah_Provider.uis.activity_bank_account.BanksActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.app.dbrah_Provider.uis.activity_previous_offers.PreviousOffersActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
 
         <service
             android:name=".chat_service.ChatService"

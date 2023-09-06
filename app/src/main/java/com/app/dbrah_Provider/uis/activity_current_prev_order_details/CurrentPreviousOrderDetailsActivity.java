@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.app.dbrah_Provider.model.SingleOrderDataModel;
 import com.app.dbrah_Provider.mvvm.ActivityCurrentPreviousOrderDetailsMvvm;
 import com.app.dbrah_Provider.uis.activity_base.BaseActivity;
 import com.app.dbrah_Provider.uis.activity_chat.ChatActivity;
+import com.app.dbrah_Provider.uis.activity_previous_offers.PreviousOffersActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -59,6 +61,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
+        binding.tvoffers.setPaintFlags(binding.tvoffers.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         activityCurrentPreviousOrderDetailsMvvm = ViewModelProviders.of(this).get(ActivityCurrentPreviousOrderDetailsMvvm.class);
         activityCurrentPreviousOrderDetailsMvvm.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
@@ -154,7 +157,13 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
 
             }
         });
-
+binding.tvoffers.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(CurrentPreviousOrderDetailsActivity.this,PreviousOffersActivity.class);
+        startActivity(intent);
+    }
+});
         binding.llMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -198,5 +198,7 @@
     <string name="price_can_not">Price Can not Bigger than 5000</string>
     <string name="products_cost">Products Cost</string>
     <string name="vat">Vat</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="refused_offers">Previous Offers</string>
 
 </resources>

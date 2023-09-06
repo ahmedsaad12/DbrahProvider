@@ -199,6 +199,8 @@
     <string name="price_can_not">لا يجب ان يكون سعر المنتج اكبر من 5000</string>
     <string name="products_cost">تكلفة المنتجات </string>
     <string name="vat">الضريبه</string>
+    <string name="bank_name">اسم البنك</string>
+    <string name="refused_offers">العروض السابقه</string>
 
 </resources>
 
