@@ -40,7 +40,7 @@ public class ActivityAddBankAccountMvvm extends AndroidViewModel {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .addBankAccount(userModel.getData().getId(),addBankAccountModel.getName(),addBankAccountModel.getIban())
+                .addBankAccount(userModel.getData().getId(),addBankAccountModel.getBankname(),addBankAccountModel.getName(),addBankAccountModel.getIban())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
@@ -72,7 +72,7 @@ public class ActivityAddBankAccountMvvm extends AndroidViewModel {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .editBankAccount(id,userModel.getData().getId(),addBankAccountModel.getName(),addBankAccountModel.getIban())
+                .editBankAccount(id,userModel.getData().getId(),addBankAccountModel.getBankname(),addBankAccountModel.getName(),addBankAccountModel.getIban())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {

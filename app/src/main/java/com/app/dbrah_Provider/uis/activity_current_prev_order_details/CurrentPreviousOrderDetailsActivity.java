@@ -61,7 +61,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
-        binding.tvoffers.setPaintFlags(binding.tvoffers.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvoffers.setPaintFlags(binding.tvoffers.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         activityCurrentPreviousOrderDetailsMvvm = ViewModelProviders.of(this).get(ActivityCurrentPreviousOrderDetailsMvvm.class);
         activityCurrentPreviousOrderDetailsMvvm.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
@@ -157,13 +157,14 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
 
             }
         });
-binding.tvoffers.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent=new Intent(CurrentPreviousOrderDetailsActivity.this,PreviousOffersActivity.class);
-        startActivity(intent);
-    }
-});
+        binding.tvoffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CurrentPreviousOrderDetailsActivity.this, PreviousOffersActivity.class);
+                intent.putExtra("orderID", Integer.parseInt(order_id));
+                startActivity(intent);
+            }
+        });
         binding.llMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

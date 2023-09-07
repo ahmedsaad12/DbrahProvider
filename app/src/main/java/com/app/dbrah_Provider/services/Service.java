@@ -11,6 +11,7 @@ import com.app.dbrah_Provider.model.NotificationDataModel;
 import com.app.dbrah_Provider.model.OrderDataModel;
 import com.app.dbrah_Provider.model.PlaceGeocodeData;
 import com.app.dbrah_Provider.model.PlaceMapDetailsData;
+import com.app.dbrah_Provider.model.PreviousOfferDataModel;
 import com.app.dbrah_Provider.model.ProductDataModel;
 import com.app.dbrah_Provider.model.RecentProductDataModel;
 import com.app.dbrah_Provider.model.ReviewDataModel;
@@ -172,6 +173,11 @@ public interface Service {
     @GET("api/getNotifications")
     Single<Response<NotificationDataModel>> getNotifications(@Query(value = "provider_id") String provider_id
     );
+    @GET("api/provider/rejectOffers")
+    Single<Response<PreviousOfferDataModel>> getPreviousOffers(@Query(value = "provider_id") String provider_id,
+                                                               @Query(value = "order_id") int order_id
+
+    );
 
     @GET("api/provider/reviews")
     Single<Response<ReviewDataModel>> getReviews(@Query(value = "provider_id") String provider_id);
@@ -259,6 +265,7 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/provider/store")
     Single<Response<StatusResponse>> addBankAccount(@Field("provider_id") String provider_id,
+                                                    @Field("account_name") String account_name,
                                                     @Field("account_holder_name") String account_holder_name,
                                                     @Field("iban") String iban
 
@@ -269,6 +276,7 @@ public interface Service {
     @POST("api/provider/update")
     Single<Response<StatusResponse>> editBankAccount(@Field("bank_account_id") String bank_account_id,
                                                      @Field("provider_id") String provider_id,
+                                                     @Field("account_name") String account_name,
                                                      @Field("account_holder_name") String account_holder_name,
                                                      @Field("iban") String iban
 

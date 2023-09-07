@@ -57,7 +57,7 @@ public class AddAccountActivity extends BaseActivity {
 
             addBankAccountModel.setName(bankModel.getAccount_holder_name());
             addBankAccountModel.setIban(bankModel.getIban());
-            addBankAccountModel.setBankname(bankModel.getAccount_bank_name());
+            addBankAccountModel.setBankname(bankModel.getAccount_name());
 
         } else if (userModel != null) {
             addBankAccountModel.setName(userModel.getData().getName());
