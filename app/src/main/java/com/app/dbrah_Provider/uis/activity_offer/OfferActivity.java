@@ -49,9 +49,9 @@ public class OfferActivity extends BaseActivity {
     private int avilable = 1;
     private int less = 1;
     private OrderModel orderModel;
-    private String time;
-    private String time_id;
-    private String date;
+  //  private String time;
+  //  private String time_id;
+   // private String date;
     private int index = 0;
     private List<OfferDataModel> offerDataModelList;
     private AddOFFerDataModel addOFFerDataModel;
@@ -71,10 +71,10 @@ public class OfferActivity extends BaseActivity {
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        time = intent.getStringExtra("time");
-        time_id = intent.getStringExtra("time_id");
+      //  time = intent.getStringExtra("time");
+       // time_id = intent.getStringExtra("time_id");
 
-        date = intent.getStringExtra("date");
+    //    date// = intent.getStringExtra("date");
 
         orderModel = (OrderModel) intent.getSerializableExtra("order");
     }
@@ -195,8 +195,8 @@ public class OfferActivity extends BaseActivity {
         offerDataModelList = new ArrayList<>();
         addOFFerDataModel = new AddOFFerDataModel();
         addOFFerDataModel.setOrderModel(orderModel);
-        addOFFerDataModel.setDelivery_date_time_id(time_id);
-        addOFFerDataModel.setTime(time);
+       // addOFFerDataModel.setDelivery_date_time_id(time_id);
+        //addOFFerDataModel.setTime(time);
         binding.setModel(orderModel.getDetails().get(index));
         binding.setLang(getLang());
         activityOfferMvvm.getIsLoadingRecentProduct().observe(this, new Observer<Boolean>() {
@@ -376,21 +376,21 @@ public class OfferActivity extends BaseActivity {
                     binding.spBrand.setSelection(0);
                     binding.tvindex.setText((index + 1) + "");
                 } else {
-                    String expectedtime = date ;
+                  //  String expectedtime = date ;
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
                     addOFFerDataModel.setOffer_details(offerDataModelList);
                     addOFFerDataModel.setOrder_id(orderModel.getId());
-                    addOFFerDataModel.setTime(time);
-                    addOFFerDataModel.setDate(date);
+                    //addOFFerDataModel.setTime(time);
+                   // addOFFerDataModel.setDate(date);
                     addOFFerDataModel.setTotal_before_tax(total + "");
                     addOFFerDataModel.setTotal_tax(((total*Double.parseDouble(setting.getTax()))/100)+"");
                     addOFFerDataModel.setTotal_price((total+Double.parseDouble(addOFFerDataModel.getTotal_tax()))+"");
-                    try {
-                        addOFFerDataModel.setDelivery_date_time(dateFormat.parse(expectedtime).getTime() + "");
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                     //   addOFFerDataModel.setDelivery_date_time(dateFormat.parse(expectedtime).getTime() + "");
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
                     addOFFerDataModel.setProvider_id(getUserModel().getData().getId());
                     Intent intent = new Intent(OfferActivity.this, PreviewActivity.class);
                     intent.putExtra("data", addOFFerDataModel);
@@ -450,7 +450,7 @@ public class OfferActivity extends BaseActivity {
                 .subscribe(query -> {
                     if (query != null && !query.isEmpty() && index < orderModel.getDetails().size()) {
                         binding.tvSinglePrice.setText(query);
-                        binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty())) + "");
+                        binding.tvTotalPrice.setText(String.format(Locale.ENGLISH,"%.2f",(Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty()))));
                     } else {
                         binding.tvSinglePrice.setText("0");
                         binding.tvTotalPrice.setText("0");
@@ -488,12 +488,12 @@ public class OfferActivity extends BaseActivity {
                     if (query != null && !query.isEmpty() && index < orderModel.getDetails().size()) {
                         if (less == 0) {
                             binding.tvSinglePrice.setText(query);
-                            binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty())) + "");
+                            binding.tvTotalPrice.setText(String.format(Locale.ENGLISH,"%.2f",(Double.parseDouble(query) * Double.parseDouble(orderModel.getDetails().get(index).getQty()))));
                         } else {
                             String qty = binding.edtQuantity.getText().toString();
                             if (!qty.isEmpty()) {
                                 binding.tvSinglePrice.setText(query);
-                                binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(qty)) + "");
+                                binding.tvTotalPrice.setText(String.format(Locale.ENGLISH,"%.2f",(Double.parseDouble(query) * Double.parseDouble(qty)))) ;
                             } else {
                                 binding.tvSinglePrice.setText(query);
 
@@ -531,7 +531,7 @@ public class OfferActivity extends BaseActivity {
                         String price = binding.edtAprice.getText().toString();
                         if (!price.isEmpty()) {
                             binding.tvSinglePrice.setText(price);
-                            binding.tvTotalPrice.setText((Double.parseDouble(query) * Double.parseDouble(price)) + "");
+                            binding.tvTotalPrice.setText(String.format(Locale.ENGLISH,"%.2f",(Double.parseDouble(query) * Double.parseDouble(price))) );
                         } else {
                             binding.tvSinglePrice.setText("0");
                             binding.tvTotalPrice.setText("0");

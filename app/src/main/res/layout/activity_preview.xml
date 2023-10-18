@@ -192,6 +192,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="14dp"
                             android:layout_marginEnd="16dp"
+                            android:visibility="gone"
                             android:background="@drawable/rounded_grey9_stroke_color10"
                             android:orientation="vertical">
 

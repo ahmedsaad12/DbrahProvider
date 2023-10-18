@@ -191,7 +191,15 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         binding.btnAddOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.flExpectedTime.setVisibility(View.VISIBLE);
+
+                Intent intent = new Intent(OrderDetailsActivity.this, OfferActivity.class);
+                //intent.putExtra("time", time);
+                // intent.putExtra("time_id", time_id);
+
+                //intent.putExtra("date", date);
+                intent.putExtra("order", orderModel);
+                launcher.launch(intent);
+                //binding.flExpectedTime.setVisibility(View.VISIBLE);
             }
         });
         binding.btnConfirm.setOnClickListener(view -> {
@@ -201,10 +209,10 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
 
                 // binding.tvTime.setError(null);
                 Intent intent = new Intent(OrderDetailsActivity.this, OfferActivity.class);
-                intent.putExtra("time", time);
-                intent.putExtra("time_id", time_id);
+                //intent.putExtra("time", time);
+               // intent.putExtra("time_id", time_id);
 
-                intent.putExtra("date", date);
+                //intent.putExtra("date", date);
                 intent.putExtra("order", orderModel);
                 launcher.launch(intent);
             }

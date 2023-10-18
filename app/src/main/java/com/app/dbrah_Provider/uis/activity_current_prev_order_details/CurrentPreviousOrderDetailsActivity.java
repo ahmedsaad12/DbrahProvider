@@ -100,7 +100,7 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
             @Override
             public void onChanged(SingleOrderDataModel singleOrderDataModel) {
                 if (singleOrderDataModel != null) {
-                    binding.tvTotalPrice.setText(singleOrderDataModel.getData().getOffer().getTotal_price());
+                    binding.tvTotalPrice.setText(String.format(Locale.ENGLISH,"%.2f",Double.parseDouble(singleOrderDataModel.getData().getOffer().getTotal_price())));
                     CurrentPreviousOrderDetailsActivity.this.singleOrderDataModel = singleOrderDataModel;
                     offerDetialsAdapter.updateList(singleOrderDataModel.getData().getOffer().getOffer_details());
                     binding.setModel1(singleOrderDataModel.getData().getOffer());
