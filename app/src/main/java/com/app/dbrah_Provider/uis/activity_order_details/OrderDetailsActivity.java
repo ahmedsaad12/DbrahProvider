@@ -171,8 +171,10 @@ public class OrderDetailsActivity extends BaseActivity implements TimePickerDial
         binding.llMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getAddress().getLatitude()), Double.parseDouble(orderModel.getAddress().getLongitude()));
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                String geoUri = "http://maps.google.com/maps?q=loc:" + orderModel.getAddress().getLatitude() + "," + orderModel.getAddress().getLongitude() + " (" + orderModel.getAddress().getAddress() + ")";
+
+             //   String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(orderModel.getAddress().getLatitude()), Double.parseDouble(orderModel.getAddress().getLongitude()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
                 startActivity(intent);
             }
         });

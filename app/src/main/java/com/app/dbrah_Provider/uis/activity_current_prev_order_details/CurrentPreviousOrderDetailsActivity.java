@@ -168,8 +168,10 @@ public class CurrentPreviousOrderDetailsActivity extends BaseActivity {
         binding.llMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLatitude()), Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLongitude()));
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                String geoUri = "http://maps.google.com/maps?q=loc:" + singleOrderDataModel.getData().getOrder().getAddress().getLatitude() + "," + singleOrderDataModel.getData().getOrder().getAddress().getLongitude() + " (" + singleOrderDataModel.getData().getOrder().getAddress().getAddress() + ")";
+
+             //   String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLatitude()), Double.parseDouble(singleOrderDataModel.getData().getOrder().getAddress().getLongitude()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
                 startActivity(intent);
             }
         });
