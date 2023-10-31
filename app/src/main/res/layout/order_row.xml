@@ -129,6 +129,44 @@
 
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almira"
+                offerDate="@{model.delivery_date_time}"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almira"
+                from="@{model.delivery_date_time_data.from}"
+                to="@{model.delivery_date_time_data.to}"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

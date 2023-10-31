@@ -13,6 +13,7 @@ public class OrderModel implements Serializable {
     private String pin;
     private String status;
     private String total_price;
+    private String delivery_date_time;
 
     private String delivered_time;
     private String created_at;
@@ -25,6 +26,7 @@ public class OrderModel implements Serializable {
     private String day;
     private String time;
     private RepresentModel representative;
+    private TimeModel delivery_date_time_data;
     private List<OrderProductModel> details;
 
     public String getId() {
@@ -84,6 +86,10 @@ public class OrderModel implements Serializable {
         this.offer_status_code = offer_status_code;
     }
 
+    public TimeModel getDelivery_date_time_data() {
+        return delivery_date_time_data;
+    }
+
     public RepresentModel getRepresentative() {
         return representative;
     }
@@ -112,9 +118,41 @@ public class OrderModel implements Serializable {
         return time;
     }
 
+    public String getDelivery_date_time() {
+        return delivery_date_time;
+    }
 
     public List<OrderProductModel> getDetails() {
         return details;
+    }
+    public class TimeModel implements Serializable {
+        private String id;
+        private long from;
+        private long to;
+        private String created_at;
+        private String updated_at;
+
+
+        public String getId() {
+            return id;
+        }
+
+
+        public long getFrom() {
+            return from;
+        }
+
+        public long getTo() {
+            return to;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
     }
 
     public static class Offers implements Serializable {

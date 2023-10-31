@@ -30,9 +30,9 @@ android {
         applicationId "com.app.dbrah_Provider"
         minSdk 19
         targetSdk 33
-        versionCode 8
+        versionCode 9
         resConfigs "en", "ar"
-        versionName "1.8"
+        versionName "1.9"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

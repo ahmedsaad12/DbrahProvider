@@ -338,6 +338,14 @@ Log.e("lllll",model.getBody());
         }
 
     }
+    @BindingAdapter({ "from", "to"})
+    public static void displayDate1(TextView textView, long from, long to) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+
+            textView.setText(dateFormat.format(new Date(from * 1000)) + " - " + dateFormat.format(new Date(to * 1000)));
+
+
+    }
 }
 
 
