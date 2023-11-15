@@ -142,7 +142,16 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_time" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/almira"
+                android:text="@string/delivery_time"
+                android:textColor="@color/black2"
+                android:textSize="14sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

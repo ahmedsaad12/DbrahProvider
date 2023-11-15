@@ -201,6 +201,7 @@
     <string name="vat">الضريبه</string>
     <string name="bank_name">اسم البنك</string>
     <string name="refused_offers">العروض السابقه</string>
+    <string name="delivery_time">وقت التوصيل</string>
 
 </resources>
 

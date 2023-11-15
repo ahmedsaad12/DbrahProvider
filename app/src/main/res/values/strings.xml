@@ -200,5 +200,6 @@
     <string name="vat">Vat</string>
     <string name="bank_name">Bank Name</string>
     <string name="refused_offers">Previous Offers</string>
+    <string name="delivery_time">Delivery Time :</string>
 
 </resources>

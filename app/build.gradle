@@ -5,7 +5,7 @@ plugins {
 
 android {
 
-    compileSdk 33
+    compileSdk 34
 
     bundle {
 
@@ -30,9 +30,9 @@ android {
         applicationId "com.app.dbrah_Provider"
         minSdk 19
         targetSdk 33
-        versionCode 9
+        versionCode 10
         resConfigs "en", "ar"
-        versionName "1.9"
+        versionName "2.0"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
