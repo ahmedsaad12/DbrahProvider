@@ -81,7 +81,7 @@ public class SignUpActivity extends BaseActivity {
     private ActivitySignUpMvvm activitySignUpMvvm;
     private Preferences preferences;
     private ActivityResultLauncher<Intent> launcher;
-    private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
+//    private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int READ_REQ = 1, CAMERA_REQ = 2;
@@ -427,19 +427,28 @@ public class SignUpActivity extends BaseActivity {
 
     public void checkReadPermission() {
         closeSheet();
-        if (ActivityCompat.checkSelfPermission(this, READ_PERM) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{READ_PERM}, READ_REQ);
+        if (ActivityCompat.checkSelfPermission(this, readImagePermission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{readImagePermission}, READ_REQ);
         } else {
             SelectImage(READ_REQ);
         }
     }
 
+
+    private String readImagePermission =  (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)?
+    Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE ;
+
+
     public void checkCameraPermission() {
+
+
 
         closeSheet();
 
-        if (ContextCompat.checkSelfPermission(this, write_permission) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, camera_permission) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(this, write_permission)
+                == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, camera_permission)
+                == PackageManager.PERMISSION_GRANTED
         ) {
             SelectImage(CAMERA_REQ);
         } else {
@@ -470,8 +479,10 @@ public class SignUpActivity extends BaseActivity {
                 intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                 launcher.launch(intent);
             } catch (SecurityException e) {
+                e.printStackTrace();
                 Toast.makeText(this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
+                e.printStackTrace();
                 Toast.makeText(this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
 
             }
@@ -479,6 +490,7 @@ public class SignUpActivity extends BaseActivity {
 
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
