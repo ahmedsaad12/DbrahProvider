@@ -199,7 +199,8 @@ public class ActivityControlProductsMvvm extends AndroidViewModel {
                                     list.add(0, model);
                                 }
                                 getCategoryId().setValue(cat_id);
-                                getSubCategoryId().setValue(list.get(0).getId());
+                                if (!list.isEmpty())
+                                    getSubCategoryId().setValue(list.get(0).getId());
 
                                 getOnSubCategoryDataSuccess().setValue(list);
                             }
