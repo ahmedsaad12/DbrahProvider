@@ -66,7 +66,7 @@ public class EditAccountActivity extends BaseActivity {
     private ActivitySignUpMvvm activitySignUpMvvm;
     private Preferences preferences;
     private ActivityResultLauncher<Intent> launcher;
-    private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
+
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int READ_REQ = 1, CAMERA_REQ = 2;

@@ -427,16 +427,14 @@ public class SignUpActivity extends BaseActivity {
 
     public void checkReadPermission() {
         closeSheet();
-        if (ActivityCompat.checkSelfPermission(this, readImagePermission) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{readImagePermission}, READ_REQ);
+        if (ActivityCompat.checkSelfPermission(this, READ_PERM) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{READ_PERM}, READ_REQ);
         } else {
             SelectImage(READ_REQ);
         }
     }
 
 
-    private String readImagePermission =  (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)?
-    Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE ;
 
 
     public void checkCameraPermission() {

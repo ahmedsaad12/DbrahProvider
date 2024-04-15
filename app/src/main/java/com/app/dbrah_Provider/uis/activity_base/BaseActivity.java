@@ -2,6 +2,7 @@ package com.app.dbrah_Provider.uis.activity_base;
 
 import android.Manifest;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -19,8 +20,9 @@ import io.paperdb.Paper;
 
 
 public class BaseActivity extends AppCompatActivity {
+    public static final String READ_PERM =  (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)?
+            Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE ;
 
-    public static final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     public static final String WRITE_PERM = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     public static final String CAM_PERM = Manifest.permission.CAMERA;
     public static final String FINELOCPerm = Manifest.permission.ACCESS_FINE_LOCATION;
